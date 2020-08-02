@@ -1,12 +1,7 @@
 <?php
 
-Route::get('/', function () {
-    return view('homepage');
-});
-
-Route::get('/account/create/', function () {
-    return view('account.create');
-});
+Route::get('/',                         'PageController@index');
+Route::get('/accounts/create',          'PageController@createAccount');
 
 Route::get('/home',                     'HomeController@index')->name('home');
 Route::get('/home/meals/',              'HomeController@meals')->name('meals');
