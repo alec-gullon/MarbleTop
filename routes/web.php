@@ -1,7 +1,17 @@
 <?php
 
-Route::get('/',                         'PageController@index');
-Route::get('/accounts/create',          'PageController@createAccount');
+/** Pages */
+
+Route::get('/',                         'PageController@index')->name('homepage');
+Route::get('/accounts/create',          'PageController@createAccount')->name('create-account');
+
+/** Authentication */
+
+Route::get('/login',                    'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login',                   'Auth\LoginController@login')->name('attempt-login');
+Route::post('/logout',                  'Auth\LoginController@logout')->name('logout');
+
+/** Home */
 
 Route::get('/home',                     'HomeController@index')->name('home');
 Route::get('/home/meals/',              'HomeController@meals')->name('meals');
@@ -18,9 +28,5 @@ Route::get('/home/groups/create/',      'Home\GroupController@add')->name('group
 Route::get('/home/groups/{group}/',     'Home\GroupController@edit')->name('group-edit');
 
 Route::get('/home/plans/create/',       'Home\PlanController@add')->name('plans-add');
-
-Route::get('/login',                    'Auth\LoginController@showLoginForm')->name('login');
-Route::post('/login',                   'Auth\LoginController@login');
-Route::post('/logout',                  'Auth\LoginController@logout');
 
 
