@@ -15,7 +15,7 @@
                 Create a plan
             </a>
 
-            <div class="meals">
+            <div class="meals" data-test="{{ count($plans) }}">
                 @foreach ($plans as $plan)
                     <li>{{ $plan['created_at'] }}</li>
                 @endforeach

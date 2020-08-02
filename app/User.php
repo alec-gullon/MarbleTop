@@ -52,4 +52,16 @@ class User extends Authenticatable
     public function plans() {
         return $this->hasMany('App\Models\Plan');
     }
+
+    public function addMeal($name, $recipe) {
+        return $this->meals()->create(compact('name', 'recipe'));
+    }
+
+    public function addGroup($name) {
+        return $this->groups()->create(compact('name'));
+    }
+
+    public function addPlan() {
+        return $this->plans()->create();
+    }
 }
