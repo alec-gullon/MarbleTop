@@ -1,0 +1,125 @@
+.Hero {
+    padding: 100px 16px 0 16px;
+    margin-bottom: 300px;
+    position: relative;
+
+    > h1 {
+        font-size: 38px;
+        font-weight: 400;
+        margin-bottom: 32px;
+
+        > .highlighted {
+            color: $green-dark;
+            font-style: italic;
+        }
+    }
+
+    > .icons {
+        display: flex;
+        margin-bottom: 32px;
+
+        > svg {
+            fill: $green-mid;
+            overflow: visible;
+            height: 50px;
+            width: 50px;
+            margin-right: 24px;
+        }
+    }
+
+    > .buttons {
+        display: flex;
+
+        > .Button {
+            margin-right: 16px;
+        }
+    }
+}
+
+.Stripes {
+    height: 580px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #f6f9fc;
+    transform: skewY(-12deg);
+
+    > .stripe-one {
+        position: absolute;
+        bottom: 120px;
+        right: 0;
+        width: 50px;
+        height: 40px;
+        background: $green-light;
+    }
+
+    > .stripe-two {
+        position: absolute;
+        bottom: 40px;
+        right: 0;
+        width: 100px;
+        height: 40px;
+        background: $green-dark;
+    }
+
+    > .stripe-three {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 75px;
+        height: 40px;
+        background: $green-mid;
+    }
+
+    > .stripe-four {
+        position: absolute;
+        bottom: -40px;
+        right: 0;
+        width: 150px;
+        height: 40px;
+        background: $green-light;
+    }
+
+    > .stripe-five {
+        position: absolute;
+        bottom: -80px;
+        right: 0;
+        width: 75px;
+        height: 40px;
+        background: $green-mid;
+    }
+
+    > .stripe-six {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 75px;
+        height: 40px;
+        background: $green-mid;
+    }
+}
+
+.FeatureBoxes {
+    padding: 0 16px;
+    > .box {
+        margin-bottom: 64px;
+        > svg {
+            height: 48px;
+            width: 48px;
+            margin-bottom: 16px;
+            fill: $green-dark;
+        }
+        > h2 {
+            font-size: 19px;
+            margin-bottom: 16px;
+            color: $grey-dark;
+            font-weight: 500;
+        }
+        > p {
+            font-size: 17px;
+            line-height: 1.6;
+            color: $grey-mid;
+        }
+    }
+}

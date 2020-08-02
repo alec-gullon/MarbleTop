@@ -1,0 +1,185 @@
+// Variables
+@import 'variables';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+    font-family: Segoe UI,sans-serif;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    background: #fbfbfd;
+    color: $grey-dark;
+}
+
+#app {
+    padding-top: 80px;
+}
+
+// Responsive mixin template
+
+@mixin medium {
+    @media only screen and (max-width: 600px) {
+        @content;
+    }
+}
+
+@mixin large {
+    @media only screen and (max-width: 600px) {
+        @content;
+    }
+}
+
+// Eventually we'll replace this with a standard normaliser, but for the time being we'll keep it simple
+// and just edit things as we go
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+@import 'components/general';
+
+@import 'components/page/welcome';
+@import 'components/page/login';
+@import 'components/page/ingredients';
+@import 'components/page/meals';
+
+body {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.Home {
+    padding: 16px;
+    > h1 {
+        font-size: 20px;
+    }
+    > .date {
+        font-size: 14px;
+        margin-bottom: 16px;
+        display: block;
+    }
+    > .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+
+        > h2 {
+            font-size: 22px;
+        }
+
+        > a {
+            font-weight: 500;
+            color: $green-dark;
+        }
+    }
+    > .latest-plan {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        margin-bottom: 32px;
+
+        > .date {
+            width: 80px;
+            height: 80px;
+            background: $green-light;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            > .day {
+                font-size: 20px;
+                font-weight: 500;
+            }
+
+            > .month {
+                font-size: 16px;
+            }
+
+        }
+
+        > a {
+            border: 1px solid $grey-light;
+            text-align: center;
+            margin-left: 8px;
+            flex-grow: 1;
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 80px;
+            color: $green-dark;
+            background: white;
+        }
+    }
+
+    > .home-option {
+        display: flex;
+        padding: 16px 24px;
+        border: 1px solid $grey-light;
+        background: white;
+        margin-bottom: 8px;
+        align-items: center;
+
+        > svg {
+            width: 60px;
+            height: 60px;
+            fill: $green-dark;
+            margin-right: 24px;
+        }
+
+        > .text {
+            flex-grow: 1;
+            width: 100%;
+            > h3 {
+                font-size: 20px;
+                color: $green-dark;
+            }
+            > p {
+                font-size: 14px;
+                color: $grey-dark;
+            }
+        }
+    }
+}
+
+.PlanCreator {
+
+    > .stage {
+        > h2 {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            color: $green-dark;
+            font-weight: 400;
+
+            > .number {
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                background: $green-mid;
+                text-align: center;
+                line-height: 40px;
+                font-size: 22px;
+                font-weight: 400;
+                margin-right: 16px;
+            }
+        }
+    }
+
+}
+

@@ -1,0 +1,200 @@
+.MealsAdmin {
+    > .MessageBox {
+        margin-bottom: 32px;
+    }
+    > .AdminLink {
+        margin-bottom: 32px;
+    }
+    .meals {
+        border: 1px solid $grey-light;
+
+        > .AdminLink {
+            border: 0;
+            border-bottom: 1px solid $grey-light;
+
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+}
+
+.MealEditor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .AdminPanel {
+        margin-bottom: 16px;
+        width: 100%;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    > .buttons {
+        display: flex;
+
+        > .Button:last-child {
+            margin-left: 16px;
+        }
+    }
+}
+
+.MealDetails {
+    > .InputWithLabel {
+        margin-bottom: 16px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.IngredientsEditor {
+
+    > .search {
+        position: relative;
+        overflow: visible;
+        margin-bottom: 16px;
+
+        > .results {
+            position: absolute;
+            bottom: 0;
+            top: 100%;
+            background: white;
+            min-height: 116px;
+            overflow-y: scroll;
+            width: 100%;
+            border: 1px solid $grey-light;
+            z-index: 1;
+
+            > ul {
+                > li {
+                    padding: 8px;
+                    border-bottom: 1px solid $grey-lightest;
+                    color: $green-dark;
+                    display: flex;
+                    align-items: center;
+
+                    > span {
+                        flex-grow: 1;
+                    }
+
+                    > svg {
+                        height: 21px;
+                        width: 21px;
+                    }
+                }
+            }
+        }
+    }
+
+    > ul {
+        border: 1px solid $grey-light;
+
+        > li {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 8px;
+
+            > .name {
+                flex-grow: 1;
+                font-size: 14px;
+            }
+
+            > .toggle {
+                margin-right: 16px;
+                font-size: 18px;
+
+                > span:first-child, > span:last-child {
+                    font-weight: 500;
+                }
+
+                > .amount {
+                    margin: 0 8px;
+                    width: 34px;
+                    display: inline-block;
+                    text-align: center;
+                }
+            }
+
+            > svg {
+                width: 21px;
+                height: 21px;
+                fill: $alert;
+            }
+
+            &:nth-child(2n+1) {
+                background: $grey-lightest;
+            }
+        }
+    }
+
+}
+
+.IngredientsTable {
+    width: 100%;
+    > tbody {
+        > tr {
+            > td {
+                width: 50%;
+            }
+        }
+    }
+}
+
+.Recipe {
+    .AdminPanel:first-child {
+        margin-bottom: 16px;
+    }
+}
+
+.RecipeMethod {
+    > p {
+        font-size: 16px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid $grey-light;
+        padding-bottom: 16px;
+        &:last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
+            margin-bottom: 0;
+        }
+    }
+}
+
+.AmountsEditor {
+    display: flex;
+    flex-direction: column;
+
+    > .amount {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        height: 30px;
+
+        > label {
+            flex-grow: 1;
+            font-weight: 500;
+        }
+
+        > input {
+            height: 100%;
+            border-radius: 0;
+            border: 1px solid $grey-light;
+        }
+
+        > button {
+            height: 100%;
+            width: 40px;
+
+            > svg {
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
