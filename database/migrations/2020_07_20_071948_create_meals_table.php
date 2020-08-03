@@ -20,9 +20,6 @@ class CreateMealsTable extends Migration
             $table->integer('user_id');
             $table->timestamps();
         });
-
-        App\Models\Meal::create(['name' => 'Breakfast', 'user_id' => 1, 'recipe' => 'My recipe here!']);
-        App\Models\Meal::create(['name' => 'Burgers with Chips', 'user_id' => 1, 'recipe' => 'My recipe here!']);
     }
 
     /**

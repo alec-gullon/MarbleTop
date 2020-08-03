@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Controller;
 
 use App\Models\Meal;
 use App\Helper;
 
-class MealController extends BaseController
+class MealController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        $meals = \App\Helper::mealsData(auth()->user());
+
+        return view('home.meals', compact('meals'));
     }
 
     public function add()

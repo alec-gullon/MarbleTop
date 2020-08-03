@@ -19,9 +19,6 @@ class CreateGroupsTable extends Migration
             $table->integer('user_id');
             $table->timestamps();
         });
-
-        App\Models\Group::create(['name' => 'Weekly', 'user_id' => 1]);
-        App\Models\Group::create(['name' => 'Monthly', 'user_id' => 1]);
     }
 
     /**

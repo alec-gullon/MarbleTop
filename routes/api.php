@@ -1,21 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:api')->post('/ingredients/add/', 'Api\IngredientController@add');
-Route::middleware('auth:api')->post('/ingredients/update/', 'Api\IngredientController@update');
-Route::middleware('auth:api')->post('/ingredients/remove/', 'Api\IngredientController@delete');
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::post('/ingredients/add/', 'Api\IngredientController@add')->name('add-ingredient');
+    Route::post('/ingredients/{ingredient}/update/', 'Api\IngredientController@update');
+    Route::post('/ingredients/{ingredient}/remove/', 'Api\IngredientController@delete');
+});
 
 Route::middleware('auth:api')->post('/meals/add/', 'Api\MealController@add');
 Route::middleware('auth:api')->post('/meals/{meal}/update', 'Api\MealController@update');

@@ -37,31 +37,48 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function ingredients() {
+    public function ingredients()
+    {
         return $this->hasMany('App\Models\Ingredient');
     }
 
-    public function meals() {
+    public function meals()
+    {
         return $this->hasMany('App\Models\Meal');
     }
 
-    public function groups() {
+    public function groups()
+    {
         return $this->hasMany('App\Models\Group');
     }
 
-    public function plans() {
+    public function plans()
+    {
         return $this->hasMany('App\Models\Plan');
     }
 
-    public function addMeal($name, $recipe) {
+    public function addMeal($name, $recipe)
+    {
         return $this->meals()->create(compact('name', 'recipe'));
     }
 
-    public function addGroup($name) {
+    public function addGroup($name)
+    {
         return $this->groups()->create(compact('name'));
     }
 
-    public function addPlan() {
+    public function addPlan()
+    {
         return $this->plans()->create();
+    }
+
+    public function addIngredient($attributes)
+    {
+        return $this->ingredients()->create($attributes);
+    }
+
+    public function hasIngredient($name)
+    {
+        return ($this->ingredients->where('name', $name)->first() !== null);
     }
 }

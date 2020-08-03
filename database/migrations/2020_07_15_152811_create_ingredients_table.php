@@ -20,12 +20,6 @@ class CreateIngredientsTable extends Migration
             $table->integer('user_id');
             $table->timestamps();
         });
-
-        App\Models\Ingredient::create(['name' => 'Beans', 'location_id' => 3, 'user_id' => 1]);
-        App\Models\Ingredient::create(['name' => 'Cheese', 'location_id' => 2, 'user_id' => 1]);
-        App\Models\Ingredient::create(['name' => 'Bread', 'location_id' => 3, 'user_id' => 1]);
-
-        App\Models\Ingredient::create(['name' => 'Bread', 'location_id' => 3, 'user_id' => 2]);
     }
 
     /**

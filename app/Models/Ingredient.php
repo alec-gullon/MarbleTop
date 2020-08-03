@@ -23,4 +23,8 @@ class Ingredient extends Model
     public function plans() {
         return $this->belongsToMany('App\Models\Ingredient');
     }
+
+    public function apiPath() {
+        return '/api/ingredients/' . $this->id . '/';
+    }
 }

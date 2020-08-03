@@ -8,6 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class HomeTest extends TestCase
 {
+    use WithFaker, RefreshDatabase;
+
     public function test_meals_homepage_displays_a_users_meals()
     {
         $user = factory('App\User')->create();
@@ -33,7 +35,7 @@ class HomeTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->get(route('groups'))
+        $this->get(route('groups'))
             ->assertSee('Kitchen Essentials')
             ->assertDontSee('Family Visit');
     }

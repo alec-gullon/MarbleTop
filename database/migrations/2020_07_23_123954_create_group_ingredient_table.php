@@ -20,13 +20,6 @@ class CreateGroupIngredientTable extends Migration
             $table->float('amount');
             $table->timestamps();
         });
-
-        DB::table('group_ingredient')->insert(['id' => 1, 'ingredient_id' => 1, 'group_id' => 1, 'amount' => 0.5]);
-        DB::table('group_ingredient')->insert(['id' => 2, 'ingredient_id' => 2, 'group_id' => 1, 'amount' => 2]);
-        DB::table('group_ingredient')->insert(['id' => 3, 'ingredient_id' => 3, 'group_id' => 1, 'amount' => 1.5]);
-
-        DB::table('group_ingredient')->insert(['id' => 4, 'ingredient_id' => 1, 'group_id' => 2, 'amount' => 1]);
-        DB::table('group_ingredient')->insert(['id' => 5, 'ingredient_id' => 2, 'group_id' => 2, 'amount' => 1.5]);
     }
 
     /**

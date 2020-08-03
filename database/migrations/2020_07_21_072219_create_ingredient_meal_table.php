@@ -24,13 +24,6 @@ class CreateIngredientMealTable extends Migration
             $table->integer('order');
             $table->timestamps();
         });
-
-        DB::table('ingredient_meal')->insert(['id' => 1, 'ingredient_id' => 1, 'meal_id' => 1, 'amount' => 0.5, 'preciseAmount' => '100g', 'order' => 0]);
-        DB::table('ingredient_meal')->insert(['id' => 2, 'ingredient_id' => 2, 'meal_id' => 1, 'amount' => 2, 'preciseAmount' => '1 Tsp', 'order' => 1]);
-        DB::table('ingredient_meal')->insert(['id' => 3, 'ingredient_id' => 3, 'meal_id' => 1, 'amount' => 1.5, 'preciseAmount' => 'x2', 'order' => 2]);
-
-        DB::table('ingredient_meal')->insert(['id' => 4, 'ingredient_id' => 1, 'meal_id' => 2, 'amount' => 1, 'preciseAmount' => '100g', 'order' => 0]);
-        DB::table('ingredient_meal')->insert(['id' => 5, 'ingredient_id' => 2, 'meal_id' => 2, 'amount' => 1, 'preciseAmount' => '1/2 Pack', 'order' => 1]);
     }
 
     /**

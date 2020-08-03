@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Controller;
 
 use App\Helper;
 
 use App\Models\Group;
 
-class GroupController extends BaseController {
-
+class GroupController extends Controller
+{
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        $groups = \App\Helper::groupsData(auth()->user());
+
+        return view('home.groups', compact('groups'));
     }
 
     public function add()
@@ -56,5 +63,4 @@ class GroupController extends BaseController {
 
         return view('home.edit-group', compact('group', 'ingredientsData'));
     }
-
 }

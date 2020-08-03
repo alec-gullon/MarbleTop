@@ -10,7 +10,7 @@ class AddIngredient extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'locationId' => 'exists:ingredient_locations,id'
+            'location_id' => 'exists:ingredient_locations,id'
         ];
     }
 }
