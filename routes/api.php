@@ -1,9 +1,9 @@
 <?php
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('/ingredients/add/', 'Api\IngredientController@add')->name('add-ingredient');
-    Route::post('/ingredients/{ingredient}/update/', 'Api\IngredientController@update');
-    Route::post('/ingredients/{ingredient}/remove/', 'Api\IngredientController@delete');
+    Route::post('/ingredients/add/', 'Api\IngredientController@store')->name('add-ingredient');
+    Route::post('/ingredients/{ingredient}/update/', 'Api\IngredientController@update')->name('update-ingredient');
+    Route::post('/ingredients/{ingredient}/remove/', 'Api\IngredientController@destroy')->name('destroy-ingredient');
 });
 
 Route::middleware('auth:api')->post('/meals/add/', 'Api\MealController@add');

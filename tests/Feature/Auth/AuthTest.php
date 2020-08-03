@@ -24,7 +24,10 @@ class AuthTest extends TestCase
         $this->post(route('add-ingredient'), ['api_token' => 'bad_api_token'])
             ->assertStatus(302);
 
-        $this->post(route('update-ingredient'), ['api_token' => 'bad_api_token'])
+        $this->post(route('update-ingredient', ['ingredient' => 1]), ['api_token' => 'bad_api_token'])
+            ->assertStatus(302);
+
+        $this->post(route('destroy-ingredient', ['ingredient' => 1]), ['api_token' => 'bad_api_token'])
             ->assertStatus(302);
     }
 }

@@ -14,7 +14,7 @@ use App\Http\Requests\Api\Ingredient\DeleteIngredient;
 
 class IngredientController extends BaseController
 {
-    public function add(AddIngredient $request)
+    public function store(AddIngredient $request)
     {
         $user = auth()->user();
 
@@ -44,7 +44,7 @@ class IngredientController extends BaseController
         return ApiResponse::success(['ingredients' => Helper::ingredientsData($user)]);
     }
 
-    public function delete(DeleteIngredient $request, Ingredient $ingredient)
+    public function destroy(DeleteIngredient $request, Ingredient $ingredient)
     {
         $ingredient->delete();
 
