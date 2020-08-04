@@ -19,6 +19,8 @@ class CreateGroupItemTable extends Migration
             $table->integer('item_id');
             $table->float('amount');
             $table->timestamps();
+
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
         });
     }
 

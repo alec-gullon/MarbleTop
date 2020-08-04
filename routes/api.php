@@ -8,10 +8,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/meals/store/', 'Api\MealController@store')->name('store-meal');
     Route::post('/meals/{meal}/update', 'Api\MealController@update')->name('update-meal');
     Route::post('/meals/{meal}/destroy', 'Api\MealController@destroy')->name('destroy-meal');
+
+    Route::post('/groups/store/', 'Api\GroupController@store')->name('store-group');
+    Route::post('/groups/{group}/update/', 'Api\GroupController@update')->name('update-group');
+    Route::post('/groups/{group}/destroy/', 'Api\GroupController@destroy')->name('destroy-group');
+
+    Route::post('/plans/store', 'Api\PlanController@store')->name('store-plan');
 });
-
-Route::middleware('auth:api')->post('/groups/add/', 'Api\GroupController@add');
-Route::middleware('auth:api')->post('/groups/{group}/update/', 'Api\GroupController@update');
-Route::middleware('auth:api')->post('/groups/{group}/delete/', 'Api\GroupController@delete');
-
-Route::middleware('auth:api')->post('/plans/add', 'Api\PlanController@add');

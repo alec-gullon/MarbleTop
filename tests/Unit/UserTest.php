@@ -31,7 +31,7 @@ class UserTest extends TestCase
 
         $name = 'Kitchen Essentials';
 
-        $group = $user->addGroup($name);
+        $group = $user->addGroup(['name' => $name]);
 
         $this->assertCount(1, $user->groups);
         $this->assertTrue($user->groups->contains($group));

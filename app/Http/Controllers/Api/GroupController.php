@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
+use App\Http\Requests\Api\Group\DestroyGroup;
+use App\Http\Requests\Api\Group\StoreGroup;
+use App\Http\Requests\Api\Group\UpdateGroup;
 use Illuminate\Http\Request;
 
 use Illuminate\Routing\Controller as BaseController;
@@ -10,75 +14,53 @@ use App\Models\Group;
 
 class GroupController extends BaseController
 {
-    public function add(Request $request)
+    public function store(StoreGroup $request)
     {
-        $request->items = json_decode($request->items);
-
         $user = auth()->user();
+        $request->items = json_decode($request->items, true);
 
-        $groups = $user->groups->where('name', $request->name);
-        if (count($groups) !== 0) {
-            return json_encode([
-                'status' => 400,
-                'error' => 'mealAlreadyExists'
-            ]);
+        if ($user->hasGroup($request->name)) {
+            return ApiResponse::error(['error' => 'groupAlreadyExists']);
         }
 
-        $group = new Group();
-        $group->user_id = $user->id;
-        $group->name = $request->name;
-        $group->save();
+        $group = $user->addGroup(
+            $request->only('name')
+        );
 
-        foreach ($request->items as $item) {
-            $group->items()->attach(
-                $item->id, ['amount' => $item->amount,]
-            );
-        }
+        $group->attachItems($request->items);
 
         $request->session()->flash('message', 'Successfully added group!');
 
-        $response = ['status' => 200];
-        return json_encode($response);
+        return ApiResponse::success();
     }
 
-    public function update(Group $group, Request $request)
+    public function update(UpdateGroup $request, Group $group)
     {
-        $request->items = json_decode($request->items);
         $user = auth()->user();
+        $request->items = json_decode($request->items, true);
 
-        if ($group->name !== $request->name) {
-            $groups = $user->groups->where('name', $request->name);
-            if (count($groups) !== 0) {
-                return json_encode([
-                    'status' => 400,
-                    'error' => 'groupAlreadyExists'
-                ]);
-            }
+        if ($group->name !== $request->name && $user->hasGroup($request->name)) {
+            return ApiResponse::error(['error' => 'groupAlreadyExists']);
         }
 
-        $group->name = $request->name;
-        $group->save();
+        $group->update(
+            $request->only('name')
+        );
 
         $group->items()->detach();
 
-        foreach ($request->items as $item) {
-            $group->items()->attach(
-                $item->id, ['amount' => $item->amount,]
-            );
-        }
+        $group->attachItems($request->items);
 
         $request->session()->flash('message', 'Successfully updated group!');
 
-        $response = ['status' => 200];
-        return json_encode($response);
+        return ApiResponse::success();
     }
 
-    public function delete(Group $group, Request $request)
+    public function destroy(DestroyGroup $request, Group $group)
     {
-        $group->items()->detach();
         $group->delete();
 
         $request->session()->flash('message', 'Successfully deleted group!');
-        return json_encode(['status' => 200]);
+        return ApiResponse::success();
     }
 }

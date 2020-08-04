@@ -13,6 +13,6 @@ class Plan extends Model
     }
 
     public function items() {
-        return $this->belongsToMany('App\Models\Items')->withPivot('amount');
+        return $this->belongsToMany('App\Models\Item')->withPivot('amount');
     }
 }

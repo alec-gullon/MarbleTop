@@ -13,8 +13,6 @@ class ItemTest extends ApiTestCase
 {
     public function test_a_user_can_add_an_item()
     {
-
-
         $attributes = [
             'name' => 'Red Onion',
             'location_id' => 1,

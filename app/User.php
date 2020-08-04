@@ -62,9 +62,9 @@ class User extends Authenticatable
         return $this->meals()->create($attributes);
     }
 
-    public function addGroup($name)
+    public function addGroup($attributes)
     {
-        return $this->groups()->create(compact('name'));
+        return $this->groups()->create($attributes);
     }
 
     public function addPlan()
@@ -85,5 +85,10 @@ class User extends Authenticatable
     public function hasMeal($name)
     {
         return ($this->meals->where('name', $name)->first() !== null);
+    }
+
+    public function hasGroup($name)
+    {
+        return ($this->groups->where('name', $name)->first() !== null);
     }
 }

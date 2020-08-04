@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 
 use Illuminate\Routing\Controller as BaseController;
@@ -10,7 +11,7 @@ use App\Models\Plan;
 
 class PlanController extends BaseController
 {
-    public function add(Request $request)
+    public function store(Request $request)
     {
         $plan = Plan::create([
             'user_id' => auth()->user()->id
@@ -24,5 +25,7 @@ class PlanController extends BaseController
         foreach ($items as $item) {
             $plan->items()->attach($item['id'], ['amount' => $item['amount']]);
         }
+
+        return ApiResponse::success();
     }
 }

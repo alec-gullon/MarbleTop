@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class Group extends Model
 {
@@ -14,5 +15,18 @@ class Group extends Model
 
     public function items() {
         return $this->belongsToMany('App\Models\Item')->withPivot('amount');
+    }
+
+    public function apiPath() {
+        return '/api/groups/' . $this->id . '/';
+    }
+
+    public function attachItems($items) {
+        foreach ($items as $item) {
+            $this->items()->attach(
+                $item['id'],
+                Arr::only($item, ['amount'])
+            );
+        }
     }
 }

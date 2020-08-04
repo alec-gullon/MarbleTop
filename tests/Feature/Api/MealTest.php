@@ -15,8 +15,6 @@ class MealTest extends ApiTestCase
 {
     public function test_a_user_can_create_a_meal()
     {
-
-
         $items = ItemFactory::addTwoItems($this->user);
 
         $attributes = [
@@ -54,8 +52,6 @@ class MealTest extends ApiTestCase
 
     public function test_a_user_cannot_create_a_meal_twice()
     {
-
-
         $meal = MealFactory::addMeal($this->user);
 
         $response = $this->callApi(route('store-meal'), [
@@ -118,8 +114,6 @@ class MealTest extends ApiTestCase
 
     public function test_a_user_cannot_update_a_meal_to_have_the_same_name_as_another_meal()
     {
-
-
         $meal = MealFactory::addMeal($this->user);
         $secondaryMeal = MealFactory::addMeal($this->user);
 

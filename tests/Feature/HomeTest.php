@@ -30,8 +30,8 @@ class HomeTest extends TestCase
         $user = factory('App\User')->create();
         $otherUser = factory('App\User')->create();
 
-        $user->addGroup('Kitchen Essentials');
-        $otherUser->addGroup('Family Visit');
+        $user->addGroup(['name' => 'Kitchen Essentials']);
+        $otherUser->addGroup(['name' => 'Family Visit']);
 
         $this->actingAs($user);
 
