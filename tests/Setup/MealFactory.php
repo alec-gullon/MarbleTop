@@ -12,25 +12,25 @@ class MealFactory
         return $user->addMeal(['name' => Str::random(16), 'recipe' => 'Lorem Ipsum']);
     }
 
-    public static function addMealWithOneIngredient($user)
+    public static function addMealWithOneItem($user)
     {
         $meal = self::addMeal($user);
 
-        $ingredient = IngredientFactory::addIngredient($user);
+        $item = ItemFactory::addItem($user);
 
-        $meal->ingredients()->attach($ingredient, ['amount' => 1, 'preciseAmount' => '100g', 'order' => 1]);
+        $meal->items()->attach($item, ['amount' => 1, 'preciseAmount' => '100g', 'order' => 1]);
 
         return $meal;
     }
 
-    public static function addMealWithTwoIngredients($user)
+    public static function addMealWithTwoItems($user)
     {
         $meal = self::addMeal($user);
 
-        $ingredients = IngredientFactory::addTwoIngredients($user);
+        $items = ItemFactory::addTwoItems($user);
 
-        $meal->ingredients()->attach($ingredients[0], ['amount' => 1, 'preciseAmount' => '100g', 'order' => 1]);
-        $meal->ingredients()->attach($ingredients[1], ['amount' => 1.5, 'preciseAmount' => '200g', 'order' => 2]);
+        $meal->items()->attach($items[0], ['amount' => 1, 'preciseAmount' => '100g', 'order' => 1]);
+        $meal->items()->attach($items[1], ['amount' => 1.5, 'preciseAmount' => '200g', 'order' => 2]);
 
         return $meal;
     }

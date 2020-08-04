@@ -12,7 +12,7 @@ class GroupController extends BaseController
 {
     public function add(Request $request)
     {
-        $request->ingredients = json_decode($request->ingredients);
+        $request->items = json_decode($request->items);
 
         $user = auth()->user();
 
@@ -29,9 +29,9 @@ class GroupController extends BaseController
         $group->name = $request->name;
         $group->save();
 
-        foreach ($request->ingredients as $ingredient) {
-            $group->ingredients()->attach(
-                $ingredient->id, ['amount' => $ingredient->amount,]
+        foreach ($request->items as $item) {
+            $group->items()->attach(
+                $item->id, ['amount' => $item->amount,]
             );
         }
 
@@ -43,7 +43,7 @@ class GroupController extends BaseController
 
     public function update(Group $group, Request $request)
     {
-        $request->ingredients = json_decode($request->ingredients);
+        $request->items = json_decode($request->items);
         $user = auth()->user();
 
         if ($group->name !== $request->name) {
@@ -59,11 +59,11 @@ class GroupController extends BaseController
         $group->name = $request->name;
         $group->save();
 
-        $group->ingredients()->detach();
+        $group->items()->detach();
 
-        foreach ($request->ingredients as $ingredient) {
-            $group->ingredients()->attach(
-                $ingredient->id, ['amount' => $ingredient->amount,]
+        foreach ($request->items as $item) {
+            $group->items()->attach(
+                $item->id, ['amount' => $item->amount,]
             );
         }
 
@@ -75,7 +75,7 @@ class GroupController extends BaseController
 
     public function delete(Group $group, Request $request)
     {
-        $group->ingredients()->detach();
+        $group->items()->detach();
         $group->delete();
 
         $request->session()->flash('message', 'Successfully deleted group!');

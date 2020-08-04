@@ -16,13 +16,13 @@ class PlanController extends BaseController
             'user_id' => auth()->user()->id
         ]);
 
-        $ingredients = [
+        $items = [
             ['id' => 1, 'amount' => 2],
             ['id' => 3, 'amount' => 0.5]
         ];
 
-        foreach ($ingredients as $ingredient) {
-            $plan->ingredients()->attach($ingredient['id'], ['amount' => $ingredient['amount']]);
+        foreach ($items as $item) {
+            $plan->items()->attach($item['id'], ['amount' => $item['amount']]);
         }
     }
 }

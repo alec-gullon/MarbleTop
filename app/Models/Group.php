@@ -12,7 +12,7 @@ class Group extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function ingredients() {
-        return $this->belongsToMany('App\Models\Ingredient')->withPivot('amount');
+    public function items() {
+        return $this->belongsToMany('App\Models\Item')->withPivot('amount');
     }
 }

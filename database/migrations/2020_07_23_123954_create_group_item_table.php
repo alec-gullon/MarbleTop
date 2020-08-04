@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGroupIngredientTable extends Migration
+class CreateGroupItemTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateGroupIngredientTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_ingredient', function (Blueprint $table) {
+        Schema::create('group_item', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('group_id');
-            $table->integer('ingredient_id');
+            $table->integer('item_id');
             $table->float('amount');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateGroupIngredientTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_ingredient');
+        Schema::dropIfExists('group_item');
     }
 }

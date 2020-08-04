@@ -24,33 +24,33 @@ class GroupController extends Controller
 
     public function add()
     {
-        $ingredientsData = Helper::ingredientsData(auth()->user());
-        foreach ($ingredientsData as $key => $ingredient) {
-            $data = $ingredient;
+        $itemsData = Helper::itemsData(auth()->user());
+        foreach ($itemsData as $key => $item) {
+            $data = $item;
 
             $data['key'] = $key;
             $data['selected'] = false;
             $data['amount'] = 1;
 
-            $ingredientsData[$key] = $data;
+            $itemsData[$key] = $data;
         }
 
-        return view('home.create-group', compact('ingredientsData'));
+        return view('home.create-group', compact('itemsData'));
     }
 
     public function edit(Group $group)
     {
-        $ingredientsData = Helper::ingredientsData(auth()->user());
-        foreach ($ingredientsData as $key => $ingredient) {
-            $data = $ingredient;
+        $itemsData = Helper::itemsData(auth()->user());
+        foreach ($itemsData as $key => $item) {
+            $data = $item;
 
             $selected = false;
             $amount = 1;
 
-            foreach ($group->ingredients as $groupIngredient) {
-                if ($groupIngredient->id === $ingredient['id']) {
+            foreach ($group->items as $groupItem) {
+                if ($groupItem->id === $item['id']) {
                     $selected = true;
-                    $amount = (float) $groupIngredient->pivot->amount;
+                    $amount = (float) $groupItem->pivot->amount;
                 }
             }
 
@@ -58,9 +58,9 @@ class GroupController extends Controller
             $data['selected'] = $selected;
             $data['amount'] = $amount;
 
-            $ingredientsData[$key] = $data;
+            $itemsData[$key] = $data;
         }
 
-        return view('home.edit-group', compact('group', 'ingredientsData'));
+        return view('home.edit-group', compact('group', 'itemsData'));
     }
 }

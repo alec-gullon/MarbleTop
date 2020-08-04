@@ -23,9 +23,9 @@ class MealController extends Controller
 
     public function add()
     {
-        $ingredientsData = Helper::ingredientsData(auth()->user());
-        foreach ($ingredientsData as $key => $ingredient) {
-            $data = $ingredient;
+        $itemsData = Helper::itemsData(auth()->user());
+        foreach ($itemsData as $key => $item) {
+            $data = $item;
 
             $data['key'] = $key;
             $data['selected'] = false;
@@ -33,43 +33,43 @@ class MealController extends Controller
             $data['preciseAmount'] = '100g';
             $data['order'] = 0;
 
-            $ingredientsData[$key] = $data;
+            $itemsData[$key] = $data;
         }
 
-        return view('home.create-meal', compact('ingredientsData'));
+        return view('home.create-meal', compact('itemsData'));
     }
 
     public function meal(Meal $meal)
     {
-        $ingredientsData = [];
+        $itemsData = [];
 
-        foreach ($meal->ingredients as $ingredient) {
-            $ingredientsData[$ingredient->pivot->order] = [
-                'name' => $ingredient->name,
-                'amount' => $ingredient->pivot->preciseAmount
+        foreach ($meal->items as $item) {
+            $itemsData[$item->pivot->order] = [
+                'name' => $item->name,
+                'amount' => $item->pivot->preciseAmount
             ];
         }
 
-        return view('home.recipe', compact('meal', 'ingredientsData'));
+        return view('home.recipe', compact('meal', 'itemsData'));
     }
 
     public function edit(Meal $meal)
     {
-        $ingredientsData = Helper::ingredientsData(auth()->user());
-        foreach ($ingredientsData as $key => $ingredient) {
-            $data = $ingredient;
+        $itemsData = Helper::itemsData(auth()->user());
+        foreach ($itemsData as $key => $item) {
+            $data = $item;
 
             $selected = false;
             $amount = 1;
             $order = -1;
             $preciseAmount = '';
 
-            foreach ($meal->ingredients as $mealIngredient) {
-                if ($mealIngredient->id === $ingredient['id']) {
+            foreach ($meal->items as $mealItem) {
+                if ($mealItem->id === $item['id']) {
                     $selected = true;
-                    $amount = (float) $mealIngredient->pivot->amount;
-                    $order = (int) $mealIngredient->pivot->order;
-                    $preciseAmount = $mealIngredient->pivot->preciseAmount;
+                    $amount = (float) $mealItem->pivot->amount;
+                    $order = (int) $mealItem->pivot->order;
+                    $preciseAmount = $mealItem->pivot->preciseAmount;
                 }
             }
 
@@ -79,9 +79,9 @@ class MealController extends Controller
             $data['preciseAmount'] = $preciseAmount;
             $data['order'] = $order;
 
-            $ingredientsData[$key] = $data;
+            $itemsData[$key] = $data;
         }
 
-        return view('home.edit-meal', compact('meal', 'ingredientsData'));
+        return view('home.edit-meal', compact('meal', 'itemsData'));
     }
 }

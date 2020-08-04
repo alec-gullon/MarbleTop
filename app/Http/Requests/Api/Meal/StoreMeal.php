@@ -11,7 +11,7 @@ class StoreMeal extends FormRequest
         return [
             'name' => 'required|string',
             'recipe' => 'required|string',
-            'ingredients' => 'required|JSON'
+            'items' => 'required|JSON'
         ];
     }
 }

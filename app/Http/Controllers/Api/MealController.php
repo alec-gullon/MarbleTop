@@ -19,7 +19,7 @@ class MealController extends BaseController
     public function store(StoreMeal $request)
     {
         $user = auth()->user();
-        $request->ingredients = json_decode($request->ingredients, true);
+        $request->items = json_decode($request->items, true);
 
         if ($user->hasMeal($request->name)) {
             return ApiResponse::error(['error' => 'mealAlreadyExists']);
@@ -29,7 +29,7 @@ class MealController extends BaseController
             $request->only('name', 'recipe')
         );
 
-        $meal->attachIngredients($request->ingredients);
+        $meal->attachItems($request->items);
 
         $request->session()->flash('message', 'Successfully added meal!');
 
@@ -39,7 +39,7 @@ class MealController extends BaseController
     public function update(UpdateMeal $request, Meal $meal)
     {
         $user = auth()->user();
-        $request->ingredients = json_decode($request->ingredients, true);
+        $request->items = json_decode($request->items, true);
 
         if ($meal->name !== $request->name && $user->hasMeal($request->name)) {
             return ApiResponse::error(['error' => 'mealAlreadyExists']);
@@ -49,9 +49,9 @@ class MealController extends BaseController
             $request->only('name', 'recipe')
         );
 
-        $meal->ingredients()->detach();
+        $meal->items()->detach();
 
-        $meal->attachIngredients($request->ingredients);
+        $meal->attachItems($request->items);
 
         $request->session()->flash('message', 'Successfully updated meal!');
 

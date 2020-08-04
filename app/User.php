@@ -37,9 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function ingredients()
+    public function items()
     {
-        return $this->hasMany('App\Models\Ingredient');
+        return $this->hasMany('App\Models\Item');
     }
 
     public function meals()
@@ -72,14 +72,14 @@ class User extends Authenticatable
         return $this->plans()->create();
     }
 
-    public function addIngredient($attributes)
+    public function addItem($attributes)
     {
-        return $this->ingredients()->create($attributes);
+        return $this->items()->create($attributes);
     }
 
-    public function hasIngredient($name)
+    public function hasItem($name)
     {
-        return ($this->ingredients->where('name', $name)->first() !== null);
+        return ($this->items->where('name', $name)->first() !== null);
     }
 
     public function hasMeal($name)

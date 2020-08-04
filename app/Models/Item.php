@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ingredient extends Model
+class Item extends Model
 {
     protected $fillable = ['name', 'location_id', 'user_id'];
 
@@ -13,7 +13,7 @@ class Ingredient extends Model
     }
 
     public function location() {
-        return $this->belongsTo('App\Models\IngredientLocation');
+        return $this->belongsTo('App\Models\ItemLocation');
     }
 
     public function meals() {
@@ -21,10 +21,10 @@ class Ingredient extends Model
     }
 
     public function plans() {
-        return $this->belongsToMany('App\Models\Ingredient');
+        return $this->belongsToMany('App\Models\Item');
     }
 
     public function apiPath() {
-        return '/api/ingredients/' . $this->id . '/';
+        return '/api/items/' . $this->id . '/';
     }
 }

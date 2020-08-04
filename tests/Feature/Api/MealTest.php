@@ -3,29 +3,33 @@
 namespace Tests\Feature\Api;
 
 use Tests\Setup\MealFactory;
-use Tests\Setup\IngredientFactory;
+use Tests\Setup\ItemFactory;
 use Tests\Setup\UserFactory;
 
 use App\Models\Meal;
-use App\Models\Ingredient;
+use App\Models\Item;
+
+use Tests\ApiTestCase;
 
 class MealTest extends ApiTestCase
 {
     public function test_a_user_can_create_a_meal()
     {
-        $ingredients = IngredientFactory::addTwoIngredients($this->user);
+
+
+        $items = ItemFactory::addTwoItems($this->user);
 
         $attributes = [
             'name' => 'Spaghetti Bolognese',
             'recipe' => 'Lorem ipsum',
-            'ingredients' => [
-                ['id' => $ingredients[0]->id, 'amount' => 1.5, 'preciseAmount' => '100g', 'order' => 1],
-                ['id' => $ingredients[1]->id, 'amount' => 2.5, 'preciseAmount' => '200g', 'order' => 2]
+            'items' => [
+                ['id' => $items[0]->id, 'amount' => 1.5, 'preciseAmount' => '100g', 'order' => 1],
+                ['id' => $items[1]->id, 'amount' => 2.5, 'preciseAmount' => '200g', 'order' => 2]
             ]
         ];
 
         $submission = $attributes;
-        $submission['ingredients'] = json_encode($submission['ingredients']);
+        $submission['items'] = json_encode($submission['items']);
 
         $response = $this->callApi(route('store-meal'), $submission, true)
             ->assertSessionHas('message')
@@ -39,23 +43,25 @@ class MealTest extends ApiTestCase
             'recipe' => $attributes['recipe']
         ]);
 
-        $this->assertDatabaseHas('ingredient_meal', [
-            'ingredient_id' => $ingredients[0]->id,
+        $this->assertDatabaseHas('item_meal', [
+            'item_id' => $items[0]->id,
             'meal_id' => Meal::first()->id,
-            'amount' => $attributes['ingredients'][0]['amount'],
-            'preciseAmount' => $attributes['ingredients'][0]['preciseAmount'],
-            'order' => $attributes['ingredients'][0]['order']
+            'amount' => $attributes['items'][0]['amount'],
+            'preciseAmount' => $attributes['items'][0]['preciseAmount'],
+            'order' => $attributes['items'][0]['order']
         ]);
     }
 
     public function test_a_user_cannot_create_a_meal_twice()
     {
+
+
         $meal = MealFactory::addMeal($this->user);
 
         $response = $this->callApi(route('store-meal'), [
             'name' => $meal->name,
             'recipe' => $meal->recipe,
-            'ingredients' => json_encode([])
+            'items' => json_encode([])
         ]);
 
         $this->assertEquals($response->status, 400);
@@ -70,55 +76,57 @@ class MealTest extends ApiTestCase
         $this->callApi(route('store-meal'), ['name' => 'Spaghetti Bolognese', 'recipe' => ''], true)
             ->assertStatus(302);
 
-        $attributes = ['name' => 'Spaghetti Bolognese', 'recipe' => 'A recipe', 'ingredients' => 'Bad ingredient request'];
+        $attributes = ['name' => 'Spaghetti Bolognese', 'recipe' => 'A recipe', 'items' => 'Bad item request'];
 
         $this->callApi(route('store-meal'), $attributes, true)->assertStatus(302);
     }
 
     public function test_a_user_can_update_a_meal()
     {
-        $meal = MealFactory::addMealWithOneIngredient($this->user);
-        $oldIngredient = Ingredient::first();
-        $newIngredient = IngredientFactory::addIngredient($this->user);
+        $meal = MealFactory::addMealWithOneItem($this->user);
+        $oldItem = Item::first();
+        $newItem = ItemFactory::addItem($this->user);
 
         $attributes = [
             'name' => 'Updated Meal Name',
             'recipe' => 'Lorem ipsum updated',
-            'ingredients' => [
-                ['id' => $newIngredient->id, 'amount' => 3, 'preciseAmount' => '50g', 'order' => 1],
+            'items' => [
+                ['id' => $newItem->id, 'amount' => 3, 'preciseAmount' => '50g', 'order' => 1],
             ]
         ];
 
         $submission = $attributes;
-        $submission['ingredients'] = json_encode($submission['ingredients']);
+        $submission['items'] = json_encode($submission['items']);
 
         $response = $this->callApi($meal->apiPath() . 'update/', $submission, true)
             ->assertSessionHas('message')
             ->decodeResponseJson();
 
         $this->assertEquals($response['status'], 200);
-        $this->assertDatabaseHas('ingredient_meal', [
-            'ingredient_id' => $newIngredient->id,
+        $this->assertDatabaseHas('item_meal', [
+            'item_id' => $newItem->id,
             'meal_id' => $meal->id,
-            'amount' => $attributes['ingredients'][0]['amount'],
-            'preciseAmount' => $attributes['ingredients'][0]['preciseAmount'],
-            'order' => $attributes['ingredients'][0]['order']
+            'amount' => $attributes['items'][0]['amount'],
+            'preciseAmount' => $attributes['items'][0]['preciseAmount'],
+            'order' => $attributes['items'][0]['order']
         ]);
-        $this->assertDatabaseMissing('ingredient_meal', [
-            'ingredient_id' => $oldIngredient->id,
+        $this->assertDatabaseMissing('item_meal', [
+            'item_id' => $oldItem->id,
             'meal_id' => $meal->id
         ]);
     }
 
     public function test_a_user_cannot_update_a_meal_to_have_the_same_name_as_another_meal()
     {
+
+
         $meal = MealFactory::addMeal($this->user);
         $secondaryMeal = MealFactory::addMeal($this->user);
 
         $response = $this->callApi($meal->apiPath() . 'update/', [
             'name' => $secondaryMeal->name,
             'recipe' => $meal->recipe,
-            'ingredients' => json_encode([])
+            'items' => json_encode([])
         ]);
 
         $this->assertEquals($response->status, 400);
@@ -137,7 +145,7 @@ class MealTest extends ApiTestCase
         $this->callApi($path, ['name' => 'Spaghetti Bolognese', 'recipe' => ''], true)
             ->assertStatus(302);
 
-        $attributes = ['name' => 'Spaghetti Bolognese', 'recipe' => 'A recipe', 'ingredients' => 'Bad ingredient request'];
+        $attributes = ['name' => 'Spaghetti Bolognese', 'recipe' => 'A recipe', 'items' => 'Bad item request'];
 
         $this->callApi($path, $attributes, true)->assertStatus(302);
     }
@@ -150,13 +158,13 @@ class MealTest extends ApiTestCase
         $this->callApi(route('update-meal', ['meal' => $meal->id]), [
             'name' => 'A name',
             'recipe' => 'A recipe',
-            'ingredients' => json_encode([])
+            'items' => json_encode([])
         ], true)->assertStatus(403);
     }
 
     public function test_a_user_can_delete_a_meal()
     {
-        $meal = MealFactory::addMealWithTwoIngredients($this->user);
+        $meal = MealFactory::addMealWithTwoItems($this->user);
 
         $response = $this->callApi(route('destroy-meal', ['meal' => $meal->id]), [], true)
             ->assertSessionHas('message')
@@ -164,9 +172,9 @@ class MealTest extends ApiTestCase
 
         $this->assertEquals($response['status'], 200);
 
-        $this->assertDatabaseCount('ingredient_meal', 0);
+        $this->assertDatabaseCount('item_meal', 0);
         $this->assertDatabaseCount('meals', 0);
-        $this->assertDatabaseCount('ingredients', 2);
+        $this->assertDatabaseCount('items', 2);
     }
 
     public function test_a_user_cannot_delete_another_users_meal()

@@ -2,30 +2,30 @@
 
 namespace Tests\Setup;
 
-use App\Models\Ingredient;
+use App\Models\Item;
 
-class IngredientFactory
+class ItemFactory
 {
-    public static function addIngredient($user)
+    public static function addItem($user)
     {
-        return $user->addIngredient([
+        return $user->addItem([
             'name' => 'Red Onion',
             'location_id' => 1
         ]);
     }
 
-    public static function addTwoIngredients($user)
+    public static function addTwoItems($user)
     {
-        $user->addIngredient([
+        $user->addItem([
             'name' => 'Red Onion',
             'location_id' => 1
         ]);
 
-        $user->addIngredient([
+        $user->addItem([
             'name' => 'White Onion',
             'location_id' => 1
         ]);
 
-        return Ingredient::all();
+        return Item::all();
     }
 }

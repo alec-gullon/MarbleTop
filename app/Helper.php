@@ -2,28 +2,25 @@
 
 namespace App;
 
-use App\Models\Ingredient;
-use App\Models\IngredientLocation;
-
-use Illuminate\Support\Facades\Auth;
+use App\Models\ItemLocation;
 
 class Helper {
 
-    public static function ingredientsData($user) {
+    public static function itemsData($user) {
         $user->refresh();
-        $ingredients = $user->ingredients->sortBy('name');
+        $items = $user->items->sortBy('name');
 
-        $ingredientsData = [];
-        foreach ($ingredients as $ingredient) {
-            $ingredientData = [
-                'id' => $ingredient->id,
-                'name' => $ingredient->name,
-                'locationId' => $ingredient->location->id
+        $itemsData = [];
+        foreach ($items as $item) {
+            $itemData = [
+                'id' => $item->id,
+                'name' => $item->name,
+                'locationId' => $item->location->id
             ];
-            $ingredientsData[] = $ingredientData;
+            $itemsData[] = $itemData;
         }
 
-        return $ingredientsData;
+        return $itemsData;
     }
 
     public static function mealsData($user) {
@@ -57,10 +54,10 @@ class Helper {
     }
 
     public static function locationsData() {
-        $ingredientLocations = IngredientLocation::all();
+        $itemLocations = ItemLocation::all();
 
         $data = [];
-        foreach ($ingredientLocations as $location) {
+        foreach ($itemLocations as $location) {
             $datum = [
                 'id' => $location->id,
                 'name' => $location->name

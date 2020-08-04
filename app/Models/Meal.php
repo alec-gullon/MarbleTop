@@ -14,19 +14,19 @@ class Meal extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function ingredients() {
-        return $this->belongsToMany('App\Models\Ingredient')->withPivot('amount', 'order', 'preciseAmount');
+    public function items() {
+        return $this->belongsToMany('App\Models\Item')->withPivot('amount', 'order', 'preciseAmount');
     }
 
     public function apiPath() {
         return '/api/meals/' . $this->id . '/';
     }
 
-    public function attachIngredients($ingredients) {
-        foreach ($ingredients as $ingredient) {
-            $this->ingredients()->attach(
-                $ingredient['id'],
-                Arr::only($ingredient, ['amount', 'preciseAmount', 'order'])
+    public function attachItems($items) {
+        foreach ($items as $item) {
+            $this->items()->attach(
+                $item['id'],
+                Arr::only($item, ['amount', 'preciseAmount', 'order'])
             );
         }
     }

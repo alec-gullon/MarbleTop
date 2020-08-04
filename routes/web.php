@@ -14,9 +14,9 @@ Route::post('/logout',                  'Auth\LoginController@logout')->name('lo
 /** Home */
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/home',                     'HomeController@index')->name('home');
+    Route::get('/home',                 'HomeController@index')->name('home');
 
-    Route::middleware('auth')->get('/home/ingredients/',        'Home\IngredientController@index')->name('ingredients');
+    Route::get('/home/items/',          'Home\ItemController@index')->name('items');
 });
 
 Route::get('/home/meals/',              'Home\MealController@index')->name('meals');
