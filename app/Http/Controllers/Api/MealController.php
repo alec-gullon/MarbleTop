@@ -8,88 +8,61 @@ use Illuminate\Routing\Controller as BaseController;
 
 use App\Models\Meal;
 
+use App\Helpers\ApiResponse;
+
+use App\Http\Requests\Api\Meal\StoreMeal;
+use App\Http\Requests\Api\Meal\UpdateMeal;
+use App\Http\Requests\Api\Meal\DestroyMeal;
+
 class MealController extends BaseController
 {
-    public function add(Request $request)
+    public function store(StoreMeal $request)
     {
-        $request->ingredients = json_decode($request->ingredients);
-
         $user = auth()->user();
+        $request->ingredients = json_decode($request->ingredients, true);
 
-        $meals = $user->meals->where('name', $request->name);
-        if (count($meals) !== 0) {
-            $response = [
-                'status' => 400,
-                'error' => 'mealAlreadyExists'
-            ];
-            return json_encode($response);
+        if ($user->hasMeal($request->name)) {
+            return ApiResponse::error(['error' => 'mealAlreadyExists']);
         }
 
-        $meal = new Meal();
-        $meal->user_id = $user->id;
-        $meal->name = $request->name;
-        $meal->recipe = $request->recipe;
-        $meal->save();
+        $meal = $user->addMeal(
+            $request->only('name', 'recipe')
+        );
 
-        foreach ($request->ingredients as $ingredient) {
-            $meal->ingredients()->attach(
-                $ingredient->id,
-                [
-                    'amount' => $ingredient->amount,
-                    'preciseAmount' => $ingredient->preciseAmount,
-                    'order' => $ingredient->order
-                ]);
-        }
+        $meal->attachIngredients($request->ingredients);
 
         $request->session()->flash('message', 'Successfully added meal!');
 
-        $response = ['status' => 200];
-        return json_encode($response);
+        return ApiResponse::success();
     }
 
-    public function update(Meal $meal, Request $request)
+    public function update(UpdateMeal $request, Meal $meal)
     {
-        $request->ingredients = json_decode($request->ingredients);
         $user = auth()->user();
+        $request->ingredients = json_decode($request->ingredients, true);
 
-        if ($meal->name !== $request->name) {
-            $meals = $user->meals->where('name', $request->name);
-            if (count($meals) !== 0) {
-                return json_encode([
-                    'status' => 400,
-                    'error' => 'mealAlreadyExists'
-                ]);
-            }
+        if ($meal->name !== $request->name && $user->hasMeal($request->name)) {
+            return ApiResponse::error(['error' => 'mealAlreadyExists']);
         }
 
-        $meal->name = $request->name;
-        $meal->recipe = $request->recipe;
-        $meal->save();
+        $meal->update(
+            $request->only('name', 'recipe')
+        );
 
         $meal->ingredients()->detach();
 
-        foreach ($request->ingredients as $ingredient) {
-            $meal->ingredients()->attach(
-                $ingredient->id,
-                [
-                    'amount' => $ingredient->amount,
-                    'preciseAmount' => $ingredient->preciseAmount,
-                    'order' => $ingredient->order
-                ]);
-        }
+        $meal->attachIngredients($request->ingredients);
 
         $request->session()->flash('message', 'Successfully updated meal!');
 
-        $response = ['status' => 200];
-        return json_encode($response);
+        return ApiResponse::success();
     }
 
-    public function delete(Meal $meal, Request $request)
+    public function destroy(DestroyMeal $request, Meal $meal)
     {
-        $meal->ingredients()->detach();
         $meal->delete();
 
         $request->session()->flash('message', 'Successfully deleted meal!');
-        return json_encode(['status' => 200]);
+        return ApiResponse::success();
     }
 }

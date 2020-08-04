@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\Ingredient;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddIngredient extends FormRequest
+class StoreIngredient extends FormRequest
 {
     public function rules()
     {

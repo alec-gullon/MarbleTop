@@ -1,14 +1,14 @@
 <?php
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('/ingredients/add/', 'Api\IngredientController@store')->name('add-ingredient');
+    Route::post('/ingredients/store/', 'Api\IngredientController@store')->name('store-ingredient');
     Route::post('/ingredients/{ingredient}/update/', 'Api\IngredientController@update')->name('update-ingredient');
-    Route::post('/ingredients/{ingredient}/remove/', 'Api\IngredientController@destroy')->name('destroy-ingredient');
-});
+    Route::post('/ingredients/{ingredient}/destroy/', 'Api\IngredientController@destroy')->name('destroy-ingredient');
 
-Route::middleware('auth:api')->post('/meals/add/', 'Api\MealController@add');
-Route::middleware('auth:api')->post('/meals/{meal}/update', 'Api\MealController@update');
-Route::middleware('auth:api')->post('/meals/{meal}/delete', 'Api\MealController@delete');
+    Route::post('/meals/store/', 'Api\MealController@store')->name('store-meal');
+    Route::post('/meals/{meal}/update', 'Api\MealController@update')->name('update-meal');
+    Route::post('/meals/{meal}/destroy', 'Api\MealController@destroy')->name('destroy-meal');
+});
 
 Route::middleware('auth:api')->post('/groups/add/', 'Api\GroupController@add');
 Route::middleware('auth:api')->post('/groups/{group}/update/', 'Api\GroupController@update');

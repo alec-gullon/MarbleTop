@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Api\Ingredient;
 
-use App\Models\Ingredient;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteIngredient extends FormRequest
+class DestroyIngredient extends FormRequest
 {
     public function authorize()
     {

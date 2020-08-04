@@ -2,76 +2,39 @@
 
 namespace Tests\Feature\Api;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Setup\IngredientFactory;
+use Tests\Setup\UserFactory;
 
-class IngredientTest extends TestCase
+use App\Models\Ingredient;
+
+class IngredientTest extends ApiTestCase
 {
-    use WithFaker, RefreshDatabase;
-
-    private $user;
-
-    private $secondaryUser;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->user = factory('App\User')->create();
-        $this->secondaryUser = factory('App\User')->create();
-    }
-
-    public function callApi($path, $arguments, $returnResponse = false)
-    {
-        $arguments = array_merge($arguments, ['api_token' => $this->user->api_token]);
-
-        $response = $this->post($path, $arguments);
-
-        if ($returnResponse) {
-             return $response;
-        }
-
-        return json_decode($response->getContent());
-    }
-
-    public function ingredientAttributes($overrides = [])
-    {
-        $default = [
-            'name' => 'Red Onion',
-            'location_id' => 1
-        ];
-
-        foreach ($overrides as $key => $value) {
-            $default[$key] = $value;
-        }
-
-        return $default;
-    }
-
     public function test_a_user_can_add_an_ingredient()
     {
-        $attributes = $this->ingredientAttributes();
+        $attributes = [
+            'name' => 'Red Onion',
+            'location_id' => 1,
+            'user_id' => $this->user->id
+        ];
 
         $response = $this->callApi(
-            route('add-ingredient'),
+            route('store-ingredient'),
             $attributes
         );
 
         $this->assertEquals($response->status, 200);
-        $this->assertEquals($response->ingredients[0]->name, 'Red Onion');
-
-        $attributes['user_id'] = [$this->user->id];
+        $this->assertEquals($response->ingredients[0]->name, $attributes['name']);
         $this->assertDatabaseHas('ingredients', $attributes);
     }
 
     public function test_a_user_cannot_add_an_ingredient_that_already_exists()
     {
-        $attributes = $this->ingredientAttributes();
+        IngredientFactory::addIngredient($this->user);
 
-        $this->user->addIngredient($attributes);
-
-        $response = $this->callApi(route('add-ingredient'), $attributes);
+        $response = $this->callApi(route('store-ingredient'), [
+            'name' => Ingredient::first()->name,
+            'location_id' => 1
+        ]);
 
         $this->assertEquals(400, $response->status);
         $this->assertEquals('ingredientAlreadyExists', $response->error);
@@ -79,66 +42,74 @@ class IngredientTest extends TestCase
 
     public function test_adding_an_ingredient_requires_the_name()
     {
-        $attributes = $this->ingredientAttributes(['name' => '']);
-
-        $this->callApi(route('add-ingredient'), $attributes, true)
+        $this->callApi(route('store-ingredient'), ['name' => ''], true)
             ->assertStatus(302);
     }
 
     public function test_adding_an_ingredient_requires_a_valid_location_id()
     {
-        $attributes = $this->ingredientAttributes(
-            ['location_id' => 10]
-        );
-
-        $this->callApi(route('add-ingredient'), $attributes, true)
+        $this->callApi(route('store-ingredient'), ['name' => 'Red Onion', 'location_id' => 10], true)
             ->assertStatus(302);
     }
 
     public function test_a_user_can_update_an_ingredient()
     {
-        $ingredient = $this->user->addIngredient($this->ingredientAttributes());
-
-        $updatedAttributes = [
-            'name' => 'Large Red Onion',
-            'location_id' => 3
-        ];
-
-        $response = $this->callApi(
-            $ingredient->apiPath() . 'update/',
-            $updatedAttributes
-        );
-
-        $this->assertEquals($response->status, 200);
-        $this->assertEquals(count($response->ingredients), 1);
-        $this->assertEquals($response->ingredients[0]->name, 'Large Red Onion');
-
-        $updatedAttributes['user_id'] = $this->user->id;
-        $this->assertDatabaseHas('ingredients', $updatedAttributes);
-    }
-
-    public function test_updating_an_ingredient_returns_error_if_ingredient_already_exists()
-    {
-        $ingredient = $this->user->addIngredient($this->ingredientAttributes());
+        $ingredient = IngredientFactory::addIngredient($this->user);
 
         $attributes = [
-            'name' => 'White Onion',
-            'location_id' => 1
+            'name' => 'Large Red Onion',
+            'location_id' => 3,
+            'user_id' => $this->user->id
         ];
-        $this->user->addIngredient($attributes);
 
         $response = $this->callApi(
             $ingredient->apiPath() . 'update/',
             $attributes
         );
 
+        $this->assertEquals($response->status, 200);
+        $this->assertEquals(count($response->ingredients), 1);
+        $this->assertEquals($response->ingredients[0]->name, $attributes['name']);
+        $this->assertDatabaseHas('ingredients', $attributes);
+    }
+
+    public function test_updating_an_ingredient_returns_error_if_ingredient_already_exists()
+    {
+        IngredientFactory::addTwoIngredients($this->user);
+
+        $ingredients = Ingredient::all();
+        $initialIngredient = $ingredients[0];
+        $secondaryIngredient = $ingredients[1];
+
+        $response = $this->callApi(
+            $initialIngredient->apiPath() . 'update/',
+            [
+                'name' => $secondaryIngredient->name,
+                'location_id' => 1
+            ]
+        );
+
         $this->assertEquals(400, $response->status);
         $this->assertEquals('ingredientAlreadyExists', $response->error);
     }
 
+    public function test_updating_an_ingredient_requires_a_valid_ingredient_id()
+    {
+        $this->callApi(route('update-ingredient', ['ingredient' => 100]), [], true)
+            ->assertStatus(404);
+    }
+
+    public function test_a_user_cannot_update_another_users_ingredients()
+    {
+        $secondaryUser = UserFactory::addUser();
+        $ingredient = IngredientFactory::addIngredient($secondaryUser);
+
+        $this->callApi($ingredient->apiPath() . 'update/', [], true)->assertStatus(403);
+    }
+
     public function test_updating_an_ingredient_requires_the_name()
     {
-        $ingredient = $this->user->addIngredient($this->ingredientAttributes());
+        $ingredient = IngredientFactory::addIngredient($this->user);
 
         $this->callApi($ingredient->apiPath() . 'update/', ['name' => '', 'location_id' => 1], true)
             ->assertStatus(302);
@@ -146,56 +117,31 @@ class IngredientTest extends TestCase
 
     public function test_updating_an_ingredient_requires_a_valid_location_id()
     {
-        $ingredient = $this->user->addIngredient($this->ingredientAttributes());
+        $ingredient = IngredientFactory::addIngredient($this->user);
 
-        $attributes = $this->ingredientAttributes(['location_id' => 10]);
-
-        $this->callApi($ingredient->apiPath() . 'update/', $attributes, true)
+        $this->callApi($ingredient->apiPath() . 'update/', ['name' => 'Red Onion', 'location_id' => 10], true)
             ->assertStatus(302);
-    }
-
-    public function test_updating_an_ingredient_requires_a_valid_ingredient_id()
-    {
-        $this->user->addIngredient($this->ingredientAttributes());
-
-        $this->callApi('/api/ingredients/100/update', [], true)
-            ->assertStatus(404);
-    }
-
-    public function test_a_user_cannot_update_another_users_ingredients()
-    {
-        $ingredient = $this->secondaryUser->addIngredient($this->ingredientAttributes());
-
-        $this->callApi($ingredient->apiPath() . 'update/', [
-            'name' => 'My Red Onion!',
-            'location_id' => 3
-        ], true)->assertStatus(403);
     }
 
     public function test_a_user_can_delete_their_ingredients()
     {
-        $attributes = $this->ingredientAttributes();
-        $ingredient = $this->user->addIngredient($attributes);
+        $ingredient = IngredientFactory::addIngredient($this->user);
 
-        $response = $this->callApi($ingredient->apiPath() . 'remove/', []);
+        $response = $this->callApi($ingredient->apiPath() . 'destroy/');
 
         $this->assertEquals($response->status, 200);
         $this->assertEquals(count($response->ingredients), 0);
-
-        $attributes['user_id'] = $this->user->id;
-        $this->assertDatabaseMissing('ingredients', $attributes);
+        $this->assertDatabaseMissing('ingredients', ['user_id' => $this->user->id]);
     }
 
     public function test_a_user_cannot_delete_other_peoples_ingredients()
     {
-        $attributes = $this->ingredientAttributes();
+        $secondaryUser = UserFactory::addUser();
+        $ingredient = IngredientFactory::addIngredient($secondaryUser);
 
-        $ingredient = $this->secondaryUser->addIngredient($attributes);
-
-        $this->callApi($ingredient->apiPath() . 'remove/', [], true)
+        $this->callApi($ingredient->apiPath() . 'destroy/', [], true)
             ->assertStatus(403);
 
-        $attributes['user_id'] = $this->secondaryUser->id;
-        $this->assertDatabaseHas('ingredients', $attributes);
+        $this->assertDatabaseHas('ingredients', ['user_id' => $secondaryUser->id]);
     }
 }

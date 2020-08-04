@@ -57,9 +57,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Plan');
     }
 
-    public function addMeal($name, $recipe)
+    public function addMeal($attributes)
     {
-        return $this->meals()->create(compact('name', 'recipe'));
+        return $this->meals()->create($attributes);
     }
 
     public function addGroup($name)
@@ -80,5 +80,10 @@ class User extends Authenticatable
     public function hasIngredient($name)
     {
         return ($this->ingredients->where('name', $name)->first() !== null);
+    }
+
+    public function hasMeal($name)
+    {
+        return ($this->meals->where('name', $name)->first() !== null);
     }
 }

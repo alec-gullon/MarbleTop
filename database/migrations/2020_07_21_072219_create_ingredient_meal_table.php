@@ -17,12 +17,14 @@ class CreateIngredientMealTable extends Migration
     {
         Schema::create('ingredient_meal', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('meal_id');
-            $table->integer('ingredient_id');
+            $table->unsignedInteger('meal_id');
+            $table->unsignedInteger('ingredient_id');
             $table->float('amount');
             $table->string('preciseAmount');
             $table->integer('order');
             $table->timestamps();
+
+            $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
         });
     }
 

@@ -15,8 +15,8 @@ class HomeTest extends TestCase
         $user = factory('App\User')->create();
         $otherUser = factory('App\User')->create();
 
-        $user->addMeal('Spaghetti Bolognese', 'My example recipe!');
-        $otherUser->addMeal('Lemon Drizzle Cake', 'Other user example recipe');
+        $user->addMeal(['name' => 'Spaghetti Bolognese', 'recipe' => 'My example recipe!']);
+        $otherUser->addMeal(['name' => 'Lemon Drizzle Cake', 'recipe' => 'Other user example recipe']);
 
         $this->actingAs($user);
 

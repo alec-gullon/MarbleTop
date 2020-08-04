@@ -21,13 +21,22 @@ class AuthTest extends TestCase
 
     public function test_guests_cannot_access_api_routes()
     {
-        $this->post(route('add-ingredient'), ['api_token' => 'bad_api_token'])
+        $this->post(route('store-ingredient'), ['api_token' => 'bad_api_token'])
             ->assertStatus(302);
 
         $this->post(route('update-ingredient', ['ingredient' => 1]), ['api_token' => 'bad_api_token'])
             ->assertStatus(302);
 
         $this->post(route('destroy-ingredient', ['ingredient' => 1]), ['api_token' => 'bad_api_token'])
+            ->assertStatus(302);
+
+        $this->post(route('store-meal'), ['api_token' => 'bad_api_token'])
+            ->assertStatus(302);
+
+        $this->post(route('update-meal', ['ingredient' => 1]), ['api_token' => 'bad_api_token'])
+            ->assertStatus(302);
+
+        $this->post(route('destroy-meal', ['ingredient' => 1]), ['api_token' => 'bad_api_token'])
             ->assertStatus(302);
     }
 }

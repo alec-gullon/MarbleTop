@@ -8,13 +8,13 @@ use App\Models\Ingredient;
 use App\Helper;
 use App\Helpers\ApiResponse;
 
-use App\Http\Requests\Api\Ingredient\AddIngredient;
+use App\Http\Requests\Api\Ingredient\StoreIngredient;
 use App\Http\Requests\Api\Ingredient\UpdateIngredient;
-use App\Http\Requests\Api\Ingredient\DeleteIngredient;
+use App\Http\Requests\Api\Ingredient\DestroyIngredient;
 
 class IngredientController extends BaseController
 {
-    public function store(AddIngredient $request)
+    public function store(StoreIngredient $request)
     {
         $user = auth()->user();
 
@@ -44,7 +44,7 @@ class IngredientController extends BaseController
         return ApiResponse::success(['ingredients' => Helper::ingredientsData($user)]);
     }
 
-    public function destroy(DeleteIngredient $request, Ingredient $ingredient)
+    public function destroy(DestroyIngredient $request, Ingredient $ingredient)
     {
         $ingredient->delete();
 

@@ -15,7 +15,7 @@ class UserTest extends TestCase
         $name = 'Spaghetti Bolognese';
         $recipe = 'My example recipe';
 
-        $meal = $user->addMeal($name, $recipe);
+        $meal = $user->addMeal(['name' => $name, 'recipe' => $recipe]);
 
         $this->assertCount(1, $user->meals);
         $this->assertTrue($user->meals->contains($meal));
