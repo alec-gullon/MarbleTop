@@ -1,5 +1,4 @@
 .LoginForm {
-    padding: 40px 16px;
     display: flex;
     flex-direction: column;
 
@@ -11,7 +10,7 @@
         color: $green-dark;
     }
 
-    > .ErrorBox {
+    > .MessageBox {
         margin-bottom: 32px;
     }
 
@@ -41,5 +40,4 @@
             margin-top: 16px;
         }
     }
-
 }

@@ -25,19 +25,26 @@ body {
 
 a {
   text-decoration: none;
+  color: #1A202C;
 }
 
 ul {
   list-style: none;
 }
 
+button {
+  display: block;
+  background: inherit;
+  border: none;
+}
+
 .Button {
-  border: 1px solid #476B2D;
-  background-color: #E3EFC7;
+  border: 1px solid #22543D;
+  background-color: #9AE6B4;
   line-height: 40px;
   height: 40px;
   display: inline-block;
-  color: #476B2D;
+  color: #22543D;
   text-align: center;
   padding: 0 24px;
   font-size: 18px;
@@ -48,7 +55,7 @@ ul {
 }
 
 .Button.is-primary {
-  background: #476B2D;
+  background: #22543D;
   color: white;
 }
 
@@ -87,19 +94,217 @@ ul {
   content: "...";
 }
 
-.ButtonIcon {
-  border: 1px solid #476B2D;
-  background-color: #E3EFC7;
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
+.Input {
+  padding: 0 8px;
+  height: 40px;
+  line-height: 1.5;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.Input.is-error {
+  border-color: #CC3333;
+  margin-bottom: 4px;
+}
+
+.Input.is-flat {
+  border-radius: 0;
+}
+
+.InputWithLabel {
+  display: flex;
+  flex-direction: column;
+}
+
+.InputWithLabel > label {
+  font-weight: 500;
+}
+
+.InputWithLabel > .error {
+  color: #CC3333;
+  font-size: 14px;
+}
+
+.Select {
+  padding: 0 20px 0 4px;
+  height: 40px;
+  line-height: 1.5;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background: white;
+}
+
+.Select.is-error {
+  border-color: #CC3333;
+  margin-bottom: 4px;
+}
+
+.MessageBox {
+  font-size: 14px;
+  padding: 16px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.MessageBox > a {
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.MessageBox.is-error {
+  color: #CC3333;
+  background: #FAECED;
+}
+
+.MessageBox.is-error > a {
+  color: #CC3333;
+}
+
+.MessageBox.is-success {
+  color: #22543D;
+  background: #9AE6B4;
+}
+
+.MessageBox.is-success > a {
+  color: #22543D;
+}
+
+.AdminContent {
+  padding: 28px 0;
+}
+
+.AdminContent > .header {
+  padding: 0 21px 32px 21px;
   position: relative;
 }
 
-.ButtonIcon > svg {
-  height: 100%;
+.AdminContent > .header:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  fill: #476B2D;
+  height: 100%;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.AdminContent > .header > h1 {
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 4px;
+  color: #22543D;
+}
+
+.AdminContent > .header .heading-tag {
+  font-size: 15px;
+  color: #425466;
+  line-height: 1.25;
+}
+
+.AdminLinkSet {
+  background: white;
+  padding: 16px 0;
+  height: 350px;
+}
+
+.AdminLinkSet > li {
+  padding-left: 21px;
+}
+
+.AdminLinkSet > li > a {
+  display: flex;
+  align-items: center;
+}
+
+.AdminLinkSet > li > a > svg {
+  height: 25px;
+  width: 25px;
+  fill: #22543D;
+}
+
+.AdminLinkSet > li > a > .text {
+  display: block;
+  width: 100%;
+  margin-left: 21px;
+  border-bottom: 1px solid #E8E8E8;
+  padding: 10px 0;
+}
+
+.ItemCreator .header {
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+  font-weight: 500;
+  color: #22543D;
+  width: 100%;
+}
+
+.ItemCreator .header > svg {
+  height: 30px;
+  width: 30px;
+  fill: #22543D;
+  margin-right: 12px;
+}
+
+.ItemCreator > .body {
+  padding: 16px 0;
+  display: none;
+  flex-direction: column;
+}
+
+.ItemCreator > .body > .InputWithLabel {
+  margin-bottom: 8px;
+}
+
+.ItemCreator > .body > .MessageBox {
+  margin-top: 8px;
+}
+
+.ItemCreator > .body > .Button {
+  margin-top: 16px;
+  align-self: flex-end;
+}
+
+.ItemCreator.is-expanded > .body {
+  display: flex;
+}
+
+.Footer {
+  border-top: 1px solid #cccccc;
+  padding: 32px 16px 64px 16px;
+  color: #22543D;
+  font-weight: 700;
+}
+
+.PageContent {
+  padding: 28px 21px;
+}
+
+.PageContent > h1 {
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 4px;
+  color: #22543D;
+}
+
+.PageContent > .heading-tag {
+  font-size: 15px;
+  color: #425466;
+  line-height: 1.25;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 32px;
+}
+
+.PageContent > .content > p {
+  margin-bottom: 16px;
+  line-height: 1.6;
+  color: #425466;
+  font-size: 15px;
+}
+
+.PageContent > .content > p > .highlighted {
+  color: #22543D;
+  font-weight: 700;
 }
 
 .PrimaryNav > .bar {
@@ -123,11 +328,15 @@ ul {
   height: 20px;
   width: 20px;
   fill: green;
-  stroke: green;
+  stroke: #22543D;
+}
+
+.PrimaryNav > .bar > .logo {
+  height: 65px;
 }
 
 .PrimaryNav > .bar > .logo > img {
-  height: 60px;
+  height: 100%;
 }
 
 .PrimaryNav > .mobile {
@@ -161,32 +370,42 @@ ul {
 
 .PrimaryNav > .mobile > .header > .top > .Button,
 .PrimaryNav > .mobile > .header > .top form {
-  flex-grow: 1;
+  width: 80%;
 }
 
 .PrimaryNav > .mobile > .header > .top > svg {
   width: 20px;
   height: 20px;
-  fill: #476B2D;
+  fill: #22543D;
   margin-left: 16px;
 }
 
 .PrimaryNav > .mobile > .header > .top > form > input {
-  width: 100%;
+  width: 80%;
+}
+
+.PrimaryNav > .mobile > .header > .sign-up {
+  width: 80%;
+  margin-bottom: 24px;
 }
 
 .PrimaryNav > .mobile > .header > .options > li {
   display: flex;
   margin-bottom: 26px;
+  align-items: center;
 }
 
-.PrimaryNav > .mobile > .header > .options > li > img {
-  height: 20px;
+.PrimaryNav > .mobile > .header > .options > li > svg {
+  height: 25px;
+  width: 25px;
+  margin-right: 12px;
+  fill: #22543D;
 }
 
 .PrimaryNav > .mobile > .header > .options > li > a {
   margin-left: 10px;
   font-size: 16px;
+  color: #1A202C;
 }
 
 .PrimaryNav > .mobile > .footer {
@@ -195,314 +414,59 @@ ul {
   border-bottom: 1px solid #E8E8E8;
 }
 
-.Footer {
-  border-top: 1px solid #cccccc;
-  padding: 32px 16px 64px 16px;
-  color: #476B2D;
-  font-weight: 700;
-}
-
-.PageContent {
-  padding: 40px 16px;
-}
-
-.PageContent > svg {
-  fill: #8FBC8F;
-  height: 50px;
-  width: 50px;
-  margin: 0 auto 32px auto;
-  display: block;
-}
-
-.PageContent > h1 {
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 32px;
-  text-align: center;
-  color: #476B2D;
-}
-
-.PageContent > p {
-  margin-bottom: 16px;
-  line-height: 1.6;
-  color: #425466;
-}
-
-.PageContent > p > .highlighted {
-  color: #476B2D;
-  font-weight: 700;
-}
-
-.AdminSection {
-  padding: 32px 16px;
-}
-
-.AdminSection > h1 {
-  font-size: 26px;
-  font-weight: 400;
-  margin-bottom: 32px;
-  color: #476B2D;
-  display: flex;
-  align-items: center;
-}
-
-.AdminSection > h1 > a {
-  margin-left: 16px;
-  height: 16px;
-  width: 16px;
-  display: flex;
-}
-
-.AdminSection > h1 > a > svg {
-  height: 100%;
-  width: 100%;
-  fill: #476B2D;
-}
-
-.MessageBox {
-  font-size: 14px;
-  padding: 16px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-}
-
-.MessageBox > a {
-  text-decoration: underline;
-  font-weight: 500;
-}
-
-.MessageBox.is-error {
-  color: #CC3333;
-  background: #FAECED;
-}
-
-.MessageBox.is-error > a {
-  color: #CC3333;
-}
-
-.MessageBox.is-success {
-  color: #476B2D;
-  background: #E3EFC7;
-}
-
-.MessageBox.is-success > a {
-  color: #476B2D;
-}
-
-.Input {
-  padding: 0 8px;
-  height: 40px;
-  line-height: 1.5;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-}
-
-.Input.is-error {
-  border-color: #CC3333;
-  margin-bottom: 4px;
-}
-
-.Input.is-flat {
-  border-radius: 0;
-}
-
-.Select {
-  padding: 0 20px 0 4px;
-  height: 40px;
-  line-height: 1.5;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  background: white;
-}
-
-.Select.is-error {
-  border-color: #CC3333;
-  margin-bottom: 4px;
-}
-
-.TextArea {
-  padding: 8px;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  min-height: 250px;
-}
-
-.InputWithLabel {
-  display: flex;
-  flex-direction: column;
-}
-
-.InputWithLabel > label {
-  font-weight: 500;
-}
-
-.InputWithLabel > .error {
-  color: #CC3333;
-  font-size: 14px;
-}
-
-.AdminLink {
-  background: white;
-  border: 1px solid #cccccc;
-  padding: 12px 16px;
-  font-size: 14px;
-  color: #476B2D;
-  font-weight: 500;
-  display: block;
-}
-
-.AdminPanel {
-  display: flex;
-  flex-direction: column;
-  background: white;
-  border: 1px solid #cccccc;
-}
-
-.AdminPanel > .header {
-  padding: 12px 16px;
-  font-size: 14px;
-  position: relative;
-  font-weight: 500;
-}
-
-.AdminPanel > .header > span {
-  color: #476B2D;
-}
-
-.AdminPanel > .header > svg {
-  height: 21px;
-  width: 21px;
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  fill: #476B2D;
-}
-
-.AdminPanel > .header.is-error {
-  background: #FAECED;
-}
-
-.AdminPanel > .body {
-  display: none;
-  padding: 16px;
-}
-
-.AdminPanel.is-expanded > .header {
-  border-bottom: 1px solid #E8E8E8;
-}
-
-.AdminPanel.is-expanded > .header > svg:first-of-type {
-  display: none;
-}
-
-.AdminPanel.is-expanded > .header > svg:last-child {
-  display: block;
-}
-
-.AdminPanel.is-expanded > .body {
-  display: block;
-  font-size: 14px;
+.PrimaryNav > .mobile > .footer > a {
+  color: #1A202C;
 }
 
 .Hero {
-  padding: 100px 16px 0 16px;
-  margin-bottom: 300px;
+  padding: 60px 16px 0 16px;
   position: relative;
+  height: 450px;
 }
 
-.Hero > h1 {
-  font-size: 38px;
-  font-weight: 400;
-  margin-bottom: 32px;
-}
-
-.Hero > h1 > .highlighted {
-  color: #476B2D;
-  font-style: italic;
-}
-
-.Hero > .icons {
-  display: flex;
-  margin-bottom: 32px;
-}
-
-.Hero > .icons > svg {
-  fill: #8FBC8F;
-  overflow: visible;
-  height: 50px;
-  width: 50px;
-  margin-right: 24px;
-}
-
-.Hero > .buttons {
-  display: flex;
-}
-
-.Hero > .buttons > .Button {
-  margin-right: 16px;
-}
-
-.Stripes {
-  height: 580px;
+.Hero > .background {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  background: #f6f9fc;
-  transform: skewY(-12deg);
+  height: 100%;
+  background: url("/images/home-hero.jpg");
+  background-size: 100% auto;
+  opacity: 0.15;
 }
 
-.Stripes > .stripe-one {
-  position: absolute;
-  bottom: 120px;
-  right: 0;
-  width: 50px;
-  height: 40px;
-  background: #E3EFC7;
+.Hero > .body {
+  position: relative;
 }
 
-.Stripes > .stripe-two {
-  position: absolute;
-  bottom: 40px;
-  right: 0;
-  width: 100px;
-  height: 40px;
-  background: #476B2D;
+.Hero > .body > h1 {
+  font-size: 34px;
+  font-weight: 400;
+  margin-bottom: 48px;
+  line-height: 1.2;
+  text-align: center;
+  color: #1A202C;
 }
 
-.Stripes > .stripe-three {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 75px;
-  height: 40px;
-  background: #8FBC8F;
+.Hero > .body > p {
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.25;
+  margin-bottom: 40px;
+  color: #425466;
 }
 
-.Stripes > .stripe-four {
-  position: absolute;
-  bottom: -40px;
-  right: 0;
-  width: 150px;
-  height: 40px;
-  background: #E3EFC7;
+.Hero > .body > .buttons {
+  display: flex;
+  justify-content: center;
 }
 
-.Stripes > .stripe-five {
-  position: absolute;
-  bottom: -80px;
-  right: 0;
-  width: 75px;
-  height: 40px;
-  background: #8FBC8F;
+.Hero > .body > .buttons > .Button {
+  margin-right: 16px;
 }
 
-.Stripes > .stripe-six {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 75px;
-  height: 40px;
-  background: #8FBC8F;
+.Hero > .body > .buttons > .Button:last-child {
+  margin-right: 0;
 }
 
 .FeatureBoxes {
@@ -514,27 +478,31 @@ ul {
 }
 
 .FeatureBoxes > .box > svg {
-  height: 48px;
-  width: 48px;
-  margin-bottom: 16px;
-  fill: #476B2D;
+  height: 33px;
+  width: 33px;
+  margin-bottom: 24px;
+  fill: #22543D;
 }
 
 .FeatureBoxes > .box > h2 {
-  font-size: 19px;
-  margin-bottom: 16px;
+  font-size: 18px;
+  margin-bottom: 12px;
   color: #1A202C;
   font-weight: 500;
 }
 
 .FeatureBoxes > .box > p {
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.25;
   color: #425466;
 }
 
+.FeatureBoxes > .box:first-child {
+  padding-top: 64px;
+  border-top: 1px dashed #22543D;
+}
+
 .LoginForm {
-  padding: 40px 16px;
   display: flex;
   flex-direction: column;
 }
@@ -544,10 +512,10 @@ ul {
   font-size: 32px;
   font-weight: 400;
   margin-bottom: 32px;
-  color: #476B2D;
+  color: #22543D;
 }
 
-.LoginForm > .ErrorBox {
+.LoginForm > .MessageBox {
   margin-bottom: 32px;
 }
 
@@ -578,438 +546,71 @@ ul {
   margin-top: 16px;
 }
 
-.IngredientCreator {
-  display: flex;
-  flex-direction: column;
-  background: white;
-  border: 1px solid #cccccc;
-  margin-bottom: 32px;
-}
-
-.IngredientCreator > .header {
-  padding: 12px 16px;
-  font-size: 14px;
-  position: relative;
-  color: #476B2D;
-  font-weight: 500;
-}
-
-.IngredientCreator > .header > svg {
-  height: 21px;
-  width: 21px;
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  fill: #476B2D;
-}
-
-.IngredientCreator > .footer {
-  display: none;
-  padding: 16px 16px;
-  flex-direction: column;
-}
-
-.IngredientCreator > .footer > .InputWithLabel {
-  margin-bottom: 16px;
-}
-
-.IngredientCreator > .footer > .InputWithLabel:last-of-type {
-  margin-bottom: 24px;
-}
-
-.IngredientCreator > .footer > .InputWithLabel > label {
-  font-size: 14px;
-}
-
-.IngredientCreator > .footer > .MessageBox {
-  margin-bottom: 16px;
-}
-
-.IngredientCreator > .footer > .Button {
-  align-self: flex-end;
-}
-
-.IngredientCreator.is-expanded > .header {
-  border-bottom: 1px solid #E8E8E8;
-}
-
-.IngredientCreator.is-expanded > .footer {
-  display: flex;
-}
-
-.IngredientsAdmin > .ingredients {
-  border: 1px solid #cccccc;
-}
-
-.IngredientEditor {
-  font-size: 14px;
-  font-weight: 500;
-  background: white;
-}
-
-.IngredientEditor:nth-child(2n+1) {
-  background: #E3EFC7;
-  color: #476B2D;
-}
-
-.IngredientEditor > .header {
-  position: relative;
-  padding: 12px 16px;
-}
-
-.IngredientEditor > .header > svg {
-  height: 21px;
-  width: 21px;
-  position: absolute;
-  top: 12px;
-  right: 16px;
-}
-
-.IngredientEditor > .footer {
-  padding: 16px;
-  display: none;
-  background: white;
-  border-bottom: 1px solid #cccccc;
-}
-
-.IngredientEditor > .footer > .footer-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-}
-
-.IngredientEditor > .footer > .footer-row > .label {
-  width: 45%;
-}
-
-.IngredientEditor > .footer > .footer-row > .Input,
-.IngredientEditor > .footer > .footer-row .Select {
-  width: 55%;
-}
-
-.IngredientEditor > .footer > .footer-row > .error {
-  width: 100%;
-  color: #CC3333;
-  margin-top: 4px;
-  text-align: right;
-  font-size: 12px;
-}
-
-.IngredientEditor > .footer > .buttons {
-  display: flex;
-  margin-top: 16px;
-}
-
-.IngredientEditor > .footer > .buttons > .Button {
-  margin-right: 16px;
-}
-
-.IngredientEditor.is-expanded > .header {
-  border-bottom: 1px solid #cccccc;
-}
-
-.IngredientEditor.is-expanded > .footer {
-  display: block;
-}
-
-.MealsAdmin > .MessageBox {
-  margin-bottom: 32px;
-}
-
-.MealsAdmin > .AdminLink {
-  margin-bottom: 32px;
-}
-
-.MealsAdmin .meals {
-  border: 1px solid #cccccc;
-}
-
-.MealsAdmin .meals > .AdminLink {
-  border: 0;
-  border-bottom: 1px solid #cccccc;
-}
-
-.MealsAdmin .meals > .AdminLink:last-child {
-  border-bottom: 0;
-}
-
-.MealEditor {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.MealEditor .AdminPanel {
-  margin-bottom: 16px;
-  width: 100%;
-}
-
-.MealEditor .AdminPanel:last-child {
-  margin-bottom: 0;
-}
-
-.MealEditor > .buttons {
-  display: flex;
-}
-
-.MealEditor > .buttons > .Button:last-child {
-  margin-left: 16px;
-}
-
-.MealDetails > .InputWithLabel {
-  margin-bottom: 16px;
-}
-
-.MealDetails > .InputWithLabel:last-child {
-  margin-bottom: 0;
-}
-
-.IngredientsEditor > .search {
-  position: relative;
-  overflow: visible;
-  margin-bottom: 16px;
-}
-
-.IngredientsEditor > .search > .results {
-  position: absolute;
-  bottom: 0;
-  top: 100%;
-  background: white;
-  min-height: 116px;
-  overflow-y: scroll;
-  width: 100%;
-  border: 1px solid #cccccc;
-  z-index: 1;
-}
-
-.IngredientsEditor > .search > .results > ul > li {
-  padding: 8px;
-  border-bottom: 1px solid #E8E8E8;
-  color: #476B2D;
-  display: flex;
-  align-items: center;
-}
-
-.IngredientsEditor > .search > .results > ul > li > span {
-  flex-grow: 1;
-}
-
-.IngredientsEditor > .search > .results > ul > li > svg {
-  height: 21px;
-  width: 21px;
-}
-
-.IngredientsEditor > ul {
-  border: 1px solid #cccccc;
-}
-
-.IngredientsEditor > ul > li {
-  display: flex;
-  align-items: center;
-  background: white;
-  padding: 8px;
-}
-
-.IngredientsEditor > ul > li > .name {
-  flex-grow: 1;
-  font-size: 14px;
-}
-
-.IngredientsEditor > ul > li > .toggle {
-  margin-right: 16px;
-  font-size: 18px;
-}
-
-.IngredientsEditor > ul > li > .toggle > span:first-child,
-.IngredientsEditor > ul > li > .toggle > span:last-child {
-  font-weight: 500;
-}
-
-.IngredientsEditor > ul > li > .toggle > .amount {
-  margin: 0 8px;
-  width: 34px;
-  display: inline-block;
-  text-align: center;
-}
-
-.IngredientsEditor > ul > li > svg {
-  width: 21px;
-  height: 21px;
-  fill: #CC3333;
-}
-
-.IngredientsEditor > ul > li:nth-child(2n+1) {
-  background: #E8E8E8;
-}
-
-.IngredientsTable {
-  width: 100%;
-}
-
-.IngredientsTable > tbody > tr > td {
-  width: 50%;
-}
-
-.Recipe .AdminPanel:first-child {
-  margin-bottom: 16px;
-}
-
-.RecipeMethod > p {
-  font-size: 16px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #cccccc;
-  padding-bottom: 16px;
-}
-
-.RecipeMethod > p:last-child {
-  padding-bottom: 0;
-  border-bottom: 0;
-  margin-bottom: 0;
-}
-
-.AmountsEditor {
-  display: flex;
-  flex-direction: column;
-}
-
-.AmountsEditor > .amount {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  height: 30px;
-}
-
-.AmountsEditor > .amount > label {
-  flex-grow: 1;
-  font-weight: 500;
-}
-
-.AmountsEditor > .amount > input {
-  height: 100%;
-  border-radius: 0;
-  border: 1px solid #cccccc;
-}
-
-.AmountsEditor > .amount > button {
-  height: 100%;
-  width: 40px;
-}
-
-.AmountsEditor > .amount > button > svg {
-  height: 100%;
-  width: 100%;
-}
-
 body {
   max-width: 600px;
   margin: 0 auto;
 }
 
-.Home {
-  padding: 16px;
+.IngredientsAdmin {
+  padding: 21px 21px;
 }
 
-.Home > h1 {
-  font-size: 20px;
-}
-
-.Home > .date {
-  font-size: 14px;
+.IngredientsAdmin > .ItemCreator {
   margin-bottom: 16px;
-  display: block;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E8E8E8;
 }
 
-.Home > .heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.Home > .heading > h2 {
-  font-size: 22px;
-}
-
-.Home > .heading > a {
-  font-weight: 500;
-  color: #476B2D;
-}
-
-.Home > .latest-plan {
-  width: 100%;
-  height: 80px;
-  display: flex;
+.IngredientsAdmin > .location {
   margin-bottom: 32px;
 }
 
-.Home > .latest-plan > .date {
-  width: 80px;
-  height: 80px;
-  background: #E3EFC7;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.Home > .latest-plan > .date > .day {
+.IngredientsAdmin > .location > h2 {
   font-size: 20px;
-  font-weight: 500;
+  color: #22543D;
+  margin-bottom: 12px;
 }
 
-.Home > .latest-plan > .date > .month {
-  font-size: 16px;
-}
-
-.Home > .latest-plan > a {
-  border: 1px solid #cccccc;
-  text-align: center;
-  margin-left: 8px;
-  flex-grow: 1;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 80px;
-  color: #476B2D;
-  background: white;
-}
-
-.Home > .home-option {
+.IngredientsAdmin > .location > .ingredient {
   display: flex;
-  padding: 16px 24px;
-  border: 1px solid #cccccc;
-  background: white;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   align-items: center;
 }
 
-.Home > .home-option > svg {
-  width: 60px;
-  height: 60px;
-  fill: #476B2D;
-  margin-right: 24px;
+.IngredientsAdmin > .location > .ingredient > svg {
+  height: 25px;
+  width: 25px;
+  fill: #22543D;
+  margin-left: 12px;
 }
 
-.Home > .home-option > .text {
+.IngredientsAdmin > .location > .ingredient > svg:last-child {
+  fill: #CC3333;
+}
+
+.IngredientsAdmin > .location > .ingredient > .field {
   flex-grow: 1;
-  width: 100%;
+  border-bottom: 1px solid #cccccc;
+  display: flex;
+  align-items: center;
 }
 
-.Home > .home-option > .text > h3 {
-  font-size: 20px;
-  color: #476B2D;
+.IngredientsAdmin > .location > .ingredient > .field > input {
+  flex-grow: 1;
+  border: none;
+  padding: 12px 0;
+  display: block;
 }
 
-.Home > .home-option > .text > p {
-  font-size: 14px;
-  color: #1A202C;
+.IngredientsAdmin > .location > .ingredient > .field > .active {
+  margin-right: 12px;
 }
 
 .PlanCreator > .stage > h2 {
   height: 50px;
   display: flex;
   align-items: center;
-  color: #476B2D;
+  color: #22543D;
   font-weight: 400;
 }
 
@@ -1017,7 +618,7 @@ body {
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  background: #8FBC8F;
+  background: #38A169;
   text-align: center;
   line-height: 40px;
   font-size: 22px;

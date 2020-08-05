@@ -1,0 +1,115 @@
+.PrimaryNav {
+
+    > .bar {
+        background: white;
+        height: 80px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+
+        > .hamburger {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            height: 20px;
+            width: 20px;
+            fill: green;
+            stroke: $green-dark;
+        }
+
+        > .logo {
+            height: 65px;
+            > img {
+                height: 100%;
+            }
+        }
+    }
+
+    > .mobile {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: -251px;
+        background: white;
+        width: 250px;
+        height: 100vh;
+        border-right: 1px solid $grey-lightest;
+        transition: 0.3s ease-in-out all;
+
+        &.is-active {
+            left: 0;
+        }
+
+        > .header {
+            padding: 16px 16px 0 16px;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+
+            > .top {
+                display: flex;
+                margin-bottom: 40px;
+                align-items: center;
+
+                > .Button, form {
+                    width: 80%;
+                }
+
+                > svg {
+                    width: 20px;
+                    height: 20px;
+                    fill: $green-dark;
+                    margin-left: 16px;
+                }
+
+                > form {
+                    > input {
+                        width: 80%;
+                    }
+                }
+            }
+
+            > .sign-up {
+                width: 80%;
+                margin-bottom: 24px;
+            }
+
+            > .options {
+                > li {
+                    display: flex;
+                    margin-bottom: 26px;
+                    align-items: center;
+
+                    > svg {
+                        height: 25px;
+                        width: 25px;
+                        margin-right: 12px;
+                        fill: $green-dark;
+                    }
+
+                    > a {
+                        margin-left: 10px;
+                        font-size: 16px;
+                        color: $grey-dark;
+                    }
+                }
+            }
+        }
+
+        > .footer {
+            padding: 16px;
+            border-top: 1px solid $grey-lightest;
+            border-bottom: 1px solid $grey-lightest;
+
+            > a {
+                color: $grey-dark;
+            }
+        }
+    }
+}

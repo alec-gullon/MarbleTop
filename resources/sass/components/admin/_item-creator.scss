@@ -1,0 +1,42 @@
+.ItemCreator {
+    .header {
+        display: flex;
+        font-size: 18px;
+        align-items: center;
+        font-weight: 500;
+        color: $green-dark;
+        width: 100%;
+
+        > svg {
+            height: 30px;
+            width: 30px;
+            fill: $green-dark;
+            margin-right: 12px;
+        }
+    }
+
+    > .body {
+        padding: 16px 0;
+        display: none;
+        flex-direction: column;
+
+        > .InputWithLabel {
+            margin-bottom: 8px;
+        }
+
+        > .MessageBox {
+            margin-top: 8px;
+        }
+
+        > .Button {
+            margin-top: 16px;
+            align-self: flex-end;
+        }
+    }
+
+    &.is-expanded {
+        > .body {
+            display: flex;
+        }
+    }
+}

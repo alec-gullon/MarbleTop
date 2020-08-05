@@ -1,0 +1,31 @@
+.AdminContent {
+    padding: 28px 0;
+
+    > .header {
+        padding: 0 21px 32px 21px;
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-bottom: 1px solid $grey-lightest;
+        }
+
+        > h1 {
+            font-size: 26px;
+            font-weight: 400;
+            margin-bottom: 4px;
+            color: $green-dark;
+        }
+
+        .heading-tag {
+            font-size: 15px;
+            color: $grey-mid;
+            line-height: 1.25;
+        }
+    }
+}

@@ -11,14 +11,7 @@
 <body>
     <div id="app">
 
-        <?php
-            $authenticated = 'false';
-            if (Auth::check()) {
-                $authenticated = 'true';
-            }
-        ?>
-
-        <primary-nav :authenticated="{{ $authenticated }}"
+        <primary-nav :authenticated="{{ Auth::check() ? 'true' : 'false' }}"
                      :csrftoken="'{{ csrf_token() }}'"
         ></primary-nav>
 
@@ -32,13 +25,8 @@
 
     <script>
         document.global = {};
-
-        @if (Auth::check())
-            document.global.apiToken = '{{ Auth::user()->api_token }}';
-        @endif
-
+        document.global.apiToken = '{{ Auth::check() ? Auth::user()->api_token : '' }}'
         document.global.xhrActive = false;
-
     </script>
     <script src="/js/app.js"></script>
 </body>

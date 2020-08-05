@@ -1,20 +1,37 @@
 <template>
     <div class="IngredientsAdmin">
-        <ingredient-creator :locations="locations"
-                            :existingIngredients="existingIngredients"
-                            @formSuccess="updateIngredients">
-        </ingredient-creator>
+        <item-creator :locations="locations"
+                      :existingItems="existingIngredients"
+                      @formSuccess="updateIngredients">
+        </item-creator>
 
-        <div class="ingredients" v-if="ingredients.length > 0">
-            <ingredient-editor v-for="(ingredient, key) in ingredients"
-                               :key="ingredient.id"
-                               :init="ingredient"
-                               :locations="locations"
-                               :existingIngredients="existingIngredients"
-                               @formSuccess="updateIngredients"
-            ></ingredient-editor>
+<!--        <div class="ingredients" v-if="ingredients.length > 0">-->
+<!--            <ingredient-editor v-for="(ingredient, key) in ingredients"-->
+<!--                               :key="ingredient.id"-->
+<!--                               :init="ingredient"-->
+<!--                               :locations="locations"-->
+<!--                               :existingIngredients="existingIngredients"-->
+<!--                               @formSuccess="updateIngredients"-->
+<!--            ></ingredient-editor>-->
+<!--        </div>-->
+
+        <div class="location">
+            <h2>Fresh</h2>
+            <div class="ingredient">
+                <div class="field">
+                    <input value="Cheese" class="is-active" />
+                    <div class="active">
+                        ...
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="/images/icons.svg#checkmark-outline"></use>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="/images/icons.svg#close-outline"></use>
+                </svg>
+            </div>
         </div>
-
     </div>
 </template>
 

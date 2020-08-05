@@ -1,20 +1,19 @@
 <template>
-    <div class="IngredientCreator" :class="{'is-expanded': expanded}">
+    <div class="ItemCreator" :class="{'is-expanded': expanded}">
 
-        <div class="header">
-            Add an Ingredient
-
-            <svg xmlns="http://www.w3.org/2000/svg" @click="toggleExpanded">
-                <use xlink:href="/images/icons/chevron-down.svg#icon" v-if="!expanded"></use>
-                <use xlink:href="/images/icons/chevron-up.svg#icon" v-else></use>
+        <div class="header" @click="toggleExpanded">
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <use xlink:href="/images/icons.svg#plus-outline" v-if="!expanded"></use>
+                <use xlink:href="/images/icons.svg#close-outline" v-else></use>
             </svg>
+            Add Item
         </div>
 
-        <div class="footer">
+        <div class="body">
             <div class="InputWithLabel">
                 <label for="name">Name</label>
-                <input class="Input" :class="{'is-error': checkForError('ingredientAlreadyExists')}" type="text" id="name" v-model="name" />
-                <span class="error" v-if="checkForError('ingredientAlreadyExists')">An ingredient with that name already exists.</span>
+                <input class="Input" :class="{'is-error': checkForError('itemAlreadyExists')}" type="text" id="name" v-model="name" />
+                <span class="error" v-if="checkForError('itemAlreadyExists')">An item with that name already exists.</span>
             </div>
 
             <div class="InputWithLabel">
@@ -28,10 +27,10 @@
             </div>
 
             <div class="MessageBox is-success" v-if="reportSuccess">
-                Ingredient successfully added!
+                Item successfully added!
             </div>
 
-            <button class="Button is-small" :class="{'is-disabled': !formReady, 'is-active': formActive}" @click="submit">Add</button>
+            <button class="Button is-small is-primary" :class="{'is-disabled': !formReady, 'is-active': formActive}" @click="submit">Add</button>
         </div>
 
     </div>
@@ -44,7 +43,7 @@
     export default {
         props: [
             'locations',
-            'existingIngredients'
+            'existingItems'
         ],
         methods: {
             submit: function() {
@@ -54,19 +53,18 @@
 
                 let data = new FormData();
                 data.append('name', this.name);
-                data.append('locationId', this.locationId);
-                data.append('respondWithIngredients', true);
+                data.append('location_id', this.locationId);
                 data.append('api_token', document.global.apiToken);
 
                 this.formActive = true;
-                this.post('/api/ingredients/add/', data, function(response) {
+                this.post('/api/items/store/', data, function(response) {
                     this.errors = [];
 
                     if (response.status === 200) {
                         this.name = '';
                         this.locationId = 0;
 
-                        this.$emit('formSuccess', {ingredients: response.ingredients});
+                        this.$emit('formSuccess', {items: response.items});
 
                         this.reportSuccess = true;
                         setTimeout(function() {
@@ -98,10 +96,10 @@
         },
         watch: {
             name: function(value) {
-                let errorIndex = this.errors.indexOf('ingredientAlreadyExists');
+                let errorIndex = this.errors.indexOf('itemAlreadyExists');
 
-                if (this.existingIngredients.indexOf(value) !== -1 && errorIndex === -1) {
-                    this.errors.push('ingredientAlreadyExists');
+                if (this.existingItems.indexOf(value) !== -1 && errorIndex === -1) {
+                    this.errors.push('itemAlreadyExists');
                     return;
                 }
 

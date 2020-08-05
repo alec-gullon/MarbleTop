@@ -1,0 +1,80 @@
+.Hero {
+    padding: 60px 16px 0 16px;
+    position: relative;
+    height: 450px;
+
+    > .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('/images/home-hero.jpg');
+        background-size: 100% auto;
+        opacity: .15;
+    }
+
+    > .body {
+        position: relative;
+
+        > h1 {
+            font-size: 34px;
+            font-weight: 400;
+            margin-bottom: 48px;
+            line-height: 1.2;
+            text-align: center;
+            color: $grey-dark;
+        }
+
+        > p {
+            text-align: center;
+            font-size: 24px;
+            line-height: 1.25;
+            margin-bottom: 40px;
+            color: $grey-mid;
+        }
+
+        > .buttons {
+            display: flex;
+            justify-content: center;
+
+            > .Button {
+                margin-right: 16px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+    }
+}
+
+.FeatureBoxes {
+    padding: 0 16px;
+    > .box {
+        margin-bottom: 64px;
+        > svg {
+            height: 33px;
+            width: 33px;
+            margin-bottom: 24px;
+            fill: $green-dark;
+        }
+        > h2 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: $grey-dark;
+            font-weight: 500;
+        }
+        > p {
+            font-size: 16px;
+            line-height: 1.25;
+            color: $grey-mid;
+        }
+
+        &:first-child {
+            padding-top: 64px;
+            border-top: 1px dashed $green-dark;
+        }
+    }
+}

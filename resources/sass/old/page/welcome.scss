@@ -1,0 +1,37 @@
+.Hero {
+    padding: 100px 16px 0 16px;
+    margin-bottom: 300px;
+    position: relative;
+
+    > h1 {
+        font-size: 38px;
+        font-weight: 400;
+        margin-bottom: 32px;
+
+        > .highlighted {
+            color: $green-dark;
+            font-style: italic;
+        }
+    }
+
+    > .icons {
+        display: flex;
+        margin-bottom: 32px;
+
+        > svg {
+            fill: $green-mid;
+            overflow: visible;
+            height: 50px;
+            width: 50px;
+            margin-right: 24px;
+        }
+    }
+
+    > .buttons {
+        display: flex;
+
+        > .Button {
+            margin-right: 16px;
+        }
+    }
+}

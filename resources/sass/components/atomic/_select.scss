@@ -1,0 +1,13 @@
+.Select {
+    padding: 0 20px 0 4px;
+    height: 40px;
+    line-height: 1.5;
+    border: 1px solid $grey-light;
+    border-radius: 4px;
+    background: white;
+
+    &.is-error {
+        border-color: $alert;
+        margin-bottom: 4px;
+    }
+}

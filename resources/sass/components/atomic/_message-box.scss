@@ -1,0 +1,28 @@
+.MessageBox {
+    font-size: 14px;
+    padding: 16px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+
+    > a {
+        text-decoration: underline;
+        font-weight: 500;
+    }
+
+    &.is-error {
+        color: $alert;
+        background: $alert-background;
+
+        > a {
+            color: $alert;
+        }
+    }
+
+    &.is-success {
+        color: $green-dark;
+        background: $green-light;
+
+        > a {
+            color: $green-dark;
+        }
+    }
+}

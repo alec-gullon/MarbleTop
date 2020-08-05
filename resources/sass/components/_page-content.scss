@@ -1,0 +1,33 @@
+.PageContent {
+    padding: 28px 21px;
+
+    > h1 {
+        font-size: 26px;
+        font-weight: 400;
+        margin-bottom: 4px;
+        color: $green-dark;
+    }
+
+    > .heading-tag {
+        font-size: 15px;
+        color: $grey-mid;
+        line-height: 1.25;
+        margin-bottom: 32px;
+        border-bottom: 1px solid $grey-lightest;
+        padding-bottom: 32px;
+    }
+
+    > .content {
+        > p {
+            margin-bottom: 16px;
+            line-height: 1.6;
+            color: $grey-mid;
+            font-size: 15px;
+
+            > .highlighted {
+                color: $green-dark;
+                font-weight: 700;
+            }
+        }
+    }
+}

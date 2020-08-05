@@ -1,0 +1,16 @@
+.Input {
+    padding: 0 8px;
+    height: 40px;
+    line-height: 1.5;
+    border: 1px solid $grey-light;
+    border-radius: 4px;
+
+    &.is-error {
+        border-color: $alert;
+        margin-bottom: 4px;
+    }
+
+    &.is-flat {
+        border-radius: 0;
+    }
+}

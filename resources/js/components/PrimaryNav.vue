@@ -5,7 +5,7 @@
                 <use :xlink:href="'/images/icons.svg#menu'"></use>
             </svg>
             <a href="/" class="logo">
-                <img src="/images/logo.svg" />
+                <img src="/images/logo-2.svg" />
             </a>
         </div>
 
@@ -15,29 +15,46 @@
                 <div class="top">
                     <form method="POST" action="/logout" v-if="authenticated">
                         <input type="hidden" name="_token" :value="csrftoken" />
-                        <input type="submit" class="Button" value="Logout" />
+                        <input type="submit" class="Button is-primary" value="Logout" />
                     </form>
-                    <a href="/login" class="Button" v-else>Log In</a>
+                    <a href="/login" class="Button is-primary" v-else>Log In</a>
 
                     <svg xmlns="http://www.w3.org/2000/svg" @click="toggleMobileNav">
                         <use :xlink:href="'/images/icons.svg#close'"></use>
                     </svg>
                 </div>
 
-                <ul class="options">
+                <a href="/accounts/create/" class="sign-up Button is-secondary" v-if="!authenticated">
+                    Create Account
+                </a>
+
+                <ul class="options" v-if="authenticated">
                     <li>
-                        <img src="/images/icons/document.svg" /><a href="/home/ingredients">Ingredients</a>
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/images/icons.svg#home"></use>
+                        </svg>
+                        <a href="/home/ingredients">Ingredients</a>
                     </li>
                     <li>
-                        <img src="/images/icons/document.svg" /><a href="/home/meals">Meals</a>
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/images/icons.svg#heart"></use>
+                        </svg>
+                        <a href="/home/meals">Meals</a>
                     </li>
                     <li>
-                        <img src="/images/icons/document.svg" /><a href="/home/groups">Groups</a>
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/images/icons.svg#home"></use>
+                        </svg>
+                        <a href="/home/groups">Groups</a>
                     </li>
                     <li>
-                        <img src="/images/icons/document.svg" /><a href="/home/plans">Saved Plans</a>
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/images/icons.svg#shopping-cart"></use>
+                        </svg>
+                        <a href="/home/plans">Saved Plans</a>
                     </li>
                 </ul>
+
             </div>
             <div class="footer">
                 <a href="/#">About MarbleTop</a>

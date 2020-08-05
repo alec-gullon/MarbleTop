@@ -1,60 +1,40 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="Home">
-        <h1>Hi Alec!</h1>
-        <span class="date">Today is Friday 24 Jul</span>
-
-        <div class="heading">
-            <h2>Latest Plan</h2>
-            <a href="/#">More</a>
+    <div class="AdminContent">
+        <div class="header">
+            <h1>Hi {{ Auth::user()->name }}!</h1>
+            <p class="heading-tag">Today is {{ date('l jS F') }}</p>
         </div>
-        <div class="latest-plan" href="#">
-            <div class="date">
-                <span class="day">23</span>
-                <span class="month">July</span>
-            </div>
-            <a href="#">
-                Details
-            </a>
+        <div class="content">
+
+            <ul class="AdminLinkSet">
+                <li>
+                    <a href="{{ route('plans') }}">
+                        @icon('shopping-cart')
+                        <span class="text">Plans</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('items') }}">
+                        @icon('home')
+                        <span class="text">Cupboard Items</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('meals') }}">
+                        @icon('heart')
+                        <span class="text">Meals</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('collections') }}">
+                        @icon('edit-pencil')
+                        <span class="text">Collections</span>
+                    </a>
+                </li>
+            </ul>
+
         </div>
-
-        <div class="heading">
-            <h2>Your Data</h2>
-            <a href="/#">More</a>
-        </div>
-
-        <a href="/home/ingredients/" class="home-option">
-            @icon('home')
-            <div class="text">
-                <h3>Items</h3>
-                <p>Everything that you might need to put on a shopping list</p>
-            </div>
-        </a>
-
-        <a href="/home/meals/" class="home-option">
-            @icon('heart')
-            <div class="text">
-                <h3>Recipes</h3>
-                <p>All the meals you like to make</p>
-            </div>
-        </a>
-
-        <a href="/home/groups/" class="home-option">
-            @icon('edit-pencil')
-            <div class="text">
-                <h3>Collections</h3>
-                <p>Other grouping of households items</p>
-            </div>
-        </a>
-
-        <a href="/home/plans/" class="home-option">
-            @icon('shopping-cart')
-            <div class="text">
-                <h3>Plans</h3>
-                <p>The shopping plans you've made</p>
-            </div>
-        </a>
-
     </div>
 @endsection
