@@ -10,11 +10,6 @@ use App\Models\Group;
 
 class GroupController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $groups = \App\Helper::groupsData(auth()->user());
@@ -22,7 +17,7 @@ class GroupController extends Controller
         return view('home.groups', compact('groups'));
     }
 
-    public function add()
+    public function show()
     {
         $itemsData = Helper::itemsData(auth()->user());
         foreach ($itemsData as $key => $item) {

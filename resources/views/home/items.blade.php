@@ -9,9 +9,9 @@
             <p class="heading-tag">Cupboard, fridge, freezer, counter</p>
         </div>
 
-        <ingredients-admin :init-ingredients="{{{ json_encode($itemsData) }}}"
-                           :locations="{{{ json_encode($locations) }}}"
-        ></ingredients-admin>
+        <items-admin    :init-items="{{{ json_encode($itemsData) }}}"
+                        :init-locations="{{{ json_encode($locations) }}}"
+        ></items-admin>
 
     </div>
 @endsection

@@ -62,6 +62,8 @@ button {
 
 @import 'pages/homepage';
 @import 'pages/login';
+@import 'pages/admin/items-admin';
+@import 'pages/admin/group-creator';
 //@import 'old/page/ingredients';
 //@import 'old/page/meals';
 
@@ -70,84 +72,63 @@ body {
     margin: 0 auto;
 }
 
-.IngredientsAdmin {
-    padding: 21px 21px;
+.hidden {
+    display: none;
+}
 
-    > .ItemCreator {
+.ItemAmounts {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+
+    > .amount {
+        display: flex;
+        width: 100%;
+        align-items: center;
+
+        > label {
+            width: 80px;
+            font-weight: 500;
+        }
+
+        > input {
+            border: none;
+            border-bottom: 1px solid $grey-light;
+            padding: 12px 0;
+            flex-grow: 1;
+        }
+
+        > svg {
+            height: 25px;
+            width: 25px;
+            fill: $green-dark;
+            margin-left: 8px;
+        }
+    }
+}
+
+.IngredientsTable {
+    width: 100%;
+    margin-bottom: 16px;
+    > tbody {
+        > tr {
+            > td {
+                width: 50%;
+            }
+        }
+    }
+}
+
+.Recipe {
+    > p {
+        font-size: 16px;
         margin-bottom: 16px;
+        border-bottom: 1px solid $grey-light;
         padding-bottom: 16px;
-        border-bottom: 1px solid $grey-lightest;
-    }
-
-    > .location {
-        margin-bottom: 32px;
-
-        > h2 {
-            font-size: 20px;
-            color: $green-dark;
-            margin-bottom: 12px;
-        }
-
-        > .ingredient {
-            display: flex;
-            margin-bottom: 12px;
-            align-items: center;
-
-            > svg {
-                height: 25px;
-                width: 25px;
-                fill: $green-dark;
-                margin-left: 12px;
-
-                &:last-child {
-                    fill: $alert;
-                }
-            }
-
-            > .field {
-                flex-grow: 1;
-                border-bottom: 1px solid $grey-light;
-                display: flex;
-                align-items: center;
-                > input {
-                    flex-grow: 1;
-                    border: none;
-                    padding: 12px 0;
-                    display: block;
-                }
-                > .active {
-                    margin-right: 12px;
-                }
-            }
-
+        &:last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
+            margin-bottom: 0;
         }
     }
-
 }
-
-.PlanCreator {
-
-    > .stage {
-        > h2 {
-            height: 50px;
-            display: flex;
-            align-items: center;
-            color: $green-dark;
-            font-weight: 400;
-
-            > .number {
-                height: 40px;
-                width: 40px;
-                border-radius: 50%;
-                background: $green-mid;
-                text-align: center;
-                line-height: 40px;
-                font-size: 22px;
-                font-weight: 400;
-                margin-right: 16px;
-            }
-        }
-    }
-
-}
-

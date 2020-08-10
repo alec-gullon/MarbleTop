@@ -30,4 +30,10 @@ class Meal extends Model
             );
         }
     }
+
+    public function displayRecipe() {
+        $parts = explode('/n\s*\n/', $this->recipe);
+        $recipe = implode('</p><p>', $parts);
+        return '<p>' . $recipe . '</p>';
+    }
 }

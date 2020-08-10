@@ -35,7 +35,7 @@ class HomeTest extends TestCase
 
         $this->actingAs($user);
 
-        $this->get(route('groups'))
+        $this->get(route('collections'))
             ->assertSee('Kitchen Essentials')
             ->assertDontSee('Family Visit');
     }

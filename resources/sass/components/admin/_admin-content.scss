@@ -27,5 +27,40 @@
             color: $grey-mid;
             line-height: 1.25;
         }
+
+        &.with-icon {
+            display: flex;
+            align-items: center;
+
+            > a {
+                z-index: 2;
+                > svg {
+                    height: 18px;
+                    width: 18px;
+                    fill: $green-dark;
+                    margin-left: 16px;
+                }
+            }
+        }
+    }
+
+    > .content {
+        background: white;
+        padding: 21px;
+
+        > .heading {
+            color: $green-dark;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+    }
+
+    > .content-with-no-right-gutter {
+        background: white;
+        > .heading {
+            padding-left: 21px;
+            color: $green-dark;
+            font-weight: 500;
+        }
     }
 }

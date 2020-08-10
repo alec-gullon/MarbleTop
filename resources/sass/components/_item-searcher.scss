@@ -1,0 +1,54 @@
+.ItemSearcher {
+    > .search {
+        position: relative;
+        overflow: visible;
+        margin-bottom: 16px;
+
+        > .Input {
+            width: 100%;
+        }
+
+        > .results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-height: 116px;
+            max-height: 174px;
+            overflow-y: scroll;
+            width: 100%;
+            border: 1px solid $grey-light;
+            z-index: 1;
+
+            > ul {
+                > li {
+                    padding: 8px;
+                    border-bottom: 1px solid $grey-lightest;
+                    color: $green-dark;
+                    display: flex;
+                    align-items: center;
+
+                    > span {
+                        flex-grow: 1;
+                    }
+
+                    > svg {
+                        height: 21px;
+                        width: 21px;
+                    }
+                }
+            }
+        }
+    }
+    > ul {
+        > .IncrementRow {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid $grey-lightest;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}

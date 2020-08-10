@@ -1,24 +1,42 @@
 <template>
-    <div class="MealEditor">
+    <div class="GroupCreator">
+        <h2 class="heading">
+            Details
+        </h2>
 
-        <meal-details :initialName="name"
-                      :initialRecipe="recipe"
-                      :errored="detailsErrored"
-                      v-on:update="updateDetails"
-        ></meal-details>
+        <div class="InputWithLabel" :class="{'is-error': nameAlreadyExists}">
+            <label for="name">Name</label>
+            <input class="Input" id="name" v-model="name" :class="{'is-error': nameAlreadyExists}" />
+            <span class="error" v-if="nameAlreadyExists">Collection already exists</span>
+        </div>
 
-        <meal-ingredients :ingredientsData="ingredientsData"
-                          :selectedIngredients="selectedIngredients"
-        ></meal-ingredients>
+        <div class="InputWithLabel">
+            <label for="recipe">Recipe</label>
+            <textarea class="TextArea" id="recipe" v-model="recipe" />
+        </div>
 
-        <meal-amounts :ingredientsData="ingredientsData"
-                      :selectedIngredients="selectedIngredients"
+        <h2 class="heading">
+            Items
+        </h2>
+
+        <item-searcher :itemsData="itemsData"
+                    :selectedItems="selectedItems"
+        ></item-searcher>
+
+        <h2 class="heading">
+            Amounts
+        </h2>
+
+        <item-amounts :itemsData="itemsData"
+                      :selectedItems="selectedItems"
         >
-        </meal-amounts>
+        </item-amounts>
 
-        <button class="Button is-small" :class="{'is-disabled': !isFormReady, 'is-active': formActive}" @click="submit">
-            Add Meal
-        </button>
+        <div class="buttons">
+            <button class="Button is-small is-primary" :class="{'is-disabled': !isFormReady, 'is-active': formActive}" @click="submit">
+                Add Meal
+            </button>
+        </div>
 
     </div>
 </template>
@@ -26,14 +44,14 @@
 <script>
 
     import Post from './../../mixins/Post.js';
-    import Errors from './../../mixins/Errors.js';
+    import Copy from './../../mixins/Copy.js';
 
     export default {
         props: [
-            'initialIngredientsData'
+            'initialItemsData'
         ],
         created: function() {
-            this.ingredientsData = this.initialIngredientsData;
+            this.itemsData = this.copy(this.initialItemsData);
         },
         methods: {
             updateDetails: function(event) {
@@ -50,23 +68,22 @@
                 data.append('recipe', this.recipe);
                 data.append('api_token', document.global.apiToken);
 
-                let ingredients = [];
-                for (let i = 0; i < this.selectedIngredients.length; i++) {
-                    let ingredient = this.selectedIngredients[i];
-                    ingredients.push({
-                        id: ingredient.id,
-                        amount: ingredient.amount,
-                        order: ingredient.order,
-                        preciseAmount: ingredient.preciseAmount
-                    })
-
+                let items = [];
+                for (let i = 0; i < this.selectedItems.length; i++) {
+                    let item = this.selectedItems[i];
+                    items.push({
+                        id: item.id,
+                        amount: item.amount,
+                        order: item.order,
+                        preciseAmount: item.preciseAmount
+                    });
                 }
 
-                data.append('ingredients', JSON.stringify(ingredients));
+                data.append('items', JSON.stringify(items));
 
                 this.formActive = true;
-                this.post('/api/meals/add/', data, function(response) {
-                    this.errors = [];
+                this.post('/api/meals/store/', data, function(response) {
+                    this.nameAlreadyExists = false;
 
                     if (response.status === 200) {
                         window.location.replace('/home/meals/');
@@ -74,7 +91,7 @@
                     }
 
                     if (response.error) {
-                        this.errors.push(response.error);
+                        this.nameAlreadyExists = true;
                     }
 
                     this.formActive = false;
@@ -86,24 +103,23 @@
             isFormReady: function() {
                 return (this.name !== '' && this.recipe !== '');
             },
-            detailsErrored: function() {
-                return this.checkForError('mealAlreadyExists');
-            },
-            selectedIngredients: function() {
-                let ingredients = [];
-                for (let i = 0; i < this.ingredientsData.length; i++) {
-                    let ingredientData = this.ingredientsData[i];
+            selectedItems: function() {
+                let items = [];
 
-                    if (ingredientData.selected) {
-                        ingredients[ingredientData.order] = ingredientData;
+                Object.keys(this.itemsData).forEach(function(key) {
+                    let itemData = this.itemsData[key];
+
+                    if (itemData.selected) {
+                        items[itemData.order] = itemData;
                     }
-                }
-                return ingredients;
+                }.bind(this));
+
+                return items;
             }
         },
         watch: {
             name: function() {
-                this.removeError('mealAlreadyExists');
+                this.nameAlreadyExists = false;
             }
         },
         data: function() {
@@ -111,11 +127,11 @@
                 name: '',
                 recipe: '',
                 formActive: false,
-                errors: [],
-                ingredientsData: []
+                itemsData: {},
+                nameAlreadyExists: false
             }
         },
-        mixins: [Post, Errors]
+        mixins: [Post, Copy]
     }
 
 </script>

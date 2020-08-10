@@ -1,9 +1,16 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="AdminSection">
-        <h1>Add Group</h1>
+    <div class="AdminContent">
 
-        <group-creator :initial-ingredients-data="{{{ json_encode($ingredientsData) }}}"></group-creator>
+        <div class="header">
+            <h1>Add a Collection</h1>
+            <p class="heading-tag">Picnic, family visit, BBQ</p>
+        </div>
+
+        <div class="content">
+            <group-creator :initial-items-data="{{{ json_encode($itemsData) }}}"></group-creator>
+        </div>
+
     </div>
 @endsection

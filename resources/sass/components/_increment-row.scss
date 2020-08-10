@@ -1,0 +1,29 @@
+.IncrementRow {
+    display: flex;
+    align-items: center;
+    > .name {
+        flex-grow: 1;
+    }
+    > .toggle {
+        display: flex;
+        align-items: center;
+        margin-right: 16px;
+
+        > .decrement, > .increment {
+            height: 25px;
+            width: 25px;
+            fill: $green-dark;
+        }
+
+        > .amount {
+            margin: 0 8px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+    > .remove {
+        height: 25px;
+        width: 25px;
+        fill: $alert;
+    }
+}

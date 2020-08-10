@@ -17,7 +17,7 @@ class Helper {
                 'name' => $item->name,
                 'locationId' => $item->location->id
             ];
-            $itemsData[] = $itemData;
+            $itemsData[$item->id] = $itemData;
         }
 
         return $itemsData;
@@ -62,7 +62,7 @@ class Helper {
                 'id' => $location->id,
                 'name' => $location->name
             ];
-            $data[] = $datum;
+            $data[$location->id] = $datum;
         }
 
         return $data;

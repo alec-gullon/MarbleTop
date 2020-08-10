@@ -165,36 +165,3 @@
         }
     }
 }
-
-.AmountsEditor {
-    display: flex;
-    flex-direction: column;
-
-    > .amount {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        height: 30px;
-
-        > label {
-            flex-grow: 1;
-            font-weight: 500;
-        }
-
-        > input {
-            height: 100%;
-            border-radius: 0;
-            border: 1px solid $grey-light;
-        }
-
-        > button {
-            height: 100%;
-            width: 40px;
-
-            > svg {
-                height: 100%;
-                width: 100%;
-            }
-        }
-    }
-}

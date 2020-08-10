@@ -1,9 +1,16 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="AdminSection">
-        <h1>Add Meal</h1>
+    <div class="AdminContent">
 
-        <meal-creator :initial-ingredients-data="{{{ json_encode($ingredientsData) }}}"></meal-creator>
+        <div class="header">
+            <h1>Meals</h1>
+            <p class="heading-tag">Bolognese, Pie, Curry, Cake</p>
+        </div>
+
+        <div class="content">
+            <meal-creator :initial-items-data="{{{ json_encode($itemsData) }}}"></meal-creator>
+        </div>
+
     </div>
 @endsection

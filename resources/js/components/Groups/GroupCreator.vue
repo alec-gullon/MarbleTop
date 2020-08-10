@@ -1,38 +1,44 @@
 <template>
-    <div class="MealEditor">
+    <div class="GroupCreator">
+        <h2 class="heading">
+            Details
+        </h2>
 
-        <group-details :initialName="name"
-                      :errored="detailsErrored"
-                      v-on:update="updateDetails"
-        ></group-details>
+        <div class="InputWithLabel" :class="{'is-error': nameAlreadyExists}">
+            <label for="name">Name</label>
+            <input class="Input" id="name" v-model="name" :class="{'is-error': nameAlreadyExists}" />
+            <span class="error" v-if="nameAlreadyExists">Collection already exists</span>
+        </div>
 
-        <meal-ingredients :ingredientsData="ingredientsData"
-                          :selectedIngredients="selectedIngredients"
-        ></meal-ingredients>
+        <h2 class="heading">
+            Items
+        </h2>
 
-        <button class="Button is-small" :class="{'is-disabled': !isFormReady, 'is-active': formActive}" @click="submit">
-            Add Meal
-        </button>
+        <item-searcher  :itemsData="itemsData"
+                        :selectedItems="selectedItems"
+        ></item-searcher>
 
+        <div class="buttons">
+            <button class="Button is-primary is-small" :class="{'is-disabled': !isFormReady, 'is-active': formActive}" @click="submit">
+                Add Collection
+            </button>
+        </div>
     </div>
 </template>
 
 <script>
 
     import Post from './../../mixins/Post.js';
-    import Errors from './../../mixins/Errors.js';
+    import Copy from './../../mixins/Copy.js';
 
     export default {
         props: [
-            'initialIngredientsData'
+            'initialItemsData'
         ],
         created: function() {
-            this.ingredientsData = this.initialIngredientsData;
+            this.itemsData = this.copy(this.initialItemsData);
         },
         methods: {
-            updateDetails: function(event) {
-                this.name = event.name;
-            },
             submit: function() {
                 if (!this.isFormReady) {
                     return;
@@ -42,29 +48,29 @@
                 data.append('name', this.name);
                 data.append('api_token', document.global.apiToken);
 
-                let ingredients = [];
-                for (let i = 0; i < this.selectedIngredients.length; i++) {
-                    let ingredient = this.selectedIngredients[i];
-                    ingredients.push({
-                        id: ingredient.id,
-                        amount: ingredient.amount
+                let items = [];
+                for (let i = 0; i < this.selectedItems.length; i++) {
+                    let item = this.selectedItems[i];
+                    items.push({
+                        id: item.id,
+                        amount: item.amount
                     })
 
                 }
 
-                data.append('ingredients', JSON.stringify(ingredients));
+                data.append('items', JSON.stringify(items));
 
                 this.formActive = true;
-                this.post('/api/groups/add/', data, function(response) {
-                    this.errors = [];
+                this.post('/api/groups/store/', data, function(response) {
+                    this.nameAlreadyExists = false;
 
                     if (response.status === 200) {
-                        window.location.replace('/home/groups/');
+                        window.location.replace('/home/collections/');
                         return;
                     }
 
                     if (response.error) {
-                        this.errors.push(response.error);
+                        this.nameAlreadyExists = true;
                     }
 
                     this.formActive = false;
@@ -76,35 +82,29 @@
             isFormReady: function() {
                 return (this.name !== '');
             },
-            detailsErrored: function() {
-                return this.checkForError('mealAlreadyExists');
-            },
-            selectedIngredients: function() {
-                let ingredients = [];
-                for (let i = 0; i < this.ingredientsData.length; i++) {
-                    let ingredientData = this.ingredientsData[i];
+            selectedItems: function() {
+                let items = [];
 
-                    if (ingredientData.selected) {
-                        ingredients[ingredientData.order] = ingredientData;
+                Object.keys(this.itemsData).forEach(function(key) {
+                    let itemData = this.itemsData[key];
+
+                    if (itemData.selected) {
+                        items[itemData.order] = itemData;
                     }
-                }
-                return ingredients;
-            }
-        },
-        watch: {
-            name: function() {
-                this.removeError('mealAlreadyExists');
+                }.bind(this));
+
+                return items;
             }
         },
         data: function() {
             return {
                 name: '',
                 formActive: false,
-                errors: [],
-                ingredientsData: []
+                nameAlreadyExists: false,
+                itemsData: []
             }
         },
-        mixins: [Post, Errors]
+        mixins: [Post, Copy]
     }
 
 </script>

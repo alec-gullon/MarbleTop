@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('collections') }}">
+                    <a href="{{ route('groups') }}">
                         @icon('edit-pencil')
                         <span class="text">Collections</span>
                     </a>

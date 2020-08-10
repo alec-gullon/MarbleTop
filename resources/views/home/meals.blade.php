@@ -1,25 +1,45 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="AdminSection">
-        <h1>Meals</h1>
 
-        <div class="MealsAdmin">
+    <div class="AdminContent">
+
+        <div class="header">
+            <h1>Meals</h1>
+            <p class="heading-tag">Bolognese, Pie, Curry, Cake</p>
+        </div>
+
+        <div class="content-with-no-right-gutter">
             @if (Session::has('message'))
                 <div class="MessageBox is-success">
                     {{ Session::get('message') }}
                 </div>
             @endif
 
-            <a class="AdminLink" href="/home/meals/create/">
-                Add a meal
-            </a>
+            <ul class="AdminLinkSet">
+                <li>
+                    <a href="{{ route('meals-add') }}">
+                        @icon('plus-outline')
+                        <div class="text">
+                            Add a Meal
+                        </div>
+                    </a>
+                </li>
+            </ul>
 
-            <div class="meals">
-                @foreach ($meals as $meal)
-                    <a class="AdminLink is-edit" href="/home/meals/{{ $meal['id'] }}">{{ $meal['name'] }}</a>
-                @endforeach
-            </div>
+                <ul class="AdminLinkSet">
+                    @foreach ($meals as $meal)
+                        <li>
+                            <a href="{{ route('meal-details', ['group' => $meal['id']]) }}">
+                                @icon('arrow-thin-right')
+                                <div class="text">
+                                    {{ $meal['name'] }}
+                                </div>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
         </div>
+
     </div>
 @endsection

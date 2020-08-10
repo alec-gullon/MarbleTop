@@ -1,25 +1,46 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="AdminSection">
-        <h1>Groups</h1>
 
-        <div class="MealsAdmin">
+    <div class="AdminContent">
+
+        <div class="header">
+            <h1>Collections</h1>
+            <p class="heading-tag">Picnic, family visit, BBQ</p>
+        </div>
+
+        <div class="content-with-no-right-gutter">
             @if (Session::has('message'))
                 <div class="MessageBox is-success">
                     {{ Session::get('message') }}
                 </div>
             @endif
 
-            <a class="AdminLink" href="/home/groups/create/">
-                Add a group
-            </a>
+            <ul class="AdminLinkSet">
+                <li>
+                    <a href="{{ route('groups-add') }}">
+                        @icon('plus-outline')
+                        <div class="text">
+                            Add a Collection
+                        </div>
+                    </a>
+                </li>
+            </ul>
 
-            <div class="meals">
+            <ul class="AdminLinkSet">
                 @foreach ($groups as $group)
-                    <a class="AdminLink is-edit" href="/home/groups/{{ $group['id'] }}/">{{ $group['name'] }}</a>
+                    <li>
+                        <a href="{{ route('groups-edit', ['group' => $group['id']]) }}">
+                            @icon('arrow-thin-right')
+                            <div class="text">
+                                {{ $group['name'] }}
+                            </div>
+                        </a>
+                    </li>
                 @endforeach
-            </div>
+            </ul>
+
         </div>
+
     </div>
 @endsection

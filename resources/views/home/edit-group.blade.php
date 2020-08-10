@@ -1,12 +1,17 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="AdminSection">
-        <h1>Editing {{ $group['name'] }}</h1>
+    <div class="AdminContent">
+        <div class="header">
+            <h1>Editing {{ $group['name'] }}</h1>
+            <p class="heading-tag">Picnic, family visit, BBQ</p>
+        </div>
 
-        <group-editor :initial-ingredients-data="{{{ json_encode($ingredientsData) }}}"
-                     :initial-name="'{{ $group['name'] }}'"
-                     :group-id="{{ $group['id'] }}"
-        ></group-editor>
+        <div class="content">
+            <group-editor :initial-items-data="{{{ json_encode($itemsData) }}}"
+                          :initial-name="'{{ $group['name'] }}'"
+                          :group-id="{{ $group['id'] }}"
+            ></group-editor>
+        </div>
     </div>
 @endsection

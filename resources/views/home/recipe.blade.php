@@ -1,12 +1,37 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="AdminSection">
-        <h1>
-            <span>{{ $meal->name }}</span>
-            <a href="/home/meals/{{ $meal->id }}/edit/">@icon('edit-pencil')</a>
-        </h1>
 
-        <recipe :recipe="{{ json_encode($meal->recipe) }}" :ingredients="{{{ json_encode($ingredientsData) }}}"></recipe>
+    <div class="AdminContent">
+
+        <div class="header with-icon">
+            <h1>Meals</h1>
+            <a href="/home/meals/{{ $meal->id }}/edit/">@icon('edit-pencil')</a>
+        </div>
+
+        <div class="content">
+            <h2 class="heading">
+                Ingredients
+            </h2>
+
+            <table class="IngredientsTable">
+                @foreach ($itemsData as $item)
+                    <tr>
+                        <td><strong>{{ $item['name'] }}</strong></td>
+                        <td>{{ $item['amount'] }}</td>
+                    </tr>
+                @endforeach
+            </table>
+
+            <h2 class="heading">
+                Method
+            </h2>
+
+            <div class="Recipe">
+                {!! $meal->displayRecipe() !!}
+            </div>
+        </div>
+
     </div>
+
 @endsection

@@ -1,17 +1,26 @@
 <template>
-    <div class="MealEditor">
+    <div class="GroupCreator">
 
-        <group-details :initialName="name"
-                      :errored="detailsErrored"
-                      v-on:update="updateDetails"
-        ></group-details>
+        <h2 class="heading">
+            Details
+        </h2>
 
-        <meal-ingredients :ingredientsData="ingredientsData"
-                          :selectedIngredients="selectedIngredients"
-        ></meal-ingredients>
+        <div class="InputWithLabel" :class="{'is-error': nameAlreadyExists}">
+            <label for="name">Name</label>
+            <input class="Input" id="name" v-model="name" :class="{'is-error': nameAlreadyExists}" />
+            <span class="error" v-if="nameAlreadyExists">Collection already exists</span>
+        </div>
+
+        <h2 class="heading">
+            Items
+        </h2>
+
+        <item-searcher  :itemsData="itemsData"
+                        :selectedItems="selectedItems"
+        ></item-searcher>
 
         <div class="buttons">
-            <button class="Button is-small" :class="{'is-disabled': !isFormReady, 'is-active': updateActive}" @click="update">
+            <button class="Button is-primary is-small" :class="{'is-disabled': !isFormReady, 'is-active': updateActive}" @click="update">
                 Edit Group
             </button>
 
@@ -26,22 +35,21 @@
 <script>
 
     import Post from './../../mixins/Post.js';
-    import Errors from './../../mixins/Errors.js';
+    import Copy from './../../mixins/Copy.js';
 
     export default {
         props: [
             'initialName',
-            'initialIngredientsData',
+            'initialItemsData',
             'groupId'
         ],
         created: function() {
             this.name = this.initialName;
-            this.ingredientsData = this.initialIngredientsData;
+            this.itemsData = this.copy(this.initialItemsData);
         },
         methods: {
             updateDetails: function(event) {
                 this.name = event.name;
-                this.removeError('groupAlreadyExists');
             },
             update: function() {
                 if (!this.isFormReady) {
@@ -52,28 +60,28 @@
                 data.append('name', this.name);
                 data.append('api_token', document.global.apiToken);
 
-                let ingredients = [];
-                for (let i = 0; i < this.selectedIngredients.length; i++) {
-                    let ingredient = this.selectedIngredients[i];
-                    ingredients.push({
-                        id: ingredient.id,
-                        amount: ingredient.amount,
+                let items = [];
+                for (let i = 0; i < this.selectedItems.length; i++) {
+                    let item = this.selectedItems[i];
+                    items.push({
+                        id: item.id,
+                        amount: item.amount,
                     });
                 }
 
-                data.append('ingredients', JSON.stringify(ingredients));
+                data.append('items', JSON.stringify(items));
 
                 this.updateActive = true;
                 this.post('/api/groups/' + this.groupId + '/update/', data, function(response) {
-                    this.errors = [];
+                    this.nameAlreadyExists = false;
 
                     if (response.status === 200) {
-                        window.location.replace('/home/groups/');
+                        window.location.replace('/home/collections/');
                         return;
                     }
 
                     if (response.error) {
-                        this.errors.push(response.error);
+                        this.nameAlreadyExists = true;
                     }
 
                     this.updateActive = false;
@@ -89,9 +97,9 @@
                 data.append('api_token', document.global.apiToken);
 
                 this.deleteActive = true;
-                this.post('/api/groups/' + this.groupId + '/delete/', data, function(response) {
+                this.post('/api/groups/' + this.groupId + '/destroy/', data, function(response) {
                     if (response.status === 200) {
-                        window.location.replace('/home/groups/');
+                        window.location.replace('/home/collections/');
                     }
                 }.bind(this));
             }
@@ -100,24 +108,23 @@
             isFormReady: function() {
                 return (this.name !== '');
             },
-            detailsErrored: function() {
-                return this.checkForError('groupAlreadyExists');
-            },
-            selectedIngredients: function() {
-                let ingredients = [];
-                for (let i = 0; i < this.ingredientsData.length; i++) {
-                    let ingredientData = this.ingredientsData[i];
+            selectedItems: function() {
+                let items = [];
 
-                    if (ingredientData.selected) {
-                        ingredients.push(ingredientData);
+                Object.keys(this.itemsData).forEach(function(key) {
+                    let itemData = this.itemsData[key];
+
+                    if (itemData.selected) {
+                        items.push(itemData);
                     }
-                }
-                return ingredients;
+                }.bind(this));
+
+                return items;
             }
         },
         watch: {
             name: function() {
-                this.removeError('groupAlreadyExists');
+                this.nameAlreadyExists = false;
             }
         },
         data: function() {
@@ -125,11 +132,11 @@
                 name: '',
                 updateActive: false,
                 deleteActive: false,
-                errors: [],
-                ingredientsData: []
+                itemsData: {},
+                nameAlreadyExists: false
             }
         },
-        mixins: [Post, Errors]
+        mixins: [Post, Copy]
     }
 
 </script>

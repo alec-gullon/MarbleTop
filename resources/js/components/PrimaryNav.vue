@@ -33,7 +33,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg">
                             <use xlink:href="/images/icons.svg#home"></use>
                         </svg>
-                        <a href="/home/ingredients">Ingredients</a>
+                        <a href="/home/items">Cupboard Items</a>
                     </li>
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +45,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg">
                             <use xlink:href="/images/icons.svg#home"></use>
                         </svg>
-                        <a href="/home/groups">Groups</a>
+                        <a href="/home/groups">Collections</a>
                     </li>
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg">

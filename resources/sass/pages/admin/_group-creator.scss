@@ -1,0 +1,23 @@
+.GroupCreator {
+    display: flex;
+    flex-direction: column;
+    > .heading {
+        color: $green-dark;
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+    > .InputWithLabel {
+        margin-bottom: 16px;
+    }
+    > .ItemSearcher {
+        margin-bottom: 16px;
+    }
+    > .buttons {
+        display: flex;
+        justify-content: flex-end;
+
+        > .Button {
+            margin-left: 12px;
+        }
+    }
+}
