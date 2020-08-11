@@ -9,9 +9,13 @@
             <p class="heading-tag">Cupboard, fridge, freezer, counter</p>
         </div>
 
-        <items-admin    :init-items="{{{ json_encode($itemsData) }}}"
-                        :init-locations="{{{ json_encode($locations) }}}"
-        ></items-admin>
+        <div class="content">
+
+            <items-admin    :initial-items="{{{ json_encode($itemsData) }}}"
+                            :locations="{{{ json_encode($locations) }}}"
+            ></items-admin>
+
+        </div>
 
     </div>
 @endsection

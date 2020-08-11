@@ -1,6 +1,5 @@
 <template>
-    <div class="GroupCreator">
-
+    <div class="MealCreator">
         <h2 class="heading">
             Details
         </h2>
@@ -15,8 +14,10 @@
             Items
         </h2>
 
-        <item-searcher  :itemsData="itemsData"
+        <item-searcher  :initialItems="items"
                         :selectedItems="selectedItems"
+                        v-on:itemUpdated="updateItems"
+                        v-on:itemRemoved="updateItems"
         ></item-searcher>
 
         <div class="buttons">
@@ -28,7 +29,6 @@
                 Delete Group
             </button>
         </div>
-
     </div>
 </template>
 
@@ -40,16 +40,16 @@
     export default {
         props: [
             'initialName',
-            'initialItemsData',
+            'initialItems',
             'groupId'
         ],
         created: function() {
             this.name = this.initialName;
-            this.itemsData = this.copy(this.initialItemsData);
+            this.items = this.copy(this.initialItems);
         },
         methods: {
-            updateDetails: function(event) {
-                this.name = event.name;
+            updateItems: function(items) {
+                this.items = items;
             },
             update: function() {
                 if (!this.isFormReady) {
@@ -111,11 +111,11 @@
             selectedItems: function() {
                 let items = [];
 
-                Object.keys(this.itemsData).forEach(function(key) {
-                    let itemData = this.itemsData[key];
+                Object.keys(this.items).forEach(function(key) {
+                    let item = this.items[key];
 
-                    if (itemData.selected) {
-                        items.push(itemData);
+                    if (item.selected) {
+                        items.push(item);
                     }
                 }.bind(this));
 
@@ -132,7 +132,7 @@
                 name: '',
                 updateActive: false,
                 deleteActive: false,
-                itemsData: {},
+                items: {},
                 nameAlreadyExists: false
             }
         },

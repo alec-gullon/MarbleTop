@@ -1,8 +1,7 @@
 .ItemsAdmin {
-    padding: 21px 21px;
-    background: white;
+    padding: 21px;
 
-    > .ItemCreator {
+    > .ExpandableForm {
         margin-bottom: 32px;
         padding-bottom: 16px;
         border-bottom: 1px solid $grey-lightest;
@@ -11,38 +10,40 @@
     > .location {
         margin-bottom: 16px;
 
+        &:last-child {
+            margin-bottom: 0;
+        }
+
         > h2 {
             font-size: 20px;
             color: $green-dark;
             margin-bottom: 20px;
         }
+    }
+}
 
-        > .item {
-            display: flex;
-            margin-bottom: 6px;
-            align-items: flex-start;
+.ItemEditor {
+    display: flex;
+    margin-bottom: 6px;
+    align-items: flex-start;
 
-            > svg {
-                height: 25px;
-                width: 25px;
-                fill: $green-dark;
-                margin-left: 12px;
+    > svg {
+        height: 25px;
+        width: 25px;
+        fill: $green-dark;
+        margin-left: 12px;
 
-                &:last-child {
-                    fill: $alert;
-                }
+        &:last-child {
+            fill: $alert;
+        }
 
-                &.is-disabled {
-                    opacity: .4;
-                }
-            }
-
-            > .InputWithActiveState {
-                flex-grow: 1;
-                margin-top: -12px;
-            }
-
+        &.is-disabled {
+            opacity: .4;
         }
     }
 
+    > .FloatingInput {
+        flex-grow: 1;
+        margin-top: -12px;
+    }
 }

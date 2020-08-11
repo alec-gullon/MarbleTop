@@ -23,9 +23,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/home/meals/{meal}/',           'Home\MealController@meal')->name('meal-details');
     Route::get('/home/meals/{meal}/edit/',      'Home\MealController@edit')->name('meal-edit');
 
-    Route::get('/home/collections/',            'Home\GroupController@index')->name('groups');
-    Route::get('/home/collections/create/',     'Home\GroupController@show')->name('groups-add');
-    Route::get('/home/collections/{group}/',    'Home\GroupController@edit')->name('groups-edit');
+    Route::get('/home/collections/',            'Home\GroupController@index')->name('collections');
+    Route::get('/home/collections/create/',     'Home\GroupController@show')->name('collections-add');
+    Route::get('/home/collections/{group}/',    'Home\GroupController@edit')->name('collections-edit');
 
     Route::get('/home/plans/',                  'Home\PlanController@index')->name('plans');
     Route::get('/home/plans/create/',           'Home\PlanController@add')->name('plans-add');

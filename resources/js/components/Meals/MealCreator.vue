@@ -1,5 +1,5 @@
 <template>
-    <div class="GroupCreator">
+    <div class="MealCreator">
         <h2 class="heading">
             Details
         </h2>
@@ -19,15 +19,17 @@
             Items
         </h2>
 
-        <item-searcher :itemsData="itemsData"
-                    :selectedItems="selectedItems"
+        <item-searcher  :initialItems="items"
+                        :selectedItems="selectedItems"
+                        v-on:itemUpdated="updateItems"
+                        v-on:itemRemoved="updateItems"
         ></item-searcher>
 
         <h2 class="heading">
             Amounts
         </h2>
 
-        <item-amounts :itemsData="itemsData"
+        <item-amounts :items="items"
                       :selectedItems="selectedItems"
         >
         </item-amounts>
@@ -48,15 +50,14 @@
 
     export default {
         props: [
-            'initialItemsData'
+            'initialItems'
         ],
         created: function() {
-            this.itemsData = this.copy(this.initialItemsData);
+            this.items = this.copy(this.initialItems);
         },
         methods: {
-            updateDetails: function(event) {
-                this.name = event.name;
-                this.recipe = event.recipe;
+            updateItems: function(items) {
+                this.items = items;
             },
             submit: function() {
                 if (!this.isFormReady) {
@@ -106,11 +107,11 @@
             selectedItems: function() {
                 let items = [];
 
-                Object.keys(this.itemsData).forEach(function(key) {
-                    let itemData = this.itemsData[key];
+                Object.keys(this.items).forEach(function(key) {
+                    let item = this.items[key];
 
-                    if (itemData.selected) {
-                        items[itemData.order] = itemData;
+                    if (item.selected) {
+                        items[item.order] = item;
                     }
                 }.bind(this));
 
@@ -127,7 +128,7 @@
                 name: '',
                 recipe: '',
                 formActive: false,
-                itemsData: {},
+                items: {},
                 nameAlreadyExists: false
             }
         },

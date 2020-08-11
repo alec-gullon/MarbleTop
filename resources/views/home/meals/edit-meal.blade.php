@@ -8,7 +8,7 @@
         </div>
 
         <div class="content">
-            <meal-editor :initial-items-data="{{{ json_encode($itemsData) }}}"
+            <meal-editor :initial-items="{{{ json_encode($itemsData) }}}"
                          :initial-name="'{{ $meal['name'] }}'"
                          :initial-recipe="{{{ json_encode($meal['recipe']) }}}"
                          :meal-id="{{ $meal['id'] }}"

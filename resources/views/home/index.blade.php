@@ -8,7 +8,7 @@
         </div>
         <div class="content">
 
-            <ul class="AdminLinkSet">
+            <ul class="OptionList">
                 <li>
                     <a href="{{ route('plans') }}">
                         @icon('shopping-cart')
@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('groups') }}">
+                    <a href="{{ route('collections') }}">
                         @icon('edit-pencil')
                         <span class="text">Collections</span>
                     </a>

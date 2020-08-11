@@ -1,5 +1,5 @@
 .AdminContent {
-    padding: 28px 0;
+    padding-top: 28px;
 
     > .header {
         padding: 0 21px 32px 21px;
@@ -46,21 +46,17 @@
 
     > .content {
         background: white;
-        padding: 21px;
+        padding: 0;
+        min-height: 370px;
 
         > .heading {
             color: $green-dark;
             font-weight: 500;
             margin-bottom: 16px;
         }
-    }
 
-    > .content-with-no-right-gutter {
-        background: white;
-        > .heading {
-            padding-left: 21px;
-            color: $green-dark;
-            font-weight: 500;
+        > .OptionList {
+            padding: 16px 0;
         }
     }
 }

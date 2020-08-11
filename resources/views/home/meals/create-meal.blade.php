@@ -9,7 +9,7 @@
         </div>
 
         <div class="content">
-            <meal-creator :initial-items-data="{{{ json_encode($itemsData) }}}"></meal-creator>
+            <meal-creator :initial-items="{{{ json_encode($itemsData) }}}"></meal-creator>
         </div>
 
     </div>

@@ -18,7 +18,7 @@ class MealController extends Controller
     {
         $meals = \App\Helper::mealsData(auth()->user());
 
-        return view('home.meals', compact('meals'));
+        return view('home.meals.index', compact('meals'));
     }
 
     public function add()
@@ -36,7 +36,7 @@ class MealController extends Controller
             $itemsData[$key] = $data;
         }
 
-        return view('home.create-meal', compact('itemsData'));
+        return view('home.meals.create-meal', compact('itemsData'));
     }
 
     public function meal(Meal $meal)
@@ -50,7 +50,7 @@ class MealController extends Controller
             ];
         }
 
-        return view('home.recipe', compact('meal', 'itemsData'));
+        return view('home.meals.recipe', compact('meal', 'itemsData'));
     }
 
     public function edit(Meal $meal)
@@ -82,6 +82,6 @@ class MealController extends Controller
             $itemsData[$key] = $data;
         }
 
-        return view('home.edit-meal', compact('meal', 'itemsData'));
+        return view('home.meals.edit-meal', compact('meal', 'itemsData'));
     }
 }

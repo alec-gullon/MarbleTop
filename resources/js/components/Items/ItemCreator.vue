@@ -1,5 +1,5 @@
 <template>
-    <div class="ItemCreator" :class="{'is-expanded': expanded}">
+    <div class="ExpandableForm" :class="{'is-expanded': expanded}">
 
         <div class="header" @click="toggleExpanded">
             <svg xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,7 @@
                     :class="{'is-disabled': !formReady, 'is-active': formActive}"
                     @click="submit"
             >
-                Add
+                Add Item
             </button>
         </div>
 

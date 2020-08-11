@@ -14,7 +14,7 @@ class GroupController extends Controller
     {
         $groups = \App\Helper::groupsData(auth()->user());
 
-        return view('home.groups', compact('groups'));
+        return view('home.collections.index', compact('groups'));
     }
 
     public function show()
@@ -30,7 +30,7 @@ class GroupController extends Controller
             $itemsData[$key] = $data;
         }
 
-        return view('home.create-group', compact('itemsData'));
+        return view('home.collections.create-collection', compact('itemsData'));
     }
 
     public function edit(Group $group)
@@ -56,6 +56,6 @@ class GroupController extends Controller
             $itemsData[$key] = $data;
         }
 
-        return view('home.edit-group', compact('group', 'itemsData'));
+        return view('home.collections.edit-collection', compact('group', 'itemsData'));
     }
 }

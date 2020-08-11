@@ -9,16 +9,16 @@
             <p class="heading-tag">Picnic, family visit, BBQ</p>
         </div>
 
-        <div class="content-with-no-right-gutter">
+        <div class="content">
             @if (Session::has('message'))
                 <div class="MessageBox is-success">
                     {{ Session::get('message') }}
                 </div>
             @endif
 
-            <ul class="AdminLinkSet">
+            <ul class="OptionList">
                 <li>
-                    <a href="{{ route('groups-add') }}">
+                    <a href="{{ route('collections-add') }}">
                         @icon('plus-outline')
                         <div class="text">
                             Add a Collection
@@ -27,10 +27,10 @@
                 </li>
             </ul>
 
-            <ul class="AdminLinkSet">
+            <ul class="OptionList">
                 @foreach ($groups as $group)
                     <li>
-                        <a href="{{ route('groups-edit', ['group' => $group['id']]) }}">
+                        <a href="{{ route('collections-edit', ['group' => $group['id']]) }}">
                             @icon('arrow-thin-right')
                             <div class="text">
                                 {{ $group['name'] }}

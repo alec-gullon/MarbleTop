@@ -4,7 +4,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="hamburger" @click="toggleMobileNav">
                 <use :xlink:href="'/images/icons.svg#menu'"></use>
             </svg>
-            <a href="/" class="logo">
+            <a :href="headingLink" class="logo">
                 <img src="/images/logo-2.svg" />
             </a>
         </div>
@@ -79,6 +79,14 @@
         methods: {
             toggleMobileNav: function() {
                 this.mobileNavActive = !this.mobileNavActive;
+            }
+        },
+        computed: {
+            headingLink: function() {
+                if (this.authenticated) {
+                    return '/home';
+                }
+                return '/';
             }
         },
         data: function() {

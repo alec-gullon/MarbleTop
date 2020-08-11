@@ -8,7 +8,7 @@
         </div>
 
         <div class="content">
-            <group-editor :initial-items-data="{{{ json_encode($itemsData) }}}"
+            <group-editor :initial-items="{{{ json_encode($itemsData) }}}"
                           :initial-name="'{{ $group['name'] }}'"
                           :group-id="{{ $group['id'] }}"
             ></group-editor>

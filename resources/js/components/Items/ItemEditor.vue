@@ -1,10 +1,10 @@
 <template>
-    <div class="item">
-        <div class="InputWithActiveState">
+    <div class="ItemEditor">
+        <div class="FloatingInput">
             <div class="field" :class="{'is-active': formActive}">
                 <input v-model="name" />
             </div>
-            <div class="error" v-if="itemAlreadyExists">Item already exists</div>
+            <div class="error" v-if="nameAlreadyExists">Item already exists</div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" @click="update" :class="{'is-disabled': !formReady}">
             <use xlink:href="/images/icons.svg#checkmark-outline"></use>
@@ -33,29 +33,32 @@
                     return;
                 }
 
-                this.formActive = true;
-
                 let data = new FormData();
                 data.append('name', this.name);
                 data.append('location_id', this.item.locationId);
                 data.append('api_token', document.global.apiToken);
 
+                this.formActive = true;
                 this.post('/api/items/' + this.item.id + '/update/', data, function(response) {
                     this.formError = (response.status !== 200);
+
+                    if (response.status === 200) {
+                        this.$emit('itemUpdated', {name: this.name, id: this.item.id});
+                    }
+
                     this.formActive = false;
                     document.global.xhrActive = false;
-                    this.item.name = this.name;
                 }.bind(this));
             },
             destroy: function() {
                 if (!this.formReady || this.formActive) {
                     return;
                 }
-                this.formActive = true;
 
                 let data = new FormData();
                 data.append('api_token', document.global.apiToken);
 
+                this.formActive = true;
                 this.post('/api/items/' + this.item.id + '/destroy/', data, function(response) {
                     this.formError = (response.status !== 200);
 
@@ -70,9 +73,9 @@
         },
         computed: {
             formReady: function() {
-                return (this.name !== '' && !this.itemAlreadyExists);
+                return (this.name !== '' && !this.nameAlreadyExists);
             },
-            itemAlreadyExists: function() {
+            nameAlreadyExists: function() {
                 return (this.name !== this.item.name && this.existingItems.indexOf(this.name) !== -1);
             }
         },

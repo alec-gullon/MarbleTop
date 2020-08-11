@@ -25,7 +25,7 @@ class ItemTest extends ApiTestCase
         );
 
         $this->assertEquals($response->status, 200);
-        $this->assertEquals($response->items[0]->name, $attributes['name']);
+        $this->assertEquals($response->items->{1}->name, $attributes['name']);
         $this->assertDatabaseHas('items', $attributes);
     }
 
@@ -70,8 +70,11 @@ class ItemTest extends ApiTestCase
         );
 
         $this->assertEquals($response->status, 200);
-        $this->assertEquals(count($response->items), 1);
-        $this->assertEquals($response->items[0]->name, $attributes['name']);
+
+        $response->items = (array) $response->items;
+
+        $this->assertEquals(count((array) $response->items), 1);
+        $this->assertEquals($response->items[1]->name, $attributes['name']);
         $this->assertDatabaseHas('items', $attributes);
     }
 

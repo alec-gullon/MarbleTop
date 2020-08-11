@@ -15,11 +15,11 @@ class PlanController extends Controller
     {
         $plans = \App\Helper::plansData(auth()->user());
 
-        return view('home.plans', compact('plans'));
+        return view('home.plans.index', compact('plans'));
     }
 
     public function add()
     {
-        return view('home.create-plan');
+        return view('home.plans.create-plan');
     }
 }

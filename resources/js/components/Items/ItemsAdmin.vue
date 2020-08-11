@@ -7,13 +7,14 @@
         >
         </item-creator>
 
-        <div class="location" v-for="key in locationsToDisplay">
-            <h2>{{ locations[key].name }}</h2>
+        <div class="location" v-for="id in locationsToDisplay">
+            <h2>{{ locations[id].name }}</h2>
 
-            <item-editor v-for="itemKey in locationItems[key].items"
+            <item-editor v-for="itemId in locationItems[id].items"
+                         :key="'item-' + itemId"
+                         :item="items[itemId]"
                          :existingItems="existingItems"
-                         :item="items[itemKey]"
-                         :key="'item-' + itemKey"
+                         v-on:itemUpdated="updateName"
                          v-on:itemDeleted="updateItems"
             ></item-editor>
         </div>
@@ -22,21 +23,22 @@
 
 <script>
 
+    import Copy from './../../mixins/Copy';
+
     export default {
         props: [
-            'initItems',
-            'initLocations'
+            'initialItems',
+            'locations'
         ],
         created: function() {
-            this.items = this.copy(this.initItems);
-            this.locations = this.copy(this.initLocations);
+            this.items = this.copy(this.initialItems);
         },
         methods: {
+            updateName: function(data) {
+                this.items[data.id].name = data.name;
+            },
             updateItems: function(data) {
                 this.items = data.items;
-            },
-            copy: function(object) {
-                return JSON.parse(JSON.stringify(object))
             }
         },
         computed: {
@@ -80,10 +82,10 @@
         },
         data: function() {
             return {
-                items: {},
-                locations: {}
+                items: {}
             }
-        }
+        },
+        mixins: [Copy]
     }
 
 </script>

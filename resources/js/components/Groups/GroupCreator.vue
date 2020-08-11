@@ -1,5 +1,5 @@
 <template>
-    <div class="GroupCreator">
+    <div class="MealCreator">
         <h2 class="heading">
             Details
         </h2>
@@ -14,8 +14,10 @@
             Items
         </h2>
 
-        <item-searcher  :itemsData="itemsData"
+        <item-searcher  :initialItems="items"
                         :selectedItems="selectedItems"
+                        v-on:itemUpdated="updateItems"
+                        v-on:itemRemoved="updateItems"
         ></item-searcher>
 
         <div class="buttons">
@@ -33,12 +35,15 @@
 
     export default {
         props: [
-            'initialItemsData'
+            'initialItems'
         ],
         created: function() {
-            this.itemsData = this.copy(this.initialItemsData);
+            this.items = this.copy(this.initialItems);
         },
         methods: {
+            updateItems: function(items) {
+                this.items = items;
+            },
             submit: function() {
                 if (!this.isFormReady) {
                     return;
@@ -54,8 +59,7 @@
                     items.push({
                         id: item.id,
                         amount: item.amount
-                    })
-
+                    });
                 }
 
                 data.append('items', JSON.stringify(items));
@@ -85,8 +89,8 @@
             selectedItems: function() {
                 let items = [];
 
-                Object.keys(this.itemsData).forEach(function(key) {
-                    let itemData = this.itemsData[key];
+                Object.keys(this.items).forEach(function(key) {
+                    let itemData = this.items[key];
 
                     if (itemData.selected) {
                         items[itemData.order] = itemData;
@@ -101,7 +105,7 @@
                 name: '',
                 formActive: false,
                 nameAlreadyExists: false,
-                itemsData: []
+                items: {}
             }
         },
         mixins: [Post, Copy]

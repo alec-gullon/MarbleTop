@@ -9,8 +9,6 @@ class PlanTest extends ApiTestCase
 {
     public function test_a_user_can_create_a_plan()
     {
-        $this->withoutExceptionHandling();
-
         $items = ItemFactory::addTwoItems($this->user);
 
         $attributes = [

@@ -38,6 +38,15 @@ button {
   border: none;
 }
 
+body {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
 .Button {
   border: 1px solid #22543D;
   background-color: #9AE6B4;
@@ -125,27 +134,27 @@ button {
   font-size: 14px;
 }
 
-.InputWithActiveState {
+.FloatingInput {
   display: flex;
   flex-direction: column;
   height: 60px;
 }
 
-.InputWithActiveState > .field {
+.FloatingInput > .field {
   display: flex;
   border-bottom: 1px solid #cccccc;
   align-items: center;
   position: relative;
 }
 
-.InputWithActiveState > .field > input {
+.FloatingInput > .field > input {
   flex-grow: 1;
   border: none;
   padding: 12px 0;
   display: block;
 }
 
-.InputWithActiveState > .field.is-active:after {
+.FloatingInput > .field.is-active:after {
   position: absolute;
   right: 0.625em;
   top: 0.625em;
@@ -161,11 +170,11 @@ button {
   width: 1em;
 }
 
-.InputWithActiveState > .field.is-error {
+.FloatingInput > .field.is-error {
   border-bottom: 1px solid #CC3333;
 }
 
-.InputWithActiveState > .error {
+.FloatingInput > .error {
   color: #CC3333;
   font-size: 12px;
   z-index: 2;
@@ -242,7 +251,7 @@ button {
 }
 
 .AdminContent {
-  padding: 28px 0;
+  padding-top: 28px;
 }
 
 .AdminContent > .header {
@@ -291,7 +300,8 @@ button {
 
 .AdminContent > .content {
   background: white;
-  padding: 21px;
+  padding: 0;
+  min-height: 370px;
 }
 
 .AdminContent > .content > .heading {
@@ -300,37 +310,30 @@ button {
   margin-bottom: 16px;
 }
 
-.AdminContent > .content-with-no-right-gutter {
-  background: white;
-}
-
-.AdminContent > .content-with-no-right-gutter > .heading {
-  padding-left: 21px;
-  color: #22543D;
-  font-weight: 500;
-}
-
-.AdminLinkSet {
-  background: white;
+.AdminContent > .content > .OptionList {
   padding: 16px 0;
 }
 
-.AdminLinkSet > li {
+.OptionList {
+  background: white;
+}
+
+.OptionList > li {
   padding-left: 21px;
 }
 
-.AdminLinkSet > li > a {
+.OptionList > li > a {
   display: flex;
   align-items: center;
 }
 
-.AdminLinkSet > li > a > svg {
+.OptionList > li > a > svg {
   height: 25px;
   width: 25px;
   fill: #22543D;
 }
 
-.AdminLinkSet > li > a > .text {
+.OptionList > li > a > .text {
   display: block;
   width: 100%;
   margin-left: 21px;
@@ -338,7 +341,7 @@ button {
   padding: 10px 0;
 }
 
-.ItemCreator .header {
+.ExpandableForm .header {
   display: flex;
   font-size: 18px;
   align-items: center;
@@ -347,39 +350,67 @@ button {
   width: 100%;
 }
 
-.ItemCreator .header > svg {
+.ExpandableForm .header > svg {
   height: 30px;
   width: 30px;
   fill: #22543D;
   margin-right: 12px;
 }
 
-.ItemCreator > .body {
+.ExpandableForm > .body {
   padding: 16px 0;
   display: none;
   flex-direction: column;
 }
 
-.ItemCreator > .body > .InputWithLabel {
+.ExpandableForm > .body > .InputWithLabel {
   margin-bottom: 8px;
 }
 
-.ItemCreator > .body > .MessageBox {
+.ExpandableForm > .body > .MessageBox {
   margin-top: 8px;
 }
 
-.ItemCreator > .body > .Button {
+.ExpandableForm > .body > .Button {
   margin-top: 16px;
   align-self: flex-end;
 }
 
-.ItemCreator.is-expanded > .body {
+.ExpandableForm.is-expanded > .body {
   display: flex;
 }
 
-.AdminHeading {
+.MealCreator {
+  display: flex;
+  flex-direction: column;
+  padding: 21px;
+}
+
+.MealCreator > .heading {
   color: #22543D;
   font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.MealCreator > .InputWithLabel {
+  margin-bottom: 16px;
+}
+
+.MealCreator > .ItemSearcher {
+  margin-bottom: 16px;
+}
+
+.MealCreator > .ItemAmounts {
+  margin-bottom: 32px;
+}
+
+.MealCreator > .buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.MealCreator > .buttons > .Button {
+  margin-left: 12px;
 }
 
 .Footer {
@@ -616,6 +647,36 @@ button {
   border-bottom: none;
 }
 
+.ItemAmounts {
+  display: flex;
+  flex-direction: column;
+}
+
+.ItemAmounts > .amount {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.ItemAmounts > .amount > label {
+  width: 80px;
+  font-weight: 500;
+}
+
+.ItemAmounts > .amount > input {
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  padding: 12px 0;
+  flex-grow: 1;
+}
+
+.ItemAmounts > .amount > svg {
+  height: 25px;
+  width: 25px;
+  fill: #22543D;
+  margin-left: 8px;
+}
+
 .Hero {
   padding: 60px 16px 0 16px;
   position: relative;
@@ -705,14 +766,6 @@ button {
   flex-direction: column;
 }
 
-.LoginForm > h1 {
-  text-align: center;
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 32px;
-  color: #22543D;
-}
-
 .LoginForm > .MessageBox {
   margin-bottom: 32px;
 }
@@ -722,21 +775,7 @@ button {
   flex-direction: column;
 }
 
-.LoginForm > form > label {
-  font-weight: 500;
-}
-
-.LoginForm > form > .Input {
-  margin-bottom: 16px;
-}
-
-.LoginForm > form > .Input.is-error {
-  margin-bottom: 4px;
-}
-
-.LoginForm > form > .error {
-  color: #CC3333;
-  font-size: 14px;
+.LoginForm > form > .InputWithLabel {
   margin-bottom: 16px;
 }
 
@@ -745,11 +784,10 @@ button {
 }
 
 .ItemsAdmin {
-  padding: 21px 21px;
-  background: white;
+  padding: 21px;
 }
 
-.ItemsAdmin > .ItemCreator {
+.ItemsAdmin > .ExpandableForm {
   margin-bottom: 32px;
   padding-bottom: 16px;
   border-bottom: 1px solid #E8E8E8;
@@ -759,125 +797,71 @@ button {
   margin-bottom: 16px;
 }
 
+.ItemsAdmin > .location:last-child {
+  margin-bottom: 0;
+}
+
 .ItemsAdmin > .location > h2 {
   font-size: 20px;
   color: #22543D;
   margin-bottom: 20px;
 }
 
-.ItemsAdmin > .location > .item {
+.ItemEditor {
   display: flex;
   margin-bottom: 6px;
   align-items: flex-start;
 }
 
-.ItemsAdmin > .location > .item > svg {
+.ItemEditor > svg {
   height: 25px;
   width: 25px;
   fill: #22543D;
   margin-left: 12px;
 }
 
-.ItemsAdmin > .location > .item > svg:last-child {
+.ItemEditor > svg:last-child {
   fill: #CC3333;
 }
 
-.ItemsAdmin > .location > .item > svg.is-disabled {
+.ItemEditor > svg.is-disabled {
   opacity: 0.4;
 }
 
-.ItemsAdmin > .location > .item > .InputWithActiveState {
+.ItemEditor > .FloatingInput {
   flex-grow: 1;
   margin-top: -12px;
 }
 
-.GroupCreator {
-  display: flex;
-  flex-direction: column;
+.Recipe {
+  padding: 21px;
 }
 
-.GroupCreator > .heading {
+.Recipe > .heading {
+  margin-bottom: 16px;
+  font-weight: 500;
   color: #22543D;
-  font-weight: 500;
-  margin-bottom: 16px;
 }
 
-.GroupCreator > .InputWithLabel {
-  margin-bottom: 16px;
-}
-
-.GroupCreator > .ItemSearcher {
-  margin-bottom: 16px;
-}
-
-.GroupCreator > .buttons {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.GroupCreator > .buttons > .Button {
-  margin-left: 12px;
-}
-
-body {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.hidden {
-  display: none;
-}
-
-.ItemAmounts {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
-
-.ItemAmounts > .amount {
-  display: flex;
-  width: 100%;
-  align-items: center;
-}
-
-.ItemAmounts > .amount > label {
-  width: 80px;
-  font-weight: 500;
-}
-
-.ItemAmounts > .amount > input {
-  border: none;
-  border-bottom: 1px solid #cccccc;
-  padding: 12px 0;
-  flex-grow: 1;
-}
-
-.ItemAmounts > .amount > svg {
-  height: 25px;
-  width: 25px;
-  fill: #22543D;
-  margin-left: 8px;
-}
-
-.IngredientsTable {
-  width: 100%;
-  margin-bottom: 16px;
-}
-
-.IngredientsTable > tbody > tr > td {
-  width: 50%;
-}
-
-.Recipe > p {
+.RecipeOutline > p {
   font-size: 16px;
   margin-bottom: 16px;
   border-bottom: 1px solid #cccccc;
   padding-bottom: 16px;
 }
 
-.Recipe > p:last-child {
+.RecipeOutline > p:last-child {
   padding-bottom: 0;
   border-bottom: 0;
   margin-bottom: 0;
+}
+
+.RecipeIngredients {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.RecipeIngredients > tbody > tr > td {
+  width: 50%;
 }
 

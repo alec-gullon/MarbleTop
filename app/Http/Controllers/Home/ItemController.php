@@ -11,6 +11,6 @@ class ItemController extends Controller
         $locations = \App\Helper::locationsData();
         $itemsData = \App\Helper::itemsData(auth()->user());
 
-        return view('home.items', compact('locations', 'itemsData'));
+        return view('home.items.index', compact('locations', 'itemsData'));
     }
 }

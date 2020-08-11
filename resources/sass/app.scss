@@ -58,77 +58,14 @@ button {
     border: none;
 }
 
-@import 'components/index';
-
-@import 'pages/homepage';
-@import 'pages/login';
-@import 'pages/admin/items-admin';
-@import 'pages/admin/group-creator';
-//@import 'old/page/ingredients';
-//@import 'old/page/meals';
-
+// @todo remove this when done with mobile development
 body {
     max-width: 600px;
     margin: 0 auto;
 }
 
-.hidden {
-    display: none;
-}
+@import 'utilities';
 
-.ItemAmounts {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
+@import 'components/index';
+@import 'pages/index';
 
-    > .amount {
-        display: flex;
-        width: 100%;
-        align-items: center;
-
-        > label {
-            width: 80px;
-            font-weight: 500;
-        }
-
-        > input {
-            border: none;
-            border-bottom: 1px solid $grey-light;
-            padding: 12px 0;
-            flex-grow: 1;
-        }
-
-        > svg {
-            height: 25px;
-            width: 25px;
-            fill: $green-dark;
-            margin-left: 8px;
-        }
-    }
-}
-
-.IngredientsTable {
-    width: 100%;
-    margin-bottom: 16px;
-    > tbody {
-        > tr {
-            > td {
-                width: 50%;
-            }
-        }
-    }
-}
-
-.Recipe {
-    > p {
-        font-size: 16px;
-        margin-bottom: 16px;
-        border-bottom: 1px solid $grey-light;
-        padding-bottom: 16px;
-        &:last-child {
-            padding-bottom: 0;
-            border-bottom: 0;
-            margin-bottom: 0;
-        }
-    }
-}

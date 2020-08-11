@@ -69,8 +69,6 @@ class GroupTest extends ApiTestCase
 
     public function test_a_user_can_update_a_group()
     {
-        $this->withoutExceptionHandling();
-
         $group = GroupFactory::addGroupWithOneItem($this->user);
         $oldItem = Item::first();
         $newItem = ItemFactory::addItem($this->user);

@@ -19,11 +19,15 @@
                     <form action="/login/" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                        <label for="email">Username</label>
-                        <input class="Input" type="text" name="email" v-model="email" required />
+                        <div class="InputWithLabel">
+                            <label for="email">Username</label>
+                            <input class="Input" type="text" name="email" v-model="email" required />
+                        </div>
 
-                        <label for="password">Password</label>
-                        <input class="Input" type="password" name="password" v-model="password" required />
+                        <div class="InputWithLabel">
+                            <label for="password">Password</label>
+                            <input class="Input" type="password" name="password" v-model="password" required />
+                        </div>
 
                         <input type="submit" class="Button is-primary" :class="{'is-disabled': !formReady}" value="Sign In" />
                     </form>

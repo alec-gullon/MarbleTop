@@ -11,7 +11,6 @@ class PageController extends Controller
 
     public function createAccount()
     {
-        return view('account.create');
+        return view('pages.create-account');
     }
-
 }
