@@ -32,7 +32,7 @@ class Meal extends Model
     }
 
     public function displayRecipe() {
-        $parts = explode('/n\s*\n/', $this->recipe);
+        $parts = preg_split("/(\n\s\n){1,}|(\n){1,}|(\r\n){1,}/", $this->recipe);
         $recipe = implode('</p><p>', $parts);
         return '<p>' . $recipe . '</p>';
     }

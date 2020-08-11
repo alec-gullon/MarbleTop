@@ -42,13 +42,45 @@
         background: $alert-background;
         color: $alert;
         border: 1px solid $alert;
+
+        &::after {
+            color: black;
+        }
     }
 
     &.is-active {
-        font-size: 0;
+        color: transparent;
+        display: flex;
+        justify-content: center;
+        position: relative;
         &::after {
-            font-size: 18px;
-            content: '...';
+            -webkit-animation: spinner .5s infinite linear;
+            animation: spinner .5s infinite linear;
+            border: 2px solid #dbdbdb;
+            border-radius: 290486px;
+            border-right-color: transparent;
+            border-top-color: transparent;
+            content: "";
+            display: block;
+            height: 12px;
+            width: 12px;
+            left: calc(50% - (1em / 2));
+            top: calc(50% - (1em / 2));
+            position: absolute;
+            color: white;
+        }
+
+        &.is-alert {
+            &::after {
+                border-left-color: $alert;
+                border-bottom-color: $alert;
+            }
         }
     }
 }
+
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(359deg); }
+}
+

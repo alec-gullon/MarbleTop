@@ -42,23 +42,16 @@
 
 <script>
 
-    import Copy from './../../mixins/Copy';
-
     export default {
         props: [
-            'initialItems',
+            'items',
             'selectedItems'
         ],
-        created: function() {
-            this.items = this.copy(this.initialItems);
-        },
         methods: {
             addItem: function(id) {
                 this.items[id].selected = true;
                 this.items[id].amount = 1;
                 this.items[id].order = this.selectedItems.length;
-
-                this.$emit('itemUpdated', this.items);
 
                 this.searchTerm = '';
             },
@@ -72,8 +65,6 @@
                     let id = this.selectedItems[i].id;
                     this.items[id].order = this.items[id].order-1;
                 }
-
-                this.$emit('itemRemoved', this.items);
 
                 this.searchTerm = '';
             },
@@ -94,8 +85,6 @@
                 }
 
                 this.items[id].amount = amount;
-
-                this.$emit('itemUpdated', this.items);
             },
             incrementAmount: function(id) {
                 let currentAmount = this.items[id].amount;
@@ -110,8 +99,6 @@
                 }
 
                 this.items[id].amount = amount;
-
-                this.$emit('itemUpdated', this.items);
             }
         },
         computed: {
@@ -139,11 +126,9 @@
         },
         data: function() {
             return {
-                searchTerm: '',
-                items: {}
+                searchTerm: ''
             }
-        },
-        mixins: [Copy]
+        }
     }
 
 </script>

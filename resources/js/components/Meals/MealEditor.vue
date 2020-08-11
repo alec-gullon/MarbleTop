@@ -19,10 +19,8 @@
             Items
         </h2>
 
-        <item-searcher  :initialItems="items"
+        <item-searcher  :items="items"
                         :selectedItems="selectedItems"
-                        v-on:itemUpdated="updateItems"
-                        v-on:itemRemoved="updateItems"
         ></item-searcher>
 
         <h2 class="heading">

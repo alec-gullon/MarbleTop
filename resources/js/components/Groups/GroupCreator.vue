@@ -14,10 +14,8 @@
             Items
         </h2>
 
-        <item-searcher  :initialItems="items"
+        <item-searcher  :items="items"
                         :selectedItems="selectedItems"
-                        v-on:itemUpdated="updateItems"
-                        v-on:itemRemoved="updateItems"
         ></item-searcher>
 
         <div class="buttons">
@@ -41,9 +39,6 @@
             this.items = this.copy(this.initialItems);
         },
         methods: {
-            updateItems: function(items) {
-                this.items = items;
-            },
             submit: function() {
                 if (!this.isFormReady) {
                     return;

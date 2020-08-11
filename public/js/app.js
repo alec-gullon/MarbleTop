@@ -125,8 +125,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -135,9 +133,6 @@ __webpack_require__.r(__webpack_exports__);
     this.items = this.copy(this.initialItems);
   },
   methods: {
-    updateItems: function updateItems(items) {
-      this.items = items;
-    },
     submit: function submit() {
       if (!this.isFormReady) {
         return;
@@ -247,8 +242,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -258,9 +251,6 @@ __webpack_require__.r(__webpack_exports__);
     this.items = this.copy(this.initialItems);
   },
   methods: {
-    updateItems: function updateItems(items) {
-      this.items = items;
-    },
     update: function update() {
       if (!this.isFormReady) {
         return;
@@ -372,18 +362,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['itemsData', 'selectedItems'],
+  props: ['items', 'selectedItems'],
   methods: {
     increaseOrder: function increaseOrder(position) {
       if (position === 0) {
         return;
       }
 
-      var targetEntryKey = this.selectedItems[position - 1].key;
-      var initialEntryKey = this.selectedItems[position].key;
+      var targetEntryId = this.selectedItems[position - 1].id;
+      var initialEntryId = this.selectedItems[position].id;
       this.swapOrder({
-        initialPosition: [targetEntryKey, position],
-        targetPosition: [initialEntryKey, position - 1]
+        initialPosition: [targetEntryId, position],
+        targetPosition: [initialEntryId, position - 1]
       });
     },
     decreaseOrder: function decreaseOrder(position) {
@@ -391,16 +381,16 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var targetEntryKey = this.selectedItems[position + 1].key;
-      var initialEntryKey = this.selectedItems[position].key;
+      var targetEntryId = this.selectedItems[position + 1].id;
+      var initialEntryId = this.selectedItems[position].id;
       this.swapOrder({
-        initialPosition: [targetEntryKey, position],
-        targetPosition: [initialEntryKey, position + 1]
+        initialPosition: [targetEntryId, position],
+        targetPosition: [initialEntryId, position + 1]
       });
     },
     swapOrder: function swapOrder(positions) {
-      this.itemsData[positions.targetPosition[0]].order = positions.targetPosition[1];
-      this.itemsData[positions.initialPosition[0]].order = positions.initialPosition[1];
+      this.items[positions.targetPosition[0]].order = positions.targetPosition[1];
+      this.items[positions.initialPosition[0]].order = positions.initialPosition[1];
     }
   },
   data: function data() {
@@ -628,7 +618,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mixins_Copy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../mixins/Copy */ "./resources/js/mixins/Copy.js");
 //
 //
 //
@@ -671,18 +660,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['initialItems', 'selectedItems'],
-  created: function created() {
-    this.items = this.copy(this.initialItems);
-  },
+  props: ['items', 'selectedItems'],
   methods: {
     addItem: function addItem(id) {
       this.items[id].selected = true;
       this.items[id].amount = 1;
       this.items[id].order = this.selectedItems.length;
-      this.$emit('itemUpdated', this.items);
       this.searchTerm = '';
     },
     removeItem: function removeItem(id) {
@@ -695,7 +679,6 @@ __webpack_require__.r(__webpack_exports__);
         this.items[_id].order = this.items[_id].order - 1;
       }
 
-      this.$emit('itemRemoved', this.items);
       this.searchTerm = '';
     },
     decrementAmount: function decrementAmount(id) {
@@ -716,7 +699,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.items[id].amount = amount;
-      this.$emit('itemUpdated', this.items);
     },
     incrementAmount: function incrementAmount(id) {
       var currentAmount = this.items[id].amount;
@@ -731,7 +713,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.items[id].amount = amount;
-      this.$emit('itemUpdated', this.items);
     }
   },
   computed: {
@@ -757,11 +738,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      searchTerm: '',
-      items: {}
+      searchTerm: ''
     };
-  },
-  mixins: [_mixins_Copy__WEBPACK_IMPORTED_MODULE_0__["default"]]
+  }
 });
 
 /***/ }),
@@ -938,8 +917,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -948,9 +925,6 @@ __webpack_require__.r(__webpack_exports__);
     this.items = this.copy(this.initialItems);
   },
   methods: {
-    updateItems: function updateItems(items) {
-      this.items = items;
-    },
     submit: function submit() {
       if (!this.isFormReady) {
         return;
@@ -1016,8 +990,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: '',
       recipe: '',
-      formActive: false,
       items: {},
+      formActive: false,
       nameAlreadyExists: false
     };
   },
@@ -1037,8 +1011,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../mixins/Post.js */ "./resources/js/mixins/Post.js");
 /* harmony import */ var _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../mixins/Copy.js */ "./resources/js/mixins/Copy.js");
-//
-//
 //
 //
 //
@@ -2063,8 +2035,7 @@ var render = function() {
       _c("h2", { staticClass: "heading" }, [_vm._v("\n        Items\n    ")]),
       _vm._v(" "),
       _c("item-searcher", {
-        attrs: { initialItems: _vm.items, selectedItems: _vm.selectedItems },
-        on: { itemUpdated: _vm.updateItems, itemRemoved: _vm.updateItems }
+        attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
       }),
       _vm._v(" "),
       _c("div", { staticClass: "buttons" }, [
@@ -2156,8 +2127,7 @@ var render = function() {
       _c("h2", { staticClass: "heading" }, [_vm._v("\n        Items\n    ")]),
       _vm._v(" "),
       _c("item-searcher", {
-        attrs: { initialItems: _vm.items, selectedItems: _vm.selectedItems },
-        on: { itemUpdated: _vm.updateItems, itemRemoved: _vm.updateItems }
+        attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
       }),
       _vm._v(" "),
       _c("div", { staticClass: "buttons" }, [
@@ -2213,7 +2183,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "ItemAmounts" },
-    _vm._l(_vm.selectedItems, function(item, key) {
+    _vm._l(_vm.selectedItems, function(item) {
       return _c("div", { staticClass: "amount" }, [
         _c("label", { attrs: { for: "item-" + item.id } }, [
           _vm._v(_vm._s(item.name))
@@ -2844,8 +2814,7 @@ var render = function() {
       _c("h2", { staticClass: "heading" }, [_vm._v("\n        Items\n    ")]),
       _vm._v(" "),
       _c("item-searcher", {
-        attrs: { initialItems: _vm.items, selectedItems: _vm.selectedItems },
-        on: { itemUpdated: _vm.updateItems, itemRemoved: _vm.updateItems }
+        attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
       }),
       _vm._v(" "),
       _c("h2", { staticClass: "heading" }, [_vm._v("\n        Amounts\n    ")]),
@@ -2969,8 +2938,7 @@ var render = function() {
       _c("h2", { staticClass: "heading" }, [_vm._v("\n        Items\n    ")]),
       _vm._v(" "),
       _c("item-searcher", {
-        attrs: { initialItems: _vm.items, selectedItems: _vm.selectedItems },
-        on: { itemUpdated: _vm.updateItems, itemRemoved: _vm.updateItems }
+        attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
       }),
       _vm._v(" "),
       _c("h2", { staticClass: "heading" }, [_vm._v("\n        Amounts\n    ")]),
