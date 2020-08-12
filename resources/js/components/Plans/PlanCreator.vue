@@ -16,8 +16,8 @@
         </div>
 
         <div class="stage" v-if="selectedStage === 1">
-            <recipe-selection :recipes="recipes"
-                            :selectedRecipes="selectedRecipes"
+            <recipe-selection   :recipes="recipes"
+                                :selectedRecipes="selectedRecipes"
             ></recipe-selection>
 
             <button class="Button is-primary" @click="advanceStage">

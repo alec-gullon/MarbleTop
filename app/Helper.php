@@ -12,6 +12,7 @@ class Helper {
 
         $itemsData = [];
         foreach ($items as $item) {
+
             $itemData = [
                 'id' => $item->id,
                 'name' => $item->name,

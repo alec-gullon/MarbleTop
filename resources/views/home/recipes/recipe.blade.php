@@ -5,7 +5,7 @@
     <div class="AdminContent">
 
         <div class="header with-icon">
-            <h1>Recipes</h1>
+            <h1>{{ $recipe->name }}</h1>
             <a href="/home/recipes/{{ $recipe->id }}/edit/">@icon('edit-pencil')</a>
         </div>
 

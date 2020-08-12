@@ -24,7 +24,7 @@
                 $itemsData = [];
                 foreach ($recipe->items as $item) {
                     $itemsData[$item->id] = [
-                        'amount' => (int) $item->pivot->amount,
+                        'amount' => (float) $item->pivot->amount,
                         'id' => $item->id
                     ];
                 }
