@@ -414,36 +414,36 @@ body {
   display: flex;
 }
 
-.MealCreator {
+.RecipeCreator {
   display: flex;
   flex-direction: column;
   padding: 21px;
 }
 
-.MealCreator > .heading {
+.RecipeCreator > .heading {
   color: #22543D;
   font-weight: 500;
   margin-bottom: 16px;
 }
 
-.MealCreator > .InputWithLabel {
+.RecipeCreator > .InputWithLabel {
   margin-bottom: 16px;
 }
 
-.MealCreator > .ItemSearcher {
+.RecipeCreator > .ItemSearcher {
   margin-bottom: 16px;
 }
 
-.MealCreator > .ItemAmounts {
+.RecipeCreator > .ItemAmounts {
   margin-bottom: 32px;
 }
 
-.MealCreator > .buttons {
+.RecipeCreator > .buttons {
   display: flex;
   justify-content: flex-end;
 }
 
-.MealCreator > .buttons > .Button {
+.RecipeCreator > .buttons > .Button {
   margin-left: 12px;
 }
 

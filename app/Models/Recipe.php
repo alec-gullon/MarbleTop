@@ -15,7 +15,7 @@ class Recipe extends Model
     }
 
     public function items() {
-        return $this->belongsToMany('App\Models\Item')->withPivot('amount', 'order', 'preciseAmount');
+        return $this->belongsToMany('App\Models\Item')->withPivot('amount', 'order', 'precise_amount');
     }
 
     public function apiPath() {
@@ -26,7 +26,7 @@ class Recipe extends Model
         foreach ($items as $item) {
             $this->items()->attach(
                 $item['id'],
-                Arr::only($item, ['amount', 'preciseAmount', 'order'])
+                Arr::only($item, ['amount', 'precise_amount', 'order'])
             );
         }
     }

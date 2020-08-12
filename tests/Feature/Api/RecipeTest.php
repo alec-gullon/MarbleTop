@@ -21,8 +21,8 @@ class RecipeTest extends ApiTestCase
             'name' => 'Spaghetti Bolognese',
             'recipe' => 'Lorem ipsum',
             'items' => [
-                ['id' => $items[0]->id, 'amount' => 1.5, 'preciseAmount' => '100g', 'order' => 1],
-                ['id' => $items[1]->id, 'amount' => 2.5, 'preciseAmount' => '200g', 'order' => 2]
+                ['id' => $items[0]->id, 'amount' => 1.5, 'precise_amount' => '100g', 'order' => 1],
+                ['id' => $items[1]->id, 'amount' => 2.5, 'precise_amount' => '200g', 'order' => 2]
             ]
         ];
 
@@ -45,7 +45,7 @@ class RecipeTest extends ApiTestCase
             'item_id' => $items[0]->id,
             'recipe_id' => Recipe::first()->id,
             'amount' => $attributes['items'][0]['amount'],
-            'preciseAmount' => $attributes['items'][0]['preciseAmount'],
+            'precise_amount' => $attributes['items'][0]['precise_amount'],
             'order' => $attributes['items'][0]['order']
         ]);
     }
@@ -87,7 +87,7 @@ class RecipeTest extends ApiTestCase
             'name' => 'Updated Recipe Name',
             'recipe' => 'Lorem ipsum updated',
             'items' => [
-                ['id' => $newItem->id, 'amount' => 3, 'preciseAmount' => '50g', 'order' => 1],
+                ['id' => $newItem->id, 'amount' => 3, 'precise_amount' => '50g', 'order' => 1],
             ]
         ];
 
@@ -103,7 +103,7 @@ class RecipeTest extends ApiTestCase
             'item_id' => $newItem->id,
             'recipe_id' => $recipe->id,
             'amount' => $attributes['items'][0]['amount'],
-            'preciseAmount' => $attributes['items'][0]['preciseAmount'],
+            'precise_amount' => $attributes['items'][0]['precise_amount'],
             'order' => $attributes['items'][0]['order']
         ]);
         $this->assertDatabaseMissing('item_recipe', [

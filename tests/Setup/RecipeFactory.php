@@ -18,7 +18,7 @@ class RecipeFactory
 
         $item = ItemFactory::addItem($user);
 
-        $recipe->items()->attach($item, ['amount' => 1, 'preciseAmount' => '100g', 'order' => 1]);
+        $recipe->items()->attach($item, ['amount' => 1, 'precise_amount' => '100g', 'order' => 1]);
 
         return $recipe;
     }
@@ -29,8 +29,8 @@ class RecipeFactory
 
         $items = ItemFactory::addTwoItems($user);
 
-        $recipe->items()->attach($items[0], ['amount' => 1, 'preciseAmount' => '100g', 'order' => 1]);
-        $recipe->items()->attach($items[1], ['amount' => 1.5, 'preciseAmount' => '200g', 'order' => 2]);
+        $recipe->items()->attach($items[0], ['amount' => 1, 'precise_amount' => '100g', 'order' => 1]);
+        $recipe->items()->attach($items[1], ['amount' => 1.5, 'precise_amount' => '200g', 'order' => 2]);
 
         return $recipe;
     }

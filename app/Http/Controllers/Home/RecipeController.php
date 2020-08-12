@@ -30,7 +30,7 @@ class RecipeController extends Controller
             $data['key'] = $key;
             $data['selected'] = false;
             $data['amount'] = 1;
-            $data['preciseAmount'] = '100g';
+            $data['precise_amount'] = '100g';
             $data['order'] = 0;
 
             $itemsData[$key] = $data;
@@ -46,7 +46,7 @@ class RecipeController extends Controller
         foreach ($recipe->items as $item) {
             $itemsData[$item->pivot->order] = [
                 'name' => $item->name,
-                'amount' => $item->pivot->preciseAmount
+                'amount' => $item->pivot->precise_amount
             ];
         }
 
@@ -62,21 +62,21 @@ class RecipeController extends Controller
             $selected = false;
             $amount = 1;
             $order = -1;
-            $preciseAmount = '';
+            $precise_amount = '';
 
             foreach ($recipe->items as $recipeItem) {
                 if ($recipeItem->id === $item['id']) {
                     $selected = true;
                     $amount = (float) $recipeItem->pivot->amount;
                     $order = (int) $recipeItem->pivot->order;
-                    $preciseAmount = $recipeItem->pivot->preciseAmount;
+                    $precise_amount = $recipeItem->pivot->precise_amount;
                 }
             }
 
             $data['key'] = $key;
             $data['selected'] = $selected;
             $data['amount'] = $amount;
-            $data['preciseAmount'] = $preciseAmount;
+            $data['precise_amount'] = $precise_amount;
             $data['order'] = $order;
 
             $itemsData[$key] = $data;

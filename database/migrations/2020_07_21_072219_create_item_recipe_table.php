@@ -20,7 +20,7 @@ class CreateItemRecipeTable extends Migration
             $table->unsignedInteger('recipe_id');
             $table->unsignedInteger('item_id');
             $table->float('amount');
-            $table->string('preciseAmount');
+            $table->string('precise_amount');
             $table->integer('order');
             $table->timestamps();
 

@@ -83,7 +83,7 @@
                         id: item.id,
                         amount: item.amount,
                         order: item.order,
-                        preciseAmount: item.preciseAmount
+                        precise_amount: item.preciseAmount
                     });
                 }
 
