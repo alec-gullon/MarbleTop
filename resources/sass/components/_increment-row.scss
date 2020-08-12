@@ -19,6 +19,20 @@
             margin: 0 8px;
             font-size: 20px;
             font-weight: 500;
+            min-width: 38px;
+            text-align: center;
+
+            &.is-alert {
+                color: $alert;
+            }
+
+            &.is-success {
+                color: $green-mid;
+            }
+        }
+
+        &:last-child {
+            margin-right: 0;
         }
     }
     > .remove {

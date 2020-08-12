@@ -1170,6 +1170,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mixins_Post__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../mixins/Post */ "./resources/js/mixins/Post.js");
 //
 //
 //
@@ -1252,15 +1253,98 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['meals', 'initialItems', 'locations'],
+  created: function created() {
+    var items = this.copy(this.initialItems);
+    Object.keys(items).forEach(function (id) {
+      items[id].amountInCupboard = 0;
+    });
+    this.items = items;
+  },
+  methods: {
+    advanceStage: function advanceStage() {
+      this.selectedStage++;
+    },
+    goBackAStage: function goBackAStage() {
+      this.selectedStage--;
+    },
+    submit: function submit() {
+      if (this.formActive) {
+        return;
+      }
+
+      var data = new FormData();
+      data.append('api_token', document.global.apiToken);
+      var amounts = this.$refs['finalReview'].itemFinalAmounts;
+      var items = [];
+      Object.keys(amounts).forEach(function (id) {
+        items.push({
+          id: id,
+          amount: amounts[id]
+        });
+      });
+      data.append('items', JSON.stringify(items));
+      console.log(JSON.stringify(items));
+      this.formActive = true;
+      this.post('/api/plans/store/', data, function (response) {
+        if (response.status === 200) {
+          window.location.replace('/home/plans/');
+          return;
+        }
+
+        this.formActive = false;
+        document.global.xhrActive = false;
+      }.bind(this));
+    }
+  },
+  computed: {
+    itemAmounts: function itemAmounts() {
+      var _this = this;
+
+      var amounts = {};
+      Object.keys(this.items).forEach(function (key) {
+        amounts[key] = 0;
+      });
+
+      var _loop = function _loop(i) {
+        var selectedMeal = _this.selectedMeals[i];
+        Object.keys(selectedMeal.items).forEach(function (key) {
+          var selectedItem = selectedMeal.items[key];
+          amounts[selectedItem.id] += selectedItem.amount;
+        });
+      };
+
+      for (var i = 0; i < this.selectedMeals.length; i++) {
+        _loop(i);
+      }
+
+      return amounts;
+    }
+  },
+  data: function data() {
+    return {
+      selectedStage: 1,
+      selectedMeals: [],
+      items: {},
+      formActive: false
+    };
+  },
+  mixins: [_mixins_Post__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -1283,15 +1367,217 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['mealsData', 'ingredientsData'],
-  created: function created() {
-    this.meals = JSON.parse(JSON.stringify(this.mealsData));
-    var ingredients = JSON.parse(JSON.stringify(this.ingredientsData));
-    Object.keys(ingredients).forEach(function (key) {
-      ingredients[key].amountInCupboard = 0;
-    });
-    this.ingredients = ingredients;
+  props: ['items', 'itemAmounts'],
+  methods: {
+    decrementAmountInCupboard: function decrementAmountInCupboard(id) {
+      if (this.items[id].amountInCupboard === 0) {
+        return;
+      }
+
+      this.items[id].amountInCupboard -= 0.25;
+
+      if (this.items[id].amountInCupboard < 0) {
+        this.items[id].amountInCupboard = 0;
+      }
+    },
+    incrementAmountInCupboard: function incrementAmountInCupboard(id) {
+      if (this.items[id].amountInCupboard === this.itemAmounts[id]) {
+        return;
+      }
+
+      this.items[id].amountInCupboard += 0.25;
+
+      if (this.items[id].amountInCupboard > this.itemAmounts[id]) {
+        this.items[id].amountInCupboard = this.itemAmounts[id];
+      }
+    }
   },
+  computed: {
+    requiredItems: function requiredItems() {
+      var items = [];
+      Object.keys(this.itemAmounts).forEach(function (key) {
+        if (this.itemAmounts[key] > 0) {
+          items.push(key);
+        }
+      }.bind(this));
+      return items;
+    }
+  },
+  data: function data() {
+    return {};
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['locations', 'items', 'itemAmounts'],
+  computed: {
+    locationItems: function locationItems() {
+      var locationItems = {};
+      Object.keys(this.locations).forEach(function (key) {
+        locationItems[key] = {
+          items: [],
+          locationId: key
+        };
+      }.bind(this));
+      Object.keys(this.itemFinalAmounts).forEach(function (id) {
+        var item = this.items[id];
+        var amount = this.itemAmounts[id];
+
+        if (amount > 0) {
+          locationItems[item.locationId].items.push(id);
+        }
+      }.bind(this));
+      return locationItems;
+    },
+    itemFinalAmounts: function itemFinalAmounts() {
+      var amounts = this.copy(this.itemAmounts);
+      Object.keys(amounts).forEach(function (id) {
+        amounts[id] = amounts[id] - this.items[id].amountInCupboard;
+
+        if (amounts[id] === 0) {
+          delete amounts[id];
+        }
+      }.bind(this));
+      return amounts;
+    },
+    locationsToDisplay: function locationsToDisplay() {
+      var locations = [];
+      Object.keys(this.locationItems).forEach(function (key) {
+        if (this.locationItems[key].items.length > 0) {
+          locations.push(key);
+        }
+      }.bind(this));
+      return locations;
+    }
+  },
+  data: function data() {
+    return {};
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mixins_Amounts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../../mixins/Amounts */ "./resources/js/mixins/Amounts.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['selectedMeals', 'meals', 'items'],
+  methods: {
+    toggleMealExpansion: function toggleMealExpansion(meal) {
+      meal.expanded = !meal.expanded;
+    },
+    decrementItem: function decrementItem(item) {
+      item.amount = this.decrementAmount(item.amount);
+    },
+    incrementItem: function incrementItem(item) {
+      item.amount = this.incrementAmount(item.amount);
+    }
+  },
+  data: function data() {
+    return {};
+  },
+  mixins: [_mixins_Amounts__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['meals', 'selectedMeals'],
   methods: {
     removeMeal: function removeMeal(id) {
       for (var i = this.selectedMeals.length - 1; 0 <= i; i--) {
@@ -1302,47 +1588,28 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     addMeal: function addMeal(id) {
-      var ingredients = {};
-      Object.keys(this.meals[id].ingredients).forEach(function (key) {
-        var ingredient = this.meals[id].ingredients[key];
-        ingredients[ingredient.id] = {
-          id: ingredient.id,
-          amount: ingredient.amount
+      var items = {};
+      Object.keys(this.meals[id].items).forEach(function (key) {
+        var item = this.meals[id].items[key];
+        items[item.id] = {
+          id: item.id,
+          amount: item.amount,
+          originalAmount: item.amount
         };
       }.bind(this));
       var meal = {
         'id': id,
-        'ingredients': ingredients
+        'items': items,
+        'expanded': false
       };
       this.selectedMeals.push(meal);
-    },
-    decrementIngredient: function decrementIngredient(ingredient) {
-      ingredient.amount -= 0.25;
-    },
-    incrementIngredient: function incrementIngredient(ingredient) {
-      ingredient.amount += 0.25;
-    },
-    decrementAmountInCupboard: function decrementAmountInCupboard(id) {
-      this.ingredients[id].amountInCupboard -= 0.25;
-    },
-    incrementAmountInCupboard: function incrementAmountInCupboard(id) {
-      this.ingredients[id].amountInCupboard += 0.25;
-    },
-    advanceStage: function advanceStage() {
-      this.selectedStage++;
-    },
-    goBackAStage: function goBackAStage() {
-      this.selectedStage--;
-    },
-    submit: function submit() {
-      console.log('submitting');
     }
   },
   computed: {
     mealAmounts: function mealAmounts() {
       var amounts = {};
-      Object.keys(this.meals).forEach(function (key) {
-        amounts[key] = 0;
+      Object.keys(this.meals).forEach(function (id) {
+        amounts[id] = 0;
       });
 
       for (var i = 0; i < this.selectedMeals.length; i++) {
@@ -1350,46 +1617,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return amounts;
-    },
-    ingredientAmounts: function ingredientAmounts() {
-      var _this = this;
-
-      var amounts = {};
-      Object.keys(this.ingredients).forEach(function (key) {
-        amounts[key] = 0;
-      });
-
-      var _loop = function _loop(i) {
-        var selectedMeal = _this.selectedMeals[i];
-        Object.keys(selectedMeal.ingredients).forEach(function (key) {
-          var selectedIngredient = selectedMeal.ingredients[key];
-          amounts[selectedIngredient.id] += selectedIngredient.amount;
-        });
-      };
-
-      for (var i = 0; i < this.selectedMeals.length; i++) {
-        _loop(i);
-      }
-
-      return amounts;
-    },
-    requiredIngredients: function requiredIngredients() {
-      var ingredients = [];
-      Object.keys(this.ingredientAmounts).forEach(function (key) {
-        if (this.ingredientAmounts[key] > 0) {
-          ingredients.push(key);
-        }
-      }.bind(this));
-      return ingredients;
     }
   },
   data: function data() {
-    return {
-      selectedStage: 1,
-      selectedMeals: [],
-      meals: {},
-      ingredients: {}
-    };
+    return {};
   }
 });
 
@@ -2998,58 +3229,60 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "PlanCreator" }, [
+    _c("div", { staticClass: "stage-indicator" }, [
+      _c("span", { class: { selected: _vm.selectedStage === 1 } }, [
+        _vm._v("1")
+      ]),
+      _vm._v(" "),
+      _c("span", { class: { selected: _vm.selectedStage === 2 } }, [
+        _vm._v("2")
+      ]),
+      _vm._v(" "),
+      _c("span", { class: { selected: _vm.selectedStage === 3 } }, [
+        _vm._v("3")
+      ]),
+      _vm._v(" "),
+      _c("span", { class: { selected: _vm.selectedStage === 4 } }, [
+        _vm._v("4")
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "stage-heading" }, [
+      _vm.selectedStage === 1
+        ? _c("span", [_vm._v("Select your meals")])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.selectedStage === 2
+        ? _c("span", [_vm._v("Edit your selected meals")])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.selectedStage === 3
+        ? _c("span", [_vm._v("Adjust for anything you already have")])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.selectedStage === 4 ? _c("span", [_vm._v("Final review")]) : _vm._e()
+    ]),
+    _vm._v(" "),
     _vm.selectedStage === 1
-      ? _c("div", { staticClass: "stage" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("table", [
+      ? _c(
+          "div",
+          { staticClass: "stage" },
+          [
+            _c("meal-selection", {
+              attrs: { meals: _vm.meals, selectedMeals: _vm.selectedMeals }
+            }),
+            _vm._v(" "),
             _c(
-              "tbody",
-              _vm._l(_vm.meals, function(meal, id) {
-                return _c("tr", [
-                  _c("td", [_vm._v(_vm._s(meal.name))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "Button",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeMeal(id)
-                          }
-                        }
-                      },
-                      [_vm._v("-")]
-                    ),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(_vm.mealAmounts[id]))]),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass: "Button",
-                        on: {
-                          click: function($event) {
-                            return _vm.addMeal(id)
-                          }
-                        }
-                      },
-                      [_vm._v("+")]
-                    )
-                  ])
-                ])
-              }),
-              0
+              "button",
+              {
+                staticClass: "Button is-primary",
+                on: { click: _vm.advanceStage }
+              },
+              [_vm._v("\n            Next\n        ")]
             )
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "Button", on: { click: _vm.advanceStage } },
-            [_vm._v("\n            Next\n        ")]
-          )
-        ])
+          ],
+          1
+        )
       : _vm._e(),
     _vm._v(" "),
     _vm.selectedStage === 2
@@ -3057,243 +3290,468 @@ var render = function() {
           "div",
           { staticClass: "stage" },
           [
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._l(_vm.selectedMeals, function(meal) {
-              return _c("div", [
-                _c("h3", [_vm._v(_vm._s(_vm.meals[meal.id].name))]),
-                _vm._v(" "),
-                _c(
-                  "table",
-                  _vm._l(meal.ingredients, function(ingredient) {
-                    return _c("tr", [
-                      _c("td", [
-                        _vm._v(_vm._s(_vm.ingredients[ingredient.id].name))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "Button",
-                            on: {
-                              click: function($event) {
-                                return _vm.decrementIngredient(ingredient)
-                              }
-                            }
-                          },
-                          [_vm._v("-")]
-                        ),
-                        _vm._v(" "),
-                        ingredient.amount <
-                        _vm.meals[meal.id].ingredients[ingredient.id].amount
-                          ? _c("span", { staticStyle: { color: "red" } }, [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(ingredient.amount) +
-                                  "\n                        "
-                              )
-                            ])
-                          : ingredient.amount ===
-                            _vm.meals[meal.id].ingredients[ingredient.id].amount
-                          ? _c("span", [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(ingredient.amount) +
-                                  "\n                        "
-                              )
-                            ])
-                          : _c("span", { staticStyle: { color: "green" } }, [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(ingredient.amount) +
-                                  "\n                        "
-                              )
-                            ]),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "Button",
-                            on: {
-                              click: function($event) {
-                                return _vm.incrementIngredient(ingredient)
-                              }
-                            }
-                          },
-                          [_vm._v("+")]
-                        )
-                      ])
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("hr")
-              ])
+            _c("meal-ingredients", {
+              attrs: {
+                meals: _vm.meals,
+                selectedMeals: _vm.selectedMeals,
+                items: _vm.items
+              }
             }),
             _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "Button", on: { click: _vm.goBackAStage } },
-              [_vm._v("\n            Back\n        ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "Button", on: { click: _vm.advanceStage } },
-              [_vm._v("\n            Next\n        ")]
-            )
+            _c("div", { staticClass: "buttons" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "Button is-secondary",
+                  on: { click: _vm.goBackAStage }
+                },
+                [_vm._v("\n                Back\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "Button is-primary",
+                  on: { click: _vm.advanceStage }
+                },
+                [_vm._v("\n                Next\n            ")]
+              )
+            ])
           ],
-          2
+          1
         )
       : _vm._e(),
     _vm._v(" "),
     _vm.selectedStage === 3
-      ? _c("div", { staticClass: "stage" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c(
-            "table",
-            _vm._l(_vm.requiredIngredients, function(id) {
-              return _c("tr", [
-                _c("td", [_vm._v(_vm._s(_vm.ingredients[id].name))]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "span",
-                    {
-                      staticClass: "Button",
-                      on: {
-                        click: function($event) {
-                          return _vm.incrementAmountInCupboard(id)
-                        }
-                      }
-                    },
-                    [_vm._v("-")]
-                  ),
-                  _vm._v(" "),
-                  _vm.ingredients[id].amountInCupboard > 0
-                    ? _c("span", { staticStyle: { color: "red" } }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(
-                              _vm.ingredientAmounts[id] -
-                                _vm.ingredients[id].amountInCupboard
-                            ) +
-                            "\n                    "
-                        )
-                      ])
-                    : _c("span", [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(
-                              _vm.ingredientAmounts[id] -
-                                _vm.ingredients[id].amountInCupboard
-                            ) +
-                            "\n                    "
-                        )
-                      ]),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      staticClass: "Button",
-                      on: {
-                        click: function($event) {
-                          return _vm.decrementAmountInCupboard(id)
-                        }
-                      }
-                    },
-                    [_vm._v("+")]
-                  )
-                ])
-              ])
+      ? _c(
+          "div",
+          { staticClass: "stage" },
+          [
+            _c("cupboard-items", {
+              attrs: { items: _vm.items, itemAmounts: _vm.itemAmounts }
             }),
-            0
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "Button", on: { click: _vm.goBackAStage } },
-            [_vm._v("\n            Back\n        ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "Button", on: { click: _vm.advanceStage } },
-            [_vm._v("\n            Next\n        ")]
-          )
-        ])
+            _vm._v(" "),
+            _c("div", { staticClass: "buttons" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "Button is-secondary",
+                  on: { click: _vm.goBackAStage }
+                },
+                [_vm._v("\n                Back\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "Button is-primary",
+                  on: { click: _vm.advanceStage }
+                },
+                [_vm._v("\n                Next\n            ")]
+              )
+            ])
+          ],
+          1
+        )
       : _vm._e(),
     _vm._v(" "),
     _vm.selectedStage === 4
-      ? _c("div", { staticClass: "stage" }, [
-          _vm._m(3),
+      ? _c(
+          "div",
+          { staticClass: "stage" },
+          [
+            _c("final-review", {
+              ref: "finalReview",
+              attrs: {
+                items: _vm.items,
+                itemAmounts: _vm.itemAmounts,
+                locations: _vm.locations
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "buttons" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "Button is-secondary",
+                  on: { click: _vm.goBackAStage }
+                },
+                [_vm._v("\n                Back\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "Button is-primary",
+                  class: { "is-active": _vm.formActive },
+                  on: { click: _vm.submit }
+                },
+                [_vm._v("\n                Submit\n            ")]
+              )
+            ])
+          ],
+          1
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=template&id=909014e4&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=template&id=909014e4& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "CupboardItems" },
+    _vm._l(_vm.requiredItems, function(id) {
+      return _c("div", { staticClass: "IncrementRow" }, [
+        _c("div", { staticClass: "name" }, [
+          _vm._v(_vm._s(_vm.items[id].name))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "toggle" }, [
+          _c(
+            "svg",
+            {
+              staticClass: "decrement",
+              attrs: { xmlns: "http://www.w3.org/2000/svg" },
+              on: {
+                click: function($event) {
+                  return _vm.incrementAmountInCupboard(id)
+                }
+              }
+            },
+            [
+              _c("use", {
+                attrs: { "xlink:href": "/images/icons.svg#minus-outline" }
+              })
+            ]
+          ),
           _vm._v(" "),
           _c(
-            "table",
-            _vm._l(_vm.requiredIngredients, function(id) {
-              return _c("tr", [
-                _c("td", [_vm._v(_vm._s(_vm.ingredients[id].name))]),
+            "span",
+            {
+              staticClass: "amount",
+              class: { "is-alert": _vm.items[id].amountInCupboard > 0 }
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(
+                    parseFloat(
+                      parseFloat(
+                        _vm.itemAmounts[id] - _vm.items[id].amountInCupboard
+                      ).toFixed(2)
+                    )
+                  ) +
+                  "\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "svg",
+            {
+              staticClass: "increment",
+              attrs: { xmlns: "http://www.w3.org/2000/svg" },
+              on: {
+                click: function($event) {
+                  return _vm.decrementAmountInCupboard(id)
+                }
+              }
+            },
+            [
+              _c("use", {
+                attrs: { "xlink:href": "/images/icons.svg#add-outline" }
+              })
+            ]
+          )
+        ])
+      ])
+    }),
+    0
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=template&id=77c64144&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=template&id=77c64144& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "FinalReview" },
+    _vm._l(_vm.locationsToDisplay, function(locationId) {
+      return _c("div", { staticClass: "location" }, [
+        _c("h3", [_vm._v(_vm._s(_vm.locations[locationId].name))]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "final-review" },
+          _vm._l(_vm.locationItems[locationId].items, function(id) {
+            return _c("div", { staticClass: "ingredient" }, [
+              _c("div", { staticClass: "name" }, [
+                _vm._v(_vm._s(_vm.items[id].name))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "amount" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(
+                      _vm.itemAmounts[id] - _vm.items[id].amountInCupboard
+                    ) +
+                    "\n                "
+                )
+              ])
+            ])
+          }),
+          0
+        )
+      ])
+    }),
+    0
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=template&id=51bf0255&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=template&id=51bf0255& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "MealIngredients" },
+    _vm._l(_vm.selectedMeals, function(meal) {
+      return _c(
+        "div",
+        { staticClass: "meal", class: { "is-expanded": meal.expanded } },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "header",
+              on: {
+                click: function($event) {
+                  return _vm.toggleMealExpansion(meal)
+                }
+              }
+            },
+            [
+              _c("h3", [_vm._v(_vm._s(_vm.meals[meal.id].name))]),
+              _vm._v(" "),
+              _c("svg", { attrs: { xmlns: "http://www.w3.org/2000/svg" } }, [
+                !meal.expanded
+                  ? _c("use", {
+                      attrs: { "xlink:href": "/images/icons.svg#chevron-down" }
+                    })
+                  : _c("use", {
+                      attrs: { "xlink:href": "/images/icons.svg#chevron-up" }
+                    })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "ingredients" },
+            _vm._l(meal.items, function(item) {
+              return _c("div", { staticClass: "IncrementRow" }, [
+                _c("div", { staticClass: "name" }, [
+                  _vm._v(_vm._s(_vm.items[item.id].name))
+                ]),
                 _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.ingredientAmounts[id]) +
-                      "\n                "
+                _c("div", { staticClass: "toggle" }, [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "decrement",
+                      attrs: { xmlns: "http://www.w3.org/2000/svg" },
+                      on: {
+                        click: function($event) {
+                          return _vm.decrementItem(item)
+                        }
+                      }
+                    },
+                    [
+                      _c("use", {
+                        attrs: {
+                          "xlink:href": "/images/icons.svg#minus-outline"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "amount",
+                      class: {
+                        "is-alert": item.amount < item.originalAmount,
+                        "is-success": item.amount > item.originalAmount
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(item.amount) +
+                          "\n                            "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "increment",
+                      attrs: { xmlns: "http://www.w3.org/2000/svg" },
+                      on: {
+                        click: function($event) {
+                          return _vm.incrementItem(item)
+                        }
+                      }
+                    },
+                    [
+                      _c("use", {
+                        attrs: { "xlink:href": "/images/icons.svg#add-outline" }
+                      })
+                    ]
                   )
                 ])
               ])
             }),
             0
+          )
+        ]
+      )
+    }),
+    0
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=template&id=8dcc0e42&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=template&id=8dcc0e42& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "MealSelection" },
+    _vm._l(_vm.meals, function(meal, id) {
+      return _c("div", { staticClass: "IncrementRow" }, [
+        _c("div", { staticClass: "name" }, [_vm._v(_vm._s(meal.name))]),
+        _vm._v(" "),
+        _c("div", { staticClass: "toggle" }, [
+          _c(
+            "svg",
+            {
+              staticClass: "decrement",
+              attrs: { xmlns: "http://www.w3.org/2000/svg" },
+              on: {
+                click: function($event) {
+                  return _vm.removeMeal(id)
+                }
+              }
+            },
+            [
+              _c("use", {
+                attrs: { "xlink:href": "/images/icons.svg#minus-outline" }
+              })
+            ]
           ),
           _vm._v(" "),
-          _c("button", { staticClass: "Button", on: { click: _vm.submit } }, [
-            _vm._v("\n            Submit\n        ")
-          ])
+          _c("span", { staticClass: "amount" }, [
+            _vm._v(_vm._s(_vm.mealAmounts[id]))
+          ]),
+          _vm._v(" "),
+          _c(
+            "svg",
+            {
+              staticClass: "increment",
+              attrs: { xmlns: "http://www.w3.org/2000/svg" },
+              on: {
+                click: function($event) {
+                  return _vm.addMeal(id)
+                }
+              }
+            },
+            [
+              _c("use", {
+                attrs: { "xlink:href": "/images/icons.svg#add-outline" }
+              })
+            ]
+          )
         ])
-      : _vm._e()
-  ])
+      ])
+    }),
+    0
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", [
-      _c("span", { staticClass: "number" }, [_vm._v("1")]),
-      _vm._v(" Select your meals")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", [
-      _c("span", { staticClass: "number" }, [_vm._v("2")]),
-      _vm._v(" Edit your selected meals")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", [
-      _c("span", { staticClass: "number" }, [_vm._v("3")]),
-      _vm._v(" Deduct anything you already have")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", [
-      _c("span", { staticClass: "number" }, [_vm._v("4")]),
-      _vm._v(" Final review")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -15622,6 +16080,10 @@ var map = {
 	"./components/Meals/MealCreator.vue": "./resources/js/components/Meals/MealCreator.vue",
 	"./components/Meals/MealEditor.vue": "./resources/js/components/Meals/MealEditor.vue",
 	"./components/Plans/PlanCreator.vue": "./resources/js/components/Plans/PlanCreator.vue",
+	"./components/Plans/Stages/CupboardItems.vue": "./resources/js/components/Plans/Stages/CupboardItems.vue",
+	"./components/Plans/Stages/FinalReview.vue": "./resources/js/components/Plans/Stages/FinalReview.vue",
+	"./components/Plans/Stages/MealIngredients.vue": "./resources/js/components/Plans/Stages/MealIngredients.vue",
+	"./components/Plans/Stages/MealSelection.vue": "./resources/js/components/Plans/Stages/MealSelection.vue",
 	"./components/PrimaryNav.vue": "./resources/js/components/PrimaryNav.vue"
 };
 
@@ -15660,6 +16122,13 @@ webpackContext.id = "./resources/js sync recursive \\.vue$/";
  * building robust, powerful web applications using Vue and Laravel.
  */
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+Vue.mixin({
+  methods: {
+    copy: function copy(object) {
+      return JSON.parse(JSON.stringify(object));
+    }
+  }
+});
 /**
  * Automatically registers Vue components.
  *
@@ -16442,6 +16911,283 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Plans/Stages/CupboardItems.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/CupboardItems.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CupboardItems_vue_vue_type_template_id_909014e4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CupboardItems.vue?vue&type=template&id=909014e4& */ "./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=template&id=909014e4&");
+/* harmony import */ var _CupboardItems_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CupboardItems.vue?vue&type=script&lang=js& */ "./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CupboardItems_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CupboardItems_vue_vue_type_template_id_909014e4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CupboardItems_vue_vue_type_template_id_909014e4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Plans/Stages/CupboardItems.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CupboardItems_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./CupboardItems.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CupboardItems_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=template&id=909014e4&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=template&id=909014e4& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CupboardItems_vue_vue_type_template_id_909014e4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./CupboardItems.vue?vue&type=template&id=909014e4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/CupboardItems.vue?vue&type=template&id=909014e4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CupboardItems_vue_vue_type_template_id_909014e4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CupboardItems_vue_vue_type_template_id_909014e4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/FinalReview.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/FinalReview.vue ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FinalReview_vue_vue_type_template_id_77c64144___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FinalReview.vue?vue&type=template&id=77c64144& */ "./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=template&id=77c64144&");
+/* harmony import */ var _FinalReview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FinalReview.vue?vue&type=script&lang=js& */ "./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _FinalReview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _FinalReview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FinalReview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FinalReview_vue_vue_type_template_id_77c64144___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FinalReview_vue_vue_type_template_id_77c64144___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Plans/Stages/FinalReview.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FinalReview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./FinalReview.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FinalReview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=template&id=77c64144&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=template&id=77c64144& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FinalReview_vue_vue_type_template_id_77c64144___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./FinalReview.vue?vue&type=template&id=77c64144& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/FinalReview.vue?vue&type=template&id=77c64144&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FinalReview_vue_vue_type_template_id_77c64144___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FinalReview_vue_vue_type_template_id_77c64144___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/MealIngredients.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/MealIngredients.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MealIngredients_vue_vue_type_template_id_51bf0255___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MealIngredients.vue?vue&type=template&id=51bf0255& */ "./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=template&id=51bf0255&");
+/* harmony import */ var _MealIngredients_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MealIngredients.vue?vue&type=script&lang=js& */ "./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MealIngredients_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MealIngredients_vue_vue_type_template_id_51bf0255___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MealIngredients_vue_vue_type_template_id_51bf0255___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Plans/Stages/MealIngredients.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MealIngredients_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MealIngredients.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MealIngredients_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=template&id=51bf0255&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=template&id=51bf0255& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MealIngredients_vue_vue_type_template_id_51bf0255___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MealIngredients.vue?vue&type=template&id=51bf0255& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/MealIngredients.vue?vue&type=template&id=51bf0255&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MealIngredients_vue_vue_type_template_id_51bf0255___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MealIngredients_vue_vue_type_template_id_51bf0255___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/MealSelection.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/MealSelection.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MealSelection_vue_vue_type_template_id_8dcc0e42___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MealSelection.vue?vue&type=template&id=8dcc0e42& */ "./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=template&id=8dcc0e42&");
+/* harmony import */ var _MealSelection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MealSelection.vue?vue&type=script&lang=js& */ "./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MealSelection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MealSelection_vue_vue_type_template_id_8dcc0e42___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MealSelection_vue_vue_type_template_id_8dcc0e42___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Plans/Stages/MealSelection.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MealSelection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MealSelection.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MealSelection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=template&id=8dcc0e42&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=template&id=8dcc0e42& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MealSelection_vue_vue_type_template_id_8dcc0e42___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MealSelection.vue?vue&type=template&id=8dcc0e42& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Plans/Stages/MealSelection.vue?vue&type=template&id=8dcc0e42&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MealSelection_vue_vue_type_template_id_8dcc0e42___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MealSelection_vue_vue_type_template_id_8dcc0e42___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/PrimaryNav.vue":
 /*!************************************************!*\
   !*** ./resources/js/components/PrimaryNav.vue ***!
@@ -16508,6 +17254,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PrimaryNav_vue_vue_type_template_id_cb63a028___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/mixins/Amounts.js":
+/*!****************************************!*\
+  !*** ./resources/js/mixins/Amounts.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    incrementAmount: function incrementAmount(amount) {
+      if (amount === 0) {
+        return 0.1;
+      } else if (amount === 0.1) {
+        return 0.25;
+      }
+
+      return amount + 0.25;
+    },
+    decrementAmount: function decrementAmount(amount) {
+      if (amount === 0) {
+        return 0;
+      }
+
+      if (amount === 0.1) {
+        return 0;
+      } else if (amount === 0.25) {
+        return 0.1;
+      }
+
+      return amount - 0.25;
+    }
+  }
+});
 
 /***/ }),
 

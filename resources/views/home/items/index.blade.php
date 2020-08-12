@@ -1,7 +1,6 @@
 @extends('layout.app')
 
 @section('content')
-
     <div class="AdminContent">
 
         <div class="header">

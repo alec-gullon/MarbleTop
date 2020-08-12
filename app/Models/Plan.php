@@ -15,4 +15,19 @@ class Plan extends Model
     public function items() {
         return $this->belongsToMany('App\Models\Item')->withPivot('amount');
     }
+
+    public function itemsByLocation()
+    {
+        $locations = [];
+
+        foreach ($this->items as $item) {
+            if (empty($locations[$item->location_id])) {
+                $items[$item->location_id] = [];
+            }
+
+            $locations[$item->location_id][] = $item;
+        }
+
+        return $locations;
+    }
 }

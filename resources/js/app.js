@@ -6,6 +6,14 @@
 
 window.Vue = require('vue');
 
+Vue.mixin({
+    methods: {
+        copy: function(object) {
+            return JSON.parse(JSON.stringify(object))
+        }
+    }
+});
+
 /**
  * Automatically registers Vue components.
  *

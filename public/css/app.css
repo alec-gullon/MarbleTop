@@ -623,6 +623,20 @@ body {
   margin: 0 8px;
   font-size: 20px;
   font-weight: 500;
+  min-width: 38px;
+  text-align: center;
+}
+
+.IncrementRow > .toggle > .amount.is-alert {
+  color: #CC3333;
+}
+
+.IncrementRow > .toggle > .amount.is-success {
+  color: #38A169;
+}
+
+.IncrementRow > .toggle:last-child {
+  margin-right: 0;
 }
 
 .IncrementRow > .remove {
@@ -897,5 +911,172 @@ body {
 
 .RecipeIngredients > tbody > tr > td {
   width: 50%;
+}
+
+.PlanCreator {
+  padding: 21px;
+}
+
+.PlanCreator > .stage-indicator {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.PlanCreator > .stage-indicator > span {
+  background: #38A169;
+  opacity: 0.5;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.PlanCreator > .stage-indicator > span.selected {
+  opacity: 1;
+}
+
+.PlanCreator > .stage-heading {
+  color: #22543D;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 32px;
+}
+
+.PlanCreator > .stage {
+  display: flex;
+  flex-direction: column;
+}
+
+.PlanCreator > .stage > .Button {
+  align-self: flex-end;
+}
+
+.PlanCreator > .stage > .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.MealSelection > .IncrementRow {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.MealSelection > .IncrementRow:last-child {
+  border-bottom: 0;
+}
+
+.MealIngredients > .meal > .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.MealIngredients > .meal > .header > h3 {
+  flex-grow: 1;
+  font-weight: 400;
+  font-size: 18px;
+  color: #22543D;
+}
+
+.MealIngredients > .meal > .header > svg {
+  height: 30px;
+  width: 30px;
+  fill: #22543D;
+}
+
+.MealIngredients > .meal > .ingredients {
+  display: none;
+}
+
+.MealIngredients > .meal > .ingredients > .IncrementRow {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.MealIngredients > .meal > .ingredients > .IncrementRow:last-child {
+  border-bottom: 0;
+}
+
+.MealIngredients > .meal:last-child > .header {
+  border-bottom: 0;
+}
+
+.MealIngredients > .meal.is-expanded > .ingredients {
+  display: block;
+}
+
+.CupboardItems > .IncrementRow {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.CupboardItems > .IncrementRow:last-child {
+  border-bottom: 0;
+}
+
+.FinalReview > .location > h3 {
+  font-weight: 400;
+  color: #22543D;
+}
+
+.FinalReview > .location > .final-review {
+  margin-bottom: 12px;
+}
+
+.FinalReview > .location > .final-review > .ingredient {
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  display: flex;
+}
+
+.FinalReview > .location > .final-review > .ingredient > .name {
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.FinalReview > .location > .final-review > .ingredient:last-child {
+  border-bottom: 0;
+}
+
+.Plan {
+  padding: 21px;
+}
+
+.Plan > h2 {
+  color: #22543D;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.Plan > .item-list {
+  margin-bottom: 16px;
+}
+
+.Plan > .item-list > .item {
+  display: flex;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.Plan > .item-list > .item > .name {
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+.Plan > .item-list > .item:last-child {
+  border-bottom: 0;
 }
 

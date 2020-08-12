@@ -1,10 +1,15 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="AdminSection">
-        <h1>Add Meal</h1>
+    <div class="AdminContent">
 
-        <?php
+        <div class="header">
+            <h1>Plans</h1>
+            <p class="heading-tag">Let's get ready for a shop</p>
+        </div>
+
+        <div class="content">
+            <?php
             $meals = Auth::user()->meals;
 
             $mealsData = [];
@@ -16,32 +21,38 @@
                     'name' => $meal->name
                 ];
 
-                $ingredientsData = [];
-                foreach ($meal->ingredients as $ingredient) {
-                    $ingredientsData[$ingredient->id] = [
-                        'amount' => (int) $ingredient->pivot->amount,
-                        'id' => $ingredient->id
+                $itemsData = [];
+                foreach ($meal->items as $item) {
+                    $itemsData[$item->id] = [
+                        'amount' => (int) $item->pivot->amount,
+                        'id' => $item->id
                     ];
                 }
 
-                $mealData['ingredients'] = $ingredientsData;
+                $mealData['items'] = $itemsData;
                 $mealsData[$meal->id] = $mealData;
             }
 
-            $ingredients = Auth::user()->ingredients;
+            $items = Auth::user()->items;
 
-            $ingredientsData = [];
-            foreach ($ingredients as $ingredient) {
-                $ingredientData = [
-                    'name' => $ingredient->name,
-                    'amount' => 0
+            $itemsData = [];
+            foreach ($items as $item) {
+                $itemData = [
+                    'name' => $item->name,
+                    'locationId' => $item->location_id
                 ];
 
-                $ingredientsData[$ingredient->id] = $ingredientData;
+                $itemsData[$item->id] = $itemData;
             }
-        ?>
 
-        <plan-creator :meals-data="{{{ json_encode($mealsData) }}}" :ingredients-data="{{ json_encode($ingredientsData) }}"
-        ></plan-creator>
+            $locations = \App\Helper::locationsData();
+            ?>
+
+            <plan-creator :meals="{{{ json_encode($mealsData) }}}"
+                          :initial-items="{{ json_encode($itemsData) }}"
+                          :locations="{{ json_encode($locations) }}"
+            ></plan-creator>
+        </div>
+
     </div>
 @endsection

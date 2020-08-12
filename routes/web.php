@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/home/plans/',                  'Home\PlanController@index')->name('plans');
     Route::get('/home/plans/create/',           'Home\PlanController@add')->name('plans-add');
+    Route::get('/home/plans/{plan}',            'Home\PlanController@show')->name('plan');
 });
 
 

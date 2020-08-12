@@ -69,3 +69,30 @@ body {
 @import 'components/index';
 @import 'pages/index';
 
+.Plan {
+    padding: 21px;
+    > h2 {
+        color: $green-dark;
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+    > .item-list {
+        margin-bottom: 16px;
+
+        > .item {
+            display: flex;
+            padding-bottom: 12px;
+            padding-top: 12px;
+            border-bottom: 1px solid $grey-lightest;
+
+            > .name {
+                flex-grow: 1;
+                font-weight: 500;
+            }
+
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+}

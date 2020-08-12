@@ -17,14 +17,13 @@ class PlanController extends BaseController
             'user_id' => auth()->user()->id
         ]);
 
-        $items = [
-            ['id' => 1, 'amount' => 2],
-            ['id' => 3, 'amount' => 0.5]
-        ];
+        $items = json_decode($request->items, true);
 
         foreach ($items as $item) {
             $plan->items()->attach($item['id'], ['amount' => $item['amount']]);
         }
+
+        $request->session()->flash('message', 'Successfully created plan!');
 
         return ApiResponse::success();
     }

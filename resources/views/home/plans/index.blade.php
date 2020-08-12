@@ -1,25 +1,44 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="AdminSection">
-        <h1>Plans</h1>
+    <div class="AdminContent">
 
-        <div class="MealsAdmin">
+        <div class="header">
+            <h1>Plans</h1>
+            <p class="heading-tag">Let's get ready for a shop</p>
+        </div>
+
+        <div class="content">
             @if (Session::has('message'))
                 <div class="MessageBox is-success">
                     {{ Session::get('message') }}
                 </div>
             @endif
 
-            <a class="AdminLink" href="/home/plans/create/">
-                Create a plan
-            </a>
+            <ul class="OptionList">
+                <li>
+                    <a href="{{ route('plans-add') }}">
+                        @icon('plus-outline')
+                        <div class="text">
+                            Add a Plan
+                        </div>
+                    </a>
+                </li>
+            </ul>
 
-            <div class="meals" data-test="{{ count($plans) }}">
-                @foreach ($plans as $plan)
-                    <li>{{ $plan['created_at'] }}</li>
+            <ul class="OptionList">
+                @foreach (Auth::user()->plans as $plan)
+                    <li>
+                        <a href="{{ route('plan', ['plan' => $plan->id]) }}">
+                            @icon('arrow-thin-right')
+                            <div class="text">
+                                {{ $plan->created_at->toFormattedDateString() }}
+                            </div>
+                        </a>
+                    </li>
                 @endforeach
-            </div>
+            </ul>
         </div>
+
     </div>
 @endsection
