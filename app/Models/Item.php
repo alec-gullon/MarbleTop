@@ -16,8 +16,8 @@ class Item extends Model
         return $this->belongsTo('App\Models\ItemLocation');
     }
 
-    public function meals() {
-        return $this->belongsToMany('App\Models\Meal');
+    public function recipes() {
+        return $this->belongsToMany('App\Models\Recipe');
     }
 
     public function plans() {

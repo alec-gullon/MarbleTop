@@ -8,34 +8,34 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
-    public function test_a_user_can_add_a_meal()
+    public function test_a_user_can_add_a_recipe()
     {
         $user = factory('App\User')->create();
 
         $name = 'Spaghetti Bolognese';
-        $recipe = 'My example recipe';
+        $recipeText = 'My example recipe';
 
-        $meal = $user->addMeal(['name' => $name, 'recipe' => $recipe]);
+        $recipe = $user->addRecipe(['name' => $name, 'recipe' => $recipeText]);
 
-        $this->assertCount(1, $user->meals);
-        $this->assertTrue($user->meals->contains($meal));
-        $this->assertDatabaseHas('meals', [
+        $this->assertCount(1, $user->recipes);
+        $this->assertTrue($user->recipes->contains($recipe));
+        $this->assertDatabaseHas('recipes', [
             'name' => $name,
-            'recipe' => $recipe
+            'recipe' => $recipeText
         ]);
     }
 
-    public function test_a_user_can_add_a_group()
+    public function test_a_user_can_add_a_collection()
     {
         $user = factory('App\User')->create();
 
         $name = 'Kitchen Essentials';
 
-        $group = $user->addGroup(['name' => $name]);
+        $collection = $user->addCollection(['name' => $name]);
 
-        $this->assertCount(1, $user->groups);
-        $this->assertTrue($user->groups->contains($group));
-        $this->assertDatabaseHas('groups', [
+        $this->assertCount(1, $user->collections);
+        $this->assertTrue($user->collections->contains($collection));
+        $this->assertDatabaseHas('collections', [
             'name' => $name,
         ]);
     }

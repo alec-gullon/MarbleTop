@@ -10,28 +10,30 @@ class HomeTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
-    public function test_meals_homepage_displays_a_users_meals()
+    public function test_recipes_homepage_displays_a_users_recipes()
     {
+        $this->withoutExceptionHandling();
+
         $user = factory('App\User')->create();
         $otherUser = factory('App\User')->create();
 
-        $user->addMeal(['name' => 'Spaghetti Bolognese', 'recipe' => 'My example recipe!']);
-        $otherUser->addMeal(['name' => 'Lemon Drizzle Cake', 'recipe' => 'Other user example recipe']);
+        $user->addRecipe(['name' => 'Spaghetti Bolognese', 'recipe' => 'My example recipe!']);
+        $otherUser->addRecipe(['name' => 'Lemon Drizzle Cake', 'recipe' => 'Other user example recipe']);
 
         $this->actingAs($user);
 
-        $this->get(route('meals'))
+        $this->get(route('recipes'))
             ->assertSee('Spaghetti Bolognese')
             ->assertDontSee('Lemon Drizzle Cake');
     }
 
-    public function test_groups_homepage_displays_a_users_groups()
+    public function test_collections_homepage_displays_a_users_collections()
     {
         $user = factory('App\User')->create();
         $otherUser = factory('App\User')->create();
 
-        $user->addGroup(['name' => 'Kitchen Essentials']);
-        $otherUser->addGroup(['name' => 'Family Visit']);
+        $user->addCollection(['name' => 'Kitchen Essentials']);
+        $otherUser->addCollection(['name' => 'Family Visit']);
 
         $this->actingAs($user);
 

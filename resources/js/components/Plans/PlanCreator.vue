@@ -9,16 +9,16 @@
         </div>
 
         <div class="stage-heading">
-            <span v-if="selectedStage === 1">Select your meals</span>
-            <span v-if="selectedStage === 2">Edit your selected meals</span>
+            <span v-if="selectedStage === 1">Select your recipes</span>
+            <span v-if="selectedStage === 2">Edit your selected recipes</span>
             <span v-if="selectedStage === 3">Adjust for anything you already have</span>
             <span v-if="selectedStage === 4">Final review</span>
         </div>
 
         <div class="stage" v-if="selectedStage === 1">
-            <meal-selection :meals="meals"
-                            :selectedMeals="selectedMeals"
-            ></meal-selection>
+            <recipe-selection :recipes="recipes"
+                            :selectedRecipes="selectedRecipes"
+            ></recipe-selection>
 
             <button class="Button is-primary" @click="advanceStage">
                 Next
@@ -26,10 +26,10 @@
         </div>
 
         <div class="stage" v-if="selectedStage === 2">
-            <meal-ingredients :meals="meals"
-                              :selectedMeals="selectedMeals"
+            <recipe-ingredients :recipes="recipes"
+                              :selectedRecipes="selectedRecipes"
                               :items="items"
-            ></meal-ingredients>
+            ></recipe-ingredients>
 
             <div class="buttons">
                 <button class="Button is-secondary" @click="goBackAStage">
@@ -86,7 +86,7 @@
 
     export default {
         props: [
-            'meals',
+            'recipes',
             'initialItems',
             'locations'
         ],
@@ -149,11 +149,11 @@
                     amounts[key] = 0;
                 });
 
-                for (let i = 0; i < this.selectedMeals.length; i++) {
-                    let selectedMeal = this.selectedMeals[i];
+                for (let i = 0; i < this.selectedRecipes.length; i++) {
+                    let selectedRecipe = this.selectedRecipes[i];
 
-                    Object.keys(selectedMeal.items).forEach(function(key) {
-                        let selectedItem = selectedMeal.items[key];
+                    Object.keys(selectedRecipe.items).forEach(function(key) {
+                        let selectedItem = selectedRecipe.items[key];
 
                         amounts[selectedItem.id] += selectedItem.amount;
                     });
@@ -165,7 +165,7 @@
         data: function() {
             return {
                 selectedStage: 1,
-                selectedMeals: [],
+                selectedRecipes: [],
                 items: {},
                 formActive: false
             }

@@ -5,8 +5,8 @@
     <div class="AdminContent">
 
         <div class="header">
-            <h1>Collections</h1>
-            <p class="heading-tag">Picnic, family visit, BBQ</p>
+            <h1>Recipes</h1>
+            <p class="heading-tag">Bolognese, Pie, Curry, Cake</p>
         </div>
 
         <div class="content">
@@ -18,28 +18,27 @@
 
             <ul class="OptionList">
                 <li>
-                    <a href="{{ route('collections-add') }}">
+                    <a href="{{ route('recipes-add') }}">
                         @icon('plus-outline')
                         <div class="text">
-                            Add a Collection
+                            Add a Recipe
                         </div>
                     </a>
                 </li>
             </ul>
 
             <ul class="OptionList">
-                @foreach ($collections as $collection)
+                @foreach ($recipes as $recipe)
                     <li>
-                        <a href="{{ route('collections-edit', ['collection' => $collection['id']]) }}">
+                        <a href="{{ route('recipe-details', ['recipe' => $recipe['id']]) }}">
                             @icon('arrow-thin-right')
                             <div class="text">
-                                {{ $collection['name'] }}
+                                {{ $recipe['name'] }}
                             </div>
                         </a>
                     </li>
                 @endforeach
             </ul>
-
         </div>
 
     </div>

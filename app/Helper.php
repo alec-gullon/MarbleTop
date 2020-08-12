@@ -23,30 +23,30 @@ class Helper {
         return $itemsData;
     }
 
-    public static function mealsData($user) {
+    public static function recipesData($user) {
         $user->refresh();
-        $meals = $user->meals->sortBy('name');
+        $recipes = $user->recipes->sortBy('name');
 
         $data = [];
-        foreach ($meals as $meal) {
+        foreach ($recipes as $recipe) {
             $datum = [
-                'id' => $meal->id,
-                'name' => $meal->name
+                'id' => $recipe->id,
+                'name' => $recipe->name
             ];
             $data[] = $datum;
         }
         return $data;
     }
 
-    public static function groupsData($user) {
+    public static function collectionsData($user) {
         $user->refresh();
-        $groups = $user->groups->sortBy('name');
+        $collections = $user->collections->sortBy('name');
 
         $data = [];
-        foreach ($groups as $group) {
+        foreach ($collections as $collection) {
             $datum = [
-                'id' => $group->id,
-                'name' => $group->name
+                'id' => $collection->id,
+                'name' => $collection->name
             ];
             $data[] = $datum;
         }

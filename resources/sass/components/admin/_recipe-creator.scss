@@ -1,0 +1,27 @@
+.RecipeCreator {
+    display: flex;
+    flex-direction: column;
+    padding: 21px;
+    > .heading {
+        color: $green-dark;
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+    > .InputWithLabel {
+        margin-bottom: 16px;
+    }
+    > .ItemSearcher {
+        margin-bottom: 16px;
+    }
+    > .ItemAmounts {
+        margin-bottom: 32px;
+    }
+    > .buttons {
+        display: flex;
+        justify-content: flex-end;
+
+        > .Button {
+            margin-left: 12px;
+        }
+    }
+}

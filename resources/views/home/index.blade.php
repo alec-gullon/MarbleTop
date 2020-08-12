@@ -22,9 +22,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('meals') }}">
+                    <a href="{{ route('recipes') }}">
                         @icon('heart')
-                        <span class="text">Meals</span>
+                        <span class="text">Recipes</span>
                     </a>
                 </li>
                 <li>

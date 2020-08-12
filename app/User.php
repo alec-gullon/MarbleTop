@@ -42,14 +42,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Item');
     }
 
-    public function meals()
+    public function recipes()
     {
-        return $this->hasMany('App\Models\Meal');
+        return $this->hasMany('App\Models\Recipe');
     }
 
-    public function groups()
+    public function collections()
     {
-        return $this->hasMany('App\Models\Group');
+        return $this->hasMany('App\Models\Collection');
     }
 
     public function plans()
@@ -57,14 +57,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Plan');
     }
 
-    public function addMeal($attributes)
+    public function addRecipe($attributes)
     {
-        return $this->meals()->create($attributes);
+        return $this->recipes()->create($attributes);
     }
 
-    public function addGroup($attributes)
+    public function addCollection($attributes)
     {
-        return $this->groups()->create($attributes);
+        return $this->collections()->create($attributes);
     }
 
     public function addPlan()
@@ -82,13 +82,13 @@ class User extends Authenticatable
         return ($this->items->where('name', $name)->first() !== null);
     }
 
-    public function hasMeal($name)
+    public function hasRecipe($name)
     {
-        return ($this->meals->where('name', $name)->first() !== null);
+        return ($this->recipes->where('name', $name)->first() !== null);
     }
 
-    public function hasGroup($name)
+    public function hasCollection($name)
     {
-        return ($this->groups->where('name', $name)->first() !== null);
+        return ($this->collections->where('name', $name)->first() !== null);
     }
 }

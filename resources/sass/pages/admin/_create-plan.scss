@@ -44,7 +44,7 @@
     }
 }
 
-.MealSelection {
+.RecipeSelection {
     > .IncrementRow {
         margin-bottom: 12px;
         padding-bottom: 12px;
@@ -56,8 +56,8 @@
     }
 }
 
-.MealIngredients {
-    > .meal {
+.RecipeIngredients {
+    > .recipe {
         > .header {
             display: flex;
             align-items: center;

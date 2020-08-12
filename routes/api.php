@@ -5,13 +5,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/items/{item}/update/', 'Api\ItemController@update')->name('update-item');
     Route::post('/items/{item}/destroy/', 'Api\ItemController@destroy')->name('destroy-item');
 
-    Route::post('/meals/store/', 'Api\MealController@store')->name('store-meal');
-    Route::post('/meals/{meal}/update', 'Api\MealController@update')->name('update-meal');
-    Route::post('/meals/{meal}/destroy', 'Api\MealController@destroy')->name('destroy-meal');
+    Route::post('/recipes/store/', 'Api\RecipeController@store')->name('store-recipe');
+    Route::post('/recipes/{recipe}/update', 'Api\RecipeController@update')->name('update-recipe');
+    Route::post('/recipes/{recipe}/destroy', 'Api\RecipeController@destroy')->name('destroy-recipe');
 
-    Route::post('/groups/store/', 'Api\GroupController@store')->name('store-group');
-    Route::post('/groups/{group}/update/', 'Api\GroupController@update')->name('update-group');
-    Route::post('/groups/{group}/destroy/', 'Api\GroupController@destroy')->name('destroy-group');
+    Route::post('/collections/store/', 'Api\CollectionController@store')->name('store-collection');
+    Route::post('/collections/{collection}/update/', 'Api\CollectionController@update')->name('update-collection');
+    Route::post('/collections/{collection}/destroy/', 'Api\CollectionController@destroy')->name('destroy-collection');
 
     Route::post('/plans/store', 'Api\PlanController@store')->name('store-plan');
 });

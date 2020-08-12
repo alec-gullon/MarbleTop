@@ -18,14 +18,14 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/home/items/',                  'Home\ItemController@index')->name('items');
 
-    Route::get('/home/meals/',                  'Home\MealController@index')->name('meals');
-    Route::get('/home/meals/create/',           'Home\MealController@add')->name('meals-add');
-    Route::get('/home/meals/{meal}/',           'Home\MealController@meal')->name('meal-details');
-    Route::get('/home/meals/{meal}/edit/',      'Home\MealController@edit')->name('meal-edit');
+    Route::get('/home/recipes/',                  'Home\RecipeController@index')->name('recipes');
+    Route::get('/home/recipes/create/',           'Home\RecipeController@add')->name('recipes-add');
+    Route::get('/home/recipes/{recipe}/',           'Home\RecipeController@recipe')->name('recipe-details');
+    Route::get('/home/recipes/{recipe}/edit/',      'Home\RecipeController@edit')->name('recipe-edit');
 
-    Route::get('/home/collections/',            'Home\GroupController@index')->name('collections');
-    Route::get('/home/collections/create/',     'Home\GroupController@show')->name('collections-add');
-    Route::get('/home/collections/{group}/',    'Home\GroupController@edit')->name('collections-edit');
+    Route::get('/home/collections/',            'Home\CollectionController@index')->name('collections');
+    Route::get('/home/collections/create/',     'Home\CollectionController@show')->name('collections-add');
+    Route::get('/home/collections/{collection}/',    'Home\CollectionController@edit')->name('collections-edit');
 
     Route::get('/home/plans/',                  'Home\PlanController@index')->name('plans');
     Route::get('/home/plans/create/',           'Home\PlanController@add')->name('plans-add');

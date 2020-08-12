@@ -1,13 +1,13 @@
 <template>
-    <div class="MealSelection">
-        <div class="IncrementRow" v-for="(meal,id) in meals">
-            <div class="name">{{ meal.name }}</div>
+    <div class="RecipeSelection">
+        <div class="IncrementRow" v-for="(recipe,id) in recipes">
+            <div class="name">{{ recipe.name }}</div>
             <div class="toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="decrement" @click="removeMeal(id)">
+                <svg xmlns="http://www.w3.org/2000/svg" class="decrement" @click="removeRecipe(id)">
                     <use xlink:href="/images/icons.svg#minus-outline"></use>
                 </svg>
-                <span class="amount">{{ mealAmounts[id] }}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="increment" @click="addMeal(id)">
+                <span class="amount">{{ recipeAmounts[id] }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="increment" @click="addRecipe(id)">
                     <use xlink:href="/images/icons.svg#add-outline"></use>
                 </svg>
             </div>
@@ -19,23 +19,23 @@
 
     export default {
         props: [
-            'meals',
-            'selectedMeals'
+            'recipes',
+            'selectedRecipes'
         ],
         methods: {
-            removeMeal(id) {
-                for (let i = this.selectedMeals.length - 1; 0 <= i; i--) {
-                    if (this.selectedMeals[i].id === id) {
-                        this.selectedMeals.splice(i, 1);
+            removeRecipe(id) {
+                for (let i = this.selectedRecipes.length - 1; 0 <= i; i--) {
+                    if (this.selectedRecipes[i].id === id) {
+                        this.selectedRecipes.splice(i, 1);
                         return;
                     }
                 }
             },
-            addMeal(id) {
+            addRecipe(id) {
                 let items = {}
 
-                Object.keys(this.meals[id].items).forEach(function(key) {
-                    let item = this.meals[id].items[key];
+                Object.keys(this.recipes[id].items).forEach(function(key) {
+                    let item = this.recipes[id].items[key];
                     items[item.id] = {
                         id: item.id,
                         amount: item.amount,
@@ -43,25 +43,25 @@
                     }
                 }.bind(this));
 
-                let meal = {
+                let recipe = {
                     'id': id,
                     'items': items,
                     'expanded': false
                 };
 
-                this.selectedMeals.push(meal);
+                this.selectedRecipes.push(recipe);
             },
         },
         computed: {
-            mealAmounts: function() {
+            recipeAmounts: function() {
                 let amounts = {};
 
-                Object.keys(this.meals).forEach(function(id) {
+                Object.keys(this.recipes).forEach(function(id) {
                     amounts[id] = 0;
                 });
 
-                for (let i = 0; i < this.selectedMeals.length; i++) {
-                    amounts[this.selectedMeals[i].id]++;
+                for (let i = 0; i < this.selectedRecipes.length; i++) {
+                    amounts[this.selectedRecipes[i].id]++;
                 }
 
                 return amounts;

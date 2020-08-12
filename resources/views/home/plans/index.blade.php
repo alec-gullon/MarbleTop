@@ -26,7 +26,7 @@
                 </li>
             </ul>
 
-            <ul class="OptionList">
+            <ul class="OptionList" data-test="{{ count(Auth::user()->plans) }}">
                 @foreach (Auth::user()->plans as $plan)
                     <li>
                         <a href="{{ route('plan', ['plan' => $plan->id]) }}">

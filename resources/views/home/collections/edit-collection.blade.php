@@ -3,15 +3,15 @@
 @section('content')
     <div class="AdminContent">
         <div class="header">
-            <h1>Editing {{ $group['name'] }}</h1>
+            <h1>Editing {{ $collection['name'] }}</h1>
             <p class="heading-tag">Picnic, family visit, BBQ</p>
         </div>
 
         <div class="content">
-            <group-editor :initial-items="{{{ json_encode($itemsData) }}}"
-                          :initial-name="'{{ $group['name'] }}'"
-                          :group-id="{{ $group['id'] }}"
-            ></group-editor>
+            <collection-editor :initial-items="{{{ json_encode($itemsData) }}}"
+                          :initial-name="'{{ $collection['name'] }}'"
+                          :collection-id="{{ $collection['id'] }}"
+            ></collection-editor>
         </div>
     </div>
 @endsection

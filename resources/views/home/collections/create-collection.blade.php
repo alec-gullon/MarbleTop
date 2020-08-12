@@ -9,7 +9,7 @@
         </div>
 
         <div class="content">
-            <group-creator :initial-items="{{{ json_encode($itemsData) }}}"></group-creator>
+            <collection-creator :initial-items="{{{ json_encode($itemsData) }}}"></collection-creator>
         </div>
 
     </div>

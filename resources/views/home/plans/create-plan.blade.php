@@ -10,27 +10,27 @@
 
         <div class="content">
             <?php
-            $meals = Auth::user()->meals;
+            $recipes = Auth::user()->recipes;
 
-            $mealsData = [];
+            $recipesData = [];
 
-            $mealIngredients = [];
-            foreach ($meals as $meal) {
-                $mealData = [
-                    'id' => $meal->id,
-                    'name' => $meal->name
+            $recipeIngredients = [];
+            foreach ($recipes as $recipe) {
+                $recipeData = [
+                    'id' => $recipe->id,
+                    'name' => $recipe->name
                 ];
 
                 $itemsData = [];
-                foreach ($meal->items as $item) {
+                foreach ($recipe->items as $item) {
                     $itemsData[$item->id] = [
                         'amount' => (int) $item->pivot->amount,
                         'id' => $item->id
                     ];
                 }
 
-                $mealData['items'] = $itemsData;
-                $mealsData[$meal->id] = $mealData;
+                $recipeData['items'] = $itemsData;
+                $recipesData[$recipe->id] = $recipeData;
             }
 
             $items = Auth::user()->items;
@@ -48,7 +48,7 @@
             $locations = \App\Helper::locationsData();
             ?>
 
-            <plan-creator :meals="{{{ json_encode($mealsData) }}}"
+            <plan-creator :recipes="{{{ json_encode($recipesData) }}}"
                           :initial-items="{{ json_encode($itemsData) }}"
                           :locations="{{ json_encode($locations) }}"
             ></plan-creator>
