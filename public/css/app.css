@@ -138,6 +138,11 @@ a {
   text-decoration: none;
 }
 
+* {
+  font-family: Segoe UI, sans-serif;
+  box-sizing: border-box;
+}
+
 html {
   font-size: 62.5%;
   height: 100%;
@@ -166,7 +171,7 @@ button {
 }
 
 body {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -643,6 +648,12 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
+@media only screen and (min-width: 768px) {
+  .PrimaryNav > .bar {
+    justify-content: flex-start;
+  }
+}
+
 .PrimaryNav > .bar > .hamburger {
   position: absolute;
   top: 30px;
@@ -653,12 +664,83 @@ body {
   stroke: #22543D;
 }
 
+@media only screen and (min-width: 768px) {
+  .PrimaryNav > .bar > .hamburger {
+    display: none;
+  }
+}
+
 .PrimaryNav > .bar > .logo {
   height: 65px;
+  margin-left: 16px;
 }
 
 .PrimaryNav > .bar > .logo > img {
   height: 100%;
+}
+
+.PrimaryNav > .bar > .links {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .PrimaryNav > .bar > .links {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  .PrimaryNav > .bar > .links > li {
+    margin-left: 24px;
+  }
+
+  .PrimaryNav > .bar > .links > .admin {
+    position: relative;
+  }
+
+  .PrimaryNav > .bar > .links > .admin > .toggle {
+    display: flex;
+    align-items: center;
+  }
+
+  .PrimaryNav > .bar > .links > .admin > .toggle > svg {
+    margin-left: 8px;
+    height: 20px;
+    width: 20px;
+  }
+
+  .PrimaryNav > .bar > .links > .admin > ul {
+    display: none;
+    position: absolute;
+    background: white;
+    top: 100%;
+    left: 10px;
+    box-shadow: 0 2px 4px 0 rgba(52, 52, 52, 0.15);
+    width: 150px;
+  }
+
+  .PrimaryNav > .bar > .links > .admin > ul > li {
+    padding: 12px;
+    border-bottom: 1px solid #E8E8E8;
+  }
+
+  .PrimaryNav > .bar > .links > .admin > ul.is-enabled {
+    display: block;
+  }
+}
+
+.PrimaryNav > .bar > .Button,
+.PrimaryNav > .bar form {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .PrimaryNav > .bar > .Button,
+  .PrimaryNav > .bar form {
+    display: block;
+    margin-right: 16px;
+  }
 }
 
 .PrimaryNav > .mobile {
@@ -871,9 +953,13 @@ body {
 }
 
 .Hero {
-  padding: 60px 16px 0 16px;
+  padding: 0 16px;
   position: relative;
-  height: 450px;
+  height: 510px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .Hero > .background {
@@ -882,13 +968,20 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("/images/home-hero.jpg");
+  background: url("/images/home-hero-small.jpg");
   background-size: 100% auto;
-  opacity: 0.15;
+  background-position: center center;
+  opacity: 0.1;
 }
 
 .Hero > .body {
   position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  .Hero > .body {
+    width: 80%;
+  }
 }
 
 .Hero > .body > h1 {
@@ -925,8 +1018,27 @@ body {
   padding: 0 16px;
 }
 
+@media only screen and (min-width: 768px) {
+  .FeatureBoxes {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px dashed #22543D;
+    margin: 0 24px;
+    padding-top: 32px;
+  }
+}
+
 .FeatureBoxes > .box {
-  margin-bottom: 64px;
+  margin-bottom: 32px;
+}
+
+@media only screen and (min-width: 768px) {
+  .FeatureBoxes > .box {
+    width: 50%;
+    padding: 0 24px 0 12px;
+    box-sizing: border-box;
+    margin-bottom: 64px;
+  }
 }
 
 .FeatureBoxes > .box > svg {
@@ -950,8 +1062,15 @@ body {
 }
 
 .FeatureBoxes > .box:first-child {
-  padding-top: 64px;
+  padding-top: 32px;
   border-top: 1px dashed #22543D;
+}
+
+@media only screen and (min-width: 768px) {
+  .FeatureBoxes > .box:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
 }
 
 .LoginForm {

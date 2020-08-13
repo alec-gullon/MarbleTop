@@ -1,3 +1,8 @@
+* {
+    font-family: Segoe UI,sans-serif;
+    box-sizing: border-box;
+}
+
 html {
     font-size: 62.5%;
     height: 100%;
@@ -25,22 +30,29 @@ button {
     border: none;
 }
 
-// @todo remove this when done with mobile development
+// Responsive mixins
+
+@mixin md {
+    @media only screen and (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin lg {
+    @media only screen and (min-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin xl {
+    @media only screen and (min-width: 1280px) {
+        @content
+    }
+}
+
+// Remove this when done with md styles
+
 body {
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
-}
-
-// Responsive mixin template
-
-@mixin medium {
-    @media only screen and (max-width: 600px) {
-        @content;
-    }
-}
-
-@mixin large {
-    @media only screen and (max-width: 600px) {
-        @content;
-    }
 }

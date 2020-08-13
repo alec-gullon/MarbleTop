@@ -1,7 +1,11 @@
 .Hero {
-    padding: 60px 16px 0 16px;
+    padding: 0 16px;
     position: relative;
-    height: 450px;
+    height: 510px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     > .background {
         position: absolute;
@@ -9,13 +13,18 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: url('/images/home-hero.jpg');
+        background: url('/images/home-hero-small.jpg');
         background-size: 100% auto;
-        opacity: .15;
+        background-position: center center;
+        opacity: .1;
     }
 
     > .body {
         position: relative;
+
+        @include md() {
+            width: 80%;
+        }
 
         > h1 {
             font-size: 34px;
@@ -52,8 +61,25 @@
 
 .FeatureBoxes {
     padding: 0 16px;
+
+    @include md() {
+        display: flex;
+        flex-wrap: wrap;
+        border-top: 1px dashed $green-dark;
+        margin: 0 24px;
+        padding-top: 32px;
+    }
+
     > .box {
-        margin-bottom: 64px;
+        margin-bottom: 32px;
+
+        @include md() {
+            width: 50%;
+            padding: 0 24px 0 12px;
+            box-sizing: border-box;
+            margin-bottom: 64px;
+        }
+
         > svg {
             height: 33px;
             width: 33px;
@@ -73,8 +99,13 @@
         }
 
         &:first-child {
-            padding-top: 64px;
+            padding-top: 32px;
             border-top: 1px dashed $green-dark;
+
+            @include md() {
+                border-top: 0;
+                padding-top: 0;
+            }
         }
     }
 }

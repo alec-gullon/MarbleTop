@@ -13,6 +13,10 @@
         z-index: 1;
         box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 
+        @include md() {
+            justify-content: flex-start;
+        }
+
         > .hamburger {
             position: absolute;
             top: 30px;
@@ -21,12 +25,77 @@
             width: 20px;
             fill: green;
             stroke: $green-dark;
+
+            @include md() {
+                display: none;
+            }
         }
 
         > .logo {
             height: 65px;
+
+            margin-left: 16px;
+
             > img {
                 height: 100%;
+            }
+        }
+
+        > .links {
+            display: none;
+
+            @include md() {
+                display: flex;
+                height: 100%;
+                align-items: center;
+                flex-grow: 1;
+
+                > li {
+                    margin-left: 24px;
+                }
+
+                > .admin {
+                    position: relative;
+
+                    > .toggle {
+                        display: flex;
+                        align-items: center;
+                        > svg {
+                            margin-left: 8px;
+                            height: 20px;
+                            width: 20px;
+                        }
+                    }
+
+                    > ul {
+                        display: none;
+                        position: absolute;
+                        background: white;
+                        top: 100%;
+                        left: 10px;
+                        box-shadow: 0 2px 4px 0 rgba(52,52,52,0.15);
+                        width: 150px;
+
+                        > li {
+                            padding: 12px;
+                            border-bottom: 1px solid $grey-lightest;
+                        }
+
+                        &.is-enabled {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        > .Button, form {
+            display: none;
+
+            @include md() {
+                display: block;
+                margin-right: 16px;
             }
         }
     }

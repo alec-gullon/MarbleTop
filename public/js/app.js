@@ -1414,6 +1414,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     'authenticated': {
@@ -1428,6 +1455,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     toggleMobileNav: function toggleMobileNav() {
       this.mobileNavActive = !this.mobileNavActive;
+    },
+    toggleAdminLinks: function toggleAdminLinks() {
+      this.displayAdminLinks = !this.displayAdminLinks;
     }
   },
   computed: {
@@ -1441,7 +1471,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      mobileNavActive: false
+      mobileNavActive: false,
+      displayAdminLinks: false
     };
   }
 });
@@ -3570,7 +3601,75 @@ var render = function() {
       _vm._v(" "),
       _c("a", { staticClass: "logo", attrs: { href: _vm.headingLink } }, [
         _c("img", { attrs: { src: "/images/logo-2.svg" } })
-      ])
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "links" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _vm.authenticated
+          ? _c("li", { staticClass: "admin" }, [
+              _c(
+                "div",
+                { staticClass: "toggle", on: { click: _vm.toggleAdminLinks } },
+                [
+                  _c("span", [_vm._v("Admin Links")]),
+                  _vm._v(" "),
+                  _c(
+                    "svg",
+                    { attrs: { xmlns: "http://www.w3.org/2000/svg" } },
+                    [
+                      !_vm.displayAdminLinks
+                        ? _c("use", {
+                            attrs: {
+                              "xlink:href": "/images/icons.svg#chevron-down"
+                            }
+                          })
+                        : _c("use", {
+                            attrs: {
+                              "xlink:href": "/images/icons.svg#chevron-down"
+                            }
+                          })
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("ul", { class: { "is-enabled": _vm.displayAdminLinks } }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _vm._m(5)
+              ])
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      !_vm.authenticated
+        ? _c(
+            "a",
+            { staticClass: "Button is-primary", attrs: { href: "/login" } },
+            [_vm._v("\n            Log In\n        ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.authenticated
+        ? _c("form", { attrs: { method: "POST", action: "/logout" } }, [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrftoken }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "Button is-primary",
+              attrs: { type: "submit", value: "Logout" }
+            })
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c(
@@ -3696,12 +3795,60 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _vm._m(6)
       ]
     )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/accounts/create" } }, [_vm._v("How it Works")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/accounts/create" } }, [_vm._v("About Us")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/home/plans" } }, [_vm._v("Plans")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/home/collections" } }, [_vm._v("Collections")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/home/recipes" } }, [_vm._v("Recipes")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/home/items" } }, [_vm._v("Items")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

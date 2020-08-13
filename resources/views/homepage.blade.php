@@ -12,7 +12,7 @@
             </h1>
 
             <p>
-                Let's make food shopping easy for a change.
+                Let's make shopping easy for a change.
             </p>
 
             <div class="buttons">
@@ -40,6 +40,12 @@
             @icon('bug')
             <h2>Free SSL Certificates</h2>
             <p>Forge integrates with LetsEncrypt, allowing you to obtain free SSL certificates for your Forge powered applications.
+            </p>
+        </div>
+        <div class="box">
+            @icon('home')
+            <h2>Cutting Edge</h2>
+            <p>We install Nginx, PHP, MySQL, Postgres, Redis, and all of the other goodies you need on the cloud of your choice. No more out-dated PHP installations.
             </p>
         </div>
     </div>
