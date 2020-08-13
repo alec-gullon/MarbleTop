@@ -1,70 +1,17 @@
-// Variables
+/**
+ * Bootstrap files
+ */
 @import 'variables';
+@import 'lib/reset';
+@import 'global';
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: inherit;
-    font-family: Segoe UI,sans-serif;
-}
-
-html {
-    box-sizing: border-box;
-    font-size: 62.5%;
-    height: 100%;
-}
-
-body {
-    min-height: 100%;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    background: #fbfbfd;
-    color: $grey-dark;
-}
-
-#app {
-    padding-top: 80px;
-}
-
-// Responsive mixin template
-
-@mixin medium {
-    @media only screen and (max-width: 600px) {
-        @content;
-    }
-}
-
-@mixin large {
-    @media only screen and (max-width: 600px) {
-        @content;
-    }
-}
-
-// Eventually we'll replace this with a standard normaliser, but for the time being we'll keep it simple
-// and just edit things as we go
-
-a {
-    text-decoration: none;
-    color: $grey-dark;
-}
-
-ul {
-    list-style: none;
-}
-
-button {
-    display: block;
-    background: inherit;
-    border: none;
-}
-
-// @todo remove this when done with mobile development
-body {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
+/**
+ * Utility helper classes - all with !important on them for maximum specificity
+ */
 @import 'utilities';
 
+/**
+ * The blocks and pages that define the application
+ */
 @import 'components/index';
 @import 'pages/index';

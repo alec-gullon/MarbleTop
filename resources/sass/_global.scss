@@ -1,0 +1,46 @@
+html {
+    font-size: 62.5%;
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    background: #fbfbfd;
+    color: $grey-dark;
+}
+
+#app {
+    padding-top: 80px;
+}
+
+a {
+    color: $grey-dark;
+}
+
+button {
+    display: block;
+    background: inherit;
+    border: none;
+}
+
+// @todo remove this when done with mobile development
+body {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+// Responsive mixin template
+
+@mixin medium {
+    @media only screen and (max-width: 600px) {
+        @content;
+    }
+}
+
+@mixin large {
+    @media only screen and (max-width: 600px) {
+        @content;
+    }
+}
