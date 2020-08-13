@@ -604,6 +604,14 @@ body {
 
 .PageContent {
   padding: 28px 21px;
+  min-height: 370px;
+}
+
+@media only screen and (min-width: 768px) {
+  .PageContent {
+    padding: 28px 24px;
+    min-height: 770px;
+  }
 }
 
 .PageContent > h1 {
@@ -613,6 +621,12 @@ body {
   color: #22543D;
 }
 
+@media only screen and (min-width: 768px) {
+  .PageContent > h1 {
+    font-size: 30px;
+  }
+}
+
 .PageContent > .heading-tag {
   font-size: 15px;
   color: #425466;
@@ -620,6 +634,13 @@ body {
   margin-bottom: 32px;
   border-bottom: 1px solid #E8E8E8;
   padding-bottom: 32px;
+}
+
+@media only screen and (min-width: 768px) {
+  .PageContent > .heading-tag {
+    font-size: 16px;
+    border-bottom-width: 2px;
+  }
 }
 
 .PageContent > .content > p {
@@ -632,6 +653,12 @@ body {
 .PageContent > .content > p > .highlighted {
   color: #22543D;
   font-weight: 700;
+}
+
+@media only screen and (min-width: 768px) {
+  .PageContent > .content > p {
+    font-size: 16px;
+  }
 }
 
 .PrimaryNav > .bar {

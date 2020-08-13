@@ -1,11 +1,21 @@
 .PageContent {
     padding: 28px 21px;
+    min-height: 370px;
+
+    @include md() {
+        padding: 28px 24px;
+        min-height: 770px;
+    }
 
     > h1 {
         font-size: 26px;
         font-weight: 400;
         margin-bottom: 4px;
         color: $green-dark;
+
+        @include md() {
+            font-size: 30px;
+        }
     }
 
     > .heading-tag {
@@ -15,6 +25,11 @@
         margin-bottom: 32px;
         border-bottom: 1px solid $grey-lightest;
         padding-bottom: 32px;
+
+        @include md() {
+            font-size: 16px;
+            border-bottom-width: 2px;
+        }
     }
 
     > .content {
@@ -27,6 +42,10 @@
             > .highlighted {
                 color: $green-dark;
                 font-weight: 700;
+            }
+
+            @include md() {
+                font-size: 16px;
             }
         }
     }
