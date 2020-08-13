@@ -778,11 +778,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['initialItems', 'locations'],
+  props: ['initialItems', 'initialLocations'],
   created: function created() {
     this.items = this.copy(this.initialItems);
+    this.locations = this.copy(this.initialLocations);
   },
   methods: {
     updateName: function updateName(data) {
@@ -790,6 +799,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateItems: function updateItems(data) {
       this.items = data.items;
+    },
+    toggleLocationExpansion: function toggleLocationExpansion(id) {
+      this.locations[id].expanded = !this.locations[id].expanded;
     }
   },
   computed: {
@@ -826,7 +838,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      items: {}
+      items: {},
+      locations: {}
     };
   },
   mixins: [_mixins_Copy__WEBPACK_IMPORTED_MODULE_0__["default"]]
@@ -988,7 +1001,6 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
       data.append('items', JSON.stringify(items));
-      console.log(JSON.stringify(items));
       this.formActive = true;
       this.post('/api/plans/store/', data, function (response) {
         if (response.status === 200) {
@@ -2897,12 +2909,38 @@ var render = function() {
       }),
       _vm._v(" "),
       _vm._l(_vm.locationsToDisplay, function(id) {
-        return _c(
-          "div",
-          { staticClass: "location" },
-          [
-            _c("h2", [_vm._v(_vm._s(_vm.locations[id].name))]),
-            _vm._v(" "),
+        return _c("div", { staticClass: "location" }, [
+          _c(
+            "div",
+            {
+              staticClass: "header",
+              on: {
+                click: function($event) {
+                  return _vm.toggleLocationExpansion(id)
+                }
+              }
+            },
+            [
+              _c("h2", [_vm._v(_vm._s(_vm.locations[id].name))]),
+              _vm._v(" "),
+              _c("svg", { attrs: { xmlns: "http://www.w3.org/2000/svg" } }, [
+                !_vm.locations[id].expanded
+                  ? _c("use", {
+                      attrs: { "xlink:href": "/images/icons.svg#chevron-down" }
+                    })
+                  : _c("use", {
+                      attrs: { "xlink:href": "/images/icons.svg#chevron-up" }
+                    })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "body",
+              class: { "is-expanded": _vm.locations[id].expanded }
+            },
             _vm._l(_vm.locationItems[id].items, function(itemId) {
               return _c("item-editor", {
                 key: "item-" + itemId,
@@ -2915,10 +2953,10 @@ var render = function() {
                   itemDeleted: _vm.updateItems
                 }
               })
-            })
-          ],
-          2
-        )
+            }),
+            1
+          )
+        ])
       })
     ],
     2
@@ -2991,7 +3029,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "stage-heading" }, [
       _vm.selectedStage === 1
-        ? _c("span", [_vm._v("Select your recipes")])
+        ? _c("span", [_vm._v("Select what you need")])
         : _vm._e(),
       _vm._v(" "),
       _vm.selectedStage === 2

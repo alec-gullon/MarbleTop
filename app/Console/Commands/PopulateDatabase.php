@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Plan;
 use Illuminate\Console\Command;
 
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,8 @@ use App\Models\Collection;
 use App\Models\Recipe;
 
 use Illuminate\Support\Facades\Hash;
+
+use Carbon\Carbon;
 
 class PopulateDatabase extends Command
 {
@@ -54,6 +57,7 @@ class PopulateDatabase extends Command
         $this->generateItems();
         $this->generateCollections();
         $this->generateRecipes();
+        $this->generatePlans();
     }
 
     protected function generateItems()
@@ -357,7 +361,7 @@ class PopulateDatabase extends Command
             $model = Recipe::create([
                 'name' => $recipe['name'],
                 'user_id' => 1,
-                'recipe' => 'Lorem Ipsum'
+                'recipe' => $this->exampleRecipe()
             ]);
 
             $order = 0;
@@ -374,5 +378,96 @@ class PopulateDatabase extends Command
             }
         }
 
+    }
+
+    public function exampleRecipe()
+    {
+        return 'Chop up all the veg except the garlic: dice the peppers and onion and chop the sweet potato into small cubes. Stick everything in a pan with some oil on a medium heat. Season well with pepper and salt.
+
+While the veg cooks through, chop up a largish amount of garlic and add to the pan. Add all the spices.
+
+Add the passata, the beans and the tomato puree and stir well. Bring to a simmer and then cover and let cook on a gentle heat for 45-60 mins.';
+    }
+
+    public function generatePlans()
+    {
+        $plans = [
+            [
+                'items' => [
+                    ['Red Onion', 1],
+                    ['Garlic Clove', 3],
+                    ['Halloumi', 0.5],
+                    ['Oxo Cube', 1],
+                    ['Parmesan', 0.25],
+                    ['Risotto Rice', 0.1],
+                    ['Onion', 1],
+                    ['Pepper', 2],
+                    ['Sweet Potato', 1],
+                    ['Garlic Clove', 2],
+                    ['Hot Chili Powder', 0.1],
+                    ['Cayenne Pepper', 0.1],
+                    ['Cocoa Powder', 0.1],
+                    ['Cinnamon', 0.1],
+                    ['Coriander', 0.1],
+                    ['Passata', 1],
+                    ['Tomato Puree', 0.25],
+                    ['Black Beans', 1],
+                    ['Kidney Beans', 1],
+                    ['Sour Cream and Chive Dip', 0.5],
+                    ['Rice Packet', 1],
+                    ['Cheddar', 0.25],
+                    ['Avocado', 1],
+                    ['Red Onion', 0.25]
+                ],
+                'timestamp' => '2020-08-12 16:44:21'
+            ],
+            [
+                'items' => [
+                    ['Red Onion', 1],
+                    ['Garlic Clove', 3],
+                    ['Halloumi', 0.5],
+                    ['Oxo Cube', 1],
+                    ['Parmesan', 0.25],
+                    ['Risotto Rice', 0.1],
+                    ['Onion', 1],
+                    ['Pepper', 2],
+                    ['Sweet Potato', 1],
+                    ['Garlic Clove', 2],
+                    ['Hot Chili Powder', 0.1],
+                    ['Cayenne Pepper', 0.1],
+                    ['Cocoa Powder', 0.1],
+                    ['Cinnamon', 0.1],
+                    ['Coriander', 0.1],
+                    ['Passata', 1],
+                    ['Tomato Puree', 0.25],
+                    ['Black Beans', 1],
+                    ['Kidney Beans', 1],
+                    ['Sour Cream and Chive Dip', 0.5],
+                    ['Rice Packet', 1],
+                    ['Cheddar', 0.25],
+                    ['Avocado', 1],
+                    ['Red Onion', 0.25]
+                ],
+                'timestamp' => '2020-08-05 12:56:08'
+            ],
+        ];
+
+        foreach ($plans as $plan) {
+            $model = Plan::create([
+                'user_id' => 1,
+                'created_at' => $plan['timestamp'],
+                'updated_at' => $plan['timestamp']
+            ]);
+
+            foreach ($plan['items'] as $itemData) {
+                try {
+                    $item = Item::where('name', $itemData[0])->first();
+
+                    $model->items()->attach($item->id, ['amount' => $itemData[1]]);
+                } catch (\Exception $e) {
+                    dd($itemData);
+                }
+            }
+        }
     }
 }

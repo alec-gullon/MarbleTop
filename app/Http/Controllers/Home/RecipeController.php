@@ -30,7 +30,7 @@ class RecipeController extends Controller
             $data['key'] = $key;
             $data['selected'] = false;
             $data['amount'] = 1;
-            $data['precise_amount'] = '100g';
+            $data['preciseAmount'] = '100g';
             $data['order'] = 0;
 
             $itemsData[$key] = $data;
@@ -41,16 +41,25 @@ class RecipeController extends Controller
 
     public function recipe(Recipe $recipe)
     {
-        $itemsData = [];
+        $primaryItemsData = [];
+        $secondaryItemsData = [];
 
         foreach ($recipe->items as $item) {
-            $itemsData[$item->pivot->order] = [
-                'name' => $item->name,
-                'amount' => $item->pivot->precise_amount
-            ];
+            if (!empty($item->pivot->precise_amount)) {
+                $primaryItemsData[] = [
+                    'name' => $item->name,
+                    'amount' => $item->pivot->precise_amount
+                ];
+            } else {
+                $secondaryItemsData[] = [
+                    'name' => $item->name
+                ];
+            }
         }
 
-        return view('home.recipes.recipe', compact('recipe', 'itemsData'));
+
+
+        return view('home.recipes.recipe', compact('recipe', 'primaryItemsData', 'secondaryItemsData'));
     }
 
     public function edit(Recipe $recipe)
@@ -76,7 +85,7 @@ class RecipeController extends Controller
             $data['key'] = $key;
             $data['selected'] = $selected;
             $data['amount'] = $amount;
-            $data['precise_amount'] = $precise_amount;
+            $data['preciseAmount'] = $precise_amount;
             $data['order'] = $order;
 
             $itemsData[$key] = $data;

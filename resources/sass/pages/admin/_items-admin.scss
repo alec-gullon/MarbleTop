@@ -14,10 +14,27 @@
             margin-bottom: 0;
         }
 
-        > h2 {
-            font-size: 20px;
-            color: $green-dark;
-            margin-bottom: 20px;
+        > .header {
+            display: flex;
+            > h2 {
+                font-size: 20px;
+                color: $green-dark;
+                margin-bottom: 20px;
+                flex-grow: 1;
+            }
+            > svg {
+                width: 30px;
+                height: 30px;
+                fill: $green-dark;
+            }
+        }
+
+        > .body {
+            display: none;
+
+            &.is-expanded {
+                display: block;
+            }
         }
     }
 }

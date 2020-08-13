@@ -19,5 +19,13 @@
                 padding: 10px 0;
             }
         }
+
+        &:last-child {
+            > a {
+                > .text {
+                    border-bottom: 0;
+                }
+            }
+        }
     }
 }

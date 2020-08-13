@@ -57,6 +57,10 @@
 
         > .OptionList {
             padding: 16px 0;
+
+            &:last-child {
+                margin-bottom: 16px;
+            }
         }
     }
 }

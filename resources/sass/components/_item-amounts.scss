@@ -6,16 +6,18 @@
         display: flex;
         width: 100%;
         align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
 
         > label {
-            width: 80px;
+            width: 100%;
             font-weight: 500;
         }
 
         > input {
             border: none;
             border-bottom: 1px solid $grey-light;
-            padding: 12px 0;
+            padding: 8px 0;
             flex-grow: 1;
         }
 

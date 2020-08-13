@@ -9,7 +9,7 @@
         </div>
 
         <div class="stage-heading">
-            <span v-if="selectedStage === 1">Select your recipes</span>
+            <span v-if="selectedStage === 1">Select what you need</span>
             <span v-if="selectedStage === 2">Edit your selected recipes</span>
             <span v-if="selectedStage === 3">Adjust for anything you already have</span>
             <span v-if="selectedStage === 4">Final review</span>
@@ -126,8 +126,6 @@
                 });
 
                 data.append('items', JSON.stringify(items));
-
-                console.log(JSON.stringify(items));
 
                 this.formActive = true;
                 this.post('/api/plans/store/', data, function(response) {

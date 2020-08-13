@@ -8,15 +8,23 @@
         </item-creator>
 
         <div class="location" v-for="id in locationsToDisplay">
-            <h2>{{ locations[id].name }}</h2>
+            <div class="header" @click="toggleLocationExpansion(id)">
+                <h2>{{ locations[id].name }}</h2>
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="/images/icons.svg#chevron-down" v-if="!locations[id].expanded"></use>
+                    <use xlink:href="/images/icons.svg#chevron-up" v-else></use>
+                </svg>
+            </div>
 
-            <item-editor v-for="itemId in locationItems[id].items"
-                         :key="'item-' + itemId"
-                         :item="items[itemId]"
-                         :existingItems="existingItems"
-                         v-on:itemUpdated="updateName"
-                         v-on:itemDeleted="updateItems"
-            ></item-editor>
+            <div class="body" :class="{'is-expanded': locations[id].expanded}">
+                <item-editor v-for="itemId in locationItems[id].items"
+                             :key="'item-' + itemId"
+                             :item="items[itemId]"
+                             :existingItems="existingItems"
+                             v-on:itemUpdated="updateName"
+                             v-on:itemDeleted="updateItems"
+                ></item-editor>
+            </div>
         </div>
     </div>
 </template>
@@ -28,10 +36,11 @@
     export default {
         props: [
             'initialItems',
-            'locations'
+            'initialLocations'
         ],
         created: function() {
             this.items = this.copy(this.initialItems);
+            this.locations = this.copy(this.initialLocations);
         },
         methods: {
             updateName: function(data) {
@@ -39,6 +48,9 @@
             },
             updateItems: function(data) {
                 this.items = data.items;
+            },
+            toggleLocationExpansion: function(id) {
+                this.locations[id].expanded = !this.locations[id].expanded;
             }
         },
         computed: {
@@ -82,7 +94,8 @@
         },
         data: function() {
             return {
-                items: {}
+                items: {},
+                locations: {}
             }
         },
         mixins: [Copy]

@@ -348,6 +348,10 @@ body {
   padding: 16px 0;
 }
 
+.AdminContent > .content > .OptionList:last-child {
+  margin-bottom: 16px;
+}
+
 .OptionList {
   background: white;
 }
@@ -373,6 +377,10 @@ body {
   margin-left: 21px;
   border-bottom: 1px solid #E8E8E8;
   padding: 10px 0;
+}
+
+.OptionList > li:last-child > a > .text {
+  border-bottom: 0;
 }
 
 .ExpandableForm .header {
@@ -704,17 +712,19 @@ body {
   display: flex;
   width: 100%;
   align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
 }
 
 .ItemAmounts > .amount > label {
-  width: 80px;
+  width: 100%;
   font-weight: 500;
 }
 
 .ItemAmounts > .amount > input {
   border: none;
   border-bottom: 1px solid #cccccc;
-  padding: 12px 0;
+  padding: 8px 0;
   flex-grow: 1;
 }
 
@@ -849,10 +859,29 @@ body {
   margin-bottom: 0;
 }
 
-.ItemsAdmin > .location > h2 {
+.ItemsAdmin > .location > .header {
+  display: flex;
+}
+
+.ItemsAdmin > .location > .header > h2 {
   font-size: 20px;
   color: #22543D;
   margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.ItemsAdmin > .location > .header > svg {
+  width: 30px;
+  height: 30px;
+  fill: #22543D;
+}
+
+.ItemsAdmin > .location > .body {
+  display: none;
+}
+
+.ItemsAdmin > .location > .body.is-expanded {
+  display: block;
 }
 
 .ItemEditor {
@@ -910,7 +939,18 @@ body {
 }
 
 .RecipeIngredients > tbody > tr > td {
+  font-size: 14px;
   width: 50%;
+  border-bottom: 1px dashed #cccccc;
+  padding: 6px 0;
+}
+
+.RecipeIngredients > tbody > tr > td.secondary {
+  color: #425466;
+}
+
+.RecipeIngredients > tbody > tr:last-child > td {
+  border-bottom: 0;
 }
 
 .PlanCreator {

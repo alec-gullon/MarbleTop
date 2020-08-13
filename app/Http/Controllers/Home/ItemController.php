@@ -11,6 +11,10 @@ class ItemController extends Controller
         $locations = \App\Helper::locationsData();
         $itemsData = \App\Helper::itemsData(auth()->user());
 
+        foreach ($locations as $key => $location) {
+            $locations[$key]['expanded'] = false;
+        }
+
         return view('home.items.index', compact('locations', 'itemsData'));
     }
 }

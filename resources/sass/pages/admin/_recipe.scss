@@ -28,7 +28,19 @@
     > tbody {
         > tr {
             > td {
+                font-size: 14px;
                 width: 50%;
+                border-bottom: 1px dashed $grey-light;
+                padding: 6px 0;
+
+                &.secondary {
+                    color: $grey-mid;
+                }
+            }
+            &:last-child {
+                > td {
+                    border-bottom: 0;
+                }
             }
         }
     }

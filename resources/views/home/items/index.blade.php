@@ -11,7 +11,7 @@
         <div class="content">
 
             <items-admin    :initial-items="{{{ json_encode($itemsData) }}}"
-                            :locations="{{{ json_encode($locations) }}}"
+                            :initial-locations="{{{ json_encode($locations) }}}"
             ></items-admin>
 
         </div>

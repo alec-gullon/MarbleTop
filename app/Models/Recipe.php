@@ -15,7 +15,7 @@ class Recipe extends Model
     }
 
     public function items() {
-        return $this->belongsToMany('App\Models\Item')->withPivot('amount', 'order', 'precise_amount');
+        return $this->belongsToMany('App\Models\Item')->withPivot('amount', 'order', 'precise_amount')->orderBy('order');
     }
 
     public function apiPath() {

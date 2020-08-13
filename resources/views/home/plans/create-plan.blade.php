@@ -10,45 +10,69 @@
 
         <div class="content">
             <?php
-            $recipes = Auth::user()->recipes;
+                $recipes = Auth::user()->recipes;
 
-            $recipesData = [];
+                $collectionsData = [];
 
-            $recipeIngredients = [];
-            foreach ($recipes as $recipe) {
-                $recipeData = [
-                    'id' => $recipe->id,
-                    'name' => $recipe->name
-                ];
-
-                $itemsData = [];
-                foreach ($recipe->items as $item) {
-                    $itemsData[$item->id] = [
-                        'amount' => (float) $item->pivot->amount,
-                        'id' => $item->id
+                foreach ($recipes as $recipe) {
+                    $collectionData = [
+                        'id' => 'recipe' . $recipe->id,
+                        'name' => $recipe->name
                     ];
+
+                    $itemsData = [];
+                    foreach ($recipe->items as $item) {
+                        $itemsData[$item->id] = [
+                            'amount' => (float) $item->pivot->amount,
+                            'id' => $item->id
+                        ];
+                    }
+
+                    $collectionData['items'] = $itemsData;
+                    $collectionsData['recipe-' . $recipe->id] = $collectionData;
                 }
 
-                $recipeData['items'] = $itemsData;
-                $recipesData[$recipe->id] = $recipeData;
-            }
+                $collectionModels = Auth::user()->collections;
 
-            $items = Auth::user()->items;
+                foreach ($collectionModels as $collection) {
+                    $collectionData = [
+                        'id' => 'collection-' . $collection->id,
+                        'name' => $collection->name,
+                    ];
 
-            $itemsData = [];
-            foreach ($items as $item) {
-                $itemData = [
-                    'name' => $item->name,
-                    'locationId' => $item->location_id
-                ];
+                    $itemsData = [];
+                    foreach ($collection->items as $item) {
+                        $itemsData[$item->id] = [
+                            'amount' => (float) $item->pivot->amount,
+                            'id' => $item->id
+                        ];
+                    }
 
-                $itemsData[$item->id] = $itemData;
-            }
+                    $collectionData['items'] = $itemsData;
+                    $collectionsData['collection-' . $collection->id] = $collectionData;
+                }
 
-            $locations = \App\Helper::locationsData();
+                usort($collectionsData, function($a, $b) {
+                    return $b['name'] < $a['name'];
+                });
+
+
+                $items = Auth::user()->items;
+
+                $itemsData = [];
+                foreach ($items as $item) {
+                    $itemData = [
+                        'name' => $item->name,
+                        'locationId' => $item->location_id
+                    ];
+
+                    $itemsData[$item->id] = $itemData;
+                }
+
+                $locations = \App\Helper::locationsData();
             ?>
 
-            <plan-creator :recipes="{{{ json_encode($recipesData) }}}"
+            <plan-creator :recipes="{{{ json_encode($collectionsData) }}}"
                           :initial-items="{{ json_encode($itemsData) }}"
                           :locations="{{ json_encode($locations) }}"
             ></plan-creator>
