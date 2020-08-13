@@ -48,6 +48,29 @@
         background: white;
         padding: 0;
         min-height: 370px;
+        position: relative;
+        border-top: 1px solid $grey-lightest;
+
+        @include md() {
+            min-height: 570px;
+            padding-left: 200px;
+        }
+
+
+        > .sidebar {
+            display: none;
+
+            @include md() {
+                display: block;
+                height: 100%;
+                border-right: 1px solid $grey-lightest;
+                padding: 16px 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 200px;
+            }
+        }
 
         > .heading {
             color: $green-dark;
@@ -59,7 +82,7 @@
             padding: 16px 0;
 
             &:last-child {
-                margin-bottom: 16px;
+                margin-bottom: 0;
             }
         }
     }

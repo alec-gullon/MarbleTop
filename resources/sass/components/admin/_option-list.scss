@@ -18,6 +18,18 @@
                 border-bottom: 1px solid $grey-lightest;
                 padding: 10px 0;
             }
+
+            &.is-light {
+                > svg {
+                    fill: $green-mid;
+                }
+            }
+
+            &.is-selected {
+                @include md() {
+                    border-right: 3px solid $green-mid;
+                }
+            }
         }
 
         &:last-child {

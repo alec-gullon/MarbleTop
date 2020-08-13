@@ -1,22 +1,26 @@
 <template>
     <div class="RecipeCreator">
-        <h2 class="heading">
-            Details
-        </h2>
+        <div class="details">
+            <h2 class="AdminHeading">
+                Details
+            </h2>
 
-        <div class="InputWithLabel" :class="{'is-error': nameAlreadyExists}">
-            <label for="name">Name</label>
-            <input class="Input" id="name" v-model="name" :class="{'is-error': nameAlreadyExists}" />
-            <span class="error" v-if="nameAlreadyExists">Collection already exists</span>
+            <div class="InputWithLabel" :class="{'is-error': nameAlreadyExists}">
+                <label for="name">Name</label>
+                <input class="Input" id="name" v-model="name" :class="{'is-error': nameAlreadyExists}" />
+                <span class="error" v-if="nameAlreadyExists">Collection already exists</span>
+            </div>
         </div>
 
-        <h2 class="heading">
-            Items
-        </h2>
+        <div class="items">
+            <h2 class="AdminHeading">
+                Items
+            </h2>
 
-        <item-searcher  :items="items"
-                        :selectedItems="selectedItems"
-        ></item-searcher>
+            <item-searcher  :items="items"
+                            :selectedItems="selectedItems"
+            ></item-searcher>
+        </div>
 
         <div class="buttons">
             <button class="Button is-primary is-small" :class="{'is-disabled': !isFormReady, 'is-active': updateActive}" @click="update">

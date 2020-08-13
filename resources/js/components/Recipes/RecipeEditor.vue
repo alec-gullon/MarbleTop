@@ -1,36 +1,42 @@
 <template>
     <div class="RecipeCreator">
-        <h2 class="heading">
-            Details
-        </h2>
+        <div class="details">
+            <h2 class="AdminHeading">
+                Details
+            </h2>
 
-        <div class="InputWithLabel" :class="{'is-error': nameAlreadyExists}">
-            <label for="name">Name</label>
-            <input class="Input" id="name" v-model="name" :class="{'is-error': nameAlreadyExists}" />
-            <span class="error" v-if="nameAlreadyExists">Collection already exists</span>
+            <div class="InputWithLabel" :class="{'is-error': nameAlreadyExists}">
+                <label for="name">Name</label>
+                <input class="Input" id="name" v-model="name" :class="{'is-error': nameAlreadyExists}" />
+                <span class="error" v-if="nameAlreadyExists">Collection already exists</span>
+            </div>
+
+            <div class="InputWithLabel">
+                <label for="recipe">Recipe</label>
+                <textarea class="TextArea" id="recipe" v-model="recipe" />
+            </div>
         </div>
 
-        <div class="InputWithLabel">
-            <label for="recipe">Recipe</label>
-            <textarea class="TextArea" id="recipe" v-model="recipe" />
+        <div class="items">
+            <h2 class="AdminHeading">
+                Items
+            </h2>
+
+            <item-searcher  :items="items"
+                            :selectedItems="selectedItems"
+            ></item-searcher>
         </div>
 
-        <h2 class="heading">
-            Items
-        </h2>
+        <div class="amounts">
+            <h2 class="AdminHeading">
+                Amounts
+            </h2>
 
-        <item-searcher  :items="items"
-                        :selectedItems="selectedItems"
-        ></item-searcher>
-
-        <h2 class="heading">
-            Amounts
-        </h2>
-
-        <item-amounts :items="items"
-                      :selectedItems="selectedItems"
-        >
-        </item-amounts>
+            <item-amounts :items="items"
+                          :selectedItems="selectedItems"
+            >
+            </item-amounts>
+        </div>
 
         <div class="buttons">
             <button class="Button is-small is-primary" :class="{'is-disabled': !isFormReady, 'is-active': updateActive}" @click="update">

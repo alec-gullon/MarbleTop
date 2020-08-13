@@ -1,7 +1,7 @@
 <template>
     <div class="ItemSearcher">
         <div class="search">
-            <label for="new-item" class="hidden">Search for Item</label>
+            <label for="new-item">Search for Item</label>
             <input class="Input is-flat"
                    id="new-item"
                    v-model="searchTerm"

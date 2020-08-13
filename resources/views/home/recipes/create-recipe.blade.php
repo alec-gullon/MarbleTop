@@ -1,16 +1,11 @@
-@extends('layout.app')
+@extends('layout.admin')
 
-@section('content')
-    <div class="AdminContent">
+@section('header')
+    <h1>Create a Recipe</h1>
+    <p class="heading-tag">Bolognese, Pie, Curry, Cake</p>
+@endsection
 
-        <div class="header">
-            <h1>Recipes</h1>
-            <p class="heading-tag">Bolognese, Pie, Curry, Cake</p>
-        </div>
-
-        <div class="content">
-            <recipe-creator :initial-items="{{{ json_encode($itemsData) }}}"></recipe-creator>
-        </div>
-
-    </div>
+@section('admin_content')
+    <recipe-creator :initial-items="{{{ json_encode($itemsData) }}}"
+    ></recipe-creator>
 @endsection

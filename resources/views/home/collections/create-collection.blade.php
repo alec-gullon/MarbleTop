@@ -1,16 +1,10 @@
-@extends('layout.app')
+@extends('layout.admin')
 
-@section('content')
-    <div class="AdminContent">
+@section('header')
+    <h1>Add a Collection</h1>
+    <p class="heading-tag">Picnic, family visit, BBQ</p>
+@endsection
 
-        <div class="header">
-            <h1>Add a Collection</h1>
-            <p class="heading-tag">Picnic, family visit, BBQ</p>
-        </div>
-
-        <div class="content">
-            <collection-creator :initial-items="{{{ json_encode($itemsData) }}}"></collection-creator>
-        </div>
-
-    </div>
+@section('admin_content')
+    <collection-creator :initial-items="{{{ json_encode($itemsData) }}}"></collection-creator>
 @endsection

@@ -1,20 +1,16 @@
-@extends('layout.app')
+@extends('layout.admin')
 
-@section('content')
-    <div class="AdminContent">
+@section('header')
+    <h1>Items</h1>
+    <p class="heading-tag">Cupboard, fridge, freezer, counter</p>
+@endsection
 
-        <div class="header">
-            <h1>Items</h1>
-            <p class="heading-tag">Cupboard, fridge, freezer, counter</p>
-        </div>
+@section('admin_content')
+    <div class="content">
 
-        <div class="content">
-
-            <items-admin    :initial-items="{{{ json_encode($itemsData) }}}"
-                            :initial-locations="{{{ json_encode($locations) }}}"
-            ></items-admin>
-
-        </div>
+        <items-admin    :initial-items="{{{ json_encode($itemsData) }}}"
+                        :initial-locations="{{{ json_encode($locations) }}}"
+        ></items-admin>
 
     </div>
 @endsection

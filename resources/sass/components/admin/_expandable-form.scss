@@ -22,6 +22,10 @@
 
         > .InputWithLabel {
             margin-bottom: 8px;
+
+            @include md() {
+                margin-bottom: 16px;
+            }
         }
 
         > .MessageBox {

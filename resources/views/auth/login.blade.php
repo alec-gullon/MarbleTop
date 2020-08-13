@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="PageContent">
+    <div class="PageContent is-narrow">
         <h1>Log In</h1>
         <p class="heading-tag">Good to see you again</p>
 

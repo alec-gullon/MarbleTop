@@ -125,6 +125,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -210,6 +214,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../mixins/Post.js */ "./resources/js/mixins/Post.js");
 /* harmony import */ var _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../mixins/Copy.js */ "./resources/js/mixins/Copy.js");
+//
+//
+//
+//
 //
 //
 //
@@ -1533,6 +1541,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1627,6 +1641,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../mixins/Post.js */ "./resources/js/mixins/Post.js");
 /* harmony import */ var _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../mixins/Copy.js */ "./resources/js/mixins/Copy.js");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2260,11 +2280,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "RecipeCreator" },
-    [
-      _c("h2", { staticClass: "heading" }, [_vm._v("\n        Details\n    ")]),
+  return _c("div", { staticClass: "RecipeCreator" }, [
+    _c("div", { staticClass: "details" }, [
+      _c("h2", { staticClass: "AdminHeading" }, [
+        _vm._v("\n            Details\n        ")
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -2304,31 +2324,39 @@ var render = function() {
               ])
             : _vm._e()
         ]
-      ),
-      _vm._v(" "),
-      _c("h2", { staticClass: "heading" }, [_vm._v("\n        Items\n    ")]),
-      _vm._v(" "),
-      _c("item-searcher", {
-        attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "buttons" }, [
-        _c(
-          "button",
-          {
-            staticClass: "Button is-primary is-small",
-            class: {
-              "is-disabled": !_vm.isFormReady,
-              "is-active": _vm.formActive
-            },
-            on: { click: _vm.submit }
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "items" },
+      [
+        _c("h2", { staticClass: "AdminHeading" }, [
+          _vm._v("\n            Items\n        ")
+        ]),
+        _vm._v(" "),
+        _c("item-searcher", {
+          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "buttons" }, [
+      _c(
+        "button",
+        {
+          staticClass: "Button is-primary is-small",
+          class: {
+            "is-disabled": !_vm.isFormReady,
+            "is-active": _vm.formActive
           },
-          [_vm._v("\n            Add Collection\n        ")]
-        )
-      ])
-    ],
-    1
-  )
+          on: { click: _vm.submit }
+        },
+        [_vm._v("\n            Add Collection\n        ")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2352,11 +2380,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "RecipeCreator" },
-    [
-      _c("h2", { staticClass: "heading" }, [_vm._v("\n        Details\n    ")]),
+  return _c("div", { staticClass: "RecipeCreator" }, [
+    _c("div", { staticClass: "details" }, [
+      _c("h2", { staticClass: "AdminHeading" }, [
+        _vm._v("\n            Details\n        ")
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -2396,41 +2424,49 @@ var render = function() {
               ])
             : _vm._e()
         ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "items" },
+      [
+        _c("h2", { staticClass: "AdminHeading" }, [
+          _vm._v("\n            Items\n        ")
+        ]),
+        _vm._v(" "),
+        _c("item-searcher", {
+          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "buttons" }, [
+      _c(
+        "button",
+        {
+          staticClass: "Button is-primary is-small",
+          class: {
+            "is-disabled": !_vm.isFormReady,
+            "is-active": _vm.updateActive
+          },
+          on: { click: _vm.update }
+        },
+        [_vm._v("\n            Edit Collection\n        ")]
       ),
       _vm._v(" "),
-      _c("h2", { staticClass: "heading" }, [_vm._v("\n        Items\n    ")]),
-      _vm._v(" "),
-      _c("item-searcher", {
-        attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "buttons" }, [
-        _c(
-          "button",
-          {
-            staticClass: "Button is-primary is-small",
-            class: {
-              "is-disabled": !_vm.isFormReady,
-              "is-active": _vm.updateActive
-            },
-            on: { click: _vm.update }
-          },
-          [_vm._v("\n            Edit Collection\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "Button is-alert is-small",
-            class: { "is-active": _vm.deleteActive },
-            on: { click: _vm.deleteCollection }
-          },
-          [_vm._v("\n            Delete Collection\n        ")]
-        )
-      ])
-    ],
-    1
-  )
+      _c(
+        "button",
+        {
+          staticClass: "Button is-alert is-small",
+          class: { "is-active": _vm.deleteActive },
+          on: { click: _vm.deleteCollection }
+        },
+        [_vm._v("\n            Delete Collection\n        ")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2777,9 +2813,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "ItemSearcher" }, [
     _c("div", { staticClass: "search" }, [
-      _c("label", { staticClass: "hidden", attrs: { for: "new-item" } }, [
-        _vm._v("Search for Item")
-      ]),
+      _c("label", { attrs: { for: "new-item" } }, [_vm._v("Search for Item")]),
       _vm._v(" "),
       _c("input", {
         directives: [
@@ -3879,11 +3913,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "RecipeCreator" },
-    [
-      _c("h2", { staticClass: "heading" }, [_vm._v("\n        Details\n    ")]),
+  return _c("div", { staticClass: "RecipeCreator" }, [
+    _c("div", { staticClass: "details" }, [
+      _c("h2", { staticClass: "AdminHeading" }, [
+        _vm._v("\n            Details\n        ")
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -3949,37 +3983,54 @@ var render = function() {
             }
           }
         })
-      ]),
-      _vm._v(" "),
-      _c("h2", { staticClass: "heading" }, [_vm._v("\n        Items\n    ")]),
-      _vm._v(" "),
-      _c("item-searcher", {
-        attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-      }),
-      _vm._v(" "),
-      _c("h2", { staticClass: "heading" }, [_vm._v("\n        Amounts\n    ")]),
-      _vm._v(" "),
-      _c("item-amounts", {
-        attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "buttons" }, [
-        _c(
-          "button",
-          {
-            staticClass: "Button is-small is-primary",
-            class: {
-              "is-disabled": !_vm.isFormReady,
-              "is-active": _vm.formActive
-            },
-            on: { click: _vm.submit }
-          },
-          [_vm._v("\n            Add Recipe\n        ")]
-        )
       ])
-    ],
-    1
-  )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "items" },
+      [
+        _c("h2", { staticClass: "AdminHeading" }, [
+          _vm._v("\n            Items\n        ")
+        ]),
+        _vm._v(" "),
+        _c("item-searcher", {
+          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "amounts" },
+      [
+        _c("h2", { staticClass: "AdminHeading" }, [
+          _vm._v("\n            Amounts\n        ")
+        ]),
+        _vm._v(" "),
+        _c("item-amounts", {
+          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "buttons" }, [
+      _c(
+        "button",
+        {
+          staticClass: "Button is-small is-primary",
+          class: {
+            "is-disabled": !_vm.isFormReady,
+            "is-active": _vm.formActive
+          },
+          on: { click: _vm.submit }
+        },
+        [_vm._v("\n            Add Recipe\n        ")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -4003,11 +4054,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "RecipeCreator" },
-    [
-      _c("h2", { staticClass: "heading" }, [_vm._v("\n        Details\n    ")]),
+  return _c("div", { staticClass: "RecipeCreator" }, [
+    _c("div", { staticClass: "details" }, [
+      _c("h2", { staticClass: "AdminHeading" }, [
+        _vm._v("\n            Details\n        ")
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -4073,47 +4124,64 @@ var render = function() {
             }
           }
         })
-      ]),
-      _vm._v(" "),
-      _c("h2", { staticClass: "heading" }, [_vm._v("\n        Items\n    ")]),
-      _vm._v(" "),
-      _c("item-searcher", {
-        attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-      }),
-      _vm._v(" "),
-      _c("h2", { staticClass: "heading" }, [_vm._v("\n        Amounts\n    ")]),
-      _vm._v(" "),
-      _c("item-amounts", {
-        attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "buttons" }, [
-        _c(
-          "button",
-          {
-            staticClass: "Button is-small is-primary",
-            class: {
-              "is-disabled": !_vm.isFormReady,
-              "is-active": _vm.updateActive
-            },
-            on: { click: _vm.update }
-          },
-          [_vm._v("\n            Edit Recipe\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "Button is-alert is-small",
-            class: { "is-active": _vm.deleteActive },
-            on: { click: _vm.deleteRecipe }
-          },
-          [_vm._v("\n            Delete Recipe\n        ")]
-        )
       ])
-    ],
-    1
-  )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "items" },
+      [
+        _c("h2", { staticClass: "AdminHeading" }, [
+          _vm._v("\n            Items\n        ")
+        ]),
+        _vm._v(" "),
+        _c("item-searcher", {
+          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "amounts" },
+      [
+        _c("h2", { staticClass: "AdminHeading" }, [
+          _vm._v("\n            Amounts\n        ")
+        ]),
+        _vm._v(" "),
+        _c("item-amounts", {
+          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "buttons" }, [
+      _c(
+        "button",
+        {
+          staticClass: "Button is-small is-primary",
+          class: {
+            "is-disabled": !_vm.isFormReady,
+            "is-active": _vm.updateActive
+          },
+          on: { click: _vm.update }
+        },
+        [_vm._v("\n            Edit Recipe\n        ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "Button is-alert is-small",
+          class: { "is-active": _vm.deleteActive },
+          on: { click: _vm.deleteRecipe }
+        },
+        [_vm._v("\n            Delete Recipe\n        ")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
