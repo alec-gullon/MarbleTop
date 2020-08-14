@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ItemLocation extends Model
 {
-    protected $fillable = ['name'];
+    protected $guarded = [];
 
     public function user() {
         return $this->hasMany('App\Models\Item');

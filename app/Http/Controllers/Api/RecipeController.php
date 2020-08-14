@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-
-use Illuminate\Routing\Controller as BaseController;
-
-use App\Models\Recipe;
-
 use App\Helpers\ApiResponse;
 
 use App\Http\Requests\Api\Recipe\StoreRecipe;
 use App\Http\Requests\Api\Recipe\UpdateRecipe;
 use App\Http\Requests\Api\Recipe\DestroyRecipe;
+
+use App\Models\Recipe;
+
+use Illuminate\Routing\Controller as BaseController;
 
 class RecipeController extends BaseController
 {

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
-use Illuminate\Http\Request;
-
-use Illuminate\Routing\Controller as BaseController;
-
 use App\Models\Plan;
+
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 
 class PlanController extends BaseController
 {

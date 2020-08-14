@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    protected $fillable = ['name', 'location_id', 'user_id'];
+    protected $guarded = [];
 
     public function user() {
         return $this->belongsTo('App\User');

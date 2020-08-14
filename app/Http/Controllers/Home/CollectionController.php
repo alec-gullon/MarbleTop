@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Http\Controllers\Controller;
-
 use App\Helper;
-
+use App\Http\Controllers\Controller;
 use App\Models\Collection;
 
 class CollectionController extends Controller
 {
     public function index()
     {
-        $collections = \App\Helper::collectionsData(auth()->user());
+        $collections = Helper::collectionsData(auth()->user());
 
         return view('home.collections.index', compact('collections'));
     }

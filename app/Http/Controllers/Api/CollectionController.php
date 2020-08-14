@@ -6,11 +6,11 @@ use App\Helpers\ApiResponse;
 use App\Http\Requests\Api\Collection\DestroyCollection;
 use App\Http\Requests\Api\Collection\StoreCollection;
 use App\Http\Requests\Api\Collection\UpdateCollection;
-use Illuminate\Http\Request;
-
-use Illuminate\Routing\Controller as BaseController;
 
 use App\Models\Collection;
+
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 
 class CollectionController extends BaseController
 {

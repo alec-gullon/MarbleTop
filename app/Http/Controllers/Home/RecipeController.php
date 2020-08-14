@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Http\Controllers\Controller;
-
-use App\Models\Recipe;
 use App\Helper;
+use App\Http\Controllers\Controller;
+use App\Models\Recipe;
+
 
 class RecipeController extends Controller
 {
@@ -16,7 +16,7 @@ class RecipeController extends Controller
 
     public function index()
     {
-        $recipes = \App\Helper::recipesData(auth()->user());
+        $recipes = Helper::recipesData(auth()->user());
 
         return view('home.recipes.index', compact('recipes'));
     }

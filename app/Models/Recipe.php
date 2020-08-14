@@ -8,7 +8,7 @@ use Illuminate\Support\Arr;
 
 class Recipe extends Model
 {
-    protected $fillable = ['name', 'user_id', 'recipe'];
+    protected $guarded = [];
 
     public function user() {
         return $this->belongsTo('App\User');

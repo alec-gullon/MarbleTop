@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 
 class Collection extends Model
 {
-    protected $fillable = ['name', 'user_id'];
+    protected $guarded = [];
 
     public function user() {
         return $this->belongsTo('App\User');
