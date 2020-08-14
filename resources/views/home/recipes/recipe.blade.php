@@ -6,7 +6,7 @@ $withIcon = true;
 
 @section('header')
     <h1>{{ $recipe->name }}</h1>
-    <a href="/home/recipes/{{ $recipe->id }}/edit/">@icon('edit-pencil')</a>
+    <a href="{{ route('recipe-edit', ['recipe' => $recipe->id]) }}">@icon('edit-pencil')</a>
 @endsection
 
 @section('admin_content')

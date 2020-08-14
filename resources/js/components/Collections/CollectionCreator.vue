@@ -64,11 +64,11 @@
                 data.append('items', JSON.stringify(items));
 
                 this.formActive = true;
-                this.post('/api/collections/store/', data, function(response) {
+                this.post('/api/collections/store', data, function(response) {
                     this.nameAlreadyExists = false;
 
                     if (response.status === 200) {
-                        window.location.replace('/home/collections/');
+                        window.location.replace('/home/collections');
                         return;
                     }
 

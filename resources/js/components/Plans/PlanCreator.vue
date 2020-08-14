@@ -128,9 +128,9 @@
                 data.append('items', JSON.stringify(items));
 
                 this.formActive = true;
-                this.post('/api/plans/store/', data, function(response) {
+                this.post('/api/plans/store', data, function(response) {
                     if (response.status === 200) {
-                        window.location.replace('/home/plans/');
+                        window.location.replace('/home/plans');
                         return;
                     }
 

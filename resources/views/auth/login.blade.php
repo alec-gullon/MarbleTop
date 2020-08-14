@@ -16,7 +16,7 @@
                     </div>
                     @enderror
 
-                    <form action="/login/" method="POST">
+                    <form action="{{ route('attempt-login') }}" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
                         <div class="InputWithLabel">

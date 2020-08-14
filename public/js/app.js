@@ -157,11 +157,11 @@ __webpack_require__.r(__webpack_exports__);
 
       data.append('items', JSON.stringify(items));
       this.formActive = true;
-      this.post('/api/collections/store/', data, function (response) {
+      this.post('/api/collections/store', data, function (response) {
         this.nameAlreadyExists = false;
 
         if (response.status === 200) {
-          window.location.replace('/home/collections/');
+          window.location.replace('/home/collections');
           return;
         }
 
@@ -279,11 +279,11 @@ __webpack_require__.r(__webpack_exports__);
 
       data.append('items', JSON.stringify(items));
       this.updateActive = true;
-      this.post('/api/collections/' + this.collectionId + '/update/', data, function (response) {
+      this.post('/api/collections/' + this.collectionId + '/update', data, function (response) {
         this.nameAlreadyExists = false;
 
         if (response.status === 200) {
-          window.location.replace('/home/collections/');
+          window.location.replace('/home/collections');
           return;
         }
 
@@ -303,9 +303,9 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('api_token', document.global.apiToken);
       this.deleteActive = true;
-      this.post('/api/collections/' + this.collectionId + '/destroy/', data, function (response) {
+      this.post('/api/collections/' + this.collectionId + '/destroy', data, function (response) {
         if (response.status === 200) {
-          window.location.replace('/home/collections/');
+          window.location.replace('/home/collections');
         }
       }.bind(this));
     }
@@ -475,7 +475,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('location_id', this.locationId);
       data.append('api_token', document.global.apiToken);
       this.formActive = true;
-      this.post('/api/items/store/', data, function (response) {
+      this.post('/api/items/store', data, function (response) {
         if (response.status === 200) {
           this.name = '';
           this.$emit('itemAdded', {
@@ -561,7 +561,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('location_id', this.item.locationId);
       data.append('api_token', document.global.apiToken);
       this.formActive = true;
-      this.post('/api/items/' + this.item.id + '/update/', data, function (response) {
+      this.post('/api/items/' + this.item.id + '/update', data, function (response) {
         this.formError = response.status !== 200;
 
         if (response.status === 200) {
@@ -583,7 +583,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('api_token', document.global.apiToken);
       this.formActive = true;
-      this.post('/api/items/' + this.item.id + '/destroy/', data, function (response) {
+      this.post('/api/items/' + this.item.id + '/destroy', data, function (response) {
         this.formError = response.status !== 200;
 
         if (response.status === 200) {
@@ -1010,9 +1010,9 @@ __webpack_require__.r(__webpack_exports__);
       });
       data.append('items', JSON.stringify(items));
       this.formActive = true;
-      this.post('/api/plans/store/', data, function (response) {
+      this.post('/api/plans/store', data, function (response) {
         if (response.status === 200) {
-          window.location.replace('/home/plans/');
+          window.location.replace('/home/plans');
           return;
         }
 
@@ -1578,7 +1578,7 @@ __webpack_require__.r(__webpack_exports__);
 
       data.append('items', JSON.stringify(items));
       this.formActive = true;
-      this.post('/api/recipes/store/', data, function (response) {
+      this.post('/api/recipes/store', data, function (response) {
         this.nameAlreadyExists = false;
 
         if (response.status === 200) {
@@ -1730,11 +1730,11 @@ __webpack_require__.r(__webpack_exports__);
 
       data.append('items', JSON.stringify(items));
       this.updateActive = true;
-      this.post('/api/recipes/' + this.recipeId + '/update/', data, function (response) {
+      this.post('/api/recipes/' + this.recipeId + '/update', data, function (response) {
         this.nameAlreadyExists = false;
 
         if (response.status === 200) {
-          window.location.replace('/home/recipes/');
+          window.location.replace('/home/recipes');
           return;
         }
 
@@ -1754,9 +1754,9 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('api_token', document.global.apiToken);
       this.deleteActive = true;
-      this.post('/api/recipes/' + this.recipeId + '/destroy/', data, function (response) {
+      this.post('/api/recipes/' + this.recipeId + '/destroy', data, function (response) {
         if (response.status === 200) {
-          window.location.replace('/home/recipes/');
+          window.location.replace('/home/recipes');
         }
       }.bind(this));
     }
@@ -3752,7 +3752,7 @@ var render = function() {
                 "a",
                 {
                   staticClass: "sign-up Button is-secondary",
-                  attrs: { href: "/accounts/create/" }
+                  attrs: { href: "/accounts/create" }
                 },
                 [_vm._v("\n                Create Account\n            ")]
               )

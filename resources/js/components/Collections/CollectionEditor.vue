@@ -71,11 +71,11 @@
                 data.append('items', JSON.stringify(items));
 
                 this.updateActive = true;
-                this.post('/api/collections/' + this.collectionId + '/update/', data, function(response) {
+                this.post('/api/collections/' + this.collectionId + '/update', data, function(response) {
                     this.nameAlreadyExists = false;
 
                     if (response.status === 200) {
-                        window.location.replace('/home/collections/');
+                        window.location.replace('/home/collections');
                         return;
                     }
 
@@ -96,9 +96,9 @@
                 data.append('api_token', document.global.apiToken);
 
                 this.deleteActive = true;
-                this.post('/api/collections/' + this.collectionId + '/destroy/', data, function(response) {
+                this.post('/api/collections/' + this.collectionId + '/destroy', data, function(response) {
                     if (response.status === 200) {
-                        window.location.replace('/home/collections/');
+                        window.location.replace('/home/collections');
                     }
                 }.bind(this));
             }

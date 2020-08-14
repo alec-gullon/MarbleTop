@@ -62,7 +62,7 @@
                 data.append('api_token', document.global.apiToken);
 
                 this.formActive = true;
-                this.post('/api/items/store/', data, function(response) {
+                this.post('/api/items/store', data, function(response) {
                     if (response.status === 200) {
                         this.name = '';
 

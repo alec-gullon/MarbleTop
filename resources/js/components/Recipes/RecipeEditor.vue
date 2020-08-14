@@ -96,11 +96,11 @@
                 data.append('items', JSON.stringify(items));
 
                 this.updateActive = true;
-                this.post('/api/recipes/' + this.recipeId + '/update/', data, function(response) {
+                this.post('/api/recipes/' + this.recipeId + '/update', data, function(response) {
                     this.nameAlreadyExists = false;
 
                     if (response.status === 200) {
-                        window.location.replace('/home/recipes/');
+                        window.location.replace('/home/recipes');
                         return;
                     }
 
@@ -121,9 +121,9 @@
                 data.append('api_token', document.global.apiToken);
 
                 this.deleteActive = true;
-                this.post('/api/recipes/' + this.recipeId + '/destroy/', data, function(response) {
+                this.post('/api/recipes/' + this.recipeId + '/destroy', data, function(response) {
                     if (response.status === 200) {
-                        window.location.replace('/home/recipes/');
+                        window.location.replace('/home/recipes');
                     }
                 }.bind(this));
             }

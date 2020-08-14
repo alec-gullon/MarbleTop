@@ -51,7 +51,7 @@
                     </svg>
                 </div>
 
-                <a href="/accounts/create/" class="sign-up Button is-secondary" v-if="!authenticated">
+                <a href="/accounts/create" class="sign-up Button is-secondary" v-if="!authenticated">
                     Create Account
                 </a>
 

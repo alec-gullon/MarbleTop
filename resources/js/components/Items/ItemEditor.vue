@@ -39,7 +39,7 @@
                 data.append('api_token', document.global.apiToken);
 
                 this.formActive = true;
-                this.post('/api/items/' + this.item.id + '/update/', data, function(response) {
+                this.post('/api/items/' + this.item.id + '/update', data, function(response) {
                     this.formError = (response.status !== 200);
 
                     if (response.status === 200) {
@@ -59,7 +59,7 @@
                 data.append('api_token', document.global.apiToken);
 
                 this.formActive = true;
-                this.post('/api/items/' + this.item.id + '/destroy/', data, function(response) {
+                this.post('/api/items/' + this.item.id + '/destroy', data, function(response) {
                     this.formError = (response.status !== 200);
 
                     if (response.status === 200) {
