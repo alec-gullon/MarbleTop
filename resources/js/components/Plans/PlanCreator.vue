@@ -10,7 +10,7 @@
 
         <div class="stage-heading">
             <span v-if="selectedStage === 1">Select what you need</span>
-            <span v-if="selectedStage === 2">Edit your selected recipes</span>
+            <span v-if="selectedStage === 2">Fine tune your selected recipes</span>
             <span v-if="selectedStage === 3">Adjust for anything you already have</span>
             <span v-if="selectedStage === 4">Final review</span>
         </div>

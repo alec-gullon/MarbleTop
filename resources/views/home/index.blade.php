@@ -16,7 +16,7 @@
         <li>
             <a href="{{ route('items') }}">
                 @icon('home')
-                <span class="text">Cupboard Items</span>
+                <span class="text">Items</span>
             </a>
         </li>
         <li>

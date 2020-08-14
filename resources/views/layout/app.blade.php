@@ -18,7 +18,9 @@
         @yield('content')
 
         <div class="Footer">
-            Created by Alec Gullon
+            <div class="container">
+                Created by Alec Gullon. Built using Laravel and Vue.js.
+            </div>
         </div>
 
     </div>

@@ -11,9 +11,9 @@
                 <li><a href="/accounts/create">How it Works</a></li>
                 <li><a href="/accounts/create">About Us</a></li>
 
-                <li class="admin" v-if="authenticated">
-                    <div class="toggle" @click="toggleAdminLinks">
-                        <span>Admin Links</span>
+                <li class="admin" v-if="authenticated" @click="toggleAdminLinks">
+                    <div class="toggle">
+                        <span>Your Kitchen</span>
                         <svg xmlns="http://www.w3.org/2000/svg">
                             <use :xlink:href="'/images/icons.svg#chevron-down'" v-if="!displayAdminLinks"></use>
                             <use :xlink:href="'/images/icons.svg#chevron-down'" v-else></use>

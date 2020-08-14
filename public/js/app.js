@@ -576,7 +576,7 @@ __webpack_require__.r(__webpack_exports__);
       }.bind(this));
     },
     destroy: function destroy() {
-      if (!this.formReady || this.formActive) {
+      if (this.formActive) {
         return;
       }
 
@@ -3098,7 +3098,7 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.selectedStage === 2
-        ? _c("span", [_vm._v("Edit your selected recipes")])
+        ? _c("span", [_vm._v("Fine tune your selected recipes")])
         : _vm._e(),
       _vm._v(" "),
       _vm.selectedStage === 3
@@ -3643,12 +3643,12 @@ var render = function() {
         _vm._m(1),
         _vm._v(" "),
         _vm.authenticated
-          ? _c("li", { staticClass: "admin" }, [
-              _c(
-                "div",
-                { staticClass: "toggle", on: { click: _vm.toggleAdminLinks } },
-                [
-                  _c("span", [_vm._v("Admin Links")]),
+          ? _c(
+              "li",
+              { staticClass: "admin", on: { click: _vm.toggleAdminLinks } },
+              [
+                _c("div", { staticClass: "toggle" }, [
+                  _c("span", [_vm._v("Your Kitchen")]),
                   _vm._v(" "),
                   _c(
                     "svg",
@@ -3667,19 +3667,19 @@ var render = function() {
                           })
                     ]
                   )
-                ]
-              ),
-              _vm._v(" "),
-              _c("ul", { class: { "is-enabled": _vm.displayAdminLinks } }, [
-                _vm._m(2),
+                ]),
                 _vm._v(" "),
-                _vm._m(3),
-                _vm._v(" "),
-                _vm._m(4),
-                _vm._v(" "),
-                _vm._m(5)
-              ])
-            ])
+                _c("ul", { class: { "is-enabled": _vm.displayAdminLinks } }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _vm._m(5)
+                ])
+              ]
+            )
           : _vm._e()
       ]),
       _vm._v(" "),

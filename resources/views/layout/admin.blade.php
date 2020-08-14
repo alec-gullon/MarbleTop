@@ -15,6 +15,7 @@
 
                 $areas = ['plan', 'item', 'recipe', 'collection'];
 
+                $selectedArea = '';
                 foreach ($areas as $area) {
                     if (strpos($route, $area) === 0) {
                         $selectedArea = $area;

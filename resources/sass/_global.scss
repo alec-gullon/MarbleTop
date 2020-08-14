@@ -20,6 +20,11 @@ body {
     padding-top: 80px;
 }
 
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
 a {
     color: $grey-dark;
 }
@@ -48,11 +53,4 @@ button {
     @media only screen and (min-width: 1280px) {
         @content
     }
-}
-
-// Remove this when done with md styles
-
-body {
-    max-width: 1200px;
-    margin: 0 auto;
 }

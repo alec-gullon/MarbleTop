@@ -160,6 +160,11 @@ body {
   padding-top: 80px;
 }
 
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 a {
   color: #1A202C;
 }
@@ -168,11 +173,6 @@ button {
   display: block;
   background: inherit;
   border: none;
-}
-
-body {
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 /**
@@ -610,41 +610,12 @@ body {
   padding: 21px;
 }
 
-@media only screen and (min-width: 768px) {
-  .RecipeCreator {
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 0;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .RecipeCreator > .details {
-    width: 50%;
-    padding: 21px;
-  }
-}
-
 .RecipeCreator > .details > .InputWithLabel {
   margin-bottom: 16px;
 }
 
-@media only screen and (min-width: 768px) {
-  .RecipeCreator > .items {
-    width: 50%;
-    padding: 21px;
-  }
-}
-
 .RecipeCreator > .items > .ItemSearcher {
   margin-bottom: 16px;
-}
-
-@media only screen and (min-width: 768px) {
-  .RecipeCreator > .amounts {
-    width: 50%;
-    padding: 21px;
-  }
 }
 
 .RecipeCreator > .amounts > .ItemAmounts {
@@ -654,13 +625,7 @@ body {
 .RecipeCreator > .buttons {
   display: flex;
   justify-content: flex-end;
-}
-
-@media only screen and (min-width: 768px) {
-  .RecipeCreator > .buttons {
-    width: 100%;
-    padding: 21px;
-  }
+  width: 100%;
 }
 
 .RecipeCreator > .buttons > .Button {
@@ -680,6 +645,18 @@ body {
   font-weight: 700;
 }
 
+@media only screen and (min-width: 1024px) {
+  .Footer {
+    padding: 32px 0px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .Footer > .container {
+    padding: 0 32px;
+  }
+}
+
 .PageContent {
   padding: 28px 21px;
   min-height: 370px;
@@ -692,7 +669,41 @@ body {
   }
 }
 
-.PageContent > h1 {
+@media only screen and (min-width: 1024px) {
+  .PageContent {
+    padding: 0;
+    min-height: 750px;
+  }
+}
+
+.PageContent > .hero {
+  background-size: 0 0;
+}
+
+@media only screen and (min-width: 1024px) {
+  .PageContent > .hero {
+    height: 450px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+  }
+}
+
+.PageContent > .hero > .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+  .PageContent > .hero > .container {
+    padding: 0 32px;
+  }
+}
+
+.PageContent > .hero > .container > h1 {
   font-size: 26px;
   font-weight: 400;
   margin-bottom: 4px;
@@ -700,12 +711,19 @@ body {
 }
 
 @media only screen and (min-width: 768px) {
-  .PageContent > h1 {
+  .PageContent > .hero > .container > h1 {
     font-size: 30px;
   }
 }
 
-.PageContent > .heading-tag {
+@media only screen and (min-width: 1024px) {
+  .PageContent > .hero > .container > h1 {
+    font-size: 50px;
+    font-style: italic;
+  }
+}
+
+.PageContent > .hero > .container > .heading-tag {
   font-size: 15px;
   color: #425466;
   line-height: 1.25;
@@ -715,27 +733,57 @@ body {
 }
 
 @media only screen and (min-width: 768px) {
-  .PageContent > .heading-tag {
+  .PageContent > .hero > .container > .heading-tag {
     font-size: 16px;
     border-bottom-width: 2px;
   }
 }
 
-.PageContent > .content > p {
+@media only screen and (min-width: 1024px) {
+  .PageContent > .hero > .container > .heading-tag {
+    border-bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: #1A202C;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .PageContent > .container {
+    padding: 0 32px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .PageContent > .container > .content {
+    max-width: 768px;
+    margin-top: 32px;
+  }
+}
+
+.PageContent > .container > .content > p {
   margin-bottom: 16px;
   line-height: 1.6;
   color: #425466;
   font-size: 15px;
 }
 
-.PageContent > .content > p > .highlighted {
+.PageContent > .container > .content > p > .highlighted {
   color: #22543D;
   font-weight: 700;
 }
 
 @media only screen and (min-width: 768px) {
-  .PageContent > .content > p {
+  .PageContent > .container > .content > p {
     font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .PageContent > .container > .content > p {
+    font-size: 18px;
   }
 }
 
@@ -782,7 +830,12 @@ body {
 
 .PrimaryNav > .bar > .logo {
   height: 65px;
-  margin-left: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+  .PrimaryNav > .bar > .logo {
+    margin-left: 16px;
+  }
 }
 
 .PrimaryNav > .bar > .logo > img {
@@ -791,6 +844,7 @@ body {
 
 .PrimaryNav > .bar > .links {
   display: none;
+  margin-left: 16px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -802,24 +856,69 @@ body {
   }
 
   .PrimaryNav > .bar > .links > li {
-    margin-left: 24px;
-  }
-
-  .PrimaryNav > .bar > .links > .admin {
-    position: relative;
-  }
-
-  .PrimaryNav > .bar > .links > .admin > .toggle {
+    height: 100%;
     display: flex;
     align-items: center;
   }
 
+  .PrimaryNav > .bar > .links > li > a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (min-width: 1024px) {
+  .PrimaryNav > .bar > .links > li > a {
+    width: 140px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .PrimaryNav > .bar > .links > li > a:hover {
+    background: #22543D;
+    color: white;
+    font-weight: 500;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .PrimaryNav > .bar > .links > .admin {
+    position: relative;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 768px) and (min-width: 768px) {
+  .PrimaryNav > .bar > .links > .admin {
+    padding: 0 16px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .PrimaryNav > .bar > .links > .admin > .toggle {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media only screen and (min-width: 768px) and (min-width: 768px) {
+  .PrimaryNav > .bar > .links > .admin > .toggle {
+    height: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
   .PrimaryNav > .bar > .links > .admin > .toggle > svg {
     margin-left: 8px;
     height: 20px;
     width: 20px;
   }
+}
 
+@media only screen and (min-width: 768px) {
   .PrimaryNav > .bar > .links > .admin > ul {
     display: none;
     position: absolute;
@@ -829,12 +928,34 @@ body {
     box-shadow: 0 2px 4px 0 rgba(52, 52, 52, 0.15);
     width: 150px;
   }
+}
 
+@media only screen and (min-width: 768px) and (min-width: 1024px) {
+  .PrimaryNav > .bar > .links > .admin > ul {
+    top: 60%;
+    left: 30px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
   .PrimaryNav > .bar > .links > .admin > ul > li {
-    padding: 12px;
+    padding: 12px 18px;
     border-bottom: 1px solid #E8E8E8;
+    position: relative;
   }
 
+  .PrimaryNav > .bar > .links > .admin > ul > li:hover::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 4px;
+    top: 0;
+    left: 0;
+    background: #22543D;
+  }
+}
+
+@media only screen and (min-width: 768px) {
   .PrimaryNav > .bar > .links > .admin > ul.is-enabled {
     display: block;
   }
@@ -988,13 +1109,6 @@ body {
 
 .ItemSearcher > .search > label {
   display: none;
-}
-
-@media only screen and (min-width: 768px) {
-  .ItemSearcher > .search > label {
-    display: block;
-    font-weight: 500;
-  }
 }
 
 .ItemSearcher > .search > .Input {
@@ -1157,8 +1271,14 @@ body {
   .FeatureBoxes > .box {
     width: 50%;
     padding: 0 24px 0 12px;
-    box-sizing: border-box;
     margin-bottom: 64px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .FeatureBoxes > .box {
+    width: 33%;
+    padding: 0 24px;
   }
 }
 
@@ -1336,6 +1456,12 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
+}
+
+@media only screen and (min-width: 768px) {
+  .PlanCreator > .stage-indicator {
+    max-width: 300px;
+  }
 }
 
 .PlanCreator > .stage-indicator > span {

@@ -34,7 +34,9 @@
         > .logo {
             height: 65px;
 
-            margin-left: 16px;
+            @include md() {
+                margin-left: 16px;
+            }
 
             > img {
                 height: 100%;
@@ -43,6 +45,7 @@
 
         > .links {
             display: none;
+            margin-left: 16px;
 
             @include md() {
                 display: flex;
@@ -51,15 +54,45 @@
                 flex-grow: 1;
 
                 > li {
-                    margin-left: 24px;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    > a {
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0 16px;
+
+                        @include lg() {
+                            width: 140px;
+                        }
+
+                        &:hover {
+                            background: $green-dark;
+                            color: white;
+                            font-weight: 500;
+                        }
+                    }
                 }
 
                 > .admin {
                     position: relative;
+                    cursor: pointer;
+
+                    @include md() {
+                        padding: 0 16px;
+                    }
 
                     > .toggle {
                         display: flex;
                         align-items: center;
+
+                        @include md() {
+                            height: 100%;
+                        }
+
                         > svg {
                             margin-left: 8px;
                             height: 20px;
@@ -76,9 +109,27 @@
                         box-shadow: 0 2px 4px 0 rgba(52,52,52,0.15);
                         width: 150px;
 
+                        @include lg() {
+                            top: 60%;
+                            left: 30px;
+                        }
+
                         > li {
-                            padding: 12px;
+                            padding: 12px 18px;
                             border-bottom: 1px solid $grey-lightest;
+                            position: relative;
+
+                            &:hover {
+                                &::before {
+                                    content: '';
+                                    position: absolute;
+                                    height: 100%;
+                                    width: 4px;
+                                    top: 0;
+                                    left: 0;
+                                    background: $green-dark
+                                }
+                            }
                         }
 
                         &.is-enabled {

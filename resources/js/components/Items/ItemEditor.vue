@@ -51,7 +51,7 @@
                 }.bind(this));
             },
             destroy: function() {
-                if (!this.formReady || this.formActive) {
+                if (this.formActive) {
                     return;
                 }
 
