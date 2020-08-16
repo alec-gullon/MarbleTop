@@ -1,5 +1,4 @@
 <template>
-    <!-- @todo: refactor these so the event-driven model doesn't pass around so much data -->
     <div class="ItemsAdmin">
         <item-creator :locations="locations"
                       :existingItems="existingItems"
@@ -7,23 +6,26 @@
         >
         </item-creator>
 
-        <div class="location" v-for="id in locationsToDisplay">
-            <div class="header" @click="toggleLocationExpansion(id)">
-                <h2>{{ locations[id].name }}</h2>
-                <svg xmlns="http://www.w3.org/2000/svg">
-                    <use xlink:href="/images/icons.svg#chevron-down" v-if="!locations[id].expanded"></use>
-                    <use xlink:href="/images/icons.svg#chevron-up" v-else></use>
-                </svg>
-            </div>
+        <div class="locations">
+            <h2>Existing Items</h2>
+            <div class="location" v-for="id in locationsToDisplay">
+                <div class="header" @click="toggleLocationExpansion(id)">
+                    <h3>{{ locations[id].name }}</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="/images/icons.svg#chevron-down" v-if="!locations[id].expanded"></use>
+                        <use xlink:href="/images/icons.svg#chevron-up" v-else></use>
+                    </svg>
+                </div>
 
-            <div class="body" :class="{'is-expanded': locations[id].expanded}">
-                <item-editor v-for="itemId in locationItems[id].items"
-                             :key="'item-' + itemId"
-                             :item="items[itemId]"
-                             :existingItems="existingItems"
-                             v-on:itemUpdated="updateName"
-                             v-on:itemDeleted="updateItems"
-                ></item-editor>
+                <div class="body" :class="{'is-expanded': locations[id].expanded}">
+                    <item-editor v-for="itemId in locationItems[id].items"
+                                 :key="'item-' + itemId"
+                                 :item="items[itemId]"
+                                 :existingItems="existingItems"
+                                 v-on:itemUpdated="updateName"
+                                 v-on:itemDeleted="updateItems"
+                    ></item-editor>
+                </div>
             </div>
         </div>
     </div>

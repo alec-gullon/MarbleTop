@@ -1,5 +1,5 @@
 <template>
-    <div class="ExpandableForm" :class="{'is-expanded': expanded}">
+    <div class="ExpandableForm flat-for-lg" :class="{'is-expanded': expanded}">
 
         <div class="header" @click="toggleExpanded">
             <svg xmlns="http://www.w3.org/2000/svg">

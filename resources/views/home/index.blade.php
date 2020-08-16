@@ -6,30 +6,9 @@
 @endsection
 
 @section('admin_content')
-    <ul class="OptionList">
-        <li>
-            <a href="{{ route('plans') }}">
-                @icon('shopping-cart')
-                <span class="text">Plans</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('items') }}">
-                @icon('home')
-                <span class="text">Items</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('recipes') }}">
-                @icon('heart')
-                <span class="text">Recipes</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('collections') }}">
-                @icon('edit-pencil')
-                <span class="text">Collections</span>
-            </a>
-        </li>
-    </ul>
+
+    <div style="padding: 24px">
+        Something better will be coming here soon!
+    </div>
+
 @endsection

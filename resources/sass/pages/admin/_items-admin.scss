@@ -1,39 +1,79 @@
 .ItemsAdmin {
     padding: 21px;
 
+    @include lg() {
+        padding-right: 0;
+    }
+
+    @include lg() {
+        display: flex;
+        justify-content: space-between;
+    }
+
     > .ExpandableForm {
         margin-bottom: 32px;
         padding-bottom: 16px;
         border-bottom: 1px solid $grey-lightest;
+
+        @include lg() {
+            width: 45%;
+            border-bottom: 0;
+        }
     }
 
-    > .location {
-        margin-bottom: 16px;
-
-        &:last-child {
-            margin-bottom: 0;
+    > .locations {
+        @include lg() {
+            width: 50%;
         }
 
-        > .header {
-            display: flex;
-            > h2 {
-                font-size: 20px;
-                color: $green-dark;
-                margin-bottom: 20px;
-                flex-grow: 1;
-            }
-            > svg {
-                width: 30px;
-                height: 30px;
-                fill: $green-dark;
+        > h2 {
+            @include lg() {
+                color: $grey-dark;
+                font-size: 18px;
+                margin-bottom: 16px;
+                font-weight: 500;
             }
         }
 
-        > .body {
-            display: none;
+        > .location {
+            margin-bottom: 16px;
 
-            &.is-expanded {
-                display: block;
+            @include lg() {
+                border-bottom: 1px solid $grey-lightest;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+
+                @include lg() {
+                    border-bottom: 0;
+                }
+            }
+
+            > .header {
+                display: flex;
+                cursor: pointer;
+
+                > h3 {
+                    font-size: 20px;
+                    color: $green-dark;
+                    margin-bottom: 20px;
+                    flex-grow: 1;
+                }
+
+                > svg {
+                    width: 30px;
+                    height: 30px;
+                    fill: $green-dark;
+                }
+            }
+
+            > .body {
+                display: none;
+
+                &.is-expanded {
+                    display: block;
+                }
             }
         }
     }
@@ -49,6 +89,7 @@
         width: 25px;
         fill: $green-dark;
         margin-left: 12px;
+        cursor: pointer;
 
         &:last-child {
             fill: $alert;

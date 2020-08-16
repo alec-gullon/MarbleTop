@@ -794,6 +794,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['initialItems', 'initialLocations'],
@@ -2584,7 +2586,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "ExpandableForm", class: { "is-expanded": _vm.expanded } },
+    {
+      staticClass: "ExpandableForm flat-for-lg",
+      class: { "is-expanded": _vm.expanded }
+    },
     [
       _c("div", { staticClass: "header", on: { click: _vm.toggleExpanded } }, [
         _c("svg", { attrs: { xmlns: "http://www.w3.org/2000/svg" } }, [
@@ -2975,58 +2980,75 @@ var render = function() {
         on: { itemAdded: _vm.updateItems }
       }),
       _vm._v(" "),
-      _vm._l(_vm.locationsToDisplay, function(id) {
-        return _c("div", { staticClass: "location" }, [
-          _c(
-            "div",
-            {
-              staticClass: "header",
-              on: {
-                click: function($event) {
-                  return _vm.toggleLocationExpansion(id)
-                }
-              }
-            },
-            [
-              _c("h2", [_vm._v(_vm._s(_vm.locations[id].name))]),
-              _vm._v(" "),
-              _c("svg", { attrs: { xmlns: "http://www.w3.org/2000/svg" } }, [
-                !_vm.locations[id].expanded
-                  ? _c("use", {
-                      attrs: { "xlink:href": "/images/icons.svg#chevron-down" }
-                    })
-                  : _c("use", {
-                      attrs: { "xlink:href": "/images/icons.svg#chevron-up" }
-                    })
-              ])
-            ]
-          ),
+      _c(
+        "div",
+        { staticClass: "locations" },
+        [
+          _c("h2", [_vm._v("Existing Items")]),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "body",
-              class: { "is-expanded": _vm.locations[id].expanded }
-            },
-            _vm._l(_vm.locationItems[id].items, function(itemId) {
-              return _c("item-editor", {
-                key: "item-" + itemId,
-                attrs: {
-                  item: _vm.items[itemId],
-                  existingItems: _vm.existingItems
+          _vm._l(_vm.locationsToDisplay, function(id) {
+            return _c("div", { staticClass: "location" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "header",
+                  on: {
+                    click: function($event) {
+                      return _vm.toggleLocationExpansion(id)
+                    }
+                  }
                 },
-                on: {
-                  itemUpdated: _vm.updateName,
-                  itemDeleted: _vm.updateItems
-                }
-              })
-            }),
-            1
-          )
-        ])
-      })
+                [
+                  _c("h3", [_vm._v(_vm._s(_vm.locations[id].name))]),
+                  _vm._v(" "),
+                  _c(
+                    "svg",
+                    { attrs: { xmlns: "http://www.w3.org/2000/svg" } },
+                    [
+                      !_vm.locations[id].expanded
+                        ? _c("use", {
+                            attrs: {
+                              "xlink:href": "/images/icons.svg#chevron-down"
+                            }
+                          })
+                        : _c("use", {
+                            attrs: {
+                              "xlink:href": "/images/icons.svg#chevron-up"
+                            }
+                          })
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "body",
+                  class: { "is-expanded": _vm.locations[id].expanded }
+                },
+                _vm._l(_vm.locationItems[id].items, function(itemId) {
+                  return _c("item-editor", {
+                    key: "item-" + itemId,
+                    attrs: {
+                      item: _vm.items[itemId],
+                      existingItems: _vm.existingItems
+                    },
+                    on: {
+                      itemUpdated: _vm.updateName,
+                      itemDeleted: _vm.updateItems
+                    }
+                  })
+                }),
+                1
+              )
+            ])
+          })
+        ],
+        2
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []

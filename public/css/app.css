@@ -218,8 +218,16 @@ button {
   color: white;
 }
 
+.Button.is-primary:hover {
+  background: #133023;
+}
+
 .Button.is-secondary {
   background: white;
+}
+
+.Button.is-secondary:hover {
+  background: #E8E8E8;
 }
 
 .Button.has-shadow {
@@ -417,6 +425,7 @@ input[type=submit].Button {
   border: 1px solid #cccccc;
   border-radius: 4px;
   background: white;
+  font-size: 16px;
 }
 
 .Select.is-error {
@@ -464,12 +473,12 @@ input[type=submit].Button {
   padding-top: 28px;
 }
 
-.AdminContent > .header {
-  padding: 0 21px 32px 21px;
+.AdminContent > .header-wrapper {
   position: relative;
+  z-index: 1;
 }
 
-.AdminContent > .header:before {
+.AdminContent > .header-wrapper:before {
   content: "";
   position: absolute;
   top: 0;
@@ -479,56 +488,78 @@ input[type=submit].Button {
   border-bottom: 1px solid #E8E8E8;
 }
 
-.AdminContent > .header > h1 {
+.AdminContent > .header-wrapper > .header {
+  padding: 0 21px 32px 21px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .AdminContent > .header-wrapper > .header {
+    padding: 0 0 32px 0;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+}
+
+.AdminContent > .header-wrapper > .header > h1 {
   font-size: 26px;
   font-weight: 400;
   margin-bottom: 4px;
   color: #22543D;
 }
 
-.AdminContent > .header .heading-tag {
+.AdminContent > .header-wrapper > .header .heading-tag {
   font-size: 15px;
   color: #425466;
   line-height: 1.25;
 }
 
-.AdminContent > .header.with-icon {
+.AdminContent > .header-wrapper > .header.with-icon {
   display: flex;
   align-items: center;
 }
 
-.AdminContent > .header.with-icon > a {
+.AdminContent > .header-wrapper > .header.with-icon > a {
   z-index: 2;
 }
 
-.AdminContent > .header.with-icon > a > svg {
+.AdminContent > .header-wrapper > .header.with-icon > a > svg {
   height: 18px;
   width: 18px;
   fill: #22543D;
   margin-left: 16px;
 }
 
-.AdminContent > .content {
+.AdminContent > .content-wrapper {
+  background: white;
+  min-height: 400px;
+}
+
+.AdminContent > .content-wrapper > .content {
   background: white;
   padding: 0;
-  min-height: 370px;
   position: relative;
-  border-top: 1px solid #E8E8E8;
 }
 
 @media only screen and (min-width: 768px) {
-  .AdminContent > .content {
-    min-height: 570px;
+  .AdminContent > .content-wrapper > .content {
+    min-height: 600px;
     padding-left: 200px;
   }
 }
 
-.AdminContent > .content > .sidebar {
+@media only screen and (min-width: 1024px) {
+  .AdminContent > .content-wrapper > .content {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+}
+
+.AdminContent > .content-wrapper > .content > .sidebar {
   display: none;
 }
 
 @media only screen and (min-width: 768px) {
-  .AdminContent > .content > .sidebar {
+  .AdminContent > .content-wrapper > .content > .sidebar {
     display: block;
     height: 100%;
     border-right: 1px solid #E8E8E8;
@@ -540,17 +571,23 @@ input[type=submit].Button {
   }
 }
 
-.AdminContent > .content > .heading {
+@media only screen and (min-width: 1024px) {
+  .AdminContent > .content-wrapper > .content > .sidebar > .OptionList {
+    margin-left: -21px;
+  }
+}
+
+.AdminContent > .content-wrapper > .content > .heading {
   color: #22543D;
   font-weight: 500;
   margin-bottom: 16px;
 }
 
-.AdminContent > .content > .OptionList {
+.AdminContent > .content-wrapper > .content > .OptionList {
   padding: 16px 0;
 }
 
-.AdminContent > .content > .OptionList:last-child {
+.AdminContent > .content-wrapper > .content > .OptionList:last-child {
   margin-bottom: 0;
 }
 
@@ -595,16 +632,17 @@ input[type=submit].Button {
   border-bottom: 0;
 }
 
-.ExpandableForm .header {
+.ExpandableForm > .header {
   display: flex;
   font-size: 18px;
   align-items: center;
   font-weight: 500;
-  color: #22543D;
+  color: #1A202C;
   width: 100%;
+  cursor: pointer;
 }
 
-.ExpandableForm .header > svg {
+.ExpandableForm > .header > svg {
   height: 30px;
   width: 30px;
   fill: #22543D;
@@ -637,6 +675,18 @@ input[type=submit].Button {
 }
 
 .ExpandableForm.is-expanded > .body {
+  display: flex;
+}
+
+.ExpandableForm.flat-for-lg > .header {
+  cursor: default;
+}
+
+.ExpandableForm.flat-for-lg > .header > svg {
+  display: none;
+}
+
+.ExpandableForm.flat-for-lg > .body {
   display: flex;
 }
 
@@ -848,10 +898,10 @@ input[type=submit].Button {
   background: white;
   height: 80px;
   position: fixed;
+  z-index: 2;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -991,8 +1041,8 @@ input[type=submit].Button {
 
 @media only screen and (min-width: 768px) and (min-width: 1024px) {
   .PrimaryNav > .bar .body > .links > .admin > ul {
-    top: 60%;
-    left: 30px;
+    top: 80%;
+    left: 0;
   }
 }
 
@@ -1034,7 +1084,6 @@ input[type=submit].Button {
 
 .PrimaryNav > .mobile {
   position: fixed;
-  z-index: 1;
   top: 0;
   left: -251px;
   background: white;
@@ -1301,6 +1350,7 @@ input[type=submit].Button {
 
 .Hero > .body > .buttons > .Button {
   margin-right: 16px;
+  min-width: 70px;
 }
 
 .Hero > .body > .buttons > .Button:last-child {
@@ -1463,42 +1513,90 @@ input[type=submit].Button {
   padding: 21px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .ItemsAdmin {
+    padding-right: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .ItemsAdmin {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 .ItemsAdmin > .ExpandableForm {
   margin-bottom: 32px;
   padding-bottom: 16px;
   border-bottom: 1px solid #E8E8E8;
 }
 
-.ItemsAdmin > .location {
+@media only screen and (min-width: 1024px) {
+  .ItemsAdmin > .ExpandableForm {
+    width: 45%;
+    border-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .ItemsAdmin > .locations {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .ItemsAdmin > .locations > h2 {
+    color: #1A202C;
+    font-size: 18px;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+}
+
+.ItemsAdmin > .locations > .location {
   margin-bottom: 16px;
 }
 
-.ItemsAdmin > .location:last-child {
+@media only screen and (min-width: 1024px) {
+  .ItemsAdmin > .locations > .location {
+    border-bottom: 1px solid #E8E8E8;
+  }
+}
+
+.ItemsAdmin > .locations > .location:last-child {
   margin-bottom: 0;
 }
 
-.ItemsAdmin > .location > .header {
-  display: flex;
+@media only screen and (min-width: 1024px) {
+  .ItemsAdmin > .locations > .location:last-child {
+    border-bottom: 0;
+  }
 }
 
-.ItemsAdmin > .location > .header > h2 {
+.ItemsAdmin > .locations > .location > .header {
+  display: flex;
+  cursor: pointer;
+}
+
+.ItemsAdmin > .locations > .location > .header > h3 {
   font-size: 20px;
   color: #22543D;
   margin-bottom: 20px;
   flex-grow: 1;
 }
 
-.ItemsAdmin > .location > .header > svg {
+.ItemsAdmin > .locations > .location > .header > svg {
   width: 30px;
   height: 30px;
   fill: #22543D;
 }
 
-.ItemsAdmin > .location > .body {
+.ItemsAdmin > .locations > .location > .body {
   display: none;
 }
 
-.ItemsAdmin > .location > .body.is-expanded {
+.ItemsAdmin > .locations > .location > .body.is-expanded {
   display: block;
 }
 
@@ -1513,6 +1611,7 @@ input[type=submit].Button {
   width: 25px;
   fill: #22543D;
   margin-left: 12px;
+  cursor: pointer;
 }
 
 .ItemEditor > svg:last-child {

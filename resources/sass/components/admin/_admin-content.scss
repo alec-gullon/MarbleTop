@@ -1,9 +1,9 @@
 .AdminContent {
     padding-top: 28px;
 
-    > .header {
-        padding: 0 21px 32px 21px;
+    > .header-wrapper {
         position: relative;
+        z-index: 1;
 
         &:before {
             content: '';
@@ -15,75 +15,101 @@
             border-bottom: 1px solid $grey-lightest;
         }
 
-        > h1 {
-            font-size: 26px;
-            font-weight: 400;
-            margin-bottom: 4px;
-            color: $green-dark;
-        }
+        > .header {
+            padding: 0 21px 32px 21px;
 
-        .heading-tag {
-            font-size: 15px;
-            color: $grey-mid;
-            line-height: 1.25;
-        }
+            @include lg() {
+                padding: 0 0 32px 0;
+                max-width: $container-width;
+                margin: 0 auto;
+            }
 
-        &.with-icon {
-            display: flex;
-            align-items: center;
+            > h1 {
+                font-size: 26px;
+                font-weight: 400;
+                margin-bottom: 4px;
+                color: $green-dark;
+            }
 
-            > a {
-                z-index: 2;
-                > svg {
-                    height: 18px;
-                    width: 18px;
-                    fill: $green-dark;
-                    margin-left: 16px;
+            .heading-tag {
+                font-size: 15px;
+                color: $grey-mid;
+                line-height: 1.25;
+            }
+
+            &.with-icon {
+                display: flex;
+                align-items: center;
+
+                > a {
+                    z-index: 2;
+
+                    > svg {
+                        height: 18px;
+                        width: 18px;
+                        fill: $green-dark;
+                        margin-left: 16px;
+                    }
                 }
             }
         }
+
     }
 
-    > .content {
+    > .content-wrapper {
         background: white;
-        padding: 0;
-        min-height: 370px;
-        position: relative;
-        border-top: 1px solid $grey-lightest;
+        min-height: 400px;
 
-        @include md() {
-            min-height: 570px;
-            padding-left: 200px;
-        }
-
-
-        > .sidebar {
-            display: none;
+        > .content {
+            background: white;
+            padding: 0;
+            position: relative;
 
             @include md() {
-                display: block;
-                height: 100%;
-                border-right: 1px solid $grey-lightest;
+                min-height: 600px;
+                padding-left: 200px;
+            }
+
+            @include lg() {
+                max-width: $container-width;
+                margin: 0 auto;
+            }
+
+            > .sidebar {
+                display: none;
+
+                @include md() {
+                    display: block;
+                    height: 100%;
+                    border-right: 1px solid $grey-lightest;
+                    padding: 16px 0;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 200px;
+                }
+
+                @include lg() {
+                    > .OptionList {
+                        margin-left: -21px;
+                    }
+                }
+            }
+
+            > .heading {
+                color: $green-dark;
+                font-weight: 500;
+                margin-bottom: 16px;
+            }
+
+            > .OptionList {
                 padding: 16px 0;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 200px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
             }
         }
 
-        > .heading {
-            color: $green-dark;
-            font-weight: 500;
-            margin-bottom: 16px;
-        }
-
-        > .OptionList {
-            padding: 16px 0;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
     }
 }

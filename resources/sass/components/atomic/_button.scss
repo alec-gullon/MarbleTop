@@ -23,13 +23,23 @@
     -ms-user-select: none;
     box-sizing: content-box;
 
+
+
     &.is-primary {
         background: $green-dark;
         color: white;
+
+        &:hover {
+            background: darken($green-dark, 10);
+        }
     }
 
     &.is-secondary {
         background: white;
+
+        &:hover {
+            background: $grey-lightest;
+        }
     }
 
     &.has-shadow {
