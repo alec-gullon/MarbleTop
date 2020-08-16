@@ -160,7 +160,7 @@ body {
   padding-top: 80px;
 }
 
-.container {
+#app > .container {
   max-width: 1280px;
   margin: 0 auto;
 }
@@ -645,65 +645,71 @@ button {
   font-weight: 700;
 }
 
+@media only screen and (min-width: 768px) {
+  .Footer {
+    padding: 32px 24px;
+  }
+}
+
 @media only screen and (min-width: 1024px) {
   .Footer {
     padding: 32px 0px;
   }
 }
 
-@media only screen and (min-width: 1024px) {
-  .Footer > .container {
-    padding: 0 32px;
-  }
+.Footer > .container {
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .PageContent {
   padding: 28px 21px;
-  min-height: 370px;
+  min-height: 600px;
 }
 
 @media only screen and (min-width: 768px) {
   .PageContent {
-    padding: 28px 24px;
-    min-height: 570px;
+    padding: 0 24px;
+    min-height: 800px;
   }
 }
 
 @media only screen and (min-width: 1024px) {
   .PageContent {
     padding: 0;
-    min-height: 750px;
   }
 }
 
 .PageContent > .hero {
-  background-size: 0 0;
+  max-width: 1280px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+  .PageContent > .hero {
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
   .PageContent > .hero {
     height: 450px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100%;
   }
 }
 
-.PageContent > .hero > .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-
-@media only screen and (min-width: 1024px) {
-  .PageContent > .hero > .container {
-    padding: 0 32px;
+@media only screen and (min-width: 768px) {
+  .PageContent > .hero > .content {
+    width: 50%;
+    margin-left: 32px;
   }
 }
 
-.PageContent > .hero > .container > h1 {
+.PageContent > .hero > .content > h1 {
   font-size: 26px;
   font-weight: 400;
   margin-bottom: 4px;
@@ -711,19 +717,18 @@ button {
 }
 
 @media only screen and (min-width: 768px) {
-  .PageContent > .hero > .container > h1 {
+  .PageContent > .hero > .content > h1 {
     font-size: 30px;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .PageContent > .hero > .container > h1 {
+  .PageContent > .hero > .content > h1 {
     font-size: 50px;
-    font-style: italic;
   }
 }
 
-.PageContent > .hero > .container > .heading-tag {
+.PageContent > .hero > .content > .heading-tag {
   font-size: 15px;
   color: #425466;
   line-height: 1.25;
@@ -733,14 +738,14 @@ button {
 }
 
 @media only screen and (min-width: 768px) {
-  .PageContent > .hero > .container > .heading-tag {
+  .PageContent > .hero > .content > .heading-tag {
     font-size: 16px;
     border-bottom-width: 2px;
   }
 }
 
-@media only screen and (min-width: 1024px) {
-  .PageContent > .hero > .container > .heading-tag {
+@media only screen and (min-width: 768px) {
+  .PageContent > .hero > .content > .heading-tag {
     border-bottom: 0;
     margin-bottom: 0;
     padding-bottom: 0;
@@ -750,46 +755,57 @@ button {
   }
 }
 
-@media only screen and (min-width: 1024px) {
-  .PageContent > .container {
-    padding: 0 32px;
+.PageContent > .hero > img {
+  width: 50%;
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .PageContent > .hero > img {
+    display: block;
+  }
+}
+
+.PageContent > .content {
+  max-width: 1280px;
+}
+
+@media only screen and (min-width: 768px) {
+  .PageContent > .content {
+    border-top: 1px dashed #22543D;
+    margin: 0 auto;
+    padding: 32px;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .PageContent > .container > .content {
-    max-width: 768px;
-    margin-top: 32px;
+  .PageContent > .content {
+    padding-right: 512px;
   }
 }
 
-.PageContent > .container > .content > p {
+.PageContent > .content > p {
   margin-bottom: 16px;
   line-height: 1.6;
   color: #425466;
   font-size: 15px;
 }
 
-.PageContent > .container > .content > p > .highlighted {
+.PageContent > .content > p > .highlighted {
   color: #22543D;
   font-weight: 700;
 }
 
 @media only screen and (min-width: 768px) {
-  .PageContent > .container > .content > p {
+  .PageContent > .content > p {
     font-size: 16px;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .PageContent > .container > .content > p {
+  .PageContent > .content > p {
     font-size: 18px;
   }
-}
-
-.PageContent.is-narrow {
-  max-width: 380px;
-  margin: 0 auto;
 }
 
 .PrimaryNav > .bar {
@@ -799,20 +815,33 @@ button {
   top: 0;
   left: 0;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 1;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
+.PrimaryNav > .bar .body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1280px;
+  padding: 0 24px;
+  margin: 0 auto;
+  height: 100%;
+}
+
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar {
+  .PrimaryNav > .bar .body {
     justify-content: flex-start;
   }
 }
 
-.PrimaryNav > .bar > .hamburger {
+@media only screen and (min-width: 1024px) {
+  .PrimaryNav > .bar .body {
+    padding: 0;
+  }
+}
+
+.PrimaryNav > .bar .body > .hamburger {
   position: absolute;
   top: 30px;
   left: 30px;
@@ -823,45 +852,39 @@ button {
 }
 
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .hamburger {
+  .PrimaryNav > .bar .body > .hamburger {
     display: none;
   }
 }
 
-.PrimaryNav > .bar > .logo {
+.PrimaryNav > .bar .body > .logo {
   height: 65px;
 }
 
-@media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .logo {
-    margin-left: 16px;
-  }
-}
-
-.PrimaryNav > .bar > .logo > img {
+.PrimaryNav > .bar .body > .logo > img {
   height: 100%;
 }
 
-.PrimaryNav > .bar > .links {
+.PrimaryNav > .bar .body > .links {
   display: none;
   margin-left: 16px;
 }
 
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .links {
+  .PrimaryNav > .bar .body > .links {
     display: flex;
     height: 100%;
     align-items: center;
     flex-grow: 1;
   }
 
-  .PrimaryNav > .bar > .links > li {
+  .PrimaryNav > .bar .body > .links > li {
     height: 100%;
     display: flex;
     align-items: center;
   }
 
-  .PrimaryNav > .bar > .links > li > a {
+  .PrimaryNav > .bar .body > .links > li > a {
     height: 100%;
     display: flex;
     align-items: center;
@@ -871,13 +894,13 @@ button {
 }
 
 @media only screen and (min-width: 768px) and (min-width: 1024px) {
-  .PrimaryNav > .bar > .links > li > a {
+  .PrimaryNav > .bar .body > .links > li > a {
     width: 140px;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .links > li > a:hover {
+  .PrimaryNav > .bar .body > .links > li > a:hover {
     background: #22543D;
     color: white;
     font-weight: 500;
@@ -885,33 +908,33 @@ button {
 }
 
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .links > .admin {
+  .PrimaryNav > .bar .body > .links > .admin {
     position: relative;
     cursor: pointer;
   }
 }
 
 @media only screen and (min-width: 768px) and (min-width: 768px) {
-  .PrimaryNav > .bar > .links > .admin {
+  .PrimaryNav > .bar .body > .links > .admin {
     padding: 0 16px;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .links > .admin > .toggle {
+  .PrimaryNav > .bar .body > .links > .admin > .toggle {
     display: flex;
     align-items: center;
   }
 }
 
 @media only screen and (min-width: 768px) and (min-width: 768px) {
-  .PrimaryNav > .bar > .links > .admin > .toggle {
+  .PrimaryNav > .bar .body > .links > .admin > .toggle {
     height: 100%;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .links > .admin > .toggle > svg {
+  .PrimaryNav > .bar .body > .links > .admin > .toggle > svg {
     margin-left: 8px;
     height: 20px;
     width: 20px;
@@ -919,7 +942,7 @@ button {
 }
 
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .links > .admin > ul {
+  .PrimaryNav > .bar .body > .links > .admin > ul {
     display: none;
     position: absolute;
     background: white;
@@ -931,20 +954,20 @@ button {
 }
 
 @media only screen and (min-width: 768px) and (min-width: 1024px) {
-  .PrimaryNav > .bar > .links > .admin > ul {
+  .PrimaryNav > .bar .body > .links > .admin > ul {
     top: 60%;
     left: 30px;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .links > .admin > ul > li {
+  .PrimaryNav > .bar .body > .links > .admin > ul > li {
     padding: 12px 18px;
     border-bottom: 1px solid #E8E8E8;
     position: relative;
   }
 
-  .PrimaryNav > .bar > .links > .admin > ul > li:hover::before {
+  .PrimaryNav > .bar .body > .links > .admin > ul > li:hover::before {
     content: "";
     position: absolute;
     height: 100%;
@@ -956,21 +979,20 @@ button {
 }
 
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .links > .admin > ul.is-enabled {
+  .PrimaryNav > .bar .body > .links > .admin > ul.is-enabled {
     display: block;
   }
 }
 
-.PrimaryNav > .bar > .Button,
-.PrimaryNav > .bar form {
+.PrimaryNav > .bar .body > .Button,
+.PrimaryNav > .bar .body form {
   display: none;
 }
 
 @media only screen and (min-width: 768px) {
-  .PrimaryNav > .bar > .Button,
-  .PrimaryNav > .bar form {
+  .PrimaryNav > .bar .body > .Button,
+  .PrimaryNav > .bar .body form {
     display: block;
-    margin-right: 16px;
   }
 }
 
@@ -1263,6 +1285,12 @@ button {
   }
 }
 
+@media only screen and (min-width: 1024px) {
+  .FeatureBoxes {
+    margin: 0;
+  }
+}
+
 .FeatureBoxes > .box {
   margin-bottom: 32px;
 }
@@ -1314,9 +1342,68 @@ button {
   }
 }
 
+.Login {
+  max-width: 768px;
+  margin: 48px auto;
+  padding: 0 21px;
+  min-height: 400px;
+}
+
+@media only screen and (min-width: 768px) {
+  .Login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .Login > .header {
+    width: 600px;
+  }
+}
+
+.Login > .header > h1 {
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 4px;
+  color: #22543D;
+}
+
+@media only screen and (min-width: 768px) {
+  .Login > .header > h1 {
+    font-size: 30px;
+  }
+}
+
+.Login > .header > .heading-tag {
+  font-size: 15px;
+  color: #425466;
+  line-height: 1.25;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 32px;
+}
+
+@media only screen and (min-width: 768px) {
+  .Login > .header > .heading-tag {
+    font-size: 16px;
+    border-bottom-width: 2px;
+  }
+}
+
 .LoginForm {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .LoginForm {
+    width: 400px;
+  }
 }
 
 .LoginForm > .MessageBox {

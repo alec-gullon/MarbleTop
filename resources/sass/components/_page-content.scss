@@ -1,36 +1,38 @@
 .PageContent {
     padding: 28px 21px;
-    min-height: 370px;
+    min-height: 600px;
 
     @include md() {
-        padding: 28px 24px;
-        min-height: 570px;
+        padding: 0 24px;
+        min-height: 800px;
     }
 
     @include lg() {
         padding: 0;
-        min-height: 750px;
     }
 
     > .hero {
-        background-size: 0 0;
+        max-width: $container-width;
+        margin: 0 auto;
+        overflow: hidden;
+
+        @include md() {
+            height: 300px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
 
         @include lg() {
             height: 450px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            width: 100%;
         }
 
-        > .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
+        > .content {
 
-            @include lg() {
-                padding: 0 32px;
+            @include md() {
+                width: 50%;
+                margin-left: 32px;
             }
 
             > h1 {
@@ -45,7 +47,6 @@
 
                 @include lg() {
                     font-size: 50px;
-                    font-style: italic;
                 }
             }
 
@@ -62,7 +63,7 @@
                     border-bottom-width: 2px;
                 }
 
-                @include lg() {
+                @include md() {
                     border-bottom: 0;
                     margin-bottom: 0;
                     padding-bottom: 0;
@@ -72,46 +73,48 @@
                 }
             }
         }
+
+        > img {
+            width: 50%;
+            display: none;
+
+            @include md() {
+                display: block;
+            }
+        }
     }
 
-    > .container {
+    > .content {
+        max-width: $container-width;
+
+        @include md() {
+            border-top: 1px dashed $green-dark;
+            margin: 0 auto;
+            padding: 32px;
+        }
 
         @include lg() {
-            padding: 0 32px;
+            padding-right: 512px;
         }
 
-        > .content {
+        > p {
+            margin-bottom: 16px;
+            line-height: 1.6;
+            color: $grey-mid;
+            font-size: 15px;
+
+            > .highlighted {
+                color: $green-dark;
+                font-weight: 700;
+            }
+
+            @include md() {
+                font-size: 16px;
+            }
 
             @include lg() {
-                max-width: 768px;
-                margin-top: 32px;
-            }
-
-            > p {
-                margin-bottom: 16px;
-                line-height: 1.6;
-                color: $grey-mid;
-                font-size: 15px;
-
-                > .highlighted {
-                    color: $green-dark;
-                    font-weight: 700;
-                }
-
-                @include md() {
-                    font-size: 16px;
-                }
-
-                @include lg() {
-                    font-size: 18px;
-                }
+                font-size: 18px;
             }
         }
-
-    }
-
-    &.is-narrow {
-        max-width: 380px;
-        margin: 0 auto;
     }
 }

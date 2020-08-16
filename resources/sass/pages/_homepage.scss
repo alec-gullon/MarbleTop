@@ -70,6 +70,10 @@
         padding-top: 32px;
     }
 
+    @include lg() {
+        margin: 0;
+    }
+
     > .box {
         margin-bottom: 32px;
 

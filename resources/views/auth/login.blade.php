@@ -2,9 +2,11 @@
 
 @section('content')
 
-    <div class="PageContent is-narrow">
-        <h1>Log In</h1>
-        <p class="heading-tag">Good to see you again</p>
+    <div class="Login">
+        <div class="header">
+            <h1>Log In</h1>
+            <p class="heading-tag">Good to see you again</p>
+        </div>
 
         <div class="content">
             <login-form inline-template>

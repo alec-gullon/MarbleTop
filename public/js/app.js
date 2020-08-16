@@ -1449,6 +1449,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     'authenticated': {
@@ -3623,87 +3625,89 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "PrimaryNav" }, [
     _c("div", { staticClass: "bar" }, [
-      _c(
-        "svg",
-        {
-          staticClass: "hamburger",
-          attrs: { xmlns: "http://www.w3.org/2000/svg" },
-          on: { click: _vm.toggleMobileNav }
-        },
-        [_c("use", { attrs: { "xlink:href": "/images/icons.svg#menu" } })]
-      ),
-      _vm._v(" "),
-      _c("a", { staticClass: "logo", attrs: { href: _vm.headingLink } }, [
-        _c("img", { attrs: { src: "/images/logo-2.svg" } })
-      ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "links" }, [
-        _vm._m(0),
+      _c("div", { staticClass: "body" }, [
+        _c(
+          "svg",
+          {
+            staticClass: "hamburger",
+            attrs: { xmlns: "http://www.w3.org/2000/svg" },
+            on: { click: _vm.toggleMobileNav }
+          },
+          [_c("use", { attrs: { "xlink:href": "/images/icons.svg#menu" } })]
+        ),
         _vm._v(" "),
-        _vm._m(1),
+        _c("a", { staticClass: "logo", attrs: { href: _vm.headingLink } }, [
+          _c("img", { attrs: { src: "/images/logo-2.svg" } })
+        ]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "links" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _vm.authenticated
+            ? _c(
+                "li",
+                { staticClass: "admin", on: { click: _vm.toggleAdminLinks } },
+                [
+                  _c("div", { staticClass: "toggle" }, [
+                    _c("span", [_vm._v("Your Kitchen")]),
+                    _vm._v(" "),
+                    _c(
+                      "svg",
+                      { attrs: { xmlns: "http://www.w3.org/2000/svg" } },
+                      [
+                        !_vm.displayAdminLinks
+                          ? _c("use", {
+                              attrs: {
+                                "xlink:href": "/images/icons.svg#chevron-down"
+                              }
+                            })
+                          : _c("use", {
+                              attrs: {
+                                "xlink:href": "/images/icons.svg#chevron-down"
+                              }
+                            })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { class: { "is-enabled": _vm.displayAdminLinks } }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _vm._m(5)
+                  ])
+                ]
+              )
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        !_vm.authenticated
+          ? _c(
+              "a",
+              { staticClass: "Button is-primary", attrs: { href: "/login" } },
+              [_vm._v("\n                Log In\n            ")]
+            )
+          : _vm._e(),
         _vm._v(" "),
         _vm.authenticated
-          ? _c(
-              "li",
-              { staticClass: "admin", on: { click: _vm.toggleAdminLinks } },
-              [
-                _c("div", { staticClass: "toggle" }, [
-                  _c("span", [_vm._v("Your Kitchen")]),
-                  _vm._v(" "),
-                  _c(
-                    "svg",
-                    { attrs: { xmlns: "http://www.w3.org/2000/svg" } },
-                    [
-                      !_vm.displayAdminLinks
-                        ? _c("use", {
-                            attrs: {
-                              "xlink:href": "/images/icons.svg#chevron-down"
-                            }
-                          })
-                        : _c("use", {
-                            attrs: {
-                              "xlink:href": "/images/icons.svg#chevron-down"
-                            }
-                          })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("ul", { class: { "is-enabled": _vm.displayAdminLinks } }, [
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _vm._m(3),
-                  _vm._v(" "),
-                  _vm._m(4),
-                  _vm._v(" "),
-                  _vm._m(5)
-                ])
-              ]
-            )
+          ? _c("form", { attrs: { method: "POST", action: "/logout" } }, [
+              _c("input", {
+                attrs: { type: "hidden", name: "_token" },
+                domProps: { value: _vm.csrftoken }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "Button is-primary",
+                attrs: { type: "submit", value: "Logout" }
+              })
+            ])
           : _vm._e()
-      ]),
-      _vm._v(" "),
-      !_vm.authenticated
-        ? _c(
-            "a",
-            { staticClass: "Button is-primary", attrs: { href: "/login" } },
-            [_vm._v("\n            Log In\n        ")]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.authenticated
-        ? _c("form", { attrs: { method: "POST", action: "/logout" } }, [
-            _c("input", {
-              attrs: { type: "hidden", name: "_token" },
-              domProps: { value: _vm.csrftoken }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "Button is-primary",
-              attrs: { type: "submit", value: "Logout" }
-            })
-          ])
-        : _vm._e()
+      ])
     ]),
     _vm._v(" "),
     _c(

@@ -1,39 +1,41 @@
 <template>
     <div class="PrimaryNav">
         <div class="bar">
-            <svg xmlns="http://www.w3.org/2000/svg" class="hamburger" @click="toggleMobileNav">
-                <use :xlink:href="'/images/icons.svg#menu'"></use>
-            </svg>
-            <a :href="headingLink" class="logo">
-                <img src="/images/logo-2.svg" />
-            </a>
-            <ul class="links">
-                <li><a href="/accounts/create">How it Works</a></li>
-                <li><a href="/accounts/create">About Us</a></li>
+            <div class="body">
+                <svg xmlns="http://www.w3.org/2000/svg" class="hamburger" @click="toggleMobileNav">
+                    <use :xlink:href="'/images/icons.svg#menu'"></use>
+                </svg>
+                <a :href="headingLink" class="logo">
+                    <img src="/images/logo-2.svg" />
+                </a>
+                <ul class="links">
+                    <li><a href="/accounts/create">How it Works</a></li>
+                    <li><a href="/accounts/create">About Us</a></li>
 
-                <li class="admin" v-if="authenticated" @click="toggleAdminLinks">
-                    <div class="toggle">
-                        <span>Your Kitchen</span>
-                        <svg xmlns="http://www.w3.org/2000/svg">
-                            <use :xlink:href="'/images/icons.svg#chevron-down'" v-if="!displayAdminLinks"></use>
-                            <use :xlink:href="'/images/icons.svg#chevron-down'" v-else></use>
-                        </svg>
-                    </div>
-                    <ul :class="{'is-enabled': displayAdminLinks}">
-                        <li><a href="/home/plans">Plans</a></li>
-                        <li><a href="/home/collections">Collections</a></li>
-                        <li><a href="/home/recipes">Recipes</a></li>
-                        <li><a href="/home/items">Items</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <a href="/login" class="Button is-primary" v-if="!authenticated">
-                Log In
-            </a>
-            <form method="POST" action="/logout" v-if="authenticated">
-                <input type="hidden" name="_token" :value="csrftoken" />
-                <input type="submit" class="Button is-primary" value="Logout" />
-            </form>
+                    <li class="admin" v-if="authenticated" @click="toggleAdminLinks">
+                        <div class="toggle">
+                            <span>Your Kitchen</span>
+                            <svg xmlns="http://www.w3.org/2000/svg">
+                                <use :xlink:href="'/images/icons.svg#chevron-down'" v-if="!displayAdminLinks"></use>
+                                <use :xlink:href="'/images/icons.svg#chevron-down'" v-else></use>
+                            </svg>
+                        </div>
+                        <ul :class="{'is-enabled': displayAdminLinks}">
+                            <li><a href="/home/plans">Plans</a></li>
+                            <li><a href="/home/collections">Collections</a></li>
+                            <li><a href="/home/recipes">Recipes</a></li>
+                            <li><a href="/home/items">Items</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <a href="/login" class="Button is-primary" v-if="!authenticated">
+                    Log In
+                </a>
+                <form method="POST" action="/logout" v-if="authenticated">
+                    <input type="hidden" name="_token" :value="csrftoken" />
+                    <input type="submit" class="Button is-primary" value="Logout" />
+                </form>
+            </div>
         </div>
 
         <div class="mobile" :class="{'is-active': mobileNavActive}">

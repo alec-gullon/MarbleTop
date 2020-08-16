@@ -7,147 +7,154 @@
         top: 0;
         left: 0;
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         z-index: 1;
         box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 
-        @include md() {
-            justify-content: flex-start;
-        }
-
-        > .hamburger {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            height: 20px;
-            width: 20px;
-            fill: green;
-            stroke: $green-dark;
+        .body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: $container-width;
+            padding: 0 24px;
+            margin: 0 auto;
+            height: 100%;
 
             @include md() {
-                display: none;
-            }
-        }
-
-        > .logo {
-            height: 65px;
-
-            @include md() {
-                margin-left: 16px;
+                justify-content: flex-start;
             }
 
-            > img {
-                height: 100%;
+            @include lg() {
+                padding: 0;
             }
-        }
 
-        > .links {
-            display: none;
-            margin-left: 16px;
+            > .hamburger {
+                position: absolute;
+                top: 30px;
+                left: 30px;
+                height: 20px;
+                width: 20px;
+                fill: green;
+                stroke: $green-dark;
 
-            @include md() {
-                display: flex;
-                height: 100%;
-                align-items: center;
-                flex-grow: 1;
+                @include md() {
+                    display: none;
+                }
+            }
 
-                > li {
+            > .logo {
+                height: 65px;
+
+                > img {
                     height: 100%;
-                    display: flex;
-                    align-items: center;
+                }
+            }
 
-                    > a {
+            > .links {
+                display: none;
+                margin-left: 16px;
+
+                @include md() {
+                    display: flex;
+                    height: 100%;
+                    align-items: center;
+                    flex-grow: 1;
+
+                    > li {
                         height: 100%;
                         display: flex;
                         align-items: center;
-                        justify-content: center;
-                        padding: 0 16px;
 
-                        @include lg() {
-                            width: 140px;
-                        }
-
-                        &:hover {
-                            background: $green-dark;
-                            color: white;
-                            font-weight: 500;
-                        }
-                    }
-                }
-
-                > .admin {
-                    position: relative;
-                    cursor: pointer;
-
-                    @include md() {
-                        padding: 0 16px;
-                    }
-
-                    > .toggle {
-                        display: flex;
-                        align-items: center;
-
-                        @include md() {
+                        > a {
                             height: 100%;
-                        }
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 0 16px;
 
-                        > svg {
-                            margin-left: 8px;
-                            height: 20px;
-                            width: 20px;
-                        }
-                    }
-
-                    > ul {
-                        display: none;
-                        position: absolute;
-                        background: white;
-                        top: 100%;
-                        left: 10px;
-                        box-shadow: 0 2px 4px 0 rgba(52,52,52,0.15);
-                        width: 150px;
-
-                        @include lg() {
-                            top: 60%;
-                            left: 30px;
-                        }
-
-                        > li {
-                            padding: 12px 18px;
-                            border-bottom: 1px solid $grey-lightest;
-                            position: relative;
+                            @include lg() {
+                                width: 140px;
+                            }
 
                             &:hover {
-                                &::before {
-                                    content: '';
-                                    position: absolute;
-                                    height: 100%;
-                                    width: 4px;
-                                    top: 0;
-                                    left: 0;
-                                    background: $green-dark
-                                }
+                                background: $green-dark;
+                                color: white;
+                                font-weight: 500;
+                            }
+                        }
+                    }
+
+                    > .admin {
+                        position: relative;
+                        cursor: pointer;
+
+                        @include md() {
+                            padding: 0 16px;
+                        }
+
+                        > .toggle {
+                            display: flex;
+                            align-items: center;
+
+                            @include md() {
+                                height: 100%;
+                            }
+
+                            > svg {
+                                margin-left: 8px;
+                                height: 20px;
+                                width: 20px;
                             }
                         }
 
-                        &.is-enabled {
-                            display: block;
+                        > ul {
+                            display: none;
+                            position: absolute;
+                            background: white;
+                            top: 100%;
+                            left: 10px;
+                            box-shadow: 0 2px 4px 0 rgba(52, 52, 52, 0.15);
+                            width: 150px;
+
+                            @include lg() {
+                                top: 60%;
+                                left: 30px;
+                            }
+
+                            > li {
+                                padding: 12px 18px;
+                                border-bottom: 1px solid $grey-lightest;
+                                position: relative;
+
+                                &:hover {
+                                    &::before {
+                                        content: '';
+                                        position: absolute;
+                                        height: 100%;
+                                        width: 4px;
+                                        top: 0;
+                                        left: 0;
+                                        background: $green-dark
+                                    }
+                                }
+                            }
+
+                            &.is-enabled {
+                                display: block;
+                            }
                         }
                     }
                 }
+
             }
 
-        }
+            > .Button, form {
+                display: none;
 
-        > .Button, form {
-            display: none;
-
-            @include md() {
-                display: block;
-                margin-right: 16px;
+                @include md() {
+                    display: block;
+                }
             }
+
         }
     }
 
