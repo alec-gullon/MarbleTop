@@ -190,17 +190,27 @@ button {
 .Button {
   border: 1px solid #22543D;
   background-color: #9AE6B4;
-  line-height: 40px;
-  height: 40px;
-  display: inline-block;
+  line-height: 1.5;
+  height: 24px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   color: #22543D;
   text-align: center;
-  padding: 0 24px;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   text-decoration: none;
   letter-spacing: -0.3px;
   position: relative;
+  padding: 7px 16px;
+  white-space: nowrap;
+  vertical-align: top;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  box-sizing: content-box;
 }
 
 .Button.is-primary {
@@ -267,6 +277,13 @@ button {
   border-bottom-color: #CC3333;
 }
 
+input[type=submit].Button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
 @-webkit-keyframes spinner {
   0% {
     transform: rotate(0deg);
@@ -288,11 +305,30 @@ button {
 }
 
 .Input {
-  padding: 0 8px;
   height: 40px;
   line-height: 1.5;
-  border: 1px solid #cccccc;
   border-radius: 4px;
+  box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
+  max-width: 100%;
+  width: 100%;
+  background: white;
+  color: #1A202C;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #cccccc;
+  font-size: 16px;
+  padding: 7px 11px;
+  position: relative;
+  vertical-align: top;
+  justify-content: flex-start;
+}
+
+.Input:hover {
+  border-color: #425466;
+}
+
+.Input:active {
+  outline: 0;
 }
 
 .Input.is-error {
