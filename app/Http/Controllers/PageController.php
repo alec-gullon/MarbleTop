@@ -13,4 +13,9 @@ class PageController extends Controller
     {
         return view('pages.create-account');
     }
+
+    public function about()
+    {
+        return view('pages.about');
+    }
 }

@@ -18,8 +18,12 @@
                 </p>
 
                 <div class="buttons">
-                    <a href="{{ route('login') }}" class="Button is-primary has-shadow">Sign In</a>
-                    <a href="{{ route('create-account') }}" class="Button is-secondary has-shadow">Create Account</a>
+                    @if (Auth::check())
+                        <a href="{{ route('home') }}" class="Button is-primary has-shadow">Home</a>
+                    @else
+                        <a href="{{ route('login') }}" class="Button is-primary has-shadow">Sign In</a>
+                        <a href="{{ route('create-account') }}" class="Button is-secondary has-shadow">Create Account</a>
+                    @endif
                 </div>
             </div>
 

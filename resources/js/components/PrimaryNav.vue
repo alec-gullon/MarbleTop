@@ -10,7 +10,7 @@
                 </a>
                 <ul class="links">
                     <li><a href="/accounts/create">How it Works</a></li>
-                    <li><a href="/accounts/create">About Us</a></li>
+                    <li><a href="/about">About Us</a></li>
 
                     <li class="admin" v-if="authenticated" @click="toggleAdminLinks">
                         <div class="toggle">

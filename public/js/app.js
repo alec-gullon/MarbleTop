@@ -878,8 +878,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      email: '',
-      password: ''
+      email: 'me@alecgullon.co.uk',
+      password: 'password'
     };
   }
 });
@@ -3874,7 +3874,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "/accounts/create" } }, [_vm._v("About Us")])
+      _c("a", { attrs: { href: "/about" } }, [_vm._v("About Us")])
     ])
   },
   function() {

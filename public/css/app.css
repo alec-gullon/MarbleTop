@@ -183,6 +183,22 @@ button {
   display: none !important;
 }
 
+.show-for-lg {
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  .show-for-lg {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .hide-for-lg {
+    display: none;
+  }
+}
+
 /**
  * The blocks and pages that define the application
  */
@@ -678,16 +694,18 @@ input[type=submit].Button {
   display: flex;
 }
 
-.ExpandableForm.flat-for-lg > .header {
-  cursor: default;
-}
+@media only screen and (min-width: 1024px) {
+  .ExpandableForm.flat-for-lg > .header {
+    cursor: default;
+  }
 
-.ExpandableForm.flat-for-lg > .header > svg {
-  display: none;
-}
+  .ExpandableForm.flat-for-lg > .header > svg {
+    display: none;
+  }
 
-.ExpandableForm.flat-for-lg > .body {
-  display: flex;
+  .ExpandableForm.flat-for-lg > .body {
+    display: flex;
+  }
 }
 
 .RecipeCreator {
@@ -852,6 +870,10 @@ input[type=submit].Button {
   }
 }
 
+.PageContent > .hero > img.is-medium {
+  height: 250px;
+}
+
 .PageContent > .content {
   max-width: 1280px;
 }
@@ -892,6 +914,25 @@ input[type=submit].Button {
   .PageContent > .content > p {
     font-size: 18px;
   }
+}
+
+.PageContent > .content > ul {
+  list-style: square;
+  margin-left: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  color: #425466;
+}
+
+.PageContent > .content > ul > li > strong {
+  color: #22543D;
+  font-weight: 700;
+}
+
+.PageContent > .content > ul > li > .highlighted {
+  color: #22543D;
+  font-weight: 500;
 }
 
 .PrimaryNav > .bar {
@@ -1510,7 +1551,7 @@ input[type=submit].Button {
 }
 
 .ItemsAdmin {
-  padding: 21px;
+  padding: 32px;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -1545,8 +1586,13 @@ input[type=submit].Button {
   }
 }
 
+.ItemsAdmin > .locations > h2 {
+  display: none;
+}
+
 @media only screen and (min-width: 1024px) {
   .ItemsAdmin > .locations > h2 {
+    display: block;
     color: #1A202C;
     font-size: 18px;
     margin-bottom: 16px;

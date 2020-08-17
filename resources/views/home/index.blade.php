@@ -7,8 +7,35 @@
 
 @section('admin_content')
 
-    <div style="padding: 24px">
+    <div style="padding: 24px" class="show-for-lg">
         Something better will be coming here soon!
     </div>
+
+    <ul class="OptionList hide-for-lg">
+        <li>
+            <a href="{{ route('plans') }}">
+                @icon('shopping-cart')
+                <span class="text">Plans</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('items') }}">
+                @icon('home')
+                <span class="text">Cupboard Items</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('recipes') }}">
+                @icon('heart')
+                <span class="text">Recipes</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('collections') }}">
+                @icon('edit-pencil')
+                <span class="text">Collections</span>
+            </a>
+        </li>
+    </ul>
 
 @endsection

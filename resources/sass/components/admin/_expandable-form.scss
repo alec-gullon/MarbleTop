@@ -46,15 +46,18 @@
     }
 
     &.flat-for-lg {
-        > .header {
-            cursor: default;
-            > svg {
-                display: none;
-            }
-        }
+        @include lg() {
+            > .header {
+                cursor: default;
 
-        > .body {
-            display: flex;
+                > svg {
+                    display: none;
+                }
+            }
+
+            > .body {
+                display: flex;
+            }
         }
     }
 }

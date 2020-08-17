@@ -4,6 +4,7 @@
 
 Route::get('/',                         'PageController@index')->name('homepage');
 Route::get('/accounts/create',          'PageController@createAccount')->name('create-account');
+Route::get('/about',                    'PageController@about')->name('about');
 
 /** Authentication */
 

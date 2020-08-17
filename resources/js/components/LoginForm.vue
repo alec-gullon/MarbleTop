@@ -12,8 +12,8 @@
         },
         data: function() {
             return {
-                email: '',
-                password: ''
+                email: 'me@alecgullon.co.uk',
+                password: 'password'
             }
         }
     }

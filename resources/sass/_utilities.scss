@@ -1,3 +1,17 @@
 .hidden {
     display: none !important;
 }
+
+.show-for-lg {
+    display: none;
+
+    @include lg() {
+        display: block;
+    }
+}
+
+.hide-for-lg {
+    @include lg() {
+        display: none;
+    }
+}
