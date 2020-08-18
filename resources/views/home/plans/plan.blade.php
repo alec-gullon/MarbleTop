@@ -1,29 +1,23 @@
-@extends('layout.app')
+@extends('layout.admin')
 
-@section('content')
-    <div class="AdminContent">
+@section('header')
+    <h1>Viewing Plan</h1>
+    <p class="heading-tag">Created on {{ $plan->created_at->toFormattedDateString() }}</p>
+@endsection
 
-        <div class="header">
-            <h1>Viewing Plan</h1>
-            <p class="heading-tag">Created on {{ $plan->created_at->toFormattedDateString() }}</p>
-        </div>
+@section('admin_content')
+    <div class="Plan">
+        @foreach ($plan->itemsByLocation() as $location => $items)
+            <h2>{{ App\Models\ItemLocation::find($location)->name }}</h2>
 
-        <div class="content">
-            <div class="Plan">
-                @foreach ($plan->itemsByLocation() as $location => $items)
-                    <h2>{{ App\Models\ItemLocation::find($location)->name }}</h2>
-
-                    <div class="item-list">
-                        @foreach ($items as $item)
-                            <div class="item">
-                                <div class="name">{{ $item->name }}</div>
-                                <div class="amount">{{ $item->pivot->amount }}</div>
-                            </div>
-                        @endforeach
+            <div class="item-list">
+                @foreach ($items as $item)
+                    <div class="item">
+                        <div class="name">{{ $item->name }}</div>
+                        <div class="amount">{{ $item->pivot->amount }}</div>
                     </div>
                 @endforeach
             </div>
-        </div>
-
+        @endforeach
     </div>
 @endsection

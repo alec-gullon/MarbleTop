@@ -21,7 +21,7 @@
                     @if (Auth::check())
                         <a href="{{ route('home') }}" class="Button is-primary has-shadow">Home</a>
                     @else
-                        <a href="{{ route('login') }}" class="Button is-primary has-shadow">Sign In</a>
+                        <a href="{{ route('login') }}" class="Button is-primary has-shadow">Log In</a>
                         <a href="{{ route('create-account') }}" class="Button is-secondary has-shadow">Create Account</a>
                     @endif
                 </div>
@@ -31,39 +31,52 @@
 
         <div class="FeatureBoxes">
             <div class="box">
-                @icon('home')
-                <h2>Cutting Edge</h2>
-                <p>We install Nginx, PHP, MySQL, Postgres, Redis, and all of the other goodies you need on the cloud of your choice. No more out-dated PHP installations.
+                @icon('happy-face')
+                <h2>Easy to use</h2>
+                <p>
+                    MarbleTop is expertly crafted to work on all your devices. So whether you're managing your recipes
+                    from the office, rummaging through the cupboards looking for what you already have in or at the shops,
+                    you'll be able to get yourself sorted with complete ease.
                 </p>
             </div>
             <div class="box">
-                @icon('heart')
-                <h2>Push to Deploy</h2>
-                <p>Deploying code couldn't be any easier. Just push to master on your GitHub, Bitbucket, or custom Git repository. We'll handle it from there.
+                @icon('cloud')
+                <h2>Available Anywhere</h2>
+                <p>
+                    Everything is stored in the cloud, so you can quickly get the stuff you need anywhere you can find an internet connection.
                 </p>
             </div>
             <div class="box">
-                @icon('bug')
-                <h2>Free SSL Certificates</h2>
-                <p>Forge integrates with LetsEncrypt, allowing you to obtain free SSL certificates for your Forge powered applications.
+                @icon('globe')
+                <h2>Environmentally Friendly</h2>
+                <p>
+                    MarbleTop is the most environmentally friendly way to manage your kitchen. Plan ahead and ensure that
+                    you get only exactly what you need and nothing more for the week.
+                </p>
+            </div>
+
+            <div class="box">
+                @icon('globe')
+                <h2>Environmentally Friendly</h2>
+                <p>
+                    MarbleTop is the most environmentally friendly way to manage your kitchen. Plan ahead and ensure that
+                    you get only exactly what you need and nothing more for the week.
                 </p>
             </div>
             <div class="box">
-                @icon('home')
-                <h2>Cutting Edge</h2>
-                <p>We install Nginx, PHP, MySQL, Postgres, Redis, and all of the other goodies you need on the cloud of your choice. No more out-dated PHP installations.
+                @icon('happy-face')
+                <h2>Easy to use</h2>
+                <p>
+                    MarbleTop is expertly crafted to work on all your devices. So whether you're managing your recipes
+                    from the office, rummaging through the cupboards looking for what you already have in or at the shops,
+                    you'll be able to get yourself sorted with complete ease.
                 </p>
             </div>
             <div class="box">
-                @icon('home')
-                <h2>Cutting Edge</h2>
-                <p>We install Nginx, PHP, MySQL, Postgres, Redis, and all of the other goodies you need on the cloud of your choice. No more out-dated PHP installations.
-                </p>
-            </div>
-            <div class="box">
-                @icon('heart')
-                <h2>Push to Deploy</h2>
-                <p>Deploying code couldn't be any easier. Just push to master on your GitHub, Bitbucket, or custom Git repository. We'll handle it from there.
+                @icon('cloud')
+                <h2>Available Everywhere</h2>
+                <p>
+                    Everything is stored in the cloud, so you can quickly get the stuff you need anywhere you can find an internet connection.
                 </p>
             </div>
         </div>

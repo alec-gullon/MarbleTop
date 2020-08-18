@@ -7,11 +7,11 @@
 
 @section('admin_content')
 
-    <div style="padding: 24px" class="show-for-lg">
+    <div style="padding: 24px" class="show-for-md">
         Something better will be coming here soon!
     </div>
 
-    <ul class="OptionList hide-for-lg">
+    <ul class="OptionList hide-for-md">
         <li>
             <a href="{{ route('plans') }}">
                 @icon('shopping-cart')

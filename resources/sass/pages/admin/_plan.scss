@@ -1,5 +1,6 @@
 .Plan {
     padding: 21px;
+    max-width: 640px;
     > h2 {
         color: $green-dark;
         font-size: 20px;
@@ -16,7 +17,7 @@
 
             > .name {
                 flex-grow: 1;
-                font-weight: 500;
+                font-weight: 700;
             }
 
             &:last-child {

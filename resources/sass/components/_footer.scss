@@ -3,6 +3,7 @@
     padding: 32px 16px;
     color: $green-dark;
     font-weight: 700;
+    background: white;
 
     @include md() {
         padding: 32px 24px;

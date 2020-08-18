@@ -6,7 +6,7 @@
                     <use :xlink:href="'/images/icons.svg#menu'"></use>
                 </svg>
                 <a :href="headingLink" class="logo">
-                    <img src="/images/logo-2.svg" />
+                    <img src="/images/logo.svg" />
                 </a>
                 <ul class="links">
                     <li><a href="/accounts/create">How it Works</a></li>
@@ -41,6 +41,12 @@
         <div class="mobile" :class="{'is-active': mobileNavActive}">
             <div class="header">
 
+                <div class="close">
+                    <svg xmlns="http://www.w3.org/2000/svg" @click="toggleMobileNav">
+                        <use :xlink:href="'/images/icons.svg#close'"></use>
+                    </svg>
+                </div>
+
                 <div class="top">
                     <form method="POST" action="/logout" v-if="authenticated">
                         <input type="hidden" name="_token" :value="csrftoken" />
@@ -48,14 +54,12 @@
                     </form>
                     <a href="/login" class="Button is-primary" v-else>Log In</a>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" @click="toggleMobileNav">
-                        <use :xlink:href="'/images/icons.svg#close'"></use>
-                    </svg>
+                    <a href="/accounts/create" class="sign-up Button is-secondary" v-if="!authenticated">
+                        Create Account
+                    </a>
                 </div>
 
-                <a href="/accounts/create" class="sign-up Button is-secondary" v-if="!authenticated">
-                    Create Account
-                </a>
+
 
                 <ul class="options" v-if="authenticated">
                     <li>
@@ -86,7 +90,7 @@
 
             </div>
             <div class="footer">
-                <a href="/#">About MarbleTop</a>
+                <a href="/about">About MarbleTop</a>
             </div>
         </div>
     </div>

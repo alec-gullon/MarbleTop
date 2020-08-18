@@ -9,7 +9,7 @@
                 <h1>About MarbleTop</h1>
                 <p class="heading-tag">To the well-organised kitchen, tea is but the next great adventure</p>
             </div>
-            <img src="/images/logo-2.svg" class="is-medium" />
+            <img src="/images/logo.svg" class="is-medium" />
         </div>
 
         <div class="content">
@@ -61,11 +61,13 @@
 
             <p>You can experiment with this demo version of the application by signing in with the email
             <span class="highlighted">guest@marbletop.co.uk</span> and password <span class="highlighted">password</span>. The
-            source code can be viewed at the project's Github <a href="#">repository</a>.</p>
+            source code can be viewed at the project's GitHub <a href="#">repository</a>.</p>
 
-            <p>Thanks for swinging by. If you are interested, there are many other projects I've worked on hosted at my <a href="#">personal site</a>.</p>
+            <p>Thanks for swinging by. If you are interested, there are many other projects I've worked on hosted at my <a href="http://alecgullon.co.uk/projects">personal site</a>.</p>
 
-            <p>Cheers, Alec.</p>
+            <p>Cheers,</p>
+
+            <p>Alec</p>
         </div>
     </div>
 

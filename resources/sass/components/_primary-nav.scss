@@ -4,7 +4,7 @@
         background: white;
         height: 80px;
         position: fixed;
-        z-index: 2;
+        z-index: 200;
         top: 0;
         left: 0;
         width: 100%;
@@ -160,6 +160,7 @@
 
     > .mobile {
         position: fixed;
+        z-index: 300;
         top: 0;
         left: -251px;
         background: white;
@@ -173,19 +174,14 @@
         }
 
         > .header {
-            padding: 16px 16px 0 16px;
             display: flex;
             flex-direction: column;
-            margin-bottom: 16px;
 
-            > .top {
+            > .close {
                 display: flex;
-                margin-bottom: 40px;
-                align-items: center;
-
-                > .Button, form {
-                    width: 80%;
-                }
+                justify-content: flex-end;
+                border-bottom: 1px solid $grey-lightest;
+                padding: 16px;
 
                 > svg {
                     width: 20px;
@@ -193,10 +189,25 @@
                     fill: $green-dark;
                     margin-left: 16px;
                 }
+            }
+
+            > .top {
+                display: flex;
+                flex-direction: column;
+                padding: 16px;
+
+                > .Button, form {
+                    margin-bottom: 16px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
 
                 > form {
+                    display: flex;
                     > input {
-                        width: 80%;
+                        width: 100%;
                     }
                 }
             }
@@ -207,6 +218,8 @@
             }
 
             > .options {
+                margin-top: 16px;
+                padding: 0 16px;
                 > li {
                     display: flex;
                     margin-bottom: 26px;

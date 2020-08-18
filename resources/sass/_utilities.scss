@@ -2,16 +2,16 @@
     display: none !important;
 }
 
-.show-for-lg {
+.show-for-md {
     display: none;
 
-    @include lg() {
+    @include md() {
         display: block;
     }
 }
 
-.hide-for-lg {
-    @include lg() {
+.hide-for-md {
+    @include md() {
         display: none;
     }
 }

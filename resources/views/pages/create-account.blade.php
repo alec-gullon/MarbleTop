@@ -9,7 +9,7 @@
                 <h1>Create an Account</h1>
                 <p class="heading-tag">Let's get you started</p>
             </div>
-            <img src="/images/chopping-board.png" />
+            <img src="/images/heroes/chopping-board.png" />
         </div>
 
         <div class="content">

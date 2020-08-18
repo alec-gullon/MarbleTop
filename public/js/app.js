@@ -1453,6 +1453,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     'authenticated': {
@@ -3659,7 +3663,7 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("a", { staticClass: "logo", attrs: { href: _vm.headingLink } }, [
-          _c("img", { attrs: { src: "/images/logo-2.svg" } })
+          _c("img", { attrs: { src: "/images/logo.svg" } })
         ]),
         _vm._v(" "),
         _c("ul", { staticClass: "links" }, [
@@ -3737,6 +3741,21 @@ var render = function() {
       { staticClass: "mobile", class: { "is-active": _vm.mobileNavActive } },
       [
         _c("div", { staticClass: "header" }, [
+          _c("div", { staticClass: "close" }, [
+            _c(
+              "svg",
+              {
+                attrs: { xmlns: "http://www.w3.org/2000/svg" },
+                on: { click: _vm.toggleMobileNav }
+              },
+              [
+                _c("use", {
+                  attrs: { "xlink:href": "/images/icons.svg#close" }
+                })
+              ]
+            )
+          ]),
+          _vm._v(" "),
           _c("div", { staticClass: "top" }, [
             _vm.authenticated
               ? _c("form", { attrs: { method: "POST", action: "/logout" } }, [
@@ -3759,30 +3778,21 @@ var render = function() {
                   [_vm._v("Log In")]
                 ),
             _vm._v(" "),
-            _c(
-              "svg",
-              {
-                attrs: { xmlns: "http://www.w3.org/2000/svg" },
-                on: { click: _vm.toggleMobileNav }
-              },
-              [
-                _c("use", {
-                  attrs: { "xlink:href": "/images/icons.svg#close" }
-                })
-              ]
-            )
+            !_vm.authenticated
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "sign-up Button is-secondary",
+                    attrs: { href: "/accounts/create" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    Create Account\n                "
+                    )
+                  ]
+                )
+              : _vm._e()
           ]),
-          _vm._v(" "),
-          !_vm.authenticated
-            ? _c(
-                "a",
-                {
-                  staticClass: "sign-up Button is-secondary",
-                  attrs: { href: "/accounts/create" }
-                },
-                [_vm._v("\n                Create Account\n            ")]
-              )
-            : _vm._e(),
           _vm._v(" "),
           _vm.authenticated
             ? _c("ul", { staticClass: "options" }, [
@@ -3914,7 +3924,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "footer" }, [
-      _c("a", { attrs: { href: "/#" } }, [_vm._v("About MarbleTop")])
+      _c("a", { attrs: { href: "/about" } }, [_vm._v("About MarbleTop")])
     ])
   }
 ]

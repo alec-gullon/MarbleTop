@@ -11,7 +11,7 @@ class PagesTest extends TestCase
         $response = $this->get(route('homepage'));
 
         $response->assertStatus(200)
-            ->assertSee('Sign In');
+            ->assertSee('Log In');
     }
 
     public function test_the_create_an_account_page_returns_expected_html()

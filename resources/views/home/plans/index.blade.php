@@ -18,7 +18,7 @@
     </ul>
 
     <ul class="OptionList" data-test="{{ count(Auth::user()->plans) }}">
-        @foreach (Auth::user()->plans as $plan)
+        @foreach (Auth::user()->plans->sortByDesc('created_at') as $plan)
             <li>
                 <a href="{{ route('plan', ['plan' => $plan->id]) }}">
                     @icon('arrow-thin-right')

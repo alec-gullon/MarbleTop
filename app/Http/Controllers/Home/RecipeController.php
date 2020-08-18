@@ -39,7 +39,7 @@ class RecipeController extends Controller
         return view('home.recipes.create-recipe', compact('itemsData'));
     }
 
-    public function recipe(Recipe $recipe)
+    public function show(Recipe $recipe)
     {
         $primaryItemsData = [];
         $secondaryItemsData = [];

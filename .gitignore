@@ -1,3 +1,5 @@
+/database/database.sqlite
+/database/test.sqlite
 /node_modules
 /public/hot
 /public/storage

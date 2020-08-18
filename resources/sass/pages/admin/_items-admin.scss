@@ -1,13 +1,10 @@
 .ItemsAdmin {
-    padding: 32px;
-
-    @include lg() {
-        padding-right: 0;
-    }
+    padding: 32px 21px;
 
     @include lg() {
         display: flex;
         justify-content: space-between;
+        padding-right: 0;
     }
 
     > .ExpandableForm {
