@@ -12,8 +12,6 @@ class HomeTest extends TestCase
 
     public function test_recipes_homepage_displays_a_users_recipes()
     {
-        $this->withoutExceptionHandling();
-
         $user = factory('App\User')->create();
         $otherUser = factory('App\User')->create();
 

@@ -22,12 +22,19 @@ class Plan extends Model
 
         foreach ($this->items as $item) {
             if (empty($locations[$item->location_id])) {
-                $items[$item->location_id] = [];
+                $locations[$item->location_id] = [
+                    'model' => $item->location
+                ];
             }
 
-            $locations[$item->location_id][] = $item;
+            $locations[$item->location_id]['items'][] = $item;
         }
 
         return $locations;
+    }
+
+    public function displayDate()
+    {
+        return $this->created_at->toFormattedDateString();
     }
 }

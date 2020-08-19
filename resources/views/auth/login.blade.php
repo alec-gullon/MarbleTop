@@ -13,9 +13,9 @@
 
                 <div class="LoginForm">
                     @error('email')
-                    <div class="MessageBox is-error">
-                        {{ $message }}
-                    </div>
+                        <div class="MessageBox is-error">
+                            {{ $message }}
+                        </div>
                     @enderror
 
                     <form action="{{ route('attempt-login') }}" method="POST">

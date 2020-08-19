@@ -2,58 +2,32 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Helper;
 use App\Http\Controllers\Controller;
+
 use App\Models\Collection;
+
+use App\Vue\CollectionCreator;
+use App\Vue\CollectionEditor;
 
 class CollectionController extends Controller
 {
     public function index()
     {
-        $collections = Helper::collectionsData(auth()->user());
-
-        return view('home.collections.index', compact('collections'));
+        return view('home.collections.index');
     }
 
     public function show()
     {
-        $itemsData = Helper::itemsData(auth()->user());
-        foreach ($itemsData as $key => $item) {
-            $data = $item;
-
-            $data['key'] = $key;
-            $data['selected'] = false;
-            $data['amount'] = 1;
-
-            $itemsData[$key] = $data;
-        }
-
-        return view('home.collections.create-collection', compact('itemsData'));
+        return view('home.collections.create-collection', [
+            'items' => CollectionCreator::items()
+        ]);
     }
 
     public function edit(Collection $collection)
     {
-        $itemsData = Helper::itemsData(auth()->user());
-        foreach ($itemsData as $key => $item) {
-            $data = $item;
-
-            $selected = false;
-            $amount = 1;
-
-            foreach ($collection->items as $collectionItem) {
-                if ($collectionItem->id === $item['id']) {
-                    $selected = true;
-                    $amount = (float) $collectionItem->pivot->amount;
-                }
-            }
-
-            $data['key'] = $key;
-            $data['selected'] = $selected;
-            $data['amount'] = $amount;
-
-            $itemsData[$key] = $data;
-        }
-
-        return view('home.collections.edit-collection', compact('collection', 'itemsData'));
+        return view('home.collections.edit-collection', [
+            'collection' => $collection,
+            'items' => CollectionEditor::items($collection)
+        ]);
     }
 }

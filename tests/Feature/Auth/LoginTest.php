@@ -29,7 +29,23 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors(['email']);
     }
 
-    public function test_login_redirects_correctly()
+    public function test_signed_in_user_cannot_reach_login_page()
+    {
+        $this->signIn();
+
+        $this->get(route('login'))
+            ->assertStatus(302);
+    }
+
+    public function test_signed_in_user_cannot_reattempt_login()
+    {
+        $this->post(route('attempt-login'), [
+            'email' => 'random@email.com',
+            'password' => 'password'
+        ])->assertStatus(302);
+    }
+
+    public function test_login_redirects()
     {
         $user = factory('App\User')->create();
 

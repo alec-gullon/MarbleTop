@@ -19,12 +19,12 @@
     </ul>
 
     <ul class="OptionList">
-        @foreach ($recipes as $recipe)
+        @foreach (Auth::user()->recipes as $recipe)
             <li>
-                <a href="{{ route('recipe-details', ['recipe' => $recipe['id']]) }}">
+                <a href="{{ route('recipe-details', ['recipe' => $recipe->id]) }}">
                     @icon('arrow-thin-right')
                     <div class="text">
-                        {{ $recipe['name'] }}
+                        {{ $recipe->name }}
                     </div>
                 </a>
             </li>

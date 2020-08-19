@@ -6,5 +6,5 @@
 @endsection
 
 @section('admin_content')
-    <collection-creator :initial-items="{{{ json_encode($itemsData) }}}"></collection-creator>
+    <collection-creator :initial-items="{{{ json_encode($items) }}}"></collection-creator>
 @endsection

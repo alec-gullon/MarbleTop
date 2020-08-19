@@ -6,7 +6,7 @@
 @endsection
 
 @section('admin_content')
-    <recipe-editor :initial-items="{{{ json_encode($itemsData) }}}"
+    <recipe-editor :initial-items="{{{ json_encode($items) }}}"
                    :initial-name="'{{ $recipe['name'] }}'"
                    :initial-recipe="{{{ json_encode($recipe['recipe']) }}}"
                    :recipe-id="{{ $recipe['id'] }}"

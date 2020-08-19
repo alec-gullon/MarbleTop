@@ -8,7 +8,7 @@
 @section('admin_content')
     <div class="content">
 
-        <items-admin    :initial-items="{{{ json_encode($itemsData) }}}"
+        <items-admin    :initial-items="{{{ json_encode($items) }}}"
                         :initial-locations="{{{ json_encode($locations) }}}"
         ></items-admin>
 

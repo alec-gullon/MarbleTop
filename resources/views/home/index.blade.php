@@ -7,6 +7,7 @@
 
 @section('admin_content')
 
+    <!-- @todo -->
     <div style="padding: 24px" class="show-for-md">
         Something better will be coming here soon!
     </div>
@@ -21,7 +22,7 @@
         <li>
             <a href="{{ route('items') }}">
                 @icon('home')
-                <span class="text">Cupboard Items</span>
+                <span class="text">Items</span>
             </a>
         </li>
         <li>

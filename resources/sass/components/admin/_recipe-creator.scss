@@ -4,6 +4,7 @@
     padding: 21px;
 
     @include md() {
+        padding-right: 0;
         //flex-direction: row;
         //flex-wrap: wrap;
         //padding: 0;

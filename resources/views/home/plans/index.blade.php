@@ -23,10 +23,14 @@
                 <a href="{{ route('plan', ['plan' => $plan->id]) }}">
                     @icon('arrow-thin-right')
                     <div class="text">
-                        {{ $plan->created_at->toFormattedDateString() }}
+                        {{ $plan->displayDate() }}
                     </div>
                 </a>
             </li>
         @endforeach
     </ul>
+@endsection
+
+@section('test')
+    <data test-count="{{ count(Auth::user()->plans) }}"></data>
 @endsection

@@ -732,6 +732,12 @@ input[type=submit].Button {
   padding: 21px;
 }
 
+@media only screen and (min-width: 768px) {
+  .RecipeCreator {
+    padding-right: 0;
+  }
+}
+
 .RecipeCreator > .details > .InputWithLabel {
   margin-bottom: 16px;
 }
@@ -764,7 +770,7 @@ input[type=submit].Button {
   border-top: 1px solid #E8E8E8;
   padding: 32px 16px;
   color: #22543D;
-  font-weight: 700;
+  font-weight: 500;
   background: white;
 }
 
@@ -1265,6 +1271,7 @@ input[type=submit].Button {
   height: 25px;
   width: 25px;
   fill: #22543D;
+  cursor: pointer;
 }
 
 .IncrementRow > .toggle > .amount {
@@ -1291,6 +1298,7 @@ input[type=submit].Button {
   height: 25px;
   width: 25px;
   fill: #CC3333;
+  cursor: pointer;
 }
 
 .ItemSearcher > .search {
@@ -1335,6 +1343,7 @@ input[type=submit].Button {
 .ItemSearcher > .search > .results > ul > li > svg {
   height: 21px;
   width: 21px;
+  cursor: pointer;
 }
 
 .ItemSearcher > ul > .IncrementRow {
@@ -1384,6 +1393,7 @@ input[type=submit].Button {
   width: 25px;
   fill: #22543D;
   margin-left: 8px;
+  cursor: pointer;
 }
 
 .Hero {

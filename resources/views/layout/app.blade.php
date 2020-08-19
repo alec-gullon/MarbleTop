@@ -19,7 +19,7 @@
 
         <div class="Footer">
             <div class="container">
-                Created by Alec Gullon. Built using Laravel and Vue.js.
+                A side project created by Alec Gullon. Built using Laravel and Vue.js.
             </div>
         </div>
 
@@ -27,9 +27,13 @@
 
     <script>
         document.global = {};
-        document.global.apiToken = '{{ Auth::check() ? Auth::user()->api_token : '' }}'
+        document.global.apiToken = '{{ Auth::check() ? Auth::user()->api_token : '' }}';
         document.global.xhrActive = false;
     </script>
     <script src="/js/app.js"></script>
 </body>
 </html>
+
+@if (App::runningUnitTests())
+    @yield('test')
+@endif

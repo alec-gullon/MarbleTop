@@ -36,4 +36,24 @@ class Recipe extends Model
         $recipe = implode('</p><p>', $parts);
         return '<p>' . $recipe . '</p>';
     }
+
+    public function primaryItems() {
+        $primaryItems = [];
+        foreach ($this->items as $item) {
+            if (!empty($item->pivot->precise_amount)) {
+                $primaryItems[] = $item;
+            }
+        }
+        return $primaryItems;
+    }
+
+    public function secondaryItems() {
+        $secondaryItems = [];
+        foreach ($this->items as $item) {
+            if (empty($item->pivot->precise_amount)) {
+                $secondaryItems[] = $item;
+            }
+        }
+        return $secondaryItems;
+    }
 }

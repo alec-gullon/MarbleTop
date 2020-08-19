@@ -19,12 +19,12 @@
     </ul>
 
     <ul class="OptionList">
-        @foreach ($collections as $collection)
+        @foreach (Auth::user()->collections as $collection)
             <li>
-                <a href="{{ route('collections-edit', ['collection' => $collection['id']]) }}">
+                <a href="{{ route('collections-edit', ['collection' => $collection->id]) }}">
                     @icon('arrow-thin-right')
                     <div class="text">
-                        {{ $collection['name'] }}
+                        {{ $collection->name }}
                     </div>
                 </a>
             </li>

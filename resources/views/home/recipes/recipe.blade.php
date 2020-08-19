@@ -16,17 +16,17 @@ $withIcon = true;
         </h2>
 
         <table class="RecipeIngredients">
-            @foreach ($primaryItemsData as $item)
+            @foreach ($recipe->primaryItems() as $item)
                 <tr>
-                    <td><strong>{{ $item['name'] }}</strong></td>
-                    <td>{{ $item['amount'] }}</td>
+                    <td><strong>{{ $item->name }}</strong></td>
+                    <td>{{ $item->pivot->precise_amount }}</td>
                 </tr>
             @endforeach
 
-            @foreach ($secondaryItemsData as $item)
-                    <tr>
-                        <td class="secondary" colspan="2"><strong>{{ $item['name'] }}</strong></td>
-                    </tr>
+            @foreach ($recipe->secondaryItems() as $item)
+                <tr>
+                    <td class="secondary" colspan="2"><strong>{{ $item->name }}</strong></td>
+                </tr>
             @endforeach
         </table>
 

@@ -5,7 +5,7 @@
     <div class="AdminContent">
 
         <div class="header-wrapper">
-            <div class="header @if (isset($withIcon)) with-icon @endif">
+            <div class="header @if (isset($withIcon))with-icon @endif">
                 @yield('header')
             </div>
         </div>
@@ -30,25 +30,33 @@
                 <div class="sidebar">
                     <ul class="OptionList">
                         <li>
-                            <a href="{{ route('plans') }}" class="is-light {{ $selectedArea === 'plan' ? 'is-selected': '' }}">
+                            <a href="{{ route('plans') }}"
+                               class="is-light {{ $selectedArea === 'plan' ? 'is-selected': '' }}"
+                            >
                                 @icon('shopping-cart')
                                 <span class="text">Plans</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('items') }}" class="is-light {{ $selectedArea === 'item' ? 'is-selected': '' }}">
+                            <a href="{{ route('items') }}"
+                               class="is-light {{ $selectedArea === 'item' ? 'is-selected': '' }}"
+                            >
                                 @icon('home')
                                 <span class="text">Items</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('recipes') }}" class="is-light {{ $selectedArea === 'recipe' ? 'is-selected': '' }}">
+                            <a href="{{ route('recipes') }}"
+                               class="is-light {{ $selectedArea === 'recipe' ? 'is-selected _recipe': '' }}"
+                            >
                                 @icon('heart')
                                 <span class="text">Recipes</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('collections') }}" class="is-light {{ $selectedArea === 'collection' ? 'is-selected': '' }}">
+                            <a href="{{ route('collections') }}"
+                               class="is-light {{ $selectedArea === 'collection' ? 'is-selected': '' }}"
+                            >
                                 @icon('edit-pencil')
                                 <span class="text">Collections</span>
                             </a>
