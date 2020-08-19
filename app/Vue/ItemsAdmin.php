@@ -26,7 +26,7 @@ class ItemsAdmin {
 
     public static function items()
     {
-        $user = Auth::user();
+        $user = Auth::user()->fresh();
         $items = $user->items->sortBy('name');
 
         $data = [];

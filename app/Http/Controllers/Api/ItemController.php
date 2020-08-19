@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Helper;
 use App\Helpers\ApiResponse;
 
 use App\Http\Requests\Api\Item\StoreItem;
@@ -11,6 +10,7 @@ use App\Http\Requests\Api\Item\DestroyItem;
 
 use App\Models\Item;
 
+use App\Vue\ItemsAdmin;
 use Illuminate\Routing\Controller as BaseController;
 
 class ItemController extends BaseController
@@ -27,7 +27,7 @@ class ItemController extends BaseController
             $request->only(['name', 'location_id'])
         );
 
-        return ApiResponse::success(['items' => Helper::itemsData($user)]);
+        return ApiResponse::success(['items' => ItemsAdmin::items()]);
     }
 
     public function update(UpdateItem $request, Item $item)
@@ -42,13 +42,13 @@ class ItemController extends BaseController
             $request->only(['name', 'location_id'])
         );
 
-        return ApiResponse::success(['items' => Helper::itemsData($user)]);
+        return ApiResponse::success(['items' => ItemsAdmin::items()]);
     }
 
     public function destroy(DestroyItem $request, Item $item)
     {
         $item->delete();
 
-        return ApiResponse::success(['items' => Helper::itemsData(auth()->user())]);
+        return ApiResponse::success(['items' => ItemsAdmin::items()]);
     }
 }

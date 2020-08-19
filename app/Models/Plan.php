@@ -23,7 +23,8 @@ class Plan extends Model
         foreach ($this->items as $item) {
             if (empty($locations[$item->location_id])) {
                 $locations[$item->location_id] = [
-                    'model' => $item->location
+                    'model' => $item->location,
+                    'items' => []
                 ];
             }
 

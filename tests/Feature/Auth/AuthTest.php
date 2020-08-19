@@ -3,13 +3,9 @@
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AuthTest extends TestCase
 {
-    use WithFaker, RefreshDatabase;
-
     public function test_guests_cannot_view_locked_pages()
     {
         $this->get(route('items'))

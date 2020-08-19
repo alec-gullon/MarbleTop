@@ -2,15 +2,16 @@
 
 namespace Tests\Feature;
 
-use Tests\Setup\CollectionFactory;
-use Tests\Setup\RecipeFactory;
-use Tests\TestCase;
+use App\Models\Item;
+
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use App\Models\Item;
-
+use Tests\Setup\CollectionFactory;
 use Tests\Setup\PlanFactory;
+use Tests\Setup\RecipeFactory;
+
+use Tests\TestCase;
 
 class PlanTest extends TestCase
 {
@@ -28,8 +29,6 @@ class PlanTest extends TestCase
 
     public function test_creating_a_plan_pulls_in_both_recipes_and_collections()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->signIn();
         $collection = CollectionFactory::addCollection($user);
         $recipe = RecipeFactory::addRecipe($user);
@@ -42,8 +41,6 @@ class PlanTest extends TestCase
 
     public function test_viewing_a_plan_displays_its_items()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->signIn();
         $plan = PlanFactory::addPlanWithTwoItems($user);
         $items = Item::all();

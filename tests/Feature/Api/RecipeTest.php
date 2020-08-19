@@ -2,14 +2,14 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Item;
+use App\Models\Recipe;
+
+use Tests\ApiTestCase;
+
 use Tests\Setup\RecipeFactory;
 use Tests\Setup\ItemFactory;
 use Tests\Setup\UserFactory;
-
-use App\Models\Recipe;
-use App\Models\Item;
-
-use Tests\ApiTestCase;
 
 class RecipeTest extends ApiTestCase
 {

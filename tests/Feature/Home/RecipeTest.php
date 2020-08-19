@@ -2,14 +2,15 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+use App\Models\Item;
+
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use Tests\Setup\ItemFactory;
 use Tests\Setup\RecipeFactory;
 
-use App\Models\Item;
+use Tests\TestCase;
 
 class RecipeTest extends TestCase
 {

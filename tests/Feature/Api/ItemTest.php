@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Item;
+
 use Tests\ApiTestCase;
 
 use Tests\Setup\ItemFactory;
 use Tests\Setup\UserFactory;
-
-use App\Models\Item;
 
 class ItemTest extends ApiTestCase
 {
@@ -56,6 +56,8 @@ class ItemTest extends ApiTestCase
 
     public function test_a_user_can_update_an_item()
     {
+        $this->withoutExceptionHandling();
+
         $item = ItemFactory::addItem($this->user);
 
         $attributes = [

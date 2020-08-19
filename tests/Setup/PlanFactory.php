@@ -2,8 +2,6 @@
 
 namespace Tests\Setup;
 
-use App\Models\Plan;
-
 class PlanFactory
 {
     public static function addPlan($user)

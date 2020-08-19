@@ -2,11 +2,12 @@
 
 namespace Tests\Feature\Home;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use Tests\Setup\ItemFactory;
+
+use Tests\TestCase;
 
 class ItemTest extends TestCase
 {
