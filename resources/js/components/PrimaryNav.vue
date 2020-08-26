@@ -93,6 +93,7 @@
             </div>
             <div class="footer">
                 <a href="/about">About MarbleTop</a>
+                <a href="/recipes">Recipes</a>
             </div>
         </div>
     </div>

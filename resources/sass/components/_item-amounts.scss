@@ -12,6 +12,10 @@
         > label {
             width: 100%;
             font-weight: 500;
+
+            @include lg() {
+                width: 150px;
+            }
         }
 
         > input {

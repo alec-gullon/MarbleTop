@@ -3,6 +3,7 @@
     align-items: center;
     > .name {
         flex-grow: 1;
+        font-weight: 500;
     }
     > .toggle {
         display: flex;

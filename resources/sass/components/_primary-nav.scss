@@ -242,11 +242,12 @@
         }
 
         > .footer {
-            padding: 16px;
-            border-top: 1px solid $grey-lightest;
-            border-bottom: 1px solid $grey-lightest;
+            display: flex;
+            flex-direction: column;
 
             > a {
+                padding: 16px;
+                border-top: 1px solid $grey-lightest;
                 color: $grey-dark;
             }
         }

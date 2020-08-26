@@ -19,6 +19,14 @@
 
     > a {
         display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+
+        @include lg() {
+            width: auto;
+        }
+
         > img {
             width: 100%;
             box-shadow: 0 4px 8px 0 rgba(52, 52, 52, 0.15);
@@ -30,7 +38,7 @@
     }
     > .body {
         flex-grow: 1;
-        padding: 32px 0 32px 40px;
+        padding: 20px;
         background: white;
         box-shadow: 0 4px 8px 0 rgba(52, 52, 52, 0.15);
         border: 1px solid $grey-lightest;
@@ -39,45 +47,89 @@
         @include lg() {
             width: auto;
             margin-left: -40px;
+            padding: 32px 0 32px 40px;
         }
 
         > .heading {
-            margin-bottom: 8px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
+            flex-direction: column;
+
+            @include md() {
+                flex-direction: row;
+                justify-content: center;
+            }
+
             > .text {
                 color: $green-dark;
                 font-size: 30px;
-                margin-right: 32px;
+                margin-bottom: 16px;
+
+                @include md() {
+                    margin-right: 32px;
+                    margin-bottom: 0;
+                }
             }
         }
     }
 }
 
 .RecipeDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     > .author {
         color: $grey-mid;
         font-size: 14px;
-        margin-bottom: 16px;
+        margin-bottom: 32px;
         line-height: 1;
+        text-align: center;
     }
     > .BulletList {
-        margin-bottom: 16px;
+        margin-bottom: 32px;
+        width: 100%;
+
+        @include md() {
+            width: auto;
+            margin-bottom: 16px;
+        }
     }
     > .text {
-        font-size: 18px;
+        font-size: 16px;
         line-height: 1.75;
-        margin-bottom: 16px;
-        max-width: 600px;
+        margin-bottom: 32px;
+
+        @include md() {
+            margin-bottom: 16px;
+            font-size: 18px;
+            max-width: 500px;
+        }
     }
     > .tags {
         display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        @include md() {
+            width: auto;
+        }
+
         > li {
+            flex-basis: 30%;
+            flex-grow: 0;
             background: $green-light;
             font-size: 12px;
             padding: 8px 16px;
             border-radius: 6px;
-            margin-right: 12px;
+            display: flex;
+            align-items: center;
+
+            @include md() {
+                flex-basis: auto;
+                margin-right: 12px;
+                font-size: 14px;
+            }
         }
     }
 }

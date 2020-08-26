@@ -15,16 +15,21 @@
                 <label for="recipe">Recipe</label>
                 <textarea class="TextArea" id="recipe" v-model="recipe" />
             </div>
+        </div>
 
-            <button class="Button is-primary" :class="{'is-active': this.updateStatusActive}" @click="updatePublishStatus">
-                <span v-if="this.published">Hide</span>
+        <div class="status">
+            <p v-if="published">Currently published.</p>
+            <p v-else>Currently unpublished.</p>
+
+            <button class="Button is-primary is-small" :class="{'is-active': this.updateStatusActive}" @click="updatePublishStatus">
+                <span v-if="this.published">Unpublish</span>
                 <span v-else>Publish</span>
             </button>
         </div>
 
         <div class="items">
             <h2 class="AdminHeading">
-                Items
+                Ingredients
             </h2>
 
             <item-searcher  :items="items"

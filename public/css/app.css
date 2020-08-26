@@ -534,8 +534,6 @@ input[type=submit].Button {
 }
 
 .CircledNumber {
-  margin-top: 6px;
-  margin-right: 16px;
   font-size: 20px;
   background: #38A169;
   border-radius: 50%;
@@ -579,6 +577,15 @@ input[type=submit].Button {
 
 .DisplayRecipe > a {
   display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .DisplayRecipe > a {
+    width: auto;
+  }
 }
 
 .DisplayRecipe > a > img {
@@ -594,7 +601,7 @@ input[type=submit].Button {
 
 .DisplayRecipe > .body {
   flex-grow: 1;
-  padding: 32px 0 32px 40px;
+  padding: 20px;
   background: white;
   box-shadow: 0 4px 8px 0 rgba(52, 52, 52, 0.15);
   border: 1px solid #E8E8E8;
@@ -605,49 +612,106 @@ input[type=submit].Button {
   .DisplayRecipe > .body {
     width: auto;
     margin-left: -40px;
+    padding: 32px 0 32px 40px;
   }
 }
 
 .DisplayRecipe > .body > .heading {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+  .DisplayRecipe > .body > .heading {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
 
 .DisplayRecipe > .body > .heading > .text {
   color: #22543D;
   font-size: 30px;
-  margin-right: 32px;
+  margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+  .DisplayRecipe > .body > .heading > .text {
+    margin-right: 32px;
+    margin-bottom: 0;
+  }
+}
+
+.RecipeDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .RecipeDetails > .author {
   color: #425466;
   font-size: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
   line-height: 1;
+  text-align: center;
 }
 
 .RecipeDetails > .BulletList {
-  margin-bottom: 16px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .RecipeDetails > .BulletList {
+    width: auto;
+    margin-bottom: 16px;
+  }
 }
 
 .RecipeDetails > .text {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.75;
-  margin-bottom: 16px;
-  max-width: 600px;
+  margin-bottom: 32px;
+}
+
+@media only screen and (min-width: 768px) {
+  .RecipeDetails > .text {
+    margin-bottom: 16px;
+    font-size: 18px;
+    max-width: 500px;
+  }
 }
 
 .RecipeDetails > .tags {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .RecipeDetails > .tags {
+    width: auto;
+  }
 }
 
 .RecipeDetails > .tags > li {
+  flex-basis: 30%;
+  flex-grow: 0;
   background: #9AE6B4;
   font-size: 12px;
   padding: 8px 16px;
   border-radius: 6px;
-  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .RecipeDetails > .tags > li {
+    flex-basis: auto;
+    margin-right: 12px;
+    font-size: 14px;
+  }
 }
 
 .AdminContent {
@@ -879,9 +943,11 @@ input[type=submit].Button {
   padding: 21px;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1024px) {
   .RecipeCreator {
-    padding-right: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
   }
 }
 
@@ -891,16 +957,57 @@ input[type=submit].Button {
   margin-bottom: 16px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .RecipeCreator > .details {
+    width: 70%;
+    margin-right: 5%;
+  }
+}
+
 .RecipeCreator > .details > .InputWithLabel {
   margin-bottom: 16px;
 }
 
-.RecipeCreator > .details > .Button {
+.RecipeCreator > .status {
+  border: 1px solid #cccccc;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 1024px) {
+  .RecipeCreator > .status {
+    font-size: 14px;
+    background: white;
+    width: 25%;
+  }
+}
+
+.RecipeCreator > .status > p {
+  margin-bottom: 16px;
+  text-align: right;
+}
+
+.RecipeCreator > .status > .Button {
   align-self: flex-end;
+}
+
+@media only screen and (min-width: 1024px) {
+  .RecipeCreator > .items {
+    width: 47%;
+    margin-right: 6%;
+    margin-bottom: 16px;
+  }
 }
 
 .RecipeCreator > .items > .ItemSearcher {
   margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .RecipeCreator > .amounts {
+    width: 47%;
+  }
 }
 
 .RecipeCreator > .amounts > .ItemAmounts {
@@ -1419,12 +1526,13 @@ input[type=submit].Button {
 }
 
 .PrimaryNav > .mobile > .footer {
-  padding: 16px;
-  border-top: 1px solid #E8E8E8;
-  border-bottom: 1px solid #E8E8E8;
+  display: flex;
+  flex-direction: column;
 }
 
 .PrimaryNav > .mobile > .footer > a {
+  padding: 16px;
+  border-top: 1px solid #E8E8E8;
   color: #1A202C;
 }
 
@@ -1435,6 +1543,7 @@ input[type=submit].Button {
 
 .IncrementRow > .name {
   flex-grow: 1;
+  font-weight: 500;
 }
 
 .IncrementRow > .toggle {
@@ -1549,6 +1658,12 @@ input[type=submit].Button {
 .ItemAmounts > .amount > label {
   width: 100%;
   font-weight: 500;
+}
+
+@media only screen and (min-width: 1024px) {
+  .ItemAmounts > .amount > label {
+    width: 150px;
+  }
 }
 
 .ItemAmounts > .amount > input {
@@ -1926,6 +2041,7 @@ input[type=submit].Button {
   margin-bottom: 16px;
   padding-bottom: 16px;
   border-bottom: 1px dotted #cccccc;
+  width: 100%;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1959,7 +2075,14 @@ input[type=submit].Button {
 
 .PublicRecipe {
   max-width: 1280px;
-  margin: 64px auto;
+  padding: 24px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .PublicRecipe {
+    padding: 0;
+    margin: 64px auto;
+  }
 }
 
 .PublicRecipe > .Breadcrumbs {
@@ -1967,16 +2090,30 @@ input[type=submit].Button {
 }
 
 .PublicRecipe > .DisplayRecipe {
-  margin-bottom: 64px;
+  margin-bottom: 24px;
+}
+
+@media only screen and (min-width: 768px) {
+  .PublicRecipe > .DisplayRecipe {
+    margin-bottom: 64px;
+  }
 }
 
 .PublicRecipe > .body {
   display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+  .PublicRecipe > .body {
+    flex-direction: row;
+  }
 }
 
 .PublicRecipe > .body > .ingredients {
   display: flex;
   flex-direction: column;
+  margin-bottom: 24px;
 }
 
 .PublicRecipe > .body > .ingredients > h2 {
@@ -1992,9 +2129,21 @@ input[type=submit].Button {
   background: white;
   margin-right: 64px;
   box-shadow: 0 4px 8px 0 rgba(52, 52, 52, 0.15);
-  width: 500px;
   flex-shrink: 0;
   border: 1px solid #E8E8E8;
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .PublicRecipe > .body > .ingredients > ul {
+    width: 300px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .PublicRecipe > .body > .ingredients > ul {
+    width: 500px;
+  }
 }
 
 .PublicRecipe > .body > .ingredients > ul > li {
@@ -2029,15 +2178,42 @@ input[type=submit].Button {
 
 .PublicRecipe > .body > .method > ul > li {
   display: flex;
-  margin-bottom: 32px;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.75;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 32px;
+}
+
+.PublicRecipe > .body > .method > ul > li:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+@media only screen and (min-width: 1024px) {
+  .PublicRecipe > .body > .method > ul > li {
+    flex-direction: row;
+    align-items: normal;
+    font-size: 18px;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
 }
 
 .PublicRecipe > .body > .method > ul > li > .CircledNumber {
-  margin-top: 6px;
-  margin-right: 16px;
   flex-shrink: 0;
+  margin-bottom: 24px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .PublicRecipe > .body > .method > ul > li > .CircledNumber {
+    margin-top: 6px;
+    margin-right: 16px;
+    margin-bottom: 0;
+  }
 }
 
 .HomePublishedRecipes {

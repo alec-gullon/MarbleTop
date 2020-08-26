@@ -106,6 +106,7 @@
         margin-bottom: 16px;
         padding-bottom: 16px;
         border-bottom: 1px dotted $grey-light;
+        width: 100%;
 
         @include md() {
             margin-right: 16px;

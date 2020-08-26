@@ -1459,6 +1459,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     'authenticated': {
@@ -1651,6 +1652,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../mixins/Post.js */ "./resources/js/mixins/Post.js");
 /* harmony import */ var _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../mixins/Copy.js */ "./resources/js/mixins/Copy.js");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3976,7 +3982,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "footer" }, [
-      _c("a", { attrs: { href: "/about" } }, [_vm._v("About MarbleTop")])
+      _c("a", { attrs: { href: "/about" } }, [_vm._v("About MarbleTop")]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "/recipes" } }, [_vm._v("Recipes")])
     ])
   }
 ]
@@ -4212,18 +4220,24 @@ var render = function() {
             }
           }
         })
-      ]),
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "status" }, [
+      _vm.published
+        ? _c("p", [_vm._v("Currently published.")])
+        : _c("p", [_vm._v("Currently unpublished.")]),
       _vm._v(" "),
       _c(
         "button",
         {
-          staticClass: "Button is-primary",
+          staticClass: "Button is-primary is-small",
           class: { "is-active": this.updateStatusActive },
           on: { click: _vm.updatePublishStatus }
         },
         [
           this.published
-            ? _c("span", [_vm._v("Hide")])
+            ? _c("span", [_vm._v("Unpublish")])
             : _c("span", [_vm._v("Publish")])
         ]
       )
@@ -4234,7 +4248,7 @@ var render = function() {
       { staticClass: "items" },
       [
         _c("h2", { staticClass: "AdminHeading" }, [
-          _vm._v("\n            Items\n        ")
+          _vm._v("\n            Ingredients\n        ")
         ]),
         _vm._v(" "),
         _c("item-searcher", {
