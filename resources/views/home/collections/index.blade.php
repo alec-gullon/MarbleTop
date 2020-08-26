@@ -19,7 +19,7 @@
     </ul>
 
     <ul class="OptionList">
-        @foreach (Auth::user()->collections as $collection)
+        @foreach (Auth::user()->collections->sortBy('name') as $collection)
             <li>
                 <a href="{{ route('collections-edit', ['collection' => $collection->id]) }}">
                     @icon('arrow-thin-right')

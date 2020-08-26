@@ -878,7 +878,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      email: 'me@alecgullon.co.uk',
+      email: 'guest@alecgullon.co.uk',
       password: 'password'
     };
   }
@@ -1457,6 +1457,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     'authenticated': {
@@ -1702,13 +1704,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['initialName', 'initialRecipe', 'initialItems', 'recipeId'],
+  props: ['initialName', 'initialRecipe', 'initialItems', 'initialPublished', 'recipeId'],
   created: function created() {
     this.name = this.initialName;
     this.recipe = this.initialRecipe;
+    this.published = this.initialPublished;
     this.items = this.copy(this.initialItems);
   },
   methods: {
@@ -1754,6 +1762,22 @@ __webpack_require__.r(__webpack_exports__);
         document.global.xhrActive = false;
       }.bind(this));
     },
+    updatePublishStatus: function updatePublishStatus() {
+      if (this.updateStatusActive) {
+        return;
+      }
+
+      var data = new FormData();
+      data.append('api_token', document.global.apiToken);
+      this.updateStatusActive = true;
+      this.post('/api/recipes/' + this.recipeId + '/status/toggle' + status, data, function (response) {
+        if (response.status === 200) {
+          this.published = !this.published;
+          this.updateStatusActive = false;
+          document.global.xhrActive = false;
+        }
+      }.bind(this));
+    },
     deleteRecipe: function deleteRecipe() {
       if (this.deleteActive) {
         return;
@@ -1794,8 +1818,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: '',
       recipe: '',
+      published: false,
       updateActive: false,
       deleteActive: false,
+      updateStatusActive: false,
       items: {},
       nameAlreadyExists: false
     };
@@ -3103,21 +3129,41 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "PlanCreator" }, [
     _c("div", { staticClass: "stage-indicator" }, [
-      _c("span", { class: { selected: _vm.selectedStage === 1 } }, [
-        _vm._v("1")
-      ]),
+      _c(
+        "span",
+        {
+          staticClass: "CircledNumber",
+          class: { "is-disabled": _vm.selectedStage !== 1 }
+        },
+        [_vm._v("1")]
+      ),
       _vm._v(" "),
-      _c("span", { class: { selected: _vm.selectedStage === 2 } }, [
-        _vm._v("2")
-      ]),
+      _c(
+        "span",
+        {
+          staticClass: "CircledNumber",
+          class: { "is-disabled": _vm.selectedStage !== 2 }
+        },
+        [_vm._v("2")]
+      ),
       _vm._v(" "),
-      _c("span", { class: { selected: _vm.selectedStage === 3 } }, [
-        _vm._v("3")
-      ]),
+      _c(
+        "span",
+        {
+          staticClass: "CircledNumber",
+          class: { "is-disabled": _vm.selectedStage !== 3 }
+        },
+        [_vm._v("3")]
+      ),
       _vm._v(" "),
-      _c("span", { class: { selected: _vm.selectedStage === 4 } }, [
-        _vm._v("4")
-      ])
+      _c(
+        "span",
+        {
+          staticClass: "CircledNumber",
+          class: { "is-disabled": _vm.selectedStage !== 4 }
+        },
+        [_vm._v("4")]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "stage-heading" }, [
@@ -3671,6 +3717,8 @@ var render = function() {
           _vm._v(" "),
           _vm._m(1),
           _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
           _vm.authenticated
             ? _c(
                 "li",
@@ -3699,13 +3747,13 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("ul", { class: { "is-enabled": _vm.displayAdminLinks } }, [
-                    _vm._m(2),
-                    _vm._v(" "),
                     _vm._m(3),
                     _vm._v(" "),
                     _vm._m(4),
                     _vm._v(" "),
-                    _vm._m(5)
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _vm._m(6)
                   ])
                 ]
               )
@@ -3802,14 +3850,28 @@ var render = function() {
                     { attrs: { xmlns: "http://www.w3.org/2000/svg" } },
                     [
                       _c("use", {
+                        attrs: {
+                          "xlink:href": "/images/icons.svg#shopping-cart"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "/home/plans" } }, [_vm._v("Plans")])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c(
+                    "svg",
+                    { attrs: { xmlns: "http://www.w3.org/2000/svg" } },
+                    [
+                      _c("use", {
                         attrs: { "xlink:href": "/images/icons.svg#home" }
                       })
                     ]
                   ),
                   _vm._v(" "),
-                  _c("a", { attrs: { href: "/home/items" } }, [
-                    _vm._v("Cupboard Items")
-                  ])
+                  _c("a", { attrs: { href: "/home/items" } }, [_vm._v("Items")])
                 ]),
                 _vm._v(" "),
                 _c("li", [
@@ -3842,30 +3904,12 @@ var render = function() {
                   _c("a", { attrs: { href: "/home/collections" } }, [
                     _vm._v("Collections")
                   ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "svg",
-                    { attrs: { xmlns: "http://www.w3.org/2000/svg" } },
-                    [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href": "/images/icons.svg#shopping-cart"
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { attrs: { href: "/home/plans" } }, [
-                    _vm._v("Saved Plans")
-                  ])
                 ])
               ])
             : _vm._e()
         ]),
         _vm._v(" "),
-        _vm._m(6)
+        _vm._m(7)
       ]
     )
   ])
@@ -3885,6 +3929,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", [
       _c("a", { attrs: { href: "/about" } }, [_vm._v("About Us")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/recipes" } }, [_vm._v("Recipes")])
     ])
   },
   function() {
@@ -4160,7 +4212,21 @@ var render = function() {
             }
           }
         })
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "Button is-primary",
+          class: { "is-active": this.updateStatusActive },
+          on: { click: _vm.updatePublishStatus }
+        },
+        [
+          this.published
+            ? _c("span", [_vm._v("Hide")])
+            : _c("span", [_vm._v("Publish")])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c(

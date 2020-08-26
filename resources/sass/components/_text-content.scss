@@ -1,0 +1,50 @@
+.TextContent {
+    @include lg() {
+        max-width: 768px;
+    }
+
+    > p {
+        margin-bottom: 16px;
+        line-height: 1.6;
+        color: $grey-mid;
+        font-size: 15px;
+
+        > .highlighted {
+            color: $green-dark;
+            font-weight: 700;
+        }
+
+        > a {
+            color: $green-dark;
+            text-decoration: underline;
+        }
+
+        @include md() {
+            font-size: 16px;
+        }
+
+        @include lg() {
+            font-size: 18px;
+        }
+    }
+
+    > ul {
+        list-style: square;
+        margin-left: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+        color: $grey-mid;
+
+        > li {
+            >strong {
+                color: $green-dark;
+                font-weight: 700;
+            }
+            > .highlighted {
+                color: $green-dark;
+                font-weight: 500;
+            }
+        }
+    }
+}

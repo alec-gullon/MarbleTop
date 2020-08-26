@@ -12,6 +12,11 @@ Route::get('/login',                    'Auth\LoginController@showLoginForm')->n
 Route::post('/login',                   'Auth\LoginController@login')->name('attempt-login');
 Route::post('/logout',                  'Auth\LoginController@logout')->name('logout');
 
+// Recipes
+
+Route::get('/recipes',                  'RecipeController@index')->name('public-recipes');
+Route::get('/recipes/{slug}',            'RecipeController@show')->name('public-recipe');
+
 // Home
 
 Route::group(['middleware' => 'auth'], function() {
@@ -21,8 +26,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/home/recipes',                     'Home\RecipeController@index')->name('recipes');
     Route::get('/home/recipes/create',              'Home\RecipeController@add')->name('recipes-add');
-    Route::get('/home/recipes/{recipe}',            'Home\RecipeController@show')->name('recipe-details');
-    Route::get('/home/recipes/{recipe}/edit',       'Home\RecipeController@edit')->name('recipe-edit');
+    Route::get('/home/recipes/{recipe}',            'Home\RecipeController@edit')->name('recipe-details');
 
     Route::get('/home/collections',                 'Home\CollectionController@index')->name('collections');
     Route::get('/home/collections/create',          'Home\CollectionController@show')->name('collections-add');

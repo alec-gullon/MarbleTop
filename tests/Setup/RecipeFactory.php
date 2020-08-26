@@ -11,6 +11,11 @@ class RecipeFactory
         return $user->addRecipe(['name' => Str::random(16), 'recipe' => 'Lorem Ipsum']);
     }
 
+    public static function addPublishedRecipe($user)
+    {
+        return $user->addRecipe(['name' => Str::random(16), 'recipe' => 'Lorem Ipsum', 'published' => true]);
+    }
+
     public static function addRecipeWithOneItem($user)
     {
         $recipe = self::addRecipe($user);

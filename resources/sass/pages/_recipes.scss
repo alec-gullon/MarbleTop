@@ -1,0 +1,140 @@
+.RecipeIndex {
+    width: 100%;
+
+    > h2 {
+        color: $green-dark;
+        margin-bottom: 16px;
+        font-weight: 500;
+        font-size: 22px;
+
+        @include lg() {
+            font-size: 26px;
+        }
+    }
+
+    > .DisplayRecipe {
+        margin-bottom: 64px;
+    }
+}
+
+.PublishedRecipes {
+    display: flex;
+    flex-wrap: wrap;
+
+    > .recipe {
+        background: white;
+        border: 2px solid $green-mid;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 32px;
+        box-shadow: 0 4px 8px 0 rgba(52, 52, 52, 0.15);
+
+        width: 100%;
+
+        @include md-only() {
+            width: 47%;
+            margin-right: 6%;
+
+            &:nth-child(2n) {
+                margin-right: 0;
+            }
+        }
+
+        @include lg() {
+            width: 30%;
+            margin-right: 5%;
+
+            &:nth-child(3n){
+                margin-right: 0;
+            }
+        }
+
+        > img {
+            width: 100%;
+            border-radius: 2px 2px 0 0;
+        }
+
+        > .main {
+            flex-grow: 1;
+            padding: 16px;
+
+            > a {
+                margin-bottom: 4px;
+                font-weight: 500;
+                font-size: 18px;
+            }
+
+            > p {
+                font-size: 14px;
+                color: $grey-mid;
+                margin-bottom: 16px;
+            }
+        }
+
+        > .rating {
+            background: $green-light;
+            color: black;
+            text-align: center;
+            padding: 16px;
+            font-weight: 500;
+            font-size: 18px;
+            border-radius: 0 0 4px 4px;
+
+            > .out-of {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+.BulletList {
+    display: flex;
+    flex-direction: column;
+
+    @include md() {
+        flex-direction: row;
+    }
+
+    > li {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        font-weight: 500;
+        color: $grey-mid;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px dotted $grey-light;
+
+        @include md() {
+            margin-right: 16px;
+            border-right: 1px solid $grey-light;
+            padding-right: 16px;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        > svg {
+            fill: $green-mid;
+            height: 25px;
+            width: 25px;
+            margin-right: 8px;
+        }
+        &:last-child {
+            border:0;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    &.small-icons {
+        > li {
+            > svg {
+                height: 20px;
+                width: 20px;
+            }
+        }
+    }
+}

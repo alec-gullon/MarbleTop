@@ -1,0 +1,22 @@
+.Breadcrumbs {
+    display: flex;
+    > li {
+        &:after {
+            content: '/';
+            margin: 0 8px;
+            color: $grey-mid;
+
+        }
+        > a {
+            color: $green-dark;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+        &:last-child {
+            &::after {
+                content: '';
+                display: none;
+            }
+        }
+    }
+}

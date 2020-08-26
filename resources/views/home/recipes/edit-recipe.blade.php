@@ -9,6 +9,8 @@
     <recipe-editor :initial-items="{{{ json_encode($items) }}}"
                    :initial-name="'{{ $recipe['name'] }}'"
                    :initial-recipe="{{{ json_encode($recipe['recipe']) }}}"
+                   :initial-published="{{ $recipe['published'] }}"
+                   :initial-image-id="{{ $recipe['image_id'] }}"
                    :recipe-id="{{ $recipe['id'] }}"
     ></recipe-editor>
 @endsection

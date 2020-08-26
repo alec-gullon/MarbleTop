@@ -11,6 +11,7 @@
                 <ul class="links">
                     <li><a href="/accounts/create">How it Works</a></li>
                     <li><a href="/about">About Us</a></li>
+                    <li><a href="/recipes">Recipes</a></li>
 
                     <li class="admin" v-if="authenticated" @click="toggleAdminLinks">
                         <div class="toggle">
@@ -64,9 +65,15 @@
                 <ul class="options" v-if="authenticated">
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/images/icons.svg#shopping-cart"></use>
+                        </svg>
+                        <a href="/home/plans">Plans</a>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg">
                             <use xlink:href="/images/icons.svg#home"></use>
                         </svg>
-                        <a href="/home/items">Cupboard Items</a>
+                        <a href="/home/items">Items</a>
                     </li>
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg">
@@ -80,12 +87,7 @@
                         </svg>
                         <a href="/home/collections">Collections</a>
                     </li>
-                    <li>
-                        <svg xmlns="http://www.w3.org/2000/svg">
-                            <use xlink:href="/images/icons.svg#shopping-cart"></use>
-                        </svg>
-                        <a href="/home/plans">Saved Plans</a>
-                    </li>
+
                 </ul>
 
             </div>

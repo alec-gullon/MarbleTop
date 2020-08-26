@@ -23,13 +23,6 @@ class RecipeController extends Controller
         ]);
     }
 
-    public function show(Recipe $recipe)
-    {
-        return view('home.recipes.recipe', [
-            'recipe' => $recipe
-        ]);
-    }
-
     public function edit(Recipe $recipe)
     {
         return view('home.recipes.edit-recipe', [

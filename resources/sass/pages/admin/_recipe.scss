@@ -1,6 +1,16 @@
 .Recipe {
     padding: 21px;
 
+    > .header {
+        display: flex;
+        margin-bottom: 16px;
+
+        > img {
+            height: 300px;
+            margin-right: 32px;
+        }
+    }
+
     > .heading {
         margin-bottom: 16px;
         font-weight: 500;
@@ -9,6 +19,7 @@
 }
 
 .RecipeOutline {
+    max-width: 768px;
     > p {
         font-size: 16px;
         margin-bottom: 16px;
@@ -23,24 +34,31 @@
 }
 
 .RecipeIngredients {
-    width: 100%;
     margin-bottom: 16px;
-    > tbody {
-        > tr {
-            > td {
-                font-size: 14px;
-                width: 50%;
-                border-bottom: 1px dashed $grey-light;
-                padding: 6px 0;
+    width: 100%;
 
-                &.secondary {
-                    color: $grey-mid;
-                }
+    > .heading {
+        margin-bottom: 16px;
+        font-weight: 500;
+        color: $green-dark;
+    }
+
+    > table {
+        width: 100%;
+        td {
+            font-size: 14px;
+            width: 50%;
+            border-bottom: 1px dashed $grey-light;
+            padding: 6px 0;
+
+            &.secondary {
+                color: $grey-mid;
             }
-            &:last-child {
-                > td {
-                    border-bottom: 0;
-                }
+        }
+
+        tr:last-child {
+            td {
+                border-bottom: 0;
             }
         }
     }

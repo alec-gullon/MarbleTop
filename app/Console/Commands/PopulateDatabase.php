@@ -16,6 +16,7 @@ use App\Models\Recipe;
 use Illuminate\Support\Facades\Hash;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class PopulateDatabase extends Command
 {
@@ -33,6 +34,45 @@ class PopulateDatabase extends Command
      */
     protected $description = 'Seeds the database with demo data';
 
+    protected $nameDictionary = [
+        'Halloumi Risotto',
+        'Breakfast',
+        'Burgers with Chips',
+        'Chickpea Burgers, Coleslaw and Chips',
+        'Fajitas',
+        'Halloumi Bulgur Wheat',
+        'Jacket Potatoes, Beans and Coleslaw',
+        'Lasagne',
+        'Mediterranean Salad, Rice and Falafel',
+        'Pasta Bake',
+        'Pizza, Coleslaw and Salad',
+        'Sausage Pasta',
+        'Spaghetti Bolognese',
+        'Sweet Potato Chili',
+        'Miso Aubergine Tacos',
+        'Mango Chutney Halloumi Curry',
+        'Toad in the Hole',
+        'Greek Style Gyozas',
+        'Miso Aubergine Tacos',
+        'Chicken Nuggets',
+        'Breakfast in Bed',
+        'Greek Inspired Chickpea Jumble'
+    ];
+
+    protected $cookTimes = [
+        10, 20, 30, 45, 60, 90, 120
+    ];
+
+    protected $servingSizes = [
+        1,2,3,4,5,6
+    ];
+
+    protected $ratings = [
+        2.5, 2.8, 3, 3.2, 3.4, 3.6, 3.9, 4.1, 4.3, 4.5, 4.7
+    ];
+
+    protected $nameDictionaryReduced = [];
+
     /**
      * Execute the console command.
      */
@@ -47,20 +87,31 @@ class PopulateDatabase extends Command
         DB::table('recipes')->truncate();
         DB::table('users')->truncate();
 
-        User::create([
-            'email' => 'me@alecgullon.co.uk',
-            'name' => 'Alec',
+        $guest = User::create([
+            'email' => 'guest@alecgullon.co.uk',
+            'name' => 'Guest',
             'password' => Hash::make('password'),
             'api_token' => 'abcd'
         ]);
 
-        $this->generateItems();
-        $this->generateCollections();
-        $this->generateRecipes();
-        $this->generatePlans();
+        $alec = User::create([
+            'email' => 'alec@alecgullon.co.uk',
+            'name' => 'Alec',
+            'password' => Hash::make('password'),
+            'api_token' => 'efgh'
+        ]);
+
+        foreach ([$guest, $alec] as $user) {
+            $this->nameDictionaryReduced = $this->nameDictionary;
+
+            $this->generateItems($user);
+            $this->generateCollections($user);
+            $this->generateRecipes($user);
+            $this->generatePlans($user);
+        }
     }
 
-    protected function generateItems()
+    protected function generateItems($user)
     {
         $freshItems = ['Tomato', 'Lemon', 'Red Onion', 'Cucumber', 'Garlic Clove', 'Pepper', 'Potato', 'Courgette',
             'Sweet Potato', 'Onion', 'Spinach', 'Avocado', 'Carrot', 'Salad Leafs', 'Ginger', 'Lime'];
@@ -69,7 +120,7 @@ class PopulateDatabase extends Command
             Item::create([
                 'name' => $freshItem,
                 'location_id' => 1,
-                'user_id' => 1
+                'user_id' => $user->id
             ]);
         }
 
@@ -80,7 +131,7 @@ class PopulateDatabase extends Command
             Item::create([
                 'name' => $chilledItem,
                 'location_id' => 2,
-                'user_id' => 1
+                'user_id' => $user->id
             ]);
         }
 
@@ -95,7 +146,7 @@ class PopulateDatabase extends Command
             Item::create([
                 'name' => $pantryItem,
                 'location_id' => 3,
-                'user_id' => 1
+                'user_id' => $user->id
             ]);
         }
 
@@ -105,16 +156,15 @@ class PopulateDatabase extends Command
             Item::create([
                 'name' => $frozenItem,
                 'location_id' => 5,
-                'user_id' => 1
+                'user_id' => $user->id
             ]);
         }
     }
 
-    protected function generateCollections()
+    protected function generateCollections($user)
     {
         $collections = [
             [
-                'name' => 'Breakfast',
                 'items' => [
                     ['Baked Beans',  1],
                     ['Sausage', 4],
@@ -123,7 +173,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Burgers with Chips',
                 'items' => [
                     ['Vegetarian Burger',  2],
                     ['Brioche Burger Bun',  2],
@@ -133,7 +182,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Chickpea Burgers, Coleslaw and Chips',
                 'items' => [
                     ['Chickpeas', 1],
                     ['Lemon', 1],
@@ -150,7 +198,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Fajitas',
                 'items' => [
                     ['Red Onion', 1],
                     ['Garlic Clove', 3],
@@ -170,7 +217,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Halloumi Bulgur Wheat',
                 'items' => [
                     ['Red Onion', 1],
                     ['Garlic Clove', 3],
@@ -182,7 +228,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Jacket Potatoes, Beans and Coleslaw',
                 'items' => [
                     ['Potato', 2],
                     ['Baked Beans', 1],
@@ -191,7 +236,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Lasagne',
                 'items' => [
                     ['Pepper', 2],
                     ['Courgette', 1],
@@ -210,7 +254,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Mediterranean Salad, Rice and Falafel',
                 'items' => [
                         ['Falafel', 1],
                         ['Rice Packet', 1],
@@ -225,7 +268,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Pasta Bake',
                 'items' => [
                     ['Red Onion', 1],
                     ['Garlic Clove', 3],
@@ -242,7 +284,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Pizza, Coleslaw and Salad',
                 'items' => [
                     ['Pizza', 1],
                     ['Coleslaw', 0.25],
@@ -256,7 +297,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Sausage Pasta',
                 'items' => [
                     ['Red Onion', 1],
                     ['Garlic Clove', 3],
@@ -271,7 +311,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Spaghetti Bolognese',
                 'items' => [
                     ['Red Onion', 1],
                     ['Garlic Clove', 3],
@@ -289,8 +328,8 @@ class PopulateDatabase extends Command
 
         foreach ($collections as $collection) {
             $model = Collection::create([
-                'name' => $collection['name'],
-                'user_id' => 1
+                'name' => $this->randomName(),
+                'user_id' => $user->id
             ]);
 
             foreach ($collection['items'] as $itemData) {
@@ -305,11 +344,10 @@ class PopulateDatabase extends Command
         }
     }
 
-    public function generateRecipes()
+    public function generateRecipes($user)
     {
         $recipes = [
             [
-                'name' => 'Halloumi Risotto',
                 'items' => [
                     ['Red Onion', 1, 'x1'],
                     ['Garlic Clove', 3, 'x3'],
@@ -320,7 +358,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Sweet Potato Chili',
                 'items' => [
                     ['Onion', 1, 'x1'],
                     ['Pepper', 2, 'x2'],
@@ -343,7 +380,6 @@ class PopulateDatabase extends Command
                 ]
             ],
             [
-                'name' => 'Toad in the Hole',
                 'items' => [
                     ['Sausage', 4, 'x4'],
                     ['Egg', 2, 'x2'],
@@ -357,11 +393,59 @@ class PopulateDatabase extends Command
             ]
         ];
 
+
         foreach ($recipes as $recipe) {
+            $name = $this->randomName();
+
+            $slug = Str::slug($name);
+            if ($user->id !== 1) {
+                $slug .= '-' . $user->id;
+            }
+
             $model = Recipe::create([
-                'name' => $recipe['name'],
-                'user_id' => 1,
-                'recipe' => $this->exampleRecipe()
+                'name' => $name,
+                'slug' => $slug,
+                'user_id' => $user->id,
+                'recipe' => $this->exampleRecipe(),
+                'published' => false,
+                'image_id' => rand(1,20),
+                'description' => 'Feed the family this comforting, budget-friendly sausage ragu with pasta. You can freeze the leftovers for another time and it tastes just as good.',
+                'rating' => $this->ratings[array_rand($this->ratings)],
+                'cook_time' => $this->cookTimes[array_rand($this->cookTimes)],
+                'serving_size' => $this->servingSizes[array_rand($this->servingSizes)]
+            ]);
+
+            $order = 0;
+            foreach ($recipe['items'] as $itemData) {
+                try {
+                    $item = Item::where('name', $itemData[0])->first();
+
+                    $model->items()->attach($item->id, ['amount' => $itemData[1], 'precise_amount' => $itemData[2], 'order' => $order]);
+                } catch (\Exception $e) {
+                    dd($itemData);
+                }
+
+                $order++;
+            }
+
+            $name = $this->randomName();
+
+            $slug = Str::slug($name);
+            if ($user->id !== 1) {
+                $slug .= '-' . $user->id;
+            }
+
+            $model = Recipe::create([
+                'name' => $name,
+                'slug' => $slug,
+                'user_id' => $user->id,
+                'recipe' => $this->exampleRecipe(),
+                'published' => true,
+                'image_id' => rand(1,20),
+                'description' => 'Feed the family this comforting, budget-friendly sausage ragu with pasta. You can freeze the leftovers for another time and it tastes just as good.',
+                'rating' => $this->ratings[array_rand($this->ratings)],
+                'cook_time' => $this->cookTimes[array_rand($this->cookTimes)],
+                'serving_size' => $this->servingSizes[array_rand($this->servingSizes)]
             ]);
 
             $order = 0;
@@ -380,6 +464,19 @@ class PopulateDatabase extends Command
 
     }
 
+    public function randomName()
+    {
+        if (count($this->nameDictionaryReduced) === 0) {
+            return 'Add another name please!';
+        }
+
+        $key = array_rand($this->nameDictionaryReduced);
+        $selected = $this->nameDictionaryReduced[$key];
+        unset($this->nameDictionaryReduced[$key]);
+
+        return $selected;
+    }
+
     public function exampleRecipe()
     {
         return 'Chop up all the veg except the garlic: dice the peppers and onion and chop the sweet potato into small cubes. Stick everything in a pan with some oil on a medium heat. Season well with pepper and salt.
@@ -389,7 +486,7 @@ While the veg cooks through, chop up a largish amount of garlic and add to the p
 Add the passata, the beans and the tomato puree and stir well. Bring to a simmer and then cover and let cook on a gentle heat for 45-60 mins.';
     }
 
-    public function generatePlans()
+    public function generatePlans($user)
     {
         $plans = [
             [
@@ -454,7 +551,7 @@ Add the passata, the beans and the tomato puree and stir well. Bring to a simmer
 
         foreach ($plans as $plan) {
             $model = Plan::create([
-                'user_id' => 1,
+                'user_id' => $user->id,
                 'created_at' => $plan['timestamp'],
                 'updated_at' => $plan['timestamp']
             ]);

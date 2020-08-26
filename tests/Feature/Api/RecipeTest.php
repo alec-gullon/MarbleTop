@@ -180,4 +180,47 @@ class RecipeTest extends ApiTestCase
             ->assertStatus(403);
     }
 
+    public function test_a_user_can_mark_a_recipe_as_published()
+    {
+        $recipe = RecipeFactory::addRecipe($this->user);
+
+        $this->callApi(route('recipe-toggle-publish', ['recipe' => $recipe->id]));
+
+        $this->assertDatabaseHas('recipes', [
+            'user_id' => $this->user->id,
+            'id' => $recipe->id,
+            'published' => true
+        ]);
+    }
+
+    public function test_a_user_can_mark_a_recipe_as_private()
+    {
+        $recipe = RecipeFactory::addPublishedRecipe($this->user);
+
+        $this->callApi(route('recipe-toggle-publish', ['recipe' => $recipe->id]));
+
+        $this->assertDatabaseHas('recipes', [
+            'user_id' => $this->user->id,
+            'id' => $recipe->id,
+            'published' => false
+        ]);
+    }
+
+    public function test_a_user_can_update_a_recipes_image()
+    {
+        $this->withoutExceptionHandling();
+
+        $recipe = RecipeFactory::addRecipe($this->user);
+
+        $imageId = 10;
+
+        $this->callApi(route('recipe-image-update', ['recipe' => $recipe->id]), ['image_id' => $imageId]);
+
+        $this->assertDatabaseHas('recipes', [
+            'user_id' => $this->user->id,
+            'id' => $recipe->id,
+            'image_id' => $imageId
+        ]);
+    }
+
 }

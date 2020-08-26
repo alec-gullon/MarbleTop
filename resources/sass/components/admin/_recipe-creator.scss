@@ -11,6 +11,9 @@
     }
 
     > .details {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 16px;
 
         @include md() {
             //width: 50%;
@@ -19,6 +22,10 @@
 
         > .InputWithLabel {
             margin-bottom: 16px;
+        }
+
+        > .Button {
+            align-self: flex-end;
         }
     }
 

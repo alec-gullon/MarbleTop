@@ -12,7 +12,7 @@
         },
         data: function() {
             return {
-                email: 'me@alecgullon.co.uk',
+                email: 'guest@alecgullon.co.uk',
                 password: 'password'
             }
         }

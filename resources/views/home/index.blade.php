@@ -8,8 +8,21 @@
 @section('admin_content')
 
     <!-- @todo -->
-    <div style="padding: 24px" class="show-for-md">
-        Something better will be coming here soon!
+    <div class="HomePublishedRecipes">
+        <h2 class="AdminHeading">
+            Your published recipes
+        </h2>
+
+        <ul>
+            @foreach (Auth::user()->publishedRecipes() as $recipe)
+                <li>
+                    <a href="{{ route('recipe-details', ['recipe' => $recipe]) }}">
+                        <img src="{{ $recipe->imagePath() }}" />
+                        <p>{{ $recipe->name }}</p>
+                    </a>
+                </li>
+            @endforeach
+        </ul>
     </div>
 
     <ul class="OptionList hide-for-md">

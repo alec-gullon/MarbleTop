@@ -11,24 +11,32 @@ $withIcon = true;
 
 @section('admin_content')
     <div class="Recipe">
-        <h2 class="heading">
-            Ingredients
-        </h2>
 
-        <table class="RecipeIngredients">
-            @foreach ($recipe->primaryItems() as $item)
-                <tr>
-                    <td><strong>{{ $item->name }}</strong></td>
-                    <td>{{ $item->pivot->precise_amount }}</td>
-                </tr>
-            @endforeach
+        <div class="header">
+            <img src="{{ $recipe->imagePath() }}" />
 
-            @foreach ($recipe->secondaryItems() as $item)
-                <tr>
-                    <td class="secondary" colspan="2"><strong>{{ $item->name }}</strong></td>
-                </tr>
-            @endforeach
-        </table>
+            <div class="RecipeIngredients">
+                <h2 class="heading">
+                    Ingredients
+                </h2>
+
+                <table>
+                @foreach ($recipe->primaryItems() as $item)
+                    <tr>
+                        <td><strong>{{ $item->name }}</strong></td>
+                        <td>{{ $item->pivot->precise_amount }}</td>
+                    </tr>
+                @endforeach
+
+                @foreach ($recipe->secondaryItems() as $item)
+                    <tr>
+                        <td class="secondary" colspan="2"><strong>{{ $item->name }}</strong></td>
+                    </tr>
+                @endforeach
+                </table>
+            </div>
+        </div>
+
 
         <h2 class="heading">
             Method

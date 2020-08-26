@@ -22,6 +22,10 @@ class Recipe extends Model
         return '/api/recipes/' . $this->id . '/';
     }
 
+    public function imagePath() {
+        return '/images/food/food-' . $this->image_id . '.jpg';
+    }
+
     public function attachItems($items) {
         foreach ($items as $item) {
             $this->items()->attach(
@@ -31,10 +35,18 @@ class Recipe extends Model
         }
     }
 
+    public function toggleStatus() {
+        $this->update(['published' => !$this->published]);
+    }
+
     public function displayRecipe() {
-        $parts = preg_split("/(\n\s\n){1,}|(\n){1,}|(\r\n){1,}/", $this->recipe);
+        $parts = $this->recipeParts();
         $recipe = implode('</p><p>', $parts);
         return '<p>' . $recipe . '</p>';
+    }
+
+    public function recipeParts() {
+        return preg_split("/(\n\s\n){1,}|(\n){1,}|(\r\n){1,}/", $this->recipe);
     }
 
     public function primaryItems() {

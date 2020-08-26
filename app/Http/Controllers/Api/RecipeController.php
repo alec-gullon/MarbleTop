@@ -10,6 +10,7 @@ use App\Http\Requests\Api\Recipe\DestroyRecipe;
 
 use App\Models\Recipe;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class RecipeController extends BaseController
@@ -61,6 +62,20 @@ class RecipeController extends BaseController
         $recipe->delete();
 
         $request->session()->flash('message', 'Successfully deleted recipe!');
+        return ApiResponse::success();
+    }
+
+    public function togglePublishStatus(Recipe $recipe) {
+        $recipe->toggleStatus();
+
+        return ApiResponse::success();
+    }
+
+    public function updateImage(Request $request, Recipe $recipe) {
+        $recipe->update(
+            $request->only('image_id')
+        );
+
         return ApiResponse::success();
     }
 }

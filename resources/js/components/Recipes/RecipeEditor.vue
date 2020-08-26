@@ -15,6 +15,11 @@
                 <label for="recipe">Recipe</label>
                 <textarea class="TextArea" id="recipe" v-model="recipe" />
             </div>
+
+            <button class="Button is-primary" :class="{'is-active': this.updateStatusActive}" @click="updatePublishStatus">
+                <span v-if="this.published">Hide</span>
+                <span v-else>Publish</span>
+            </button>
         </div>
 
         <div class="items">
@@ -61,11 +66,13 @@
             'initialName',
             'initialRecipe',
             'initialItems',
+            'initialPublished',
             'recipeId'
         ],
         created: function() {
             this.name = this.initialName;
             this.recipe = this.initialRecipe;
+            this.published = this.initialPublished;
             this.items = this.copy(this.initialItems);
         },
         methods: {
@@ -112,6 +119,24 @@
                     document.global.xhrActive = false;
                 }.bind(this));
             },
+            updatePublishStatus: function() {
+                if (this.updateStatusActive) {
+                    return;
+                }
+
+                let data = new FormData();
+                data.append('api_token', document.global.apiToken);
+
+                this.updateStatusActive = true;
+                this.post('/api/recipes/' + this.recipeId + '/status/toggle' + status, data, function(response) {
+                    if (response.status === 200) {
+                        this.published = !this.published;
+
+                        this.updateStatusActive = false;
+                        document.global.xhrActive = false;
+                    }
+                }.bind(this));
+            },
             deleteRecipe: function() {
                 if (this.deleteActive) {
                     return;
@@ -155,8 +180,10 @@
             return {
                 name: '',
                 recipe: '',
+                published: false,
                 updateActive: false,
                 deleteActive: false,
+                updateStatusActive: false,
                 items: {},
                 nameAlreadyExists: false
             }

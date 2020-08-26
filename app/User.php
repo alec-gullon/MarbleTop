@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Recipe');
     }
 
+    public function publishedRecipes()
+    {
+        return $this->recipes()->where('published', true)->get();
+    }
+
     public function collections()
     {
         return $this->hasMany('App\Models\Collection');

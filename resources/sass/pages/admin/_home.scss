@@ -1,0 +1,33 @@
+.HomePublishedRecipes {
+    padding: 24px 0 24px 24px;
+
+    > .AdminHeading {
+        margin-bottom: 12px;
+    }
+
+    > ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        > li {
+            width: 30%;
+            margin-right: 5%;
+            border: 1px solid $green-mid;
+
+            > a {
+                > img {
+                    width: 100%;
+                }
+
+                > p {
+                    padding: 12px;
+                    font-weight: 500;
+                }
+            }
+
+            &:nth-child(3n) {
+                margin-right: 0%;
+            }
+        }
+    }
+}

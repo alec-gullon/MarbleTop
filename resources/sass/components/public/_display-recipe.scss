@@ -1,0 +1,83 @@
+.DisplayRecipe {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    @include lg() {
+        flex-direction: row;
+    }
+
+    > img {
+        display: flex;
+        width: 100%;
+        box-shadow: 0 4px 8px 0 rgba(52, 52, 52, 0.15);
+
+        @include lg() {
+            width: 500px;
+        }
+    }
+
+    > a {
+        display: flex;
+        > img {
+            width: 100%;
+            box-shadow: 0 4px 8px 0 rgba(52, 52, 52, 0.15);
+
+            @include lg() {
+                width: 500px;
+            }
+        }
+    }
+    > .body {
+        flex-grow: 1;
+        padding: 32px 0 32px 40px;
+        background: white;
+        box-shadow: 0 4px 8px 0 rgba(52, 52, 52, 0.15);
+        border: 1px solid $grey-lightest;
+        width: 100%;
+
+        @include lg() {
+            width: auto;
+            margin-left: -40px;
+        }
+
+        > .heading {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            > .text {
+                color: $green-dark;
+                font-size: 30px;
+                margin-right: 32px;
+            }
+        }
+    }
+}
+
+.RecipeDetails {
+    > .author {
+        color: $grey-mid;
+        font-size: 14px;
+        margin-bottom: 16px;
+        line-height: 1;
+    }
+    > .BulletList {
+        margin-bottom: 16px;
+    }
+    > .text {
+        font-size: 18px;
+        line-height: 1.75;
+        margin-bottom: 16px;
+        max-width: 600px;
+    }
+    > .tags {
+        display: flex;
+        > li {
+            background: $green-light;
+            font-size: 12px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-right: 12px;
+        }
+    }
+}

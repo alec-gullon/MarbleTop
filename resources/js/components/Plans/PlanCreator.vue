@@ -2,10 +2,10 @@
     <div class="PlanCreator">
 
         <div class="stage-indicator">
-            <span :class="{'selected': selectedStage === 1}">1</span>
-            <span :class="{'selected': selectedStage === 2}">2</span>
-            <span :class="{'selected': selectedStage === 3}">3</span>
-            <span :class="{'selected': selectedStage === 4}">4</span>
+            <span class="CircledNumber" :class="{'is-disabled': selectedStage !== 1}">1</span>
+            <span class="CircledNumber" :class="{'is-disabled': selectedStage !== 2}">2</span>
+            <span class="CircledNumber" :class="{'is-disabled': selectedStage !== 3}">3</span>
+            <span class="CircledNumber" :class="{'is-disabled': selectedStage !== 4}">4</span>
         </div>
 
         <div class="stage-heading">
