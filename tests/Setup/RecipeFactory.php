@@ -8,12 +8,31 @@ class RecipeFactory
 {
     public static function addRecipe($user)
     {
-        return $user->addRecipe(['name' => Str::random(16), 'recipe' => 'Lorem Ipsum']);
+        return $user->addRecipe([
+            'name' => Str::random(16),
+            'recipe' => 'Lorem Ipsum',
+            'description' => 'Happy Description',
+            'cook_time' => 20,
+            'serving_size' => 4,
+        ]);
+    }
+
+    public static function addRecipeWithName($user, $name)
+    {
+        return $user->addRecipe(['name' => $name, 'recipe' => 'Lorem Ipsum']);
     }
 
     public static function addPublishedRecipe($user)
     {
-        return $user->addRecipe(['name' => Str::random(16), 'recipe' => 'Lorem Ipsum', 'published' => true]);
+        return $user->addRecipe([
+            'name' => Str::random(16),
+            'slug' => 'an-example-slug',
+            'recipe' => 'Lorem Ipsum',
+            'description' => 'Happy Description',
+            'cook_time' => 20,
+            'serving_size' => 4,
+            'published' => true
+        ]);
     }
 
     public static function addRecipeWithOneItem($user)

@@ -1858,6 +1858,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1888,9 +1892,6 @@ __webpack_require__.r(__webpack_exports__);
     this.items = this.copy(this._items);
   },
   methods: {
-    updateItems: function updateItems(items) {
-      this.items = items;
-    },
     update: function update() {
       if (!this.isFormReady) {
         return;
@@ -1907,6 +1908,7 @@ __webpack_require__.r(__webpack_exports__);
 
       for (var i = 0; i < this.selectedItems.length; i++) {
         var item = this.selectedItems[i];
+        console.log(item);
         items.push({
           id: item.id,
           amount: item.amount,
@@ -1978,6 +1980,13 @@ __webpack_require__.r(__webpack_exports__);
         }
       }.bind(this));
       return items;
+    },
+    publishable: function publishable() {
+      if (this._description && this._servingSize !== 0 && this._cookTime !== 0) {
+        return true;
+      }
+
+      return false;
     }
   },
   watch: {
@@ -4689,23 +4698,23 @@ var render = function() {
               }
             },
             [
-              _c("option", { attrs: { value: "0" } }, [
+              _c("option", { domProps: { value: 0 } }, [
                 _vm._v("Please select..")
               ]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "10" } }, [_vm._v("10 Mins")]),
+              _c("option", { domProps: { value: 10 } }, [_vm._v("10 Mins")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "20" } }, [_vm._v("20 Mins")]),
+              _c("option", { domProps: { value: 20 } }, [_vm._v("20 Mins")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "30" } }, [_vm._v("30 Mins")]),
+              _c("option", { domProps: { value: 30 } }, [_vm._v("30 Mins")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "45" } }, [_vm._v("45 Mins")]),
+              _c("option", { domProps: { value: 45 } }, [_vm._v("45 Mins")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "60" } }, [_vm._v("60 Mins")]),
+              _c("option", { domProps: { value: 60 } }, [_vm._v("60 Mins")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "90" } }, [_vm._v("90 Mins")]),
+              _c("option", { domProps: { value: 90 } }, [_vm._v("90 Mins")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "120" } }, [_vm._v("120 Mins")])
+              _c("option", { domProps: { value: 120 } }, [_vm._v("120 Mins")])
             ]
           )
         ]),
@@ -4772,19 +4781,31 @@ var render = function() {
           ? _c("p", [_vm._v("Currently published.")])
           : _c("p", [_vm._v("Currently unpublished.")]),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "Button is-primary is-small",
-            class: { "is-active": this.updateStatusActive },
-            on: { click: _vm.updatePublishStatus }
-          },
-          [
-            this.published
-              ? _c("span", [_vm._v("Unpublish")])
-              : _c("span", [_vm._v("Publish")])
-          ]
-        )
+        !_vm.publishable
+          ? _c("p", [
+              _vm._v(
+                "\n                In order to publish a recipe, you must set the "
+              ),
+              _c("strong", [_vm._v("Description")]),
+              _vm._v(",\n                "),
+              _c("strong", [_vm._v("How Long it Takes to Cook")]),
+              _vm._v(" and "),
+              _c("strong", [_vm._v("How Many it Feeds")]),
+              _vm._v(" fields.\n            ")
+            ])
+          : _c(
+              "button",
+              {
+                staticClass: "Button is-primary is-small",
+                class: { "is-active": this.updateStatusActive },
+                on: { click: _vm.updatePublishStatus }
+              },
+              [
+                this.published
+                  ? _c("span", [_vm._v("Unpublish")])
+                  : _c("span", [_vm._v("Publish")])
+              ]
+            )
       ])
     ]),
     _vm._v(" "),
@@ -4871,7 +4892,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "cooktime" } }, [
-      _vm._v("How Long It Takes to Cook "),
+      _vm._v("How Long it Takes to Cook "),
       _c("span", [_vm._v("(Optional)")])
     ])
   },
@@ -4880,7 +4901,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "servingsize" } }, [
-      _vm._v("How Many It Feeds "),
+      _vm._v("How Many it Feeds "),
       _c("span", [_vm._v("(Optional)")])
     ])
   },
@@ -4903,7 +4924,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "The list of things you want to include in the collection, along with an amount for each item"
+          "The list of ingredients you want to include in the recipe, along with an amount for each ingredient"
         )
       ])
     ])

@@ -223,6 +223,113 @@ class RecipeTest extends ApiTestCase
         ]);
     }
 
+    public function test_when_a_user_publishes_a_recipe_a_slug_is_generated()
+    {
+        $recipe = RecipeFactory::addRecipe($this->user);
+        $recipe->update(['name' => 'Spaghetti Bolognese']);
+
+        $this->callApi(route('recipe-toggle-publish', ['recipe' => $recipe->id]));
+
+        $this->assertDatabaseHas('recipes', [
+            'user_id' => $this->user->id,
+            'id' => $recipe->id,
+            'slug' => 'spaghetti-bolognese'
+        ]);
+    }
+
+    public function test_two_recipes_cannot_have_the_same_slug()
+    {
+        $alec = $this->user;
+        $lucy = UserFactory::addUser();
+
+        $recipe = RecipeFactory::addRecipe($alec);
+        $duplicateRecipe = RecipeFactory::addRecipe($lucy);
+
+        $recipe->update(['name' => 'Spaghetti Bolognese']);
+        $duplicateRecipe->update(['name' => 'Spaghetti Bolognese']);
+
+        $this->callApi(route('recipe-toggle-publish', ['recipe' => $recipe->id]));
+
+        $this->user = $lucy;
+
+        $this->callApi(route('recipe-toggle-publish', ['recipe' => $duplicateRecipe->id]));
+
+        $this->assertDatabaseHas('recipes', [
+            'user_id' => $this->user->id,
+            'id' => $duplicateRecipe->id,
+            'slug' => 'spaghetti-bolognese-' . $lucy->id
+        ]);
+    }
+
+    public function test_a_user_cannot_publish_a_recipe_without_the_required_attributes()
+    {
+        $recipe = RecipeFactory::addRecipe($this->user);
+        $recipe->update([
+            'description' => '',
+            'cook_time' => '',
+            'serving_size' => ''
+        ]);
+
+        $response = $this->callApi(route('recipe-toggle-publish', ['recipe' => $recipe->id]));
+
+        $this->assertEquals($response->status, 400);
+        $this->assertEquals($response->error, 'descriptionIsRequired');
+
+        $recipe->update(['description' => 'My happy description']);
+
+        $response = $this->callApi(route('recipe-toggle-publish', ['recipe' => $recipe->id]));
+
+        $this->assertEquals($response->status, 400);
+        $this->assertEquals($response->error, 'servingSizeIsRequired');
+
+        $recipe->update(['serving_size' => '20']);
+
+        $response = $this->callApi(route('recipe-toggle-publish', ['recipe' => $recipe->id]));
+
+        $this->assertEquals($response->status, 400);
+        $this->assertEquals($response->error, 'cookTimeIsRequired');
+    }
+
+    public function test_unpublishing_a_recipe_removes_the_slug()
+    {
+        $recipe = RecipeFactory::addPublishedRecipe($this->user);
+
+        $this->callApi(route('recipe-toggle-publish', ['recipe' => $recipe->id]));
+
+        $this->assertDatabaseHas('recipes', [
+            'user_id' => $this->user->id,
+            'id' => $recipe->id,
+            'slug' => ''
+        ]);
+    }
+
+    public function test_a_user_cannot_set_serving_size_or_cooking_time_to_unexpected_values()
+    {
+        $this->withoutExceptionHandling();
+
+        $recipe = RecipeFactory::addRecipe($this->user);
+
+        $attributes = [
+            'name' => 'Updated Recipe Name',
+            'recipe' => 'Lorem ipsum updated',
+            'description' => 'My happy description',
+            'items' => json_encode([]),
+            'cook_time' => 35,
+            'serving_size' => 9
+        ];
+
+        $path = route('update-recipe', ['recipe' => $recipe->id]);
+
+        $response = $this->callApi($path, $attributes);
+        $this->assertEquals($response->error, 'invalidCookTime');
+
+        $attributes['cook_time'] = 30;
+
+        $response = $this->callApi($path, $attributes);
+        $this->assertEquals($response->error, 'invalidServingSize');
+
+    }
+
     public function test_a_user_can_update_a_recipes_image()
     {
         $recipe = RecipeFactory::addRecipe($this->user);

@@ -2636,3 +2636,7 @@ input[type=submit].Button {
   margin-bottom: 16px;
 }
 
+.AdminSection > .section > .Button {
+  margin-right: 16px;
+}
+

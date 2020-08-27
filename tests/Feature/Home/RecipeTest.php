@@ -43,26 +43,6 @@ class RecipeTest extends TestCase
             ->assertSee($items[1]->name);
     }
 
-    public function test_viewing_a_recipe_displays_the_recipe()
-    {
-        $user = $this->signIn();
-        $recipe = RecipeFactory::addRecipe($user);
-
-        $this->get(route('recipe-details', ['recipe' => $recipe->id]))
-            ->assertSee($recipe->displayRecipe());
-    }
-
-    public function test_viewing_a_recipe_displays_the_ingredients()
-    {
-        $user = $this->signIn();
-        $recipe = RecipeFactory::addRecipeWithTwoItems($user);
-        $items = Item::all();
-
-        $this->get(route('recipe-details', ['recipe' => $recipe->id]))
-            ->assertSee($items[0]->name)
-            ->assertSee($items[1]->name);
-    }
-
     public function test_editing_a_recipe_displays_the_ingredients()
     {
         $user = $this->signIn();

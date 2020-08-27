@@ -334,7 +334,7 @@ class PopulateDatabase extends Command
 
             foreach ($collection['items'] as $itemData) {
                 try {
-                    $item = Item::where('name', $itemData[0])->first();
+                    $item = Item::where(['name' => $itemData[0], 'user_id' => $user->id])->first();
 
                     $model->items()->attach($item->id, ['amount' => $itemData[1]]);
                 } catch (\Exception $e) {
@@ -418,7 +418,7 @@ class PopulateDatabase extends Command
             $order = 0;
             foreach ($recipe['items'] as $itemData) {
                 try {
-                    $item = Item::where('name', $itemData[0])->first();
+                    $item = Item::where(['name' => $itemData[0], 'user_id' => $user->id])->first();
 
                     $model->items()->attach($item->id, ['amount' => $itemData[1], 'precise_amount' => $itemData[2], 'order' => $order]);
                 } catch (\Exception $e) {
@@ -451,7 +451,7 @@ class PopulateDatabase extends Command
             $order = 0;
             foreach ($recipe['items'] as $itemData) {
                 try {
-                    $item = Item::where('name', $itemData[0])->first();
+                    $item = Item::where(['name' => $itemData[0], 'user_id' => $user->id])->first();
 
                     $model->items()->attach($item->id, ['amount' => $itemData[1], 'precise_amount' => $itemData[2], 'order' => $order]);
                 } catch (\Exception $e) {
@@ -558,7 +558,7 @@ Add the passata, the beans and the tomato puree and stir well. Bring to a simmer
 
             foreach ($plan['items'] as $itemData) {
                 try {
-                    $item = Item::where('name', $itemData[0])->first();
+                    $item = Item::where(['name' => $itemData[0], 'user_id' => $user->id])->first();
 
                     $model->items()->attach($item->id, ['amount' => $itemData[1]]);
                 } catch (\Exception $e) {

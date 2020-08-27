@@ -12,6 +12,7 @@ use App\Models\Recipe;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Str;
 
 class RecipeController extends BaseController
 {
@@ -44,6 +45,14 @@ class RecipeController extends BaseController
             return ApiResponse::error(['error' => 'recipeAlreadyExists']);
         }
 
+        if (!empty($request->cook_time) && !in_array($request->cook_time, Recipe::$expectedCookTimes)) {
+            return ApiResponse::error(['error' => 'invalidCookTime']);
+        }
+
+        if (!empty($request->serving_size) && !in_array($request->serving_size, Recipe::$expectedServingSizes)) {
+            return ApiResponse::error(['error' => 'invalidServingSize']);
+        }
+
         $recipe->update(
             $request->only('name', 'recipe', 'description', 'image_id', 'serving_size', 'cook_time')
         );
@@ -66,7 +75,32 @@ class RecipeController extends BaseController
     }
 
     public function togglePublishStatus(Recipe $recipe) {
-        $recipe->toggleStatus();
+        if ($recipe->published) {
+            $recipe->update([
+                'slug' => '',
+                'published' => false
+            ]);
+        } else {
+            if (empty($recipe->description)) {
+                return ApiResponse::error(['error' => 'descriptionIsRequired']);
+            }
+            if (empty($recipe->serving_size)) {
+                return ApiResponse::error(['error' => 'servingSizeIsRequired']);
+            }
+            if (empty($recipe->cook_time)) {
+                return ApiResponse::error(['error' => 'cookTimeIsRequired']);
+            }
+
+            $slug = Str::slug($recipe->name);
+            if (Recipe::where('slug', $slug)->count()) {
+                $slug = $slug . '-' . $recipe->user->id;
+            }
+
+            $recipe->update([
+                'slug' => $slug,
+                'published' => true
+            ]);
+        }
 
         return ApiResponse::success();
     }

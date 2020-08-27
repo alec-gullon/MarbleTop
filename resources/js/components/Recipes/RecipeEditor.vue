@@ -26,21 +26,21 @@
                 </div>
 
                 <div class="InputWithLabel">
-                    <label for="cooktime">How Long It Takes to Cook <span>(Optional)</span></label>
+                    <label for="cooktime">How Long it Takes to Cook <span>(Optional)</span></label>
                     <select class="Select" id="cooktime" v-model="cookTime">
-                        <option value="0">Please select..</option>
-                        <option value="10">10 Mins</option>
-                        <option value="20">20 Mins</option>
-                        <option value="30">30 Mins</option>
-                        <option value="45">45 Mins</option>
-                        <option value="60">60 Mins</option>
-                        <option value="90">90 Mins</option>
-                        <option value="120">120 Mins</option>
+                        <option :value="0">Please select..</option>
+                        <option :value="10">10 Mins</option>
+                        <option :value="20">20 Mins</option>
+                        <option :value="30">30 Mins</option>
+                        <option :value="45">45 Mins</option>
+                        <option :value="60">60 Mins</option>
+                        <option :value="90">90 Mins</option>
+                        <option :value="120">120 Mins</option>
                     </select>
                 </div>
 
                 <div class="InputWithLabel">
-                    <label for="servingsize">How Many It Feeds <span>(Optional)</span></label>
+                    <label for="servingsize">How Many it Feeds <span>(Optional)</span></label>
                     <select class="Select" id="servingsize" v-model="servingSize">
                         <option value="0">Please Select...</option>
                         <option>1</option>
@@ -66,7 +66,11 @@
                 <p v-if="published">Currently published.</p>
                 <p v-else>Currently unpublished.</p>
 
-                <button class="Button is-primary is-small" :class="{'is-active': this.updateStatusActive}" @click="updatePublishStatus">
+                <p v-if="!publishable">
+                    In order to publish a recipe, you must set the <strong>Description</strong>,
+                    <strong>How Long it Takes to Cook</strong> and <strong>How Many it Feeds</strong> fields.
+                </p>
+                <button v-else class="Button is-primary is-small" :class="{'is-active': this.updateStatusActive}" @click="updatePublishStatus">
                     <span v-if="this.published">Unpublish</span>
                     <span v-else>Publish</span>
                 </button>
@@ -78,7 +82,7 @@
 
             <div class="label">
                 <h2>Ingredients</h2>
-                <p>The list of things you want to include in the collection, along with an amount for each item</p>
+                <p>The list of ingredients you want to include in the recipe, along with an amount for each ingredient</p>
             </div>
 
             <div class="section">
@@ -162,9 +166,6 @@
             this.items = this.copy(this._items);
         },
         methods: {
-            updateItems: function(items) {
-                this.items = items;
-            },
             update: function() {
                 if (!this.isFormReady) {
                     return;
@@ -181,6 +182,7 @@
                 let items = [];
                 for (let i = 0; i < this.selectedItems.length; i++) {
                     let item = this.selectedItems[i];
+                    console.log(item);
                     items.push({
                         id: item.id,
                         amount: item.amount,
@@ -258,6 +260,12 @@
                 }.bind(this));
 
                 return items;
+            },
+            publishable: function() {
+                if (this._description && this._servingSize !== 0 && this._cookTime !== 0) {
+                    return true;
+                }
+                return false;
             }
         },
         watch: {

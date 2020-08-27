@@ -10,6 +10,14 @@ class Recipe extends Model
 {
     protected $guarded = [];
 
+    public static $expectedCookTimes = [
+        0, 10, 20, 30, 45, 60, 90, 120
+    ];
+
+    public static $expectedServingSizes = [
+        0, 1, 2, 3, 4, 5, 6
+    ];
+
     public function user() {
         return $this->belongsTo('App\User');
     }
