@@ -15,3 +15,67 @@
  */
 @import 'components/index';
 @import 'pages/index';
+
+.ItemsAdmin {
+    display: flex;
+    flex-direction: column;
+}
+
+.ItemCreator {
+    display: flex;
+    flex-direction: column;
+
+    > .InputWithLabel {
+        margin-bottom: 16px;
+    }
+    > .Button {
+        margin-top: 16px;
+        align-self: flex-end;
+    }
+}
+
+.AdminSection {
+    display: flex;
+    border-bottom: 1px solid $grey-lightest;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+
+    &:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    > .label {
+        width: 30%;
+        margin-right: 5%;
+
+        > h2 {
+            color: $green-dark;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        > p {
+            font-size: 14px;
+            color: $grey-mid;
+            font-style: italic;
+        }
+    }
+
+    > .section {
+        width: 75%;
+
+        > .InputWithLabel {
+            margin-bottom: 16px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        > p {
+            margin-bottom: 16px;
+        }
+    }
+}

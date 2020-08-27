@@ -3,6 +3,13 @@
     flex-direction: column;
     > label {
         font-weight: 700;
+
+        > span {
+            font-size: 14px;
+            font-weight: 400;
+            color: $grey-mid;
+            font-style: italic;
+        }
     }
     > .error {
         color: $alert;

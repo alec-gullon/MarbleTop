@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/home/recipes',                     'Home\RecipeController@index')->name('recipes');
     Route::get('/home/recipes/create',              'Home\RecipeController@add')->name('recipes-add');
-    Route::get('/home/recipes/{recipe}',            'Home\RecipeController@edit')->name('recipe-details');
+    Route::get('/home/recipes/{recipe}',            'Home\RecipeController@edit')->name('recipe-edit');
 
     Route::get('/home/collections',                 'Home\CollectionController@index')->name('collections');
     Route::get('/home/collections/create',          'Home\CollectionController@show')->name('collections-add');

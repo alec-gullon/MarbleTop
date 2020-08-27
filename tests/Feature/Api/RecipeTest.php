@@ -20,10 +20,14 @@ class RecipeTest extends ApiTestCase
         $attributes = [
             'name' => 'Spaghetti Bolognese',
             'recipe' => 'Lorem ipsum',
+            'description' => 'My happy description',
             'items' => [
                 ['id' => $items[0]->id, 'amount' => 1.5, 'precise_amount' => '100g', 'order' => 1],
                 ['id' => $items[1]->id, 'amount' => 2.5, 'precise_amount' => '200g', 'order' => 2]
-            ]
+            ],
+            'image_id' => 10,
+            'cook_time' => 30,
+            'serving_size' => 2
         ];
 
         $submission = $attributes;
@@ -38,7 +42,11 @@ class RecipeTest extends ApiTestCase
         $this->assertDatabaseHas('recipes', [
             'user_id' => $this->user->id,
             'name' => $attributes['name'],
-            'recipe' => $attributes['recipe']
+            'recipe' => $attributes['recipe'],
+            'description' => $attributes['description'],
+            'image_id' => $attributes['image_id'],
+            'cook_time' => $attributes['cook_time'],
+            'serving_size' => $attributes['serving_size']
         ]);
 
         $this->assertDatabaseHas('item_recipe', [
@@ -86,9 +94,13 @@ class RecipeTest extends ApiTestCase
         $attributes = [
             'name' => 'Updated Recipe Name',
             'recipe' => 'Lorem ipsum updated',
+            'description' => 'My happy description',
             'items' => [
                 ['id' => $newItem->id, 'amount' => 3, 'precise_amount' => '50g', 'order' => 1],
-            ]
+            ],
+            'image_id' => 10,
+            'cook_time' => 30,
+            'serving_size' => 2
         ];
 
         $submission = $attributes;
@@ -97,6 +109,11 @@ class RecipeTest extends ApiTestCase
         $response = $this->callApi($recipe->apiPath() . 'update/', $submission, true)
             ->assertSessionHas('message')
             ->decodeResponseJson();
+
+        $this->assertDatabaseHas('recipes', [
+            'id' => $recipe->id,
+            'serving_size' => $attributes['serving_size']
+        ]);
 
         $this->assertEquals($response['status'], 200);
         $this->assertDatabaseHas('item_recipe', [
@@ -208,8 +225,6 @@ class RecipeTest extends ApiTestCase
 
     public function test_a_user_can_update_a_recipes_image()
     {
-        $this->withoutExceptionHandling();
-
         $recipe = RecipeFactory::addRecipe($this->user);
 
         $imageId = 10;

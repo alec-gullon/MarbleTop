@@ -403,6 +403,13 @@ input[type=submit].Button {
   font-weight: 700;
 }
 
+.InputWithLabel > label > span {
+  font-size: 14px;
+  font-weight: 400;
+  color: #425466;
+  font-style: italic;
+}
+
 .InputWithLabel > .error {
   color: #CC3333;
   font-size: 14px;
@@ -941,31 +948,6 @@ input[type=submit].Button {
   display: flex;
   flex-direction: column;
   padding: 21px;
-}
-
-@media only screen and (min-width: 1024px) {
-  .RecipeCreator {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-  }
-}
-
-.RecipeCreator > .details {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
-
-@media only screen and (min-width: 1024px) {
-  .RecipeCreator > .details {
-    width: 70%;
-    margin-right: 5%;
-  }
-}
-
-.RecipeCreator > .details > .InputWithLabel {
-  margin-bottom: 16px;
 }
 
 .RecipeCreator > .status {
@@ -2052,6 +2034,7 @@ input[type=submit].Button {
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: 0;
+    width: auto;
   }
 }
 
@@ -2273,18 +2256,17 @@ input[type=submit].Button {
   }
 }
 
-@media only screen and (min-width: 1024px) {
-  .ItemsAdmin > .locations {
-    width: 50%;
-  }
+.ItemLocations {
+  display: flex;
+  flex-direction: column;
 }
 
-.ItemsAdmin > .locations > h2 {
+.ItemLocations > h2 {
   display: none;
 }
 
 @media only screen and (min-width: 1024px) {
-  .ItemsAdmin > .locations > h2 {
+  .ItemLocations > h2 {
     display: block;
     color: #1A202C;
     font-size: 18px;
@@ -2293,49 +2275,49 @@ input[type=submit].Button {
   }
 }
 
-.ItemsAdmin > .locations > .location {
+.ItemLocations > .location {
   margin-bottom: 16px;
 }
 
 @media only screen and (min-width: 1024px) {
-  .ItemsAdmin > .locations > .location {
+  .ItemLocations > .location {
     border-bottom: 1px solid #E8E8E8;
   }
 }
 
-.ItemsAdmin > .locations > .location:last-child {
+.ItemLocations > .location:last-child {
   margin-bottom: 0;
 }
 
 @media only screen and (min-width: 1024px) {
-  .ItemsAdmin > .locations > .location:last-child {
+  .ItemLocations > .location:last-child {
     border-bottom: 0;
   }
 }
 
-.ItemsAdmin > .locations > .location > .header {
+.ItemLocations > .location > .header {
   display: flex;
   cursor: pointer;
 }
 
-.ItemsAdmin > .locations > .location > .header > h3 {
+.ItemLocations > .location > .header > h3 {
   font-size: 20px;
   color: #22543D;
   margin-bottom: 20px;
   flex-grow: 1;
 }
 
-.ItemsAdmin > .locations > .location > .header > svg {
+.ItemLocations > .location > .header > svg {
   width: 30px;
   height: 30px;
   fill: #22543D;
 }
 
-.ItemsAdmin > .locations > .location > .body {
+.ItemLocations > .location > .body {
   display: none;
 }
 
-.ItemsAdmin > .locations > .location > .body.is-expanded {
+.ItemLocations > .location > .body.is-expanded {
   display: block;
 }
 
@@ -2587,5 +2569,70 @@ input[type=submit].Button {
 
 .Plan > .item-list > .item:last-child {
   border-bottom: 0;
+}
+
+.ItemsAdmin {
+  display: flex;
+  flex-direction: column;
+}
+
+.ItemCreator {
+  display: flex;
+  flex-direction: column;
+}
+
+.ItemCreator > .InputWithLabel {
+  margin-bottom: 16px;
+}
+
+.ItemCreator > .Button {
+  margin-top: 16px;
+  align-self: flex-end;
+}
+
+.AdminSection {
+  display: flex;
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+}
+
+.AdminSection:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.AdminSection > .label {
+  width: 30%;
+  margin-right: 5%;
+}
+
+.AdminSection > .label > h2 {
+  color: #22543D;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.AdminSection > .label > p {
+  font-size: 14px;
+  color: #425466;
+  font-style: italic;
+}
+
+.AdminSection > .section {
+  width: 75%;
+}
+
+.AdminSection > .section > .InputWithLabel {
+  margin-bottom: 16px;
+}
+
+.AdminSection > .section > .InputWithLabel:last-child {
+  margin-bottom: 0;
+}
+
+.AdminSection > .section > p {
+  margin-bottom: 16px;
 }
 

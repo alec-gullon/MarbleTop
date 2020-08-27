@@ -21,7 +21,7 @@
     <ul class="OptionList">
         @foreach (Auth::user()->recipes->sortBy('name') as $recipe)
             <li>
-                <a href="{{ route('recipe-details', ['recipe' => $recipe->id]) }}">
+                <a href="{{ route('recipe-edit', ['recipe' => $recipe->id]) }}">
                     @icon('arrow-thin-right')
                     <div class="text">
                         {{ $recipe->name }}

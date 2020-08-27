@@ -129,6 +129,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -214,6 +224,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../mixins/Post.js */ "./resources/js/mixins/Post.js");
 /* harmony import */ var _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../mixins/Copy.js */ "./resources/js/mixins/Copy.js");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -453,14 +470,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['locations', 'existingItems'],
@@ -490,9 +499,6 @@ __webpack_require__.r(__webpack_exports__);
         this.formActive = false;
         document.global.xhrActive = false;
       }.bind(this));
-    },
-    toggleExpanded: function toggleExpanded() {
-      this.expanded = !this.expanded;
     }
   },
   computed: {
@@ -507,7 +513,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: '',
       locationId: 0,
-      expanded: false,
       reportSuccess: false,
       formActive: false
     };
@@ -763,6 +768,28 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_Copy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../mixins/Copy */ "./resources/js/mixins/Copy.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1558,12 +1585,75 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['initialItems'],
+  data: function data() {
+    return {
+      name: '',
+      recipe: '',
+      description: '',
+      cookTime: 0,
+      servingSize: 0,
+      items: {},
+      formActive: false,
+      nameAlreadyExists: false
+    };
+  },
+  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  props: ['_items'],
   created: function created() {
-    this.items = this.copy(this.initialItems);
+    this.items = this.copy(this._items);
   },
   methods: {
     submit: function submit() {
@@ -1574,6 +1664,10 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('name', this.name);
       data.append('recipe', this.recipe);
+      data.append('description', this.description);
+      data.append('serving_size', this.servingSize);
+      data.append('cook_time', this.cookTime);
+      data.append('image_id', Math.floor(Math.random() * 20) + 1);
       data.append('api_token', document.global.apiToken);
       var items = [];
 
@@ -1626,17 +1720,7 @@ __webpack_require__.r(__webpack_exports__);
     name: function name() {
       this.nameAlreadyExists = false;
     }
-  },
-  data: function data() {
-    return {
-      name: '',
-      recipe: '',
-      items: {},
-      formActive: false,
-      nameAlreadyExists: false
-    };
-  },
-  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__["default"]]
+  }
 });
 
 /***/ }),
@@ -1715,15 +1799,93 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['initialName', 'initialRecipe', 'initialItems', 'initialPublished', 'recipeId'],
+  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  data: function data() {
+    return {
+      name: '',
+      recipe: '',
+      description: '',
+      cookTime: 0,
+      servingSize: 0,
+      published: false,
+      updateActive: false,
+      deleteActive: false,
+      updateStatusActive: false,
+      items: {},
+      nameAlreadyExists: false
+    };
+  },
+  props: ['_name', '_recipe', '_description', '_cookTime', '_servingSize', '_items', '_published', 'recipeId'],
   created: function created() {
-    this.name = this.initialName;
-    this.recipe = this.initialRecipe;
-    this.published = this.initialPublished;
-    this.items = this.copy(this.initialItems);
+    this.name = this._name;
+    this.recipe = this._recipe;
+    this.description = this._description;
+    this.cookTime = this._cookTime;
+    this.servingSize = this._servingSize;
+    this.published = this._published;
+    this.items = this.copy(this._items);
   },
   methods: {
     updateItems: function updateItems(items) {
@@ -1737,6 +1899,9 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('name', this.name);
       data.append('recipe', this.recipe);
+      data.append('description', this.description);
+      data.append('serving_size', this.servingSize);
+      data.append('cook_time', this.cookTime);
       data.append('api_token', document.global.apiToken);
       var items = [];
 
@@ -1819,20 +1984,7 @@ __webpack_require__.r(__webpack_exports__);
     name: function name() {
       this.nameAlreadyExists = false;
     }
-  },
-  data: function data() {
-    return {
-      name: '',
-      recipe: '',
-      published: false,
-      updateActive: false,
-      deleteActive: false,
-      updateStatusActive: false,
-      items: {},
-      nameAlreadyExists: false
-    };
-  },
-  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__["default"]]
+  }
 });
 
 /***/ }),
@@ -2321,66 +2473,66 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "RecipeCreator" }, [
-    _c("div", { staticClass: "details" }, [
-      _c("h2", { staticClass: "AdminHeading" }, [
-        _vm._v("\n            Details\n        ")
-      ]),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "section" }, [
+        _c(
+          "div",
+          {
+            staticClass: "InputWithLabel",
+            class: { "is-error": _vm.nameAlreadyExists }
+          },
+          [
+            _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "Input",
+              class: { "is-error": _vm.nameAlreadyExists },
+              attrs: { id: "name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.nameAlreadyExists
+              ? _c("span", { staticClass: "error" }, [
+                  _vm._v("Collection already exists")
+                ])
+              : _vm._e()
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "div",
-        {
-          staticClass: "InputWithLabel",
-          class: { "is-error": _vm.nameAlreadyExists }
-        },
+        { staticClass: "section" },
         [
-          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
-              }
-            ],
-            staticClass: "Input",
-            class: { "is-error": _vm.nameAlreadyExists },
-            attrs: { id: "name" },
-            domProps: { value: _vm.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.name = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm.nameAlreadyExists
-            ? _c("span", { staticClass: "error" }, [
-                _vm._v("Collection already exists")
-              ])
-            : _vm._e()
-        ]
+          _c("item-searcher", {
+            attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+          })
+        ],
+        1
       )
     ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "items" },
-      [
-        _c("h2", { staticClass: "AdminHeading" }, [
-          _vm._v("\n            Items\n        ")
-        ]),
-        _vm._v(" "),
-        _c("item-searcher", {
-          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-        })
-      ],
-      1
-    ),
     _vm._v(" "),
     _c("div", { staticClass: "buttons" }, [
       _c(
@@ -2398,7 +2550,32 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Details")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Start with a name")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Items")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "The list of things you want to include in the collection, along with an amount for each item"
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -2421,66 +2598,66 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "RecipeCreator" }, [
-    _c("div", { staticClass: "details" }, [
-      _c("h2", { staticClass: "AdminHeading" }, [
-        _vm._v("\n            Details\n        ")
-      ]),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "section" }, [
+        _c(
+          "div",
+          {
+            staticClass: "InputWithLabel",
+            class: { "is-error": _vm.nameAlreadyExists }
+          },
+          [
+            _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "Input",
+              class: { "is-error": _vm.nameAlreadyExists },
+              attrs: { id: "name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.nameAlreadyExists
+              ? _c("span", { staticClass: "error" }, [
+                  _vm._v("Collection already exists")
+                ])
+              : _vm._e()
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "div",
-        {
-          staticClass: "InputWithLabel",
-          class: { "is-error": _vm.nameAlreadyExists }
-        },
+        { staticClass: "section" },
         [
-          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
-              }
-            ],
-            staticClass: "Input",
-            class: { "is-error": _vm.nameAlreadyExists },
-            attrs: { id: "name" },
-            domProps: { value: _vm.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.name = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm.nameAlreadyExists
-            ? _c("span", { staticClass: "error" }, [
-                _vm._v("Collection already exists")
-              ])
-            : _vm._e()
-        ]
+          _c("item-searcher", {
+            attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+          })
+        ],
+        1
       )
     ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "items" },
-      [
-        _c("h2", { staticClass: "AdminHeading" }, [
-          _vm._v("\n            Items\n        ")
-        ]),
-        _vm._v(" "),
-        _c("item-searcher", {
-          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-        })
-      ],
-      1
-    ),
     _vm._v(" "),
     _c("div", { staticClass: "buttons" }, [
       _c(
@@ -2508,7 +2685,32 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Details")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Edit the name of the collection")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Items")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "The list of things you want to include in the collection, along with an amount for each item"
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -2620,134 +2822,105 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "ExpandableForm flat-for-lg",
-      class: { "is-expanded": _vm.expanded }
-    },
-    [
-      _c("div", { staticClass: "header", on: { click: _vm.toggleExpanded } }, [
-        _c("svg", { attrs: { xmlns: "http://www.w3.org/2000/svg" } }, [
-          !_vm.expanded
-            ? _c("use", {
-                attrs: { "xlink:href": "/images/icons.svg#plus-outline" }
-              })
-            : _c("use", {
-                attrs: { "xlink:href": "/images/icons.svg#close-outline" }
-              })
-        ]),
-        _vm._v("\n        Add Item\n    ")
+  return _c("div", { staticClass: "ItemCreator" }, [
+    _c("div", { staticClass: "InputWithLabel" }, [
+      _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.name,
+            expression: "name"
+          }
+        ],
+        staticClass: "Input",
+        class: { "is-error": _vm.nameAlreadyExists },
+        attrs: { type: "text", id: "name" },
+        domProps: { value: _vm.name },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.name = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _vm.nameAlreadyExists
+        ? _c("span", { staticClass: "error" }, [
+            _vm._v("An item with that name already exists.")
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "InputWithLabel" }, [
+      _c("label", { attrs: { for: "location" } }, [
+        _vm._v("Supermarket Location")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "body" }, [
-        _c("div", { staticClass: "InputWithLabel" }, [
-          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
-              }
-            ],
-            staticClass: "Input",
-            class: { "is-error": _vm.nameAlreadyExists },
-            attrs: { type: "text", id: "name" },
-            domProps: { value: _vm.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.name = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm.nameAlreadyExists
-            ? _c("span", { staticClass: "error" }, [
-                _vm._v("An item with that name already exists.")
-              ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "InputWithLabel" }, [
-          _c("label", { attrs: { for: "location" } }, [
-            _vm._v("Supermarket Location")
-          ]),
-          _vm._v(" "),
-          _c(
-            "select",
+      _c(
+        "select",
+        {
+          directives: [
             {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.locationId,
-                  expression: "locationId"
-                }
-              ],
-              staticClass: "Select",
-              attrs: { id: "location" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.locationId = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { value: "0" } }, [
-                _vm._v("Please Select...")
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.locations, function(location) {
-                return _c("option", { domProps: { value: location.id } }, [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(location.name) +
-                      "\n                "
-                  )
-                ])
-              })
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _vm.reportSuccess
-          ? _c("div", { staticClass: "MessageBox is-success" }, [
-              _vm._v("\n            Item successfully added!\n        ")
+              name: "model",
+              rawName: "v-model",
+              value: _vm.locationId,
+              expression: "locationId"
+            }
+          ],
+          staticClass: "Select",
+          attrs: { id: "location" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.locationId = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "0" } }, [_vm._v("Please Select...")]),
+          _vm._v(" "),
+          _vm._l(_vm.locations, function(location) {
+            return _c("option", { domProps: { value: location.id } }, [
+              _vm._v(
+                "\n                " + _vm._s(location.name) + "\n            "
+              )
             ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "Button is-small is-primary",
-            class: {
-              "is-disabled": !_vm.formReady,
-              "is-active": _vm.formActive
-            },
-            on: { click: _vm.submit }
-          },
-          [_vm._v("\n            Add Item\n        ")]
-        )
-      ])
-    ]
-  )
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _vm.reportSuccess
+      ? _c("div", { staticClass: "MessageBox is-success" }, [
+          _vm._v("\n        Item successfully added!\n    ")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "Button is-small is-primary",
+        class: { "is-disabled": !_vm.formReady, "is-active": _vm.formActive },
+        on: { click: _vm.submit }
+      },
+      [_vm._v("\n        Add Item\n    ")]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3007,21 +3180,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "ItemsAdmin" },
-    [
-      _c("item-creator", {
-        attrs: { locations: _vm.locations, existingItems: _vm.existingItems },
-        on: { itemAdded: _vm.updateItems }
-      }),
+  return _c("div", { staticClass: "ItemsAdmin" }, [
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(0),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "locations" },
+        { staticClass: "section" },
         [
-          _c("h2", [_vm._v("Existing Items")]),
-          _vm._v(" "),
+          _c("item-creator", {
+            attrs: {
+              locations: _vm.locations,
+              existingItems: _vm.existingItems
+            },
+            on: { itemAdded: _vm.updateItems }
+          })
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "section" }, [
+        _c(
+          "div",
+          { staticClass: "ItemLocations" },
           _vm._l(_vm.locationsToDisplay, function(id) {
             return _c("div", { staticClass: "location" }, [
               _c(
@@ -3079,15 +3264,39 @@ var render = function() {
                 1
               )
             ])
-          })
-        ],
-        2
-      )
-    ],
-    1
-  )
+          }),
+          0
+        )
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Add Item")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "Add an item you might need to grab next time you go shopping: it could be anything,\n            from tomatoes to cat food"
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Existing Items")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("The items that you currently track in the system")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -4010,107 +4219,239 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "RecipeCreator" }, [
-    _c("div", { staticClass: "details" }, [
-      _c("h2", { staticClass: "AdminHeading" }, [
-        _vm._v("\n            Details\n        ")
-      ]),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(0),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "InputWithLabel",
-          class: { "is-error": _vm.nameAlreadyExists }
-        },
-        [
-          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+      _c("div", { staticClass: "section" }, [
+        _c(
+          "div",
+          {
+            staticClass: "InputWithLabel",
+            class: { "is-error": _vm.nameAlreadyExists }
+          },
+          [
+            _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "Input",
+              class: { "is-error": _vm.nameAlreadyExists },
+              attrs: { id: "name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.nameAlreadyExists
+              ? _c("span", { staticClass: "error" }, [
+                  _vm._v("Collection already exists")
+                ])
+              : _vm._e()
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "InputWithLabel" }, [
+          _c("label", { attrs: { for: "recipe" } }, [_vm._v("Recipe")]),
           _vm._v(" "),
-          _c("input", {
+          _c("textarea", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
+                value: _vm.recipe,
+                expression: "recipe"
               }
             ],
-            staticClass: "Input",
-            class: { "is-error": _vm.nameAlreadyExists },
-            attrs: { id: "name" },
-            domProps: { value: _vm.name },
+            staticClass: "TextArea",
+            attrs: { id: "recipe" },
+            domProps: { value: _vm.recipe },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.name = $event.target.value
+                _vm.recipe = $event.target.value
               }
             }
-          }),
-          _vm._v(" "),
-          _vm.nameAlreadyExists
-            ? _c("span", { staticClass: "error" }, [
-                _vm._v("Collection already exists")
-              ])
-            : _vm._e()
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "InputWithLabel" }, [
-        _c("label", { attrs: { for: "recipe" } }, [_vm._v("Recipe")]),
+          })
+        ]),
         _vm._v(" "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.recipe,
-              expression: "recipe"
-            }
-          ],
-          staticClass: "TextArea",
-          attrs: { id: "recipe" },
-          domProps: { value: _vm.recipe },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("div", { staticClass: "InputWithLabel" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.description,
+                expression: "description"
               }
-              _vm.recipe = $event.target.value
+            ],
+            staticClass: "TextArea",
+            attrs: { id: "description" },
+            domProps: { value: _vm.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.description = $event.target.value
+              }
             }
-          }
-        })
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "InputWithLabel" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cookTime,
+                  expression: "cookTime"
+                }
+              ],
+              staticClass: "Select",
+              attrs: { id: "cooktime" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.cookTime = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0" } }, [
+                _vm._v("Please select..")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "10" } }, [_vm._v("10 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "20" } }, [_vm._v("20 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "30" } }, [_vm._v("30 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "45" } }, [_vm._v("45 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "60" } }, [_vm._v("60 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "90" } }, [_vm._v("90 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "120" } }, [_vm._v("120 Mins")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "InputWithLabel" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.servingSize,
+                  expression: "servingSize"
+                }
+              ],
+              staticClass: "Select",
+              attrs: { id: "servingsize" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.servingSize = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0" } }, [
+                _vm._v("Please Select...")
+              ]),
+              _vm._v(" "),
+              _c("option", [_vm._v("1")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("2")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("3")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("4")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("5")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("6")])
+            ]
+          )
+        ])
       ])
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "items" },
-      [
-        _c("h2", { staticClass: "AdminHeading" }, [
-          _vm._v("\n            Items\n        ")
-        ]),
-        _vm._v(" "),
-        _c("item-searcher", {
-          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-        })
-      ],
-      1
-    ),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(4),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "section" },
+        [
+          _c("item-searcher", {
+            attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+          })
+        ],
+        1
+      )
+    ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "amounts" },
-      [
-        _c("h2", { staticClass: "AdminHeading" }, [
-          _vm._v("\n            Amounts\n        ")
-        ]),
-        _vm._v(" "),
-        _c("item-amounts", {
-          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-        })
-      ],
-      1
-    ),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(5),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "section" },
+        [
+          _c("item-amounts", {
+            attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+          })
+        ],
+        1
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "buttons" }, [
       _c(
@@ -4128,7 +4469,75 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Details")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("We need to know a few things about the recipe you're adding")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "description" } }, [
+      _vm._v("Description "),
+      _c("span", [_vm._v("(Optional)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cooktime" } }, [
+      _vm._v("How Long It Takes to Cook "),
+      _c("span", [_vm._v("(Optional)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "servingsize" } }, [
+      _vm._v("How Many It Feeds "),
+      _c("span", [_vm._v("(Optional)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Ingredients")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "The list of things you want to include in the collection, along with an amount for each item"
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Amounts")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "The precise amount of each ingredient in the recipe: a tsp of this, 100g of that, 2 of those. Leave\n            blank if you don't want to specify a precise amount. You can also customise the display order in this\n            section"
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -4151,127 +4560,263 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "RecipeCreator" }, [
-    _c("div", { staticClass: "details" }, [
-      _c("h2", { staticClass: "AdminHeading" }, [
-        _vm._v("\n            Details\n        ")
-      ]),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(0),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "InputWithLabel",
-          class: { "is-error": _vm.nameAlreadyExists }
-        },
-        [
-          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+      _c("div", { staticClass: "section" }, [
+        _c(
+          "div",
+          {
+            staticClass: "InputWithLabel",
+            class: { "is-error": _vm.nameAlreadyExists }
+          },
+          [
+            _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "Input",
+              class: { "is-error": _vm.nameAlreadyExists },
+              attrs: { id: "name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.nameAlreadyExists
+              ? _c("span", { staticClass: "error" }, [
+                  _vm._v("Collection already exists")
+                ])
+              : _vm._e()
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "InputWithLabel" }, [
+          _c("label", { attrs: { for: "recipe" } }, [_vm._v("Recipe")]),
           _vm._v(" "),
-          _c("input", {
+          _c("textarea", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
+                value: _vm.recipe,
+                expression: "recipe"
               }
             ],
-            staticClass: "Input",
-            class: { "is-error": _vm.nameAlreadyExists },
-            attrs: { id: "name" },
-            domProps: { value: _vm.name },
+            staticClass: "TextArea",
+            attrs: { id: "recipe" },
+            domProps: { value: _vm.recipe },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.name = $event.target.value
+                _vm.recipe = $event.target.value
               }
             }
-          }),
-          _vm._v(" "),
-          _vm.nameAlreadyExists
-            ? _c("span", { staticClass: "error" }, [
-                _vm._v("Collection already exists")
-              ])
-            : _vm._e()
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "InputWithLabel" }, [
-        _c("label", { attrs: { for: "recipe" } }, [_vm._v("Recipe")]),
+          })
+        ]),
         _vm._v(" "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.recipe,
-              expression: "recipe"
-            }
-          ],
-          staticClass: "TextArea",
-          attrs: { id: "recipe" },
-          domProps: { value: _vm.recipe },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("div", { staticClass: "InputWithLabel" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.description,
+                expression: "description"
               }
-              _vm.recipe = $event.target.value
+            ],
+            staticClass: "TextArea",
+            attrs: { id: "description" },
+            domProps: { value: _vm.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.description = $event.target.value
+              }
             }
-          }
-        })
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "InputWithLabel" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cookTime,
+                  expression: "cookTime"
+                }
+              ],
+              staticClass: "Select",
+              attrs: { id: "cooktime" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.cookTime = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0" } }, [
+                _vm._v("Please select..")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "10" } }, [_vm._v("10 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "20" } }, [_vm._v("20 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "30" } }, [_vm._v("30 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "45" } }, [_vm._v("45 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "60" } }, [_vm._v("60 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "90" } }, [_vm._v("90 Mins")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "120" } }, [_vm._v("120 Mins")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "InputWithLabel" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.servingSize,
+                  expression: "servingSize"
+                }
+              ],
+              staticClass: "Select",
+              attrs: { id: "servingsize" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.servingSize = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0" } }, [
+                _vm._v("Please Select...")
+              ]),
+              _vm._v(" "),
+              _c("option", [_vm._v("1")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("2")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("3")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("4")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("5")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("6")])
+            ]
+          )
+        ])
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "status" }, [
-      _vm.published
-        ? _c("p", [_vm._v("Currently published.")])
-        : _c("p", [_vm._v("Currently unpublished.")]),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(4),
+      _vm._v(" "),
+      _c("div", { staticClass: "section" }, [
+        _vm.published
+          ? _c("p", [_vm._v("Currently published.")])
+          : _c("p", [_vm._v("Currently unpublished.")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "Button is-primary is-small",
+            class: { "is-active": this.updateStatusActive },
+            on: { click: _vm.updatePublishStatus }
+          },
+          [
+            this.published
+              ? _c("span", [_vm._v("Unpublish")])
+              : _c("span", [_vm._v("Publish")])
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(5),
       _vm._v(" "),
       _c(
-        "button",
-        {
-          staticClass: "Button is-primary is-small",
-          class: { "is-active": this.updateStatusActive },
-          on: { click: _vm.updatePublishStatus }
-        },
+        "div",
+        { staticClass: "section" },
         [
-          this.published
-            ? _c("span", [_vm._v("Unpublish")])
-            : _c("span", [_vm._v("Publish")])
-        ]
+          _c("item-searcher", {
+            attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+          })
+        ],
+        1
       )
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "items" },
-      [
-        _c("h2", { staticClass: "AdminHeading" }, [
-          _vm._v("\n            Ingredients\n        ")
-        ]),
-        _vm._v(" "),
-        _c("item-searcher", {
-          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "amounts" },
-      [
-        _c("h2", { staticClass: "AdminHeading" }, [
-          _vm._v("\n            Amounts\n        ")
-        ]),
-        _vm._v(" "),
-        _c("item-amounts", {
-          attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
-        })
-      ],
-      1
-    ),
+    _c("div", { staticClass: "AdminSection" }, [
+      _vm._m(6),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "section" },
+        [
+          _c("item-amounts", {
+            attrs: { items: _vm.items, selectedItems: _vm.selectedItems }
+          })
+        ],
+        1
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "buttons" }, [
       _c(
@@ -4299,7 +4844,85 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Details")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("We need to know a few things about the recipe you're adding")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "description" } }, [
+      _vm._v("Description "),
+      _c("span", [_vm._v("(Optional)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cooktime" } }, [
+      _vm._v("How Long It Takes to Cook "),
+      _c("span", [_vm._v("(Optional)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "servingsize" } }, [
+      _vm._v("How Many It Feeds "),
+      _c("span", [_vm._v("(Optional)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Publish Status")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("The current publish status of your recipe")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Ingredients")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "The list of things you want to include in the collection, along with an amount for each item"
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("h2", [_vm._v("Amounts")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "The precise amount of each ingredient in the recipe: a tsp of this, 100g of that, 2 of those. Leave\n                blank if you don't want to specify a precise amount. You can also customise the display order in this\n                section"
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

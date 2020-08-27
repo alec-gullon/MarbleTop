@@ -25,7 +25,7 @@ class RecipeController extends BaseController
         }
 
         $recipe = $user->addRecipe(
-            $request->only('name', 'recipe')
+            $request->only('name', 'recipe', 'description', 'image_id', 'serving_size', 'cook_time')
         );
 
         $recipe->attachItems($request->items);
@@ -45,7 +45,7 @@ class RecipeController extends BaseController
         }
 
         $recipe->update(
-            $request->only('name', 'recipe')
+            $request->only('name', 'recipe', 'description', 'image_id', 'serving_size', 'cook_time')
         );
 
         $recipe->items()->detach();

@@ -16,15 +16,6 @@ class RecipeTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
-    public function test_recipe_displays_edit_icon()
-    {
-        $user = $this->signIn();
-        $recipe = RecipeFactory::addRecipe($user);
-
-        $this->get(route('recipe-details', ['recipe' => $recipe->id]))
-            ->assertSee('header with-icon');
-    }
-
     public function test_recipe_index_sets_recipes_as_the_selected_area()
     {
         $this->signIn();

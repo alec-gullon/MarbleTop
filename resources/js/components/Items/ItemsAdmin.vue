@@ -1,30 +1,52 @@
 <template>
     <div class="ItemsAdmin">
-        <item-creator :locations="locations"
-                      :existingItems="existingItems"
-                      v-on:itemAdded="updateItems"
-        >
-        </item-creator>
+        <div class="AdminSection">
 
-        <div class="locations">
-            <h2>Existing Items</h2>
-            <div class="location" v-for="id in locationsToDisplay">
-                <div class="header" @click="toggleLocationExpansion(id)">
-                    <h3>{{ locations[id].name }}</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg">
-                        <use xlink:href="/images/icons.svg#chevron-down" v-if="!locations[id].expanded"></use>
-                        <use xlink:href="/images/icons.svg#chevron-up" v-else></use>
-                    </svg>
-                </div>
+            <div class="label">
+                <h2>Add Item</h2>
+                <p>Add an item you might need to grab next time you go shopping: it could be anything,
+                from tomatoes to cat food</p>
+            </div>
 
-                <div class="body" :class="{'is-expanded': locations[id].expanded}">
-                    <item-editor v-for="itemId in locationItems[id].items"
-                                 :key="'item-' + itemId"
-                                 :item="items[itemId]"
-                                 :existingItems="existingItems"
-                                 v-on:itemUpdated="updateName"
-                                 v-on:itemDeleted="updateItems"
-                    ></item-editor>
+            <div class="section">
+
+                <item-creator :locations="locations"
+                              :existingItems="existingItems"
+                              v-on:itemAdded="updateItems"
+                >
+                </item-creator>
+
+            </div>
+
+        </div>
+
+        <div class="AdminSection">
+            <div class="label">
+                <h2>Existing Items</h2>
+                <p>The items that you currently track in the system</p>
+            </div>
+
+            <div class="section">
+                <div class="ItemLocations">
+                    <div class="location" v-for="id in locationsToDisplay">
+                        <div class="header" @click="toggleLocationExpansion(id)">
+                            <h3>{{ locations[id].name }}</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/images/icons.svg#chevron-down" v-if="!locations[id].expanded"></use>
+                                <use xlink:href="/images/icons.svg#chevron-up" v-else></use>
+                            </svg>
+                        </div>
+
+                        <div class="body" :class="{'is-expanded': locations[id].expanded}">
+                            <item-editor v-for="itemId in locationItems[id].items"
+                                         :key="'item-' + itemId"
+                                         :item="items[itemId]"
+                                         :existingItems="existingItems"
+                                         v-on:itemUpdated="updateName"
+                                         v-on:itemDeleted="updateItems"
+                            ></item-editor>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

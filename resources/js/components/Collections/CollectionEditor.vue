@@ -1,25 +1,32 @@
 <template>
     <div class="RecipeCreator">
-        <div class="details">
-            <h2 class="AdminHeading">
-                Details
-            </h2>
 
-            <div class="InputWithLabel" :class="{'is-error': nameAlreadyExists}">
-                <label for="name">Name</label>
-                <input class="Input" id="name" v-model="name" :class="{'is-error': nameAlreadyExists}" />
-                <span class="error" v-if="nameAlreadyExists">Collection already exists</span>
+        <div class="AdminSection">
+            <div class="label">
+                <h2>Details</h2>
+                <p>Edit the name of the collection</p>
+            </div>
+
+            <div class="section">
+                <div class="InputWithLabel" :class="{'is-error': nameAlreadyExists}">
+                    <label for="name">Name</label>
+                    <input class="Input" id="name" v-model="name" :class="{'is-error': nameAlreadyExists}" />
+                    <span class="error" v-if="nameAlreadyExists">Collection already exists</span>
+                </div>
             </div>
         </div>
 
-        <div class="items">
-            <h2 class="AdminHeading">
-                Items
-            </h2>
+        <div class="AdminSection">
+            <div class="label">
+                <h2>Items</h2>
+                <p>The list of things you want to include in the collection, along with an amount for each item</p>
+            </div>
 
-            <item-searcher  :items="items"
-                            :selectedItems="selectedItems"
-            ></item-searcher>
+            <div class="section">
+                <item-searcher  :items="items"
+                                :selectedItems="selectedItems"
+                ></item-searcher>
+            </div>
         </div>
 
         <div class="buttons">

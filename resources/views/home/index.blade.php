@@ -16,7 +16,7 @@
         <ul>
             @foreach (Auth::user()->publishedRecipes() as $recipe)
                 <li>
-                    <a href="{{ route('recipe-details', ['recipe' => $recipe]) }}">
+                    <a href="{{ route('recipe-edit', ['recipe' => $recipe]) }}">
                         <img src="{{ $recipe->imagePath() }}" />
                         <p>{{ $recipe->name }}</p>
                     </a>

@@ -6,6 +6,6 @@
 @endsection
 
 @section('admin_content')
-    <recipe-creator :initial-items="{{{ json_encode($items) }}}"
+    <recipe-creator :_items="{{{ json_encode($items) }}}"
     ></recipe-creator>
 @endsection

@@ -56,8 +56,6 @@ class ItemTest extends ApiTestCase
 
     public function test_a_user_can_update_an_item()
     {
-        $this->withoutExceptionHandling();
-
         $item = ItemFactory::addItem($this->user);
 
         $attributes = [

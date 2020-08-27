@@ -3,27 +3,6 @@
     flex-direction: column;
     padding: 21px;
 
-    @include lg() {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-start;
-    }
-
-    > .details {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 16px;
-
-        @include lg() {
-            width: 70%;
-            margin-right: 5%;
-        }
-
-        > .InputWithLabel {
-            margin-bottom: 16px;
-        }
-    }
-
     > .status {
         border: 1px solid $grey-light;
         padding: 16px;
