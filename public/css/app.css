@@ -176,36 +176,6 @@ button {
 }
 
 /**
- * Ad hoc. Must be replaced with something better soon
- */
-
-.ImageSelector > .selected {
-  margin-bottom: 12px;
-  border-bottom: 1px solid #cccccc;
-  padding-bottom: 12px;
-}
-
-.ImageSelector > .selected img {
-  height: 200px;
-}
-
-.ImageSelector > .options {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.ImageSelector > .options > img {
-  width: 22%;
-  margin-right: 3%;
-  margin-bottom: 12px;
-  cursor: pointer;
-}
-
-.ImageSelector > .options > img:nth-child(4n) {
-  margin-right: 0;
-}
-
-/**
  * Utility helper classes - all with !important on them for maximum specificity
  */
 
@@ -884,70 +854,16 @@ input[type=submit].Button {
   border-bottom: 0;
 }
 
-.ExpandableForm > .header {
-  display: flex;
-  font-size: 18px;
-  align-items: center;
-  font-weight: 500;
-  color: #1A202C;
-  width: 100%;
-  cursor: pointer;
-}
-
-.ExpandableForm > .header > svg {
-  height: 30px;
-  width: 30px;
-  fill: #22543D;
-  margin-right: 12px;
-}
-
-.ExpandableForm > .body {
-  padding: 16px 0;
-  display: none;
-  flex-direction: column;
-}
-
-.ExpandableForm > .body > .InputWithLabel {
-  margin-bottom: 8px;
-}
-
-@media only screen and (min-width: 768px) {
-  .ExpandableForm > .body > .InputWithLabel {
-    margin-bottom: 16px;
-  }
-}
-
-.ExpandableForm > .body > .MessageBox {
-  margin-top: 8px;
-}
-
-.ExpandableForm > .body > .Button {
-  margin-top: 16px;
-  align-self: flex-end;
-}
-
-.ExpandableForm.is-expanded > .body {
-  display: flex;
-}
-
-@media only screen and (min-width: 1024px) {
-  .ExpandableForm.flat-for-lg > .header {
-    cursor: default;
-  }
-
-  .ExpandableForm.flat-for-lg > .header > svg {
-    display: none;
-  }
-
-  .ExpandableForm.flat-for-lg > .body {
-    display: flex;
-  }
-}
-
 .RecipeCreator {
   display: flex;
   flex-direction: column;
   padding: 21px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .RecipeCreator {
+    padding-right: 0;
+  }
 }
 
 .RecipeCreator > .status {
@@ -1012,6 +928,104 @@ input[type=submit].Button {
   margin-bottom: 16px;
 }
 
+.AdminSection {
+  display: flex;
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 1024px) {
+  .AdminSection {
+    flex-direction: row;
+  }
+}
+
+.AdminSection:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.AdminSection > .label {
+  margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+  .AdminSection > .label {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #E8E8E8;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .AdminSection > .label {
+    width: 30%;
+    margin-right: 5%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+    flex-direction: column;
+  }
+}
+
+.AdminSection > .label > h2 {
+  color: #22543D;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+@media only screen and (min-width: 768px) {
+  .AdminSection > .label > h2 {
+    margin-right: 32px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .AdminSection > .label > h2 {
+    margin-bottom: 8px;
+  }
+}
+
+.AdminSection > .label > p {
+  font-size: 14px;
+  color: #425466;
+  font-style: italic;
+}
+
+@media only screen and (min-width: 768px) {
+  .AdminSection > .label > p {
+    flex-grow: 1;
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .AdminSection > .section {
+    width: 75%;
+  }
+}
+
+.AdminSection > .section > .InputWithLabel {
+  margin-bottom: 16px;
+}
+
+.AdminSection > .section > .InputWithLabel:last-child {
+  margin-bottom: 0;
+}
+
+.AdminSection > .section > p {
+  margin-bottom: 16px;
+}
+
+.AdminSection > .section > .Button {
+  margin-right: 16px;
+}
+
 .Footer {
   border-top: 1px solid #E8E8E8;
   padding: 32px 16px;
@@ -1022,13 +1036,7 @@ input[type=submit].Button {
 
 @media only screen and (min-width: 768px) {
   .Footer {
-    padding: 32px 24px;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .Footer {
-    padding: 32px 0px;
+    padding: 32px;
   }
 }
 
@@ -1037,15 +1045,52 @@ input[type=submit].Button {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+  .Footer > .container {
+    flex-direction: row;
+  }
 }
 
 .Footer > .container > .links {
   display: flex;
   font-size: 16px;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+  .Footer > .container > .links {
+    flex-direction: row;
+    margin-bottom: 0;
+  }
 }
 
 .Footer > .container > .links > .link-set {
-  margin-right: 128px;
+  margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+  .Footer > .container > .links > .link-set {
+    margin-right: 64px;
+    margin-bottom: 0;
+  }
+
+  .Footer > .container > .links > .link-set:last-child {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .Footer > .container > .links > .link-set {
+    margin-right: 128px;
+  }
+
+  .Footer > .container > .links > .link-set:last-child {
+    margin-right: 0;
+  }
 }
 
 .Footer > .container > .links > .link-set > span {
@@ -1068,7 +1113,13 @@ input[type=submit].Button {
 .Footer > .container > .contact {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+}
+
+@media only screen and (min-width: 768px) {
+  .Footer > .container > .contact {
+    align-items: flex-end;
+    margin-left: 128px;
+  }
 }
 
 .Footer > .container > .contact > span {
@@ -1085,18 +1136,37 @@ input[type=submit].Button {
   background: white;
   border-top: 1px solid #E8E8E8;
   color: #425466;
+  padding: 32px 16px;
+}
+
+@media only screen and (min-width: 768px) {
+  .Legal {
+    padding: 32px;
+  }
 }
 
 .Legal > .container {
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+  .Legal > .container {
+    flex-direction: row;
+  }
 }
 
 .Legal > .container > * {
-  margin-right: 32px;
-  padding: 32px 0;
   font-size: 14px;
+  margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+  .Legal > .container > * {
+    margin-right: 32px;
+  }
 }
 
 .Legal > .container > a {
@@ -1296,6 +1366,60 @@ input[type=submit].Button {
 .TextContent > ul > li > .highlighted {
   color: #22543D;
   font-weight: 500;
+}
+
+.BulletList {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+  .BulletList {
+    flex-direction: row;
+  }
+}
+
+.BulletList > li {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: #425466;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px dotted #cccccc;
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .BulletList > li {
+    margin-right: 16px;
+    border-right: 1px solid #cccccc;
+    padding-right: 16px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+    width: auto;
+  }
+}
+
+.BulletList > li > svg {
+  fill: #38A169;
+  height: 25px;
+  width: 25px;
+  margin-right: 8px;
+}
+
+.BulletList > li:last-child {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.BulletList.small-icons > li > svg {
+  height: 20px;
+  width: 20px;
 }
 
 .PrimaryNav > .bar {
@@ -2069,60 +2193,6 @@ input[type=submit].Button {
   font-size: 12px;
 }
 
-.BulletList {
-  display: flex;
-  flex-direction: column;
-}
-
-@media only screen and (min-width: 768px) {
-  .BulletList {
-    flex-direction: row;
-  }
-}
-
-.BulletList > li {
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  font-weight: 500;
-  color: #425466;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px dotted #cccccc;
-  width: 100%;
-}
-
-@media only screen and (min-width: 768px) {
-  .BulletList > li {
-    margin-right: 16px;
-    border-right: 1px solid #cccccc;
-    padding-right: 16px;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: 0;
-    width: auto;
-  }
-}
-
-.BulletList > li > svg {
-  fill: #38A169;
-  height: 25px;
-  width: 25px;
-  margin-right: 8px;
-}
-
-.BulletList > li:last-child {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.BulletList.small-icons > li > svg {
-  height: 20px;
-  width: 20px;
-}
-
 .PublicRecipe {
   max-width: 1280px;
   padding: 24px;
@@ -2268,6 +2338,13 @@ input[type=submit].Button {
 
 .HomePublishedRecipes {
   padding: 24px 0 24px 24px;
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .HomePublishedRecipes {
+    display: block;
+  }
 }
 
 .HomePublishedRecipes > .AdminHeading {
@@ -2300,6 +2377,8 @@ input[type=submit].Button {
 
 .ItemsAdmin {
   padding: 32px 21px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -2310,17 +2389,18 @@ input[type=submit].Button {
   }
 }
 
-.ItemsAdmin > .ExpandableForm {
-  margin-bottom: 32px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #E8E8E8;
+.ItemCreator {
+  display: flex;
+  flex-direction: column;
 }
 
-@media only screen and (min-width: 1024px) {
-  .ItemsAdmin > .ExpandableForm {
-    width: 45%;
-    border-bottom: 0;
-  }
+.ItemCreator > .InputWithLabel {
+  margin-bottom: 16px;
+}
+
+.ItemCreator > .Button {
+  margin-top: 16px;
+  align-self: flex-end;
 }
 
 .ItemLocations {
@@ -2413,73 +2493,6 @@ input[type=submit].Button {
 .ItemEditor > .FloatingInput {
   flex-grow: 1;
   margin-top: -12px;
-}
-
-.Recipe {
-  padding: 21px;
-}
-
-.Recipe > .header {
-  display: flex;
-  margin-bottom: 16px;
-}
-
-.Recipe > .header > img {
-  height: 300px;
-  margin-right: 32px;
-}
-
-.Recipe > .heading {
-  margin-bottom: 16px;
-  font-weight: 500;
-  color: #22543D;
-}
-
-.RecipeOutline {
-  max-width: 768px;
-}
-
-.RecipeOutline > p {
-  font-size: 16px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #cccccc;
-  padding-bottom: 16px;
-}
-
-.RecipeOutline > p:last-child {
-  padding-bottom: 0;
-  border-bottom: 0;
-  margin-bottom: 0;
-}
-
-.RecipeIngredients {
-  margin-bottom: 16px;
-  width: 100%;
-}
-
-.RecipeIngredients > .heading {
-  margin-bottom: 16px;
-  font-weight: 500;
-  color: #22543D;
-}
-
-.RecipeIngredients > table {
-  width: 100%;
-}
-
-.RecipeIngredients > table td {
-  font-size: 14px;
-  width: 50%;
-  border-bottom: 1px dashed #cccccc;
-  padding: 6px 0;
-}
-
-.RecipeIngredients > table td.secondary {
-  color: #425466;
-}
-
-.RecipeIngredients > table tr:last-child td {
-  border-bottom: 0;
 }
 
 .PlanCreator {
@@ -2636,74 +2649,5 @@ input[type=submit].Button {
 
 .Plan > .item-list > .item:last-child {
   border-bottom: 0;
-}
-
-.ItemsAdmin {
-  display: flex;
-  flex-direction: column;
-}
-
-.ItemCreator {
-  display: flex;
-  flex-direction: column;
-}
-
-.ItemCreator > .InputWithLabel {
-  margin-bottom: 16px;
-}
-
-.ItemCreator > .Button {
-  margin-top: 16px;
-  align-self: flex-end;
-}
-
-.AdminSection {
-  display: flex;
-  border-bottom: 1px solid #E8E8E8;
-  padding-bottom: 32px;
-  margin-bottom: 32px;
-}
-
-.AdminSection:last-child {
-  border-bottom: 0;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.AdminSection > .label {
-  width: 30%;
-  margin-right: 5%;
-}
-
-.AdminSection > .label > h2 {
-  color: #22543D;
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.AdminSection > .label > p {
-  font-size: 14px;
-  color: #425466;
-  font-style: italic;
-}
-
-.AdminSection > .section {
-  width: 75%;
-}
-
-.AdminSection > .section > .InputWithLabel {
-  margin-bottom: 16px;
-}
-
-.AdminSection > .section > .InputWithLabel:last-child {
-  margin-bottom: 0;
-}
-
-.AdminSection > .section > p {
-  margin-bottom: 16px;
-}
-
-.AdminSection > .section > .Button {
-  margin-right: 16px;
 }
 

@@ -1,0 +1,86 @@
+.AdminSection {
+    display: flex;
+    border-bottom: 1px solid $grey-lightest;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+    flex-direction: column;
+
+    @include lg() {
+        flex-direction: row;
+    }
+
+    &:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    > .label {
+        margin-bottom: 16px;
+
+        @include md() {
+            display: flex;
+            align-items: flex-start;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid $grey-lightest;
+        }
+
+        @include lg() {
+            width: 30%;
+            margin-right: 5%;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: 0;
+            flex-direction: column;
+        }
+
+        > h2 {
+            color: $green-dark;
+            font-size: 18px;
+            font-weight: 500;
+
+            @include md() {
+                margin-right: 32px;
+            }
+
+            @include lg() {
+                margin-bottom: 8px;
+            }
+        }
+
+        > p {
+            font-size: 14px;
+            color: $grey-mid;
+            font-style: italic;
+
+            @include md() {
+                flex-grow: 1;
+                display: flex;
+            }
+        }
+    }
+
+    > .section {
+
+        @include lg() {
+            width: 75%;
+        }
+
+        > .InputWithLabel {
+            margin-bottom: 16px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        > p {
+            margin-bottom: 16px;
+        }
+
+        > .Button {
+            margin-right: 16px;
+        }
+    }
+}

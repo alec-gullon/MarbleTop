@@ -3,6 +3,10 @@
     flex-direction: column;
     padding: 21px;
 
+    @include lg() {
+        padding-right: 0;
+    }
+
     > .status {
         border: 1px solid $grey-light;
         padding: 16px;
@@ -55,10 +59,4 @@
             margin-left: 12px;
         }
     }
-}
-
-.AdminHeading {
-    color: $green-dark;
-    font-weight: 500;
-    margin-bottom: 16px;
 }

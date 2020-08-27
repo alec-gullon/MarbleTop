@@ -6,11 +6,7 @@
     background: white;
 
     @include md() {
-        padding: 32px 24px;
-    }
-
-    @include lg() {
-        padding: 32px 0px;
+        padding: 32px;
     }
 
     > .container {
@@ -18,13 +14,42 @@
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
+        flex-direction: column;
+
+        @include md() {
+            flex-direction: row;
+        }
 
         > .links {
             display: flex;
             font-size: 16px;
+            flex-direction: column;
+            margin-bottom: 16px;
+
+            @include md() {
+                flex-direction: row;
+                margin-bottom: 0;
+            }
 
             > .link-set {
-                margin-right: 128px;
+                margin-bottom: 16px;
+
+                @include md() {
+                    margin-right: 64px;
+                    margin-bottom: 0;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+
+                @include lg() {
+                    margin-right: 128px;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
 
                 > span {
                     margin-bottom: 16px;
@@ -49,7 +74,11 @@
         > .contact {
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
+
+            @include md() {
+                align-items: flex-end;
+                margin-left: 128px;
+            }
 
             > span {
                 margin-bottom: 16px;
@@ -60,29 +89,6 @@
                 font-size: 14px;
                 text-decoration: underline;
             }
-        }
-    }
-}
-
-.Legal {
-    background: white;
-    border-top: 1px solid $grey-lightest;
-    color: $grey-mid;
-
-    > .container {
-        max-width: $container-width;
-        margin: 0 auto;
-        display: flex;
-
-        > * {
-            margin-right: 32px;
-            padding: 32px 0;
-            font-size: 14px;
-        }
-
-        > a {
-            text-decoration: underline;
-            color: $grey-mid;
         }
     }
 }

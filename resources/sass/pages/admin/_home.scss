@@ -1,5 +1,10 @@
 .HomePublishedRecipes {
     padding: 24px 0 24px 24px;
+    display: none;
+
+    @include md() {
+        display: block;
+    }
 
     > .AdminHeading {
         margin-bottom: 12px;

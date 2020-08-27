@@ -6,11 +6,6 @@
 
         > label {
             display: none;
-
-            @include md() {
-                //display: block;
-                //font-weight: 500;
-            }
         }
 
         > .Input {
