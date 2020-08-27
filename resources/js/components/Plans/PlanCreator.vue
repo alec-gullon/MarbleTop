@@ -85,13 +85,22 @@
     import Post from './../../mixins/Post';
 
     export default {
+        mixins: [Post],
+        data: function() {
+            return {
+                selectedStage: 1,
+                selectedRecipes: [],
+                items: {},
+                formActive: false
+            }
+        },
         props: [
+            '_items',
             'recipes',
-            'initialItems',
             'locations'
         ],
         created: function() {
-            let items = this.copy(this.initialItems);
+            let items = this.copy(this._items);
 
             Object.keys(items).forEach(function(id) {
                 items[id].amountInCupboard = 0;
@@ -159,16 +168,7 @@
 
                 return amounts;
             }
-        },
-        data: function() {
-            return {
-                selectedStage: 1,
-                selectedRecipes: [],
-                items: {},
-                formActive: false
-            }
-        },
-        mixins: [Post]
+        }
     }
 
 </script>

@@ -22,6 +22,9 @@
 <script>
 
     export default {
+        data: function() {
+            return {}
+        },
         props: [
             'items',
             'itemAmounts'
@@ -62,9 +65,6 @@
 
                 return items;
             }
-        },
-        data: function() {
-            return {}
         }
     }
 

@@ -102,6 +102,12 @@
 <script>
 
     export default {
+        data: function() {
+            return {
+                mobileNavActive: false,
+                displayAdminLinks: false
+            }
+        },
         props: {
             'authenticated': {
                 type: Boolean,
@@ -126,12 +132,6 @@
                     return '/home';
                 }
                 return '/';
-            }
-        },
-        data: function() {
-            return {
-                mobileNavActive: false,
-                displayAdminLinks: false
             }
         }
     }

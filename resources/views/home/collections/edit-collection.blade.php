@@ -6,8 +6,8 @@
 @endsection
 
 @section('admin_content')
-    <collection-editor :initial-items="{{{ json_encode($items) }}}"
-                       :initial-name="'{{ $collection['name'] }}'"
+    <collection-editor :_items="{{{ json_encode($items) }}}"
+                       :_name="'{{ $collection['name'] }}'"
                        :collection-id="{{ $collection['id'] }}"
     ></collection-editor>
 @endsection

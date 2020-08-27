@@ -36,6 +36,10 @@
     import Amounts from './../../../mixins/Amounts';
 
     export default {
+        mixins: [Amounts],
+        data: function() {
+            return {}
+        },
         props: [
             'selectedRecipes',
             'recipes',
@@ -51,11 +55,7 @@
             incrementItem(item) {
                 item.amount = this.incrementAmount(item.amount);
             }
-        },
-        data: function() {
-            return {}
-        },
-        mixins: [Amounts]
+        }
     }
 
 </script>

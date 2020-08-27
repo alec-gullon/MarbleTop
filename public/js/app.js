@@ -142,9 +142,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['initialItems'],
+  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  data: function data() {
+    return {
+      name: '',
+      formActive: false,
+      nameAlreadyExists: false,
+      items: {}
+    };
+  },
+  props: ['_items'],
   created: function created() {
-    this.items = this.copy(this.initialItems);
+    this.items = this.copy(this._items);
   },
   methods: {
     submit: function submit() {
@@ -199,16 +208,7 @@ __webpack_require__.r(__webpack_exports__);
       }.bind(this));
       return items;
     }
-  },
-  data: function data() {
-    return {
-      name: '',
-      formActive: false,
-      nameAlreadyExists: false,
-      items: {}
-    };
-  },
-  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__["default"]]
+  }
 });
 
 /***/ }),
@@ -270,10 +270,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['initialName', 'initialItems', 'collectionId'],
+  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  data: function data() {
+    return {
+      name: '',
+      updateActive: false,
+      deleteActive: false,
+      items: {},
+      nameAlreadyExists: false
+    };
+  },
+  props: ['_name', '_items', 'collectionId'],
   created: function created() {
-    this.name = this.initialName;
-    this.items = this.copy(this.initialItems);
+    this.name = this._name;
+    this.items = this.copy(this._items);
   },
   methods: {
     update: function update() {
@@ -347,17 +357,7 @@ __webpack_require__.r(__webpack_exports__);
     name: function name() {
       this.nameAlreadyExists = false;
     }
-  },
-  data: function data() {
-    return {
-      name: '',
-      updateActive: false,
-      deleteActive: false,
-      items: {},
-      nameAlreadyExists: false
-    };
-  },
-  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__["default"]]
+  }
 });
 
 /***/ }),
@@ -387,6 +387,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
   props: ['items', 'selectedItems'],
   methods: {
     increaseOrder: function increaseOrder(position) {
@@ -417,9 +420,6 @@ __webpack_require__.r(__webpack_exports__);
       this.items[positions.targetPosition[0]].order = positions.targetPosition[1];
       this.items[positions.initialPosition[0]].order = positions.initialPosition[1];
     }
-  },
-  data: function data() {
-    return {};
   }
 });
 
@@ -472,6 +472,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      name: '',
+      locationId: 0,
+      reportSuccess: false,
+      formActive: false
+    };
+  },
   props: ['locations', 'existingItems'],
   methods: {
     submit: function submit() {
@@ -508,16 +517,7 @@ __webpack_require__.r(__webpack_exports__);
     nameAlreadyExists: function nameAlreadyExists() {
       return this.existingItems.indexOf(this.name) !== -1;
     }
-  },
-  data: function data() {
-    return {
-      name: '',
-      locationId: 0,
-      reportSuccess: false,
-      formActive: false
-    };
-  },
-  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"]]
+  }
 });
 
 /***/ }),
@@ -551,6 +551,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      formActive: false,
+      formError: false,
+      name: ''
+    };
+  },
   props: ['item', 'existingItems'],
   created: function created() {
     this.name = this.item.name;
@@ -609,15 +617,7 @@ __webpack_require__.r(__webpack_exports__);
     nameAlreadyExists: function nameAlreadyExists() {
       return this.name !== this.item.name && this.existingItems.indexOf(this.name) !== -1;
     }
-  },
-  data: function data() {
-    return {
-      formActive: false,
-      formError: false,
-      name: ''
-    };
-  },
-  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"]]
+  }
 });
 
 /***/ }),
@@ -674,6 +674,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      searchTerm: ''
+    };
+  },
   props: ['items', 'selectedItems'],
   methods: {
     addItem: function addItem(id) {
@@ -748,11 +753,6 @@ __webpack_require__.r(__webpack_exports__);
       }.bind(this));
       return items;
     }
-  },
-  data: function data() {
-    return {
-      searchTerm: ''
-    };
   }
 });
 
@@ -825,10 +825,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['initialItems', 'initialLocations'],
+  mixins: [_mixins_Copy__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      items: {},
+      locations: {}
+    };
+  },
+  props: ['_items', '_locations'],
   created: function created() {
-    this.items = this.copy(this.initialItems);
-    this.locations = this.copy(this.initialLocations);
+    this.items = this.copy(this._items);
+    this.locations = this.copy(this._locations);
   },
   methods: {
     updateName: function updateName(data) {
@@ -872,14 +879,7 @@ __webpack_require__.r(__webpack_exports__);
       }.bind(this));
       return locations;
     }
-  },
-  data: function data() {
-    return {
-      items: {},
-      locations: {}
-    };
-  },
-  mixins: [_mixins_Copy__WEBPACK_IMPORTED_MODULE_0__["default"]]
+  }
 });
 
 /***/ }),
@@ -898,16 +898,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: {
-    formReady: function formReady() {
-      return this.email !== '' && this.password !== '';
-    }
-  },
   data: function data() {
     return {
       email: 'guest@alecgullon.co.uk',
       password: 'password'
     };
+  },
+  computed: {
+    formReady: function formReady() {
+      return this.email !== '' && this.password !== '';
+    }
   }
 });
 
@@ -1007,9 +1007,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['recipes', 'initialItems', 'locations'],
+  mixins: [_mixins_Post__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      selectedStage: 1,
+      selectedRecipes: [],
+      items: {},
+      formActive: false
+    };
+  },
+  props: ['_items', 'recipes', 'locations'],
   created: function created() {
-    var items = this.copy(this.initialItems);
+    var items = this.copy(this._items);
     Object.keys(items).forEach(function (id) {
       items[id].amountInCupboard = 0;
     });
@@ -1073,16 +1082,7 @@ __webpack_require__.r(__webpack_exports__);
 
       return amounts;
     }
-  },
-  data: function data() {
-    return {
-      selectedStage: 1,
-      selectedRecipes: [],
-      items: {},
-      formActive: false
-    };
-  },
-  mixins: [_mixins_Post__WEBPACK_IMPORTED_MODULE_0__["default"]]
+  }
 });
 
 /***/ }),
@@ -1118,6 +1118,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
   props: ['items', 'itemAmounts'],
   methods: {
     decrementAmountInCupboard: function decrementAmountInCupboard(id) {
@@ -1153,9 +1156,6 @@ __webpack_require__.r(__webpack_exports__);
       }.bind(this));
       return items;
     }
-  },
-  data: function data() {
-    return {};
   }
 });
 
@@ -1188,6 +1188,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
   props: ['locations', 'items', 'itemAmounts'],
   computed: {
     locationItems: function locationItems() {
@@ -1228,9 +1231,6 @@ __webpack_require__.r(__webpack_exports__);
       }.bind(this));
       return locations;
     }
-  },
-  data: function data() {
-    return {};
   }
 });
 
@@ -1281,6 +1281,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_Amounts__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {};
+  },
   props: ['selectedRecipes', 'recipes', 'items'],
   methods: {
     toggleRecipeExpansion: function toggleRecipeExpansion(recipe) {
@@ -1292,11 +1296,7 @@ __webpack_require__.r(__webpack_exports__);
     incrementItem: function incrementItem(item) {
       item.amount = this.incrementAmount(item.amount);
     }
-  },
-  data: function data() {
-    return {};
-  },
-  mixins: [_mixins_Amounts__WEBPACK_IMPORTED_MODULE_0__["default"]]
+  }
 });
 
 /***/ }),
@@ -1328,6 +1328,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
   props: ['recipes', 'selectedRecipes'],
   methods: {
     removeRecipe: function removeRecipe(id) {
@@ -1369,9 +1372,6 @@ __webpack_require__.r(__webpack_exports__);
 
       return amounts;
     }
-  },
-  data: function data() {
-    return {};
   }
 });
 
@@ -1488,6 +1488,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      mobileNavActive: false,
+      displayAdminLinks: false
+    };
+  },
   props: {
     'authenticated': {
       type: Boolean,
@@ -1514,12 +1520,6 @@ __webpack_require__.r(__webpack_exports__);
 
       return '/';
     }
-  },
-  data: function data() {
-    return {
-      mobileNavActive: false,
-      displayAdminLinks: false
-    };
   }
 });
 
@@ -1638,6 +1638,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__["default"]],
   data: function data() {
     return {
       name: '',
@@ -1650,7 +1651,6 @@ __webpack_require__.r(__webpack_exports__);
       nameAlreadyExists: false
     };
   },
-  mixins: [_mixins_Post_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_Copy_js__WEBPACK_IMPORTED_MODULE_1__["default"]],
   props: ['_items'],
   created: function created() {
     this.items = this.copy(this._items);

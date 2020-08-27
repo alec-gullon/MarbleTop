@@ -18,6 +18,9 @@
 <script>
 
     export default {
+        data: function() {
+            return {}
+        },
         props: [
             'locations',
             'items',
@@ -69,9 +72,6 @@
 
                 return locations;
             }
-        },
-        data: function() {
-            return {}
         }
     }
 

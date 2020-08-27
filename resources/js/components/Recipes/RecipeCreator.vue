@@ -103,6 +103,7 @@
     import Copy from './../../mixins/Copy.js';
 
     export default {
+        mixins: [Post, Copy],
         data: function() {
             return {
                 name: '',
@@ -115,7 +116,6 @@
                 nameAlreadyExists: false
             }
         },
-        mixins: [Post, Copy],
         props: [
             '_items'
         ],

@@ -18,6 +18,9 @@
 <script>
 
     export default {
+        data: function() {
+            return {}
+        },
         props: [
             'recipes',
             'selectedRecipes'
@@ -66,9 +69,6 @@
 
                 return amounts;
             }
-        },
-        data: function() {
-            return {}
         }
     }
 

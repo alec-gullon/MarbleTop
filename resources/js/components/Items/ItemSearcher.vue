@@ -43,6 +43,11 @@
 <script>
 
     export default {
+        data: function() {
+            return {
+                searchTerm: ''
+            }
+        },
         props: [
             'items',
             'selectedItems'
@@ -122,11 +127,6 @@
                 }.bind(this));
 
                 return items;
-            }
-        },
-        data: function() {
-            return {
-                searchTerm: ''
             }
         }
     }

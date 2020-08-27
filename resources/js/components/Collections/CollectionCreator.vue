@@ -46,11 +46,20 @@
     import Copy from './../../mixins/Copy.js';
 
     export default {
+        mixins: [Post, Copy],
+        data: function() {
+            return {
+                name: '',
+                formActive: false,
+                nameAlreadyExists: false,
+                items: {}
+            }
+        },
         props: [
-            'initialItems'
+            '_items'
         ],
         created: function() {
-            this.items = this.copy(this.initialItems);
+            this.items = this.copy(this._items);
         },
         methods: {
             submit: function() {
@@ -108,16 +117,7 @@
 
                 return items;
             }
-        },
-        data: function() {
-            return {
-                name: '',
-                formActive: false,
-                nameAlreadyExists: false,
-                items: {}
-            }
-        },
-        mixins: [Post, Copy]
+        }
     }
 
 </script>

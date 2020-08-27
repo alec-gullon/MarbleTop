@@ -47,14 +47,24 @@
     import Copy from './../../mixins/Copy.js';
 
     export default {
+        mixins: [Post, Copy],
+        data: function() {
+            return {
+                name: '',
+                updateActive: false,
+                deleteActive: false,
+                items: {},
+                nameAlreadyExists: false
+            }
+        },
         props: [
-            'initialName',
-            'initialItems',
+            '_name',
+            '_items',
             'collectionId'
         ],
         created: function() {
-            this.name = this.initialName;
-            this.items = this.copy(this.initialItems);
+            this.name = this._name;
+            this.items = this.copy(this._items);
         },
         methods: {
             update: function() {
@@ -132,17 +142,7 @@
             name: function() {
                 this.nameAlreadyExists = false;
             }
-        },
-        data: function() {
-            return {
-                name: '',
-                updateActive: false,
-                deleteActive: false,
-                items: {},
-                nameAlreadyExists: false
-            }
-        },
-        mixins: [Post, Copy]
+        }
     }
 
 </script>

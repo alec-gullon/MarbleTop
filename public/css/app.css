@@ -1035,6 +1035,73 @@ input[type=submit].Button {
 .Footer > .container {
   max-width: 1280px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Footer > .container > .links {
+  display: flex;
+  font-size: 16px;
+}
+
+.Footer > .container > .links > .link-set {
+  margin-right: 128px;
+}
+
+.Footer > .container > .links > .link-set > span {
+  margin-bottom: 16px;
+  display: block;
+  font-size: 16px;
+}
+
+.Footer > .container > .links > .link-set > ul > li {
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.Footer > .container > .links > .link-set > ul > li > a {
+  color: #425466;
+}
+
+.Footer > .container > .contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.Footer > .container > .contact > span {
+  margin-bottom: 16px;
+}
+
+.Footer > .container > .contact > a {
+  margin-bottom: 8px;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.Legal {
+  background: white;
+  border-top: 1px solid #E8E8E8;
+  color: #425466;
+}
+
+.Legal > .container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.Legal > .container > * {
+  margin-right: 32px;
+  padding: 32px 0;
+  font-size: 14px;
+}
+
+.Legal > .container > a {
+  text-decoration: underline;
+  color: #425466;
 }
 
 .PageContent {

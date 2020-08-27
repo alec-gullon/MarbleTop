@@ -16,6 +16,9 @@
 <script>
 
     export default {
+        data: function() {
+            return {}
+        },
         props: [
             'items',
             'selectedItems'
@@ -45,10 +48,6 @@
                 this.items[positions.targetPosition[0]].order = positions.targetPosition[1];
                 this.items[positions.initialPosition[0]].order = positions.initialPosition[1];
             }
-        },
-
-        data: function() {
-            return {}
         }
     }
 

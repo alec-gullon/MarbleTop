@@ -38,6 +38,15 @@
     import Post from './../../mixins/Post.js';
 
     export default {
+        mixins: [Post],
+        data: function () {
+            return {
+                name: '',
+                locationId: 0,
+                reportSuccess: false,
+                formActive: false,
+            }
+        },
         props: [
             'locations',
             'existingItems'
@@ -80,16 +89,7 @@
             nameAlreadyExists: function() {
                 return (this.existingItems.indexOf(this.name) !== -1);
             }
-        },
-        data: function () {
-            return {
-                name: '',
-                locationId: 0,
-                reportSuccess: false,
-                formActive: false,
-            }
-        },
-        mixins: [Post]
+        }
     }
 
 </script>

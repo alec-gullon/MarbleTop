@@ -16,5 +16,73 @@
     > .container {
         max-width: $container-width;
         margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+
+        > .links {
+            display: flex;
+            font-size: 16px;
+
+            > .link-set {
+                margin-right: 128px;
+
+                > span {
+                    margin-bottom: 16px;
+                    display: block;
+                    font-size: 16px;
+                }
+
+                > ul {
+                    > li {
+                        font-size: 14px;
+                        margin-bottom: 8px;
+                        font-weight: 400;
+                        text-decoration: underline;
+                        > a {
+                            color: $grey-mid;
+                        }
+                    }
+                }
+            }
+        }
+
+        > .contact {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+
+            > span {
+                margin-bottom: 16px;
+            }
+
+            > a {
+                margin-bottom: 8px;
+                font-size: 14px;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.Legal {
+    background: white;
+    border-top: 1px solid $grey-lightest;
+    color: $grey-mid;
+
+    > .container {
+        max-width: $container-width;
+        margin: 0 auto;
+        display: flex;
+
+        > * {
+            margin-right: 32px;
+            padding: 32px 0;
+            font-size: 14px;
+        }
+
+        > a {
+            text-decoration: underline;
+            color: $grey-mid;
+        }
     }
 }

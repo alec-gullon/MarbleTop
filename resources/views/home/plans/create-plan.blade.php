@@ -7,7 +7,7 @@
 
 @section('admin_content')
     <plan-creator :recipes="{{{ json_encode($recipes) }}}"
-                  :initial-items="{{ json_encode($items) }}"
+                  :_items="{{ json_encode($items) }}"
                   :locations="{{ json_encode($locations) }}"
     ></plan-creator>
 @endsection

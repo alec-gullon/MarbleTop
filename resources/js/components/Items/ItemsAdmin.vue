@@ -58,13 +58,20 @@
     import Copy from './../../mixins/Copy';
 
     export default {
+        mixins: [Copy],
+        data: function() {
+            return {
+                items: {},
+                locations: {}
+            }
+        },
         props: [
-            'initialItems',
-            'initialLocations'
+            '_items',
+            '_locations'
         ],
         created: function() {
-            this.items = this.copy(this.initialItems);
-            this.locations = this.copy(this.initialLocations);
+            this.items = this.copy(this._items);
+            this.locations = this.copy(this._locations);
         },
         methods: {
             updateName: function(data) {
@@ -115,14 +122,7 @@
 
                 return locations;
             }
-        },
-        data: function() {
-            return {
-                items: {},
-                locations: {}
-            }
-        },
-        mixins: [Copy]
+        }
     }
 
 </script>
