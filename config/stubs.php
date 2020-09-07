@@ -1,0 +1,375 @@
+<?php
+
+return [
+    'recipe_names' => [
+        'Halloumi Risotto',
+        'Breakfast',
+        'Burgers with Chips',
+        'Chickpea Burgers, Coleslaw and Chips',
+        'Fajitas',
+        'Halloumi Bulgur Wheat',
+        'Jacket Potatoes, Beans and Coleslaw',
+        'Lasagne',
+        'Mediterranean Salad, Rice and Falafel',
+        'Pasta Bake',
+        'Pizza, Coleslaw and Salad',
+        'Sausage Pasta',
+        'Spaghetti Bolognese',
+        'Sweet Potato Chili',
+        'Miso Aubergine Tacos',
+        'Mango Chutney Halloumi Curry',
+        'Toad in the Hole',
+        'Greek Style Gyozas',
+        'Miso Aubergine Tacos',
+        'Chicken Nuggets',
+        'Breakfast in Bed',
+        'Greek Inspired Chickpea Jumble'
+    ],
+
+    'fresh_items' => [
+        'Avocado',
+        'Carrot',
+        'Courgette',
+        'Cucumber',
+        'Garlic Clove',
+        'Ginger',
+        'Lemon',
+        'Lime',
+        'Onion',
+        'Pepper',
+        'Potato',
+        'Red Onion',
+        'Salad Leafs',
+        'Spinach',
+        'Sweet Potato',
+        'Tomato'
+    ],
+
+    'chilled_items' => [
+        'Butter',
+        'Cheddar',
+        'Chipotle Mayo',
+        'Coleslaw',
+        'Falafel',
+        'Garlic Bread',
+        'Halloumi',
+        'Hummus',
+        'Milk',
+        'Parmesan',
+        'Pizza',
+        'Sour Cream and Chive Dip',
+        'Sweet Chili Sauce',
+        'Vegetarian Spring Rolls'
+    ],
+
+    'pantry_items' => [
+        'Baked Beans',
+        'Basil',
+        'Black Beans',
+        'Bread',
+        'Brioche Burger Bun',
+        'Bulgur Wheat',
+        'Cayenne Pepper',
+        'Chickpeas',
+        'Chili Flakes',
+        'Chopped Tomatoes',
+        'Cinnamon',
+        'Cocoa Powder',
+        'Coconut Milk',
+        'Coconut Oil',
+        'Coriander',
+        'Cumin',
+        'Egg',
+        'Gherkin',
+        'Gravy Granules',
+        'Hot Chili Powder',
+        'Kidney Beans',
+        'Lasagne Sheets',
+        'Oregano',
+        'Oxo Cube',
+        'Paprika',
+        'Parsley',
+        'Passata',
+        'Pasta',
+        'Peanut Butter',
+        'Pesto Pot',
+        'Pitta Bread',
+        'Plain Flour',
+        'Rice Packet',
+        'Risotto Rice',
+        'Soy Sauce',
+        'Stir Fry Sauce Packet',
+        'Straight Pasta',
+        'Stuffing',
+        'Sweetcorn',
+        'Thai Red Curry Paste',
+        'Thyme',
+        'Tomato Puree',
+        'White Sauce',
+        'Wraps'
+    ],
+
+    'frozen_items' => [
+        'Hash Browns',
+        'Quorn Pieces',
+        'Mince',
+        'Peas',
+        'Sausage',
+        'Vegetarian Burger'
+    ],
+
+    'description' => 'Feed the family this comforting, budget-friendly sausage ragu with pasta. You can freeze the leftovers for another time and it tastes just as good.',
+
+    'recipe' => 'Chop up all the veg except the garlic: dice the peppers and onion and chop the sweet potato into small cubes. Stick everything in a pan with some oil on a medium heat. Season well with pepper and salt.
+
+While the veg cooks through, chop up a largish amount of garlic and add to the pan. Add all the spices.
+
+Add the passata, the beans and the tomato puree and stir well. Bring to a simmer and then cover and let cook on a gentle heat for 45-60 mins.',
+
+    'cook_times' => [10, 20, 30, 45, 60, 90, 120],
+
+    'serving_sizes' => [1, 2, 3, 4, 5, 6],
+
+    'ratings' => [2.5, 2.8, 3, 3.2, 3.4, 3.6, 3.9, 4.1, 4.3, 4.5, 4.7],
+
+    'collections' => [
+        [
+            ['Baked Beans',  1],
+            ['Sausage', 4],
+            ['Hash Browns', 0.25],
+            ['Egg', 2]
+        ],
+        [
+            ['Vegetarian Burger',  2],
+            ['Brioche Burger Bun',  2],
+            ['Butter',  0.1],
+            ['Gherkin',  0.1],
+            ['Tomato', 1]
+        ],
+        [
+            ['Chickpeas', 1],
+            ['Lemon', 1],
+            ['Cumin', 0.1],
+            ['Coriander', 0.1],
+            ['Egg', 1],
+            ['Bread', 0.1],
+            ['Red Onion', 1],
+            ['Brioche Burger Bun', 2],
+            ['Tomato', 1],
+            ['Cucumber', 0.25],
+            ['Sweet Chili Sauce', 0.1],
+            ['Halloumi', 0.25]
+        ],
+        [
+            ['Red Onion', 1],
+            ['Garlic Clove', 3],
+            ['Pepper', 1],
+            ['Quorn Pieces', 0.75],
+            ['Sour Cream and Chive Dip', 0.5],
+            ['Wraps', 4],
+            ['Cheddar', 0.25],
+            ['Hot Chili Powder', 0.1],
+            ['Paprika', 0.25],
+            ['Cumin', 0.1],
+            ['Coriander', 0.1],
+            ['Oregano', 0.1],
+            ['Chipotle Mayo', 0.1],
+            ['Passata', 0.5],
+            ['Avocado', 1]
+        ],
+        [
+            ['Red Onion', 1],
+            ['Garlic Clove', 3],
+            ['Oxo Cube', 1],
+            ['Halloumi', 0.5],
+            ['Cinnamon', 0.1],
+            ['Pesto Pot', 1],
+            ['Bulgur Wheat', 0.25]
+        ],
+        [
+            ['Potato', 2],
+            ['Baked Beans', 1],
+            ['Coleslaw', 0.5],
+            ['Cheddar', 0.25]
+        ],
+        [
+            ['Pepper', 2],
+            ['Courgette', 1],
+            ['Sweet Potato', 1],
+            ['Onion', 1],
+            ['Chili Flakes', 0.1],
+            ['Garlic Clove', 2],
+            ['Chopped Tomatoes', 2],
+            ['Oregano', 0.1],
+            ['Oxo Cube', 1],
+            ['Spinach', 0.25],
+            ['Lasagne Sheets', 0.25],
+            ['White Sauce', 1],
+            ['Cheddar', 0.25],
+            ['Garlic Bread', 1]
+        ],
+        [
+            ['Falafel', 1],
+            ['Rice Packet', 1],
+            ['Hummus', 1],
+            ['Tomato', 1],
+            ['Cucumber', 0.25],
+            ['Red Onion', 0.5],
+            ['Pepper', 0.5],
+            ['Pitta Bread', 2],
+            ['Lemon', 0.5],
+            ['Halloumi', 0.5]
+        ],
+        [
+            ['Red Onion', 1],
+            ['Garlic Clove', 3],
+            ['Pepper', 1],
+            ['Carrot', 1],
+            ['Sweetcorn', 0.5],
+            ['Chopped Tomatoes', 1],
+            ['Basil', 0.1],
+            ['Parsley', 0.1],
+            ['Tomato Puree', 0.25],
+            ['Garlic Bread', 1],
+            ['Pasta', 0.25],
+            ['Cheddar', 0.25]
+        ],
+        [
+            ['Pizza', 1],
+            ['Coleslaw', 0.25],
+            ['Lemon', 0.5],
+            ['Salad Leafs', 0.25],
+            ['Tomato', 0.5],
+            ['Red Onion', 0.25],
+            ['Pepper', 0.5],
+            ['Cucumber', 0.25],
+            ['Carrot', 0.5]
+        ],
+        [
+            ['Red Onion', 1],
+            ['Garlic Clove', 3],
+            ['Pepper', 1],
+            ['Sausage', 4],
+            ['Garlic Bread', 1],
+            ['Pasta', 0.25],
+            ['Chopped Tomatoes', 1],
+            ['Tomato Puree', 0.25],
+            ['Basil', 0.25],
+            ['Parsley', 0.25]
+        ],
+        [
+            ['Red Onion', 1],
+            ['Garlic Clove', 3],
+            ['Carrot', 1],
+            ['Mince', 0.5],
+            ['Chopped Tomatoes', 1],
+            ['Tomato Puree', 0.25],
+            ['Straight Pasta', 0.25],
+            ['Oregano', 0.1],
+            ['Thyme', 0.1],
+            ['Garlic Bread', 1]
+        ]
+    ],
+
+    'recipes' => [
+        [
+            ['Red Onion', 1, 'x1'],
+            ['Garlic Clove', 3, 'x3'],
+            ['Halloumi', 0.5, '1/2 a block'],
+            ['Oxo Cube', 1, 'x1'],
+            ['Parmesan', 0.25, '100g'],
+            ['Risotto Rice', 0.1, '100g']
+        ],
+        [
+            ['Onion', 1, 'x1'],
+            ['Pepper', 2, 'x2'],
+            ['Sweet Potato', 1, 'x1'],
+            ['Garlic Clove', 2, 'x2'],
+            ['Hot Chili Powder', 0.1, '1 Tsp'],
+            ['Cayenne Pepper', 0.1, '1 Tsp'],
+            ['Cocoa Powder', 0.1, '2 Tbsp'],
+            ['Cinnamon', 0.1, '1 Tbsp'],
+            ['Coriander', 0.1, '1 Tbsp'],
+            ['Passata', 1, '500ml'],
+            ['Tomato Puree', 0.25, '100g'],
+            ['Black Beans', 1, '100g'],
+            ['Kidney Beans', 1, '100g'],
+            ['Sour Cream and Chive Dip', 0.5, ''],
+            ['Rice Packet', 1, 'x1'],
+            ['Cheddar', 0.25, ''],
+            ['Avocado', 1, 'x1'],
+            ['Red Onion', 0.25, 'x1']
+        ],
+        [
+            ['Sausage', 4, 'x4'],
+            ['Egg', 2, 'x2'],
+            ['Plain Flour', 0.1, '50g'],
+            ['Milk', 0.1, ''],
+            ['Carrot', 2, 'x2'],
+            ['Potato', 2, 'x2'],
+            ['Gravy Granules', 0.1, '100g'],
+            ['Stuffing', 0.25, '']
+        ]
+    ],
+
+    'plans' => [
+        [
+            'items' => [
+                ['Red Onion', 1],
+                ['Garlic Clove', 3],
+                ['Halloumi', 0.5],
+                ['Oxo Cube', 1],
+                ['Parmesan', 0.25],
+                ['Risotto Rice', 0.1],
+                ['Onion', 1],
+                ['Pepper', 2],
+                ['Sweet Potato', 1],
+                ['Garlic Clove', 2],
+                ['Hot Chili Powder', 0.1],
+                ['Cayenne Pepper', 0.1],
+                ['Cocoa Powder', 0.1],
+                ['Cinnamon', 0.1],
+                ['Coriander', 0.1],
+                ['Passata', 1],
+                ['Tomato Puree', 0.25],
+                ['Black Beans', 1],
+                ['Kidney Beans', 1],
+                ['Sour Cream and Chive Dip', 0.5],
+                ['Rice Packet', 1],
+                ['Cheddar', 0.25],
+                ['Avocado', 1],
+                ['Red Onion', 0.25]
+            ],
+            'timestamp' => '2020-08-12 16:44:21'
+        ],
+        [
+            'items' => [
+                ['Red Onion', 1],
+                ['Garlic Clove', 3],
+                ['Halloumi', 0.5],
+                ['Oxo Cube', 1],
+                ['Parmesan', 0.25],
+                ['Risotto Rice', 0.1],
+                ['Onion', 1],
+                ['Pepper', 2],
+                ['Sweet Potato', 1],
+                ['Garlic Clove', 2],
+                ['Hot Chili Powder', 0.1],
+                ['Cayenne Pepper', 0.1],
+                ['Cocoa Powder', 0.1],
+                ['Cinnamon', 0.1],
+                ['Coriander', 0.1],
+                ['Passata', 1],
+                ['Tomato Puree', 0.25],
+                ['Black Beans', 1],
+                ['Kidney Beans', 1],
+                ['Sour Cream and Chive Dip', 0.5],
+                ['Rice Packet', 1],
+                ['Cheddar', 0.25],
+                ['Avocado', 1],
+                ['Red Onion', 0.25]
+            ],
+            'timestamp' => '2020-08-05 12:56:08'
+        ],
+    ]
+];
