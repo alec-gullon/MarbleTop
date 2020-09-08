@@ -185,7 +185,6 @@ class PopulateDatabase extends Command
 
             foreach ($collection as $itemData) {
                 $item = Item::where(['name' => $itemData[0], 'user_id' => $user->id])->first();
-
                 $model->items()->attach($item->id, ['amount' => $itemData[1]]);
             }
         }

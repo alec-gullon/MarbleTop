@@ -6,14 +6,18 @@ use App\Helpers\ApiResponse;
 use App\Http\Requests\Api\Collection\DestroyCollection;
 use App\Http\Requests\Api\Collection\StoreCollection;
 use App\Http\Requests\Api\Collection\UpdateCollection;
-
 use App\Models\Collection;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class CollectionController extends BaseController
 {
+    /**
+     * Creates and stores a new Collection model
+     *
+     * @param   StoreCollection     $request
+     * @return  string
+     */
     public function store(StoreCollection $request)
     {
         $user = auth()->user();
@@ -34,6 +38,14 @@ class CollectionController extends BaseController
         return ApiResponse::success();
     }
 
+    /**
+     * Updates the specified $collection model
+     *
+     * @param   UpdateCollection    $request
+     * @param   Collection          $collection
+     *
+     * @return  string
+     */
     public function update(UpdateCollection $request, Collection $collection)
     {
         $user = auth()->user();
@@ -56,6 +68,14 @@ class CollectionController extends BaseController
         return ApiResponse::success();
     }
 
+    /**
+     * Deletes the specified $collection model
+     *
+     * @param DestroyCollection $request
+     * @param Collection $collection
+     *
+     * @return  string
+     */
     public function destroy(DestroyCollection $request, Collection $collection)
     {
         $collection->delete();

@@ -7,7 +7,7 @@ exactly what they need in the process and nothing more.
 This is a Laravel project, so the process to view it in action is pretty simple:
 
 - run `composer install` and `npm install` at the application route to install the project dependencies;
-- create an empty file at `./database/database.sqlite` and run `php artisan migrate` to run the database migrations;
+- create an empty file at `database/database.sqlite` and run `php artisan migrate` to run the database migrations;
 - run `php artisan demo:populate` to populate the database with seed data;
 - you can now log in with the credentials `Guest` and `password` (these are automatically populated for you
 in the login form).

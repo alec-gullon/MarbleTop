@@ -330,19 +330,4 @@ class RecipeTest extends ApiTestCase
 
     }
 
-    public function test_a_user_can_update_a_recipes_image()
-    {
-        $recipe = RecipeFactory::addRecipe($this->user);
-
-        $imageId = 10;
-
-        $this->callApi(route('recipe-image-update', ['recipe' => $recipe->id]), ['image_id' => $imageId]);
-
-        $this->assertDatabaseHas('recipes', [
-            'user_id' => $this->user->id,
-            'id' => $recipe->id,
-            'image_id' => $imageId
-        ]);
-    }
-
 }

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
-
 use App\Http\Requests\Api\Recipe\StoreRecipe;
 use App\Http\Requests\Api\Recipe\UpdateRecipe;
 use App\Http\Requests\Api\Recipe\DestroyRecipe;
-
 use App\Models\Recipe;
 
 use Illuminate\Http\Request;
@@ -16,6 +14,12 @@ use Illuminate\Support\Str;
 
 class RecipeController extends BaseController
 {
+    /**
+     * Creates and stores a Recipe model
+     *
+     * @param   StoreRecipe     $request
+     * @return  string
+     */
     public function store(StoreRecipe $request)
     {
         $user = auth()->user();
@@ -36,6 +40,14 @@ class RecipeController extends BaseController
         return ApiResponse::success();
     }
 
+    /**
+     * Updates the specified $recipe model
+     *
+     * @param   UpdateRecipe    $request
+     * @param   Recipe          $recipe
+     *
+     * @return  string
+     */
     public function update(UpdateRecipe $request, Recipe $recipe)
     {
         $user = auth()->user();
@@ -66,6 +78,14 @@ class RecipeController extends BaseController
         return ApiResponse::success();
     }
 
+    /**
+     * Deletes the specified $recipe model
+     *
+     * @param   DestroyRecipe   $request
+     * @param   Recipe          $recipe
+     *
+     * @return  string
+     */
     public function destroy(DestroyRecipe $request, Recipe $recipe)
     {
         $recipe->delete();
@@ -74,6 +94,14 @@ class RecipeController extends BaseController
         return ApiResponse::success();
     }
 
+    /**
+     * Toggles the publish status for the specified $recipe. If the recipe is already published, then the slug is
+     * set to the empty string, to free it up for future recipes. If the recipe is unpublished, a check is
+     * conducted for certain required attributes.
+     *
+     * @param   Recipe  $recipe
+     * @return  string
+     */
     public function togglePublishStatus(Recipe $recipe) {
         if ($recipe->published) {
             $recipe->update([
@@ -101,14 +129,6 @@ class RecipeController extends BaseController
                 'published' => true
             ]);
         }
-
-        return ApiResponse::success();
-    }
-
-    public function updateImage(Request $request, Recipe $recipe) {
-        $recipe->update(
-            $request->only('image_id')
-        );
 
         return ApiResponse::success();
     }

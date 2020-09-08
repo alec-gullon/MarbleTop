@@ -10,7 +10,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/recipes/{recipe}/destroy', 'Api\RecipeController@destroy')->name('destroy-recipe');
 
     Route::post('/recipes/{recipe}/status/toggle', 'Api\RecipeController@togglePublishStatus')->name('recipe-toggle-publish');
-    Route::post('/recipes/{recipe}/update-image', 'Api\RecipeController@updateImage')->name('recipe-image-update');
 
     Route::post('/collections/store', 'Api\CollectionController@store')->name('store-collection');
     Route::post('/collections/{collection}/update', 'Api\CollectionController@update')->name('update-collection');

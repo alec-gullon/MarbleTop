@@ -10,6 +10,12 @@ use Illuminate\Routing\Controller as BaseController;
 
 class PlanController extends BaseController
 {
+    /**
+     * Creates and stores a new Plan model
+     *
+     * @param   Request     $request
+     * @return  string
+     */
     public function store(Request $request)
     {
         $plan = Plan::create([
