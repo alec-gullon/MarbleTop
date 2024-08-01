@@ -14,7 +14,7 @@
 
         <div class="content">
             <div class="TextContent">
-                <p>Hi there, and welcome to the about page for MarbleTop.</p>
+                <p>Hi there, and welcome to the about page for <span class="highlighted">MarbleTop</span>.</p>
 
                 <p><span class="highlighted">MarbleTop</span> is the most recent side project that I've added to my portfolio. Essentially, I wanted
                 something that really communicated to prospective clients my competencies as a developer and the level
@@ -62,7 +62,7 @@
 
                 <p>You can experiment with this demo version of the application by signing in with the email
                 <span class="highlighted">guest@alecgullon.co.uk</span> and password <span class="highlighted">password</span>. The
-                source code can be viewed at the project's GitHub <a href="#">repository</a>.</p>
+                source code can be viewed at the project's GitHub <a href="https://github.com/alec-gullon/MarbleTop">repository</a>.</p>
 
                 <p>Thanks for swinging by. If you are interested, there are many other projects I've worked on hosted at my <a href="http://alecgullon.co.uk/projects">personal site</a>.</p>
 

@@ -8,6 +8,7 @@ use App\Models\Recipe;
 
 use App\Vue\RecipeCreator;
 use App\Vue\RecipeEditor;
+use Illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
 {

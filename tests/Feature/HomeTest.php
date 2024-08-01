@@ -54,7 +54,7 @@ class HomeTest extends TestCase
         $this->actingAs($user);
 
         $this->get(route('plans'))
-            ->assertSee('data-test="2"')
-            ->assertDontSee('data-test="1"');
+            ->assertSee('data-test="2"', false)
+            ->assertDontSee('data-test="1"', false);
     }
 }

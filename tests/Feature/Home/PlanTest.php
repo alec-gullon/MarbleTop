@@ -24,7 +24,7 @@ class PlanTest extends TestCase
 
         $this->get(route('plans'))
             ->assertSee($plan->displayDate())
-            ->assertSee('test-count="1"');
+            ->assertSee('test-count="1"', false);
     }
 
     public function test_creating_a_plan_pulls_in_both_recipes_and_collections()
@@ -36,7 +36,7 @@ class PlanTest extends TestCase
         $this->get(route('plans-add'))
             ->assertSee($collection->name)
             ->assertSee($recipe->name)
-            ->assertSee('data-recipe-count="2"');
+            ->assertSee('data-recipe-count="2"', false);
     }
 
     public function test_viewing_a_plan_displays_its_items()

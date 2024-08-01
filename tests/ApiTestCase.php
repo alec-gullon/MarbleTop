@@ -31,7 +31,7 @@ class ApiTestCase extends TestCase
         return json_decode($response->getContent());
     }
 
-    protected function assertDatabaseCount($table, $count)
+    protected function assertDatabaseCount($table, $count, $connection = null)
     {
         $existingCount = \DB::table($table)->count();
         $this->assertEquals($count, $existingCount);
